@@ -1,0 +1,2150 @@
+<header class="site-header" id="makkari-auto-header" role="banner">
+  <div class="nav-container">
+
+    <a href="index.html" class="brand-container" aria-label="Go to Homepage">
+      <img src="https://lh3.googleusercontent.com/d/1RjhoHvjH6DbnNqLOpCNQUOySmpLD2EPv" alt="Company Logo" class="brand-logo-img">
+    </a>
+
+    <button class="mobile-toggle" id="mobile-toggle" aria-expanded="false" aria-controls="nav-menu" aria-label="Open navigation menu">
+      <span class="bar"></span>
+      <span class="bar"></span>
+      <span class="bar"></span>
+    </button>
+
+    <nav aria-label="Main navigation">
+      <ul class="nav-menu" id="nav-menu">
+        <li class="nav-item">
+          <a href="index.html" class="nav-link">Home</a>
+        </li>
+        <li class="nav-item">
+          <a href="about.html" class="nav-link">About Us</a>
+        </li>
+        <li class="nav-item">
+          <a href="services.html" class="nav-link">Services</a>
+        </li>
+        <li class="nav-item">
+          <a href="projects.html" class="nav-link">Projects</a>
+        </li>
+        <li class="nav-item">
+          <a href="estimator.html" class="nav-link">Estimator Modules</a>
+        </li>
+        <li class="nav-item">
+          <a href="contact.html" class="nav-link highlight">Contact Us</a>
+        </li>
+      </ul>
+    </nav>
+
+  </div>
+</header>
+
+<style>
+  :root {
+    --brand-navy: #152F4E;
+    --brand-red: #E52330;
+    --brand-red-hover: #c41c27;
+    --glass-bg: rgba(255, 255, 255, 0.75);
+    --glass-bg-scrolled: rgba(255, 255, 255, 0.9);
+    --glass-border: rgba(255, 255, 255, 0.5);
+    --glass-hover: rgba(21, 47, 78, 0.08);
+    --text-color: #152F4E;
+    --header-height: clamp(60px, 7vh, 75px);
+    --shadow-glass: 0 8px 32px 0 rgba(0, 0, 0, 0.12);
+    --transition-speed: 0.35s;
+    --ease-spring: cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  }
+
+  /* Floating Glass Bar with Entrance Animation */
+  .site-header {
+    position: fixed;
+    top: 8px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: min(92%, 1150px);
+    height: var(--header-height);
+    z-index: 1000;
+    border-radius: 100px;
+    
+    background: var(--glass-bg);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    border: 1px solid var(--glass-border);
+    box-shadow: var(--shadow-glass);
+    
+    /* Initial entrance state */
+    opacity: 0;
+    animation: headerEntrance 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+    transition: top var(--transition-speed) ease, 
+                background var(--transition-speed) ease, 
+                box-shadow var(--transition-speed) ease,
+                border-color var(--transition-speed) ease;
+  }
+
+  @keyframes headerEntrance {
+    0% {
+      opacity: 0;
+      transform: translate(-50%, -25px);
+    }
+    100% {
+      opacity: 1;
+      transform: translate(-50%, 0);
+    }
+  }
+
+  .site-header.scrolled {
+    background: var(--glass-bg-scrolled);
+    border-color: rgba(255, 255, 255, 0.8);
+    box-shadow: 0 12px 35px 0 rgba(0, 0, 0, 0.18);
+    top: 12px;
+  }
+
+  .nav-container {
+    width: 100%;
+    height: 100%;
+    margin: 0 auto;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 clamp(1.2rem, 3vw, 2rem);
+    position: relative;
+  }
+
+  /* Brand Logo Animations */
+  .brand-container {
+    display: flex;
+    align-items: center;
+    text-decoration: none;
+    height: 100%;
+    border-radius: 50px;
+  }
+
+  .brand-logo-img {
+    height: clamp(32px, 4.5vh, 42px);
+    width: auto;
+    object-fit: contain;
+    transition: transform 0.3s var(--ease-spring);
+  }
+
+  .brand-container:hover .brand-logo-img {
+    transform: scale(1.08) rotate(-1.5deg);
+  }
+
+  /* Desktop Menu & Staggered Link Animations */
+  .nav-menu {
+    display: flex;
+    list-style: none;
+    gap: clamp(0.3rem, 1vw, 0.8rem);
+    align-items: center;
+  }
+
+  /* Cascade menu links on page load */
+  .nav-item {
+    opacity: 0;
+    animation: navItemFade 0.5s ease forwards;
+  }
+
+  .nav-item:nth-child(1) { animation-delay: 0.2s; }
+  .nav-item:nth-child(2) { animation-delay: 0.27s; }
+  .nav-item:nth-child(3) { animation-delay: 0.34s; }
+  .nav-item:nth-child(4) { animation-delay: 0.41s; }
+  .nav-item:nth-child(5) { animation-delay: 0.48s; }
+  .nav-item:nth-child(6) { animation-delay: 0.55s; }
+
+  @keyframes navItemFade {
+    from {
+      opacity: 0;
+      transform: translateY(-8px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  .nav-link {
+    position: relative;
+    color: var(--text-color);
+    text-decoration: none;
+    font-size: clamp(0.85rem, 0.95vw, 0.95rem);
+    font-weight: 600;
+    padding: 0.55rem 1.1rem;
+    border-radius: 50px;
+    transition: color var(--transition-speed) ease, 
+                background-color var(--transition-speed) ease, 
+                transform var(--transition-speed) var(--ease-spring);
+    white-space: nowrap;
+    display: inline-block;
+  }
+
+  .nav-link:hover, 
+  .nav-link:focus-visible {
+    background-color: var(--glass-hover);
+    color: var(--brand-navy);
+    transform: translateY(-2px);
+    outline: none;
+  }
+
+  .nav-link.active-page {
+    background-color: rgba(21, 47, 78, 0.12);
+    color: var(--brand-navy);
+  }
+
+  .nav-link.highlight {
+    background-color: var(--brand-red);
+    color: #FFFFFF;
+    box-shadow: 0 4px 15px rgba(229, 35, 48, 0.3);
+    transition: all var(--transition-speed) ease;
+  }
+
+  .nav-link.highlight:hover {
+    background-color: var(--brand-red-hover);
+    color: #FFFFFF;
+    transform: translateY(-2px) scale(1.03);
+    box-shadow: 0 6px 20px rgba(229, 35, 48, 0.45);
+  }
+
+  /* Mobile Toggle Bar Transitions */
+  .mobile-toggle {
+    display: none;
+    flex-direction: column;
+    justify-content: space-between;
+    width: 26px;
+    height: 18px;
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    padding: 0;
+    margin-left: auto;
+    z-index: 101;
+  }
+
+  .mobile-toggle .bar {
+    height: 2px;
+    width: 100%;
+    background-color: var(--text-color);
+    border-radius: 2px;
+    transition: transform var(--transition-speed) var(--ease-spring), 
+                opacity var(--transition-speed) ease;
+  }
+
+  .mobile-toggle.active .bar:nth-child(1) {
+    transform: translateY(8px) rotate(45deg);
+  }
+  .mobile-toggle.active .bar:nth-child(2) {
+    opacity: 0;
+    transform: translateX(-10px);
+  }
+  .mobile-toggle.active .bar:nth-child(3) {
+    transform: translateY(-8px) rotate(-45deg);
+  }
+
+  /* Responsive Mobile Menu Dropdown */
+  @media (max-width: 900px) {
+    .mobile-toggle {
+      display: flex;
+    }
+
+    .nav-menu {
+      position: absolute;
+      top: calc(100% + 12px);
+      right: 0;
+      width: 100%;
+      max-width: 280px;
+      background: rgba(255, 255, 255, 0.95);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      flex-direction: column;
+      align-items: stretch;
+      opacity: 0;
+      visibility: hidden;
+      transform: translateY(-15px) scale(0.95);
+      transition: opacity var(--transition-speed) ease,
+                  transform var(--transition-speed) var(--ease-spring),
+                  visibility var(--transition-speed) ease;
+      box-shadow: 0 16px 32px rgba(0, 0, 0, 0.15);
+      border-radius: 20px;
+      border: 1px solid var(--glass-border);
+      padding: 0.5rem 0;
+      overflow: hidden;
+    }
+
+    .nav-menu.active {
+      opacity: 1;
+      visibility: visible;
+      transform: translateY(0) scale(1);
+    }
+
+    .nav-item {
+      animation: none;
+      opacity: 0;
+      transform: translateX(15px);
+      transition: opacity 0.3s ease, transform 0.3s ease;
+    }
+
+    .nav-menu.active .nav-item {
+      opacity: 1;
+      transform: translateX(0);
+    }
+
+    .nav-menu.active .nav-item:nth-child(1) { transition-delay: 0.05s; }
+    .nav-menu.active .nav-item:nth-child(2) { transition-delay: 0.10s; }
+    .nav-menu.active .nav-item:nth-child(3) { transition-delay: 0.15s; }
+    .nav-menu.active .nav-item:nth-child(4) { transition-delay: 0.20s; }
+    .nav-menu.active .nav-item:nth-child(5) { transition-delay: 0.25s; }
+    .nav-menu.active .nav-item:nth-child(6) { transition-delay: 0.30s; }
+
+    .nav-link {
+      display: block;
+      color: var(--text-color);
+      padding: 0.85rem 1.4rem;
+      border-radius: 0;
+      text-align: left;
+      transform: none !important;
+    }
+
+    .nav-link.highlight {
+      text-align: center;
+      margin: 0.5rem 1rem;
+      border-radius: 50px;
+    }
+  }
+</style>
+
+<script>
+  document.addEventListener("DOMContentLoaded", function () {
+    const header = document.getElementById('makkari-auto-header');
+    const mobileToggle = document.getElementById('mobile-toggle');
+    const navMenu = document.getElementById('nav-menu');
+
+    const handleScroll = () => {
+      if (window.scrollY > 20) {
+        header.classList.add('scrolled');
+      } else {
+        header.classList.remove('scrolled');
+      }
+    };
+
+    window.addEventListener('scroll', handleScroll);
+    handleScroll();
+
+    const currentPath = window.location.pathname.toLowerCase();
+    const navLinks = document.querySelectorAll('.nav-link');
+
+    navLinks.forEach(link => {
+      const hrefValue = link.getAttribute('href').toLowerCase();
+      const isHome = (hrefValue === 'index.html' && (currentPath === '/' || currentPath.endsWith('index.html')));
+      const isExactMatch = currentPath.includes(hrefValue.replace('.html', ''));
+
+      if (isHome || (hrefValue !== 'index.html' && isExactMatch)) {
+        link.classList.add('active-page');
+        link.setAttribute('aria-current', 'page');
+      }
+    });
+
+    if (mobileToggle && navMenu) {
+      const toggleMenu = (forceClose = false) => {
+        const isClosing = forceClose || navMenu.classList.contains('active');
+        if (isClosing) {
+          navMenu.classList.remove('active');
+          mobileToggle.classList.remove('active');
+          mobileToggle.setAttribute('aria-expanded', 'false');
+        } else {
+          navMenu.classList.add('active');
+          mobileToggle.classList.add('active');
+          mobileToggle.setAttribute('aria-expanded', 'true');
+        }
+      };
+
+      mobileToggle.addEventListener('click', (e) => {
+        e.stopPropagation();
+        toggleMenu();
+      });
+
+      document.addEventListener('click', (e) => {
+        if (!header.contains(e.target)) {
+          toggleMenu(true);
+        }
+      });
+    }
+  });
+</script>
+
+<!----------------------------------------------->
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Precision Engineering & Construction</title>
+  
+  <!-- Google Font Imports -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800;900&family=Inter:wght@400;500;600&family=Archivo:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body, html {
+      height: 100%;
+      font-family: 'Montserrat', sans-serif;
+      color: #ffffff;
+      overflow-x: hidden;
+      background-color: #ffffff;
+    }
+
+    /* Hero Section Styles */
+    .hero-container {
+      position: relative;
+      min-height: 100vh;
+      width: 100%;
+      background-image: linear-gradient(rgba(10, 15, 26, 0.28), rgba(10, 15, 26, 0.28)), 
+                        url('https://lh3.googleusercontent.com/d/1Yx22rsiW7IBqtROqXqjXs8rGScuLonVR');
+      background-size: cover;
+      background-position: center;
+      background-repeat: no-repeat;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 6% 120px 8%;
+      gap: 40px;
+    }
+
+    .hero-content {
+      max-width: 580px;
+      text-align: left;
+      flex: 1;
+    }
+
+    .hero-content h1 {
+      font-family: 'Montserrat', sans-serif;
+      font-size: 32px;
+      font-weight: 800;
+      line-height: 1.35;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      margin-bottom: 24px;
+      color: #ffffff;
+      text-shadow: 0 4px 18px rgba(0, 0, 0, 0.9);
+    }
+
+    .hero-content h1 span {
+      display: block;
+      color: #ffffff;
+    }
+
+    .hero-content h1 .accent-text {
+      color: #ffffff;
+      font-weight: 900;
+    }
+
+    .hero-content p {
+      font-family: 'Montserrat', sans-serif;
+      font-size: 13px;
+      font-weight: 600;
+      line-height: 1.8;
+      letter-spacing: 0.6px;
+      color: #ffffff;
+      text-shadow: 0 2px 10px rgba(0, 0, 0, 0.95);
+    }
+
+    .glass-tile {
+      background: linear-gradient(
+        135deg, 
+        rgba(255, 255, 255, 0.12) 0%, 
+        rgba(255, 255, 255, 0.02) 100%
+      );
+      backdrop-filter: blur(4px);
+      -webkit-backdrop-filter: blur(4px);
+      border: 1.5px solid rgba(255, 255, 255, 0.55);
+      border-radius: 16px;
+      padding: 28px 24px;
+      width: 360px;
+      box-shadow: 0 25px 50px rgba(0, 0, 0, 0.35), 
+                  inset 1px 1px 2px rgba(255, 255, 255, 0.8),
+                  inset -1px -1px 2px rgba(0, 0, 0, 0.2);
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+      flex-shrink: 0;
+      margin-right: 40px;
+    }
+
+    .glass-tile-header {
+      font-size: 11px;
+      font-weight: 800;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: #ffffff;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.4);
+      padding-bottom: 10px;
+      margin-bottom: 2px;
+      text-shadow: 0 2px 8px rgba(0, 0, 0, 0.8);
+    }
+
+    .glass-badge {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      background: rgba(0, 0, 0, 0.22);
+      border: 1px solid rgba(255, 255, 255, 0.45);
+      padding: 10px 14px;
+      border-radius: 10px;
+      transition: transform 0.2s ease, background 0.2s ease, border-color 0.2s ease;
+      backdrop-filter: blur(2px);
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+    }
+
+    .glass-badge:hover {
+      background: rgba(255, 255, 255, 0.2);
+      transform: translateX(-4px);
+      border-color: rgba(255, 255, 255, 0.85);
+    }
+
+    .glass-badge-icon-wrap {
+      width: 42px;
+      height: 42px;
+      border-radius: 8px;
+      background: rgba(255, 255, 255, 0.95);
+      border: 1px solid rgba(255, 255, 255, 0.8);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.35);
+      padding: 4px;
+      overflow: hidden;
+    }
+
+    .glass-badge-icon-wrap img {
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+    }
+
+    .glass-badge-icon-wrap svg {
+      width: 24px;
+      height: 24px;
+      fill: #101828;
+    }
+
+    .glass-badge-text {
+      font-size: 13px;
+      font-weight: 700;
+      color: #ffffff;
+      letter-spacing: 0.4px;
+      line-height: 1.3;
+      text-shadow: 0 2px 8px rgba(0, 0, 0, 0.85);
+    }
+
+    .glass-badge-sub {
+      font-size: 11px;
+      font-weight: 500;
+      opacity: 0.95;
+      display: block;
+      color: #ffffff;
+      text-shadow: 0 1px 4px rgba(0, 0, 0, 0.9);
+    }
+
+    .stats-bar-container {
+      position: absolute;
+      bottom: 25px;
+      left: 5%;
+      right: 5%;
+      width: 90%;
+      background: transparent;
+      backdrop-filter: none;
+      -webkit-backdrop-filter: none;
+      border: none;
+      border-radius: 0;
+      padding: 10px 0;
+      z-index: 100;
+      box-shadow: none;
+    }
+
+    .stats-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 20px;
+      align-items: center;
+      justify-content: center;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    .stat-item {
+      text-align: center;
+      position: relative;
+      padding: 0 10px;
+    }
+
+    .stat-item:not(:last-child)::after {
+      content: '';
+      position: absolute;
+      right: 0;
+      top: 15%;
+      height: 70%;
+      width: 1px;
+      background: rgba(255, 255, 255, 0.3);
+    }
+
+    .stat-number {
+      font-family: 'Montserrat', sans-serif;
+      font-size: 28px;
+      font-weight: 800;
+      color: #ffffff;
+      letter-spacing: 0.5px;
+      line-height: 1.1;
+      margin-bottom: 6px;
+      text-shadow: 0 2px 10px rgba(0, 0, 0, 0.85);
+    }
+
+    .stat-number span.accent {
+      color: #ffffff;
+      font-weight: 900;
+    }
+
+    .stat-label {
+      font-family: 'Montserrat', sans-serif;
+      font-size: 11px;
+      font-weight: 600;
+      color: #ffffff;
+      text-transform: uppercase;
+      letter-spacing: 0.8px;
+      line-height: 1.3;
+      text-shadow: 0 1px 5px rgba(0, 0, 0, 0.9);
+    }
+
+    /* Why Choose Us Section */
+    .why-us-section {
+      background-color: #f9f9f9;
+      color: #152f4e;
+      padding: 80px 4% 90px 4%;
+      font-family: 'Archivo', sans-serif;
+    }
+
+    .why-us-header {
+      text-align: center;
+      max-width: 900px;
+      margin: 0 auto 50px auto;
+    }
+
+    .why-us-subtitle {
+      font-size: 13px;
+      font-weight: 700;
+      color: #e52330;
+      text-transform: uppercase;
+      letter-spacing: 2px;
+      margin-bottom: 8px;
+      display: block;
+    }
+
+    .why-us-title {
+      font-size: 32px;
+      font-weight: 800;
+      color: #152f4e;
+      letter-spacing: 0.5px;
+      text-transform: uppercase;
+      margin-bottom: 16px;
+    }
+
+    .why-us-description {
+      font-size: 15px;
+      line-height: 1.8;
+      color: #475569;
+      font-weight: 400;
+    }
+
+    .why-us-grid {
+      display: grid;
+      grid-template-columns: repeat(6, 1fr);
+      gap: 20px;
+      max-width: 1400px;
+      margin: 0 auto;
+    }
+
+    .why-us-card {
+      background: #ffffff;
+      border: 1px solid #e2e8f0;
+      border-radius: 12px;
+      padding: 24px 16px;
+      text-align: center;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 16px;
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.03);
+      transition: transform 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    .why-us-card:hover {
+      transform: translateY(-6px);
+      border-color: #e52330;
+      box-shadow: 0 12px 24px rgba(229, 35, 48, 0.1);
+    }
+
+    .why-us-icon-wrap {
+      width: 52px;
+      height: 52px;
+      border-radius: 50%;
+      background: rgba(229, 35, 48, 0.1);
+      border: 1px solid rgba(229, 35, 48, 0.3);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+    }
+
+    .why-us-icon-wrap svg {
+      width: 26px;
+      height: 26px;
+      fill: #e52330;
+    }
+
+    .why-us-card-title {
+      font-size: 13px;
+      font-weight: 700;
+      color: #152f4e;
+      line-height: 1.4;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+
+    /* What We Do Section */
+    .services-section {
+      background-color: #ffffff;
+      color: #152f4e;
+      padding: 80px 4% 90px 4%;
+      font-family: 'Archivo', sans-serif;
+    }
+
+    .services-header {
+      text-align: center;
+      max-width: 800px;
+      margin: 0 auto 50px auto;
+    }
+
+    .services-subtitle {
+      font-size: 13px;
+      font-weight: 700;
+      color: #e52330;
+      text-transform: uppercase;
+      letter-spacing: 2px;
+      margin-bottom: 8px;
+      display: block;
+    }
+
+    .services-title {
+      font-size: 32px;
+      font-weight: 800;
+      color: #152f4e;
+      letter-spacing: 0.5px;
+      text-transform: uppercase;
+    }
+
+    .services-grid {
+      display: grid;
+      grid-template-columns: repeat(6, 1fr);
+      gap: 16px;
+      max-width: 1400px;
+      margin: 0 auto;
+    }
+
+    .service-card {
+      background: #f9f9f9;
+      border: 1px solid #e2e8f0;
+      border-radius: 12px;
+      overflow: hidden;
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.03);
+      transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .service-card:hover {
+      transform: translateY(-6px);
+      box-shadow: 0 12px 24px rgba(21, 47, 78, 0.12);
+      border-color: #e52330;
+    }
+
+    .service-image-wrap {
+      width: 100%;
+      height: 140px;
+      overflow: hidden;
+      position: relative;
+      background-color: #e2e8f0;
+    }
+
+    .service-image-wrap img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 0.4s ease;
+    }
+
+    .service-card:hover .service-image-wrap img {
+      transform: scale(1.08);
+    }
+
+    .service-content {
+      padding: 16px 12px;
+      display: flex;
+      flex-direction: column;
+      flex-grow: 1;
+      justify-content: center;
+      text-align: center;
+    }
+
+    .service-card-title {
+      font-size: 14px;
+      font-weight: 700;
+      color: #152f4e;
+      line-height: 1.35;
+      margin: 0;
+    }
+
+    /* Featured Projects Section & Interactive Carousel */
+    .projects-section {
+      background-color: #f9f9f9;
+      color: #152f4e;
+      padding: 80px 0 90px 0;
+      font-family: 'Archivo', sans-serif;
+      overflow: hidden;
+    }
+
+    .projects-header {
+      text-align: center;
+      max-width: 800px;
+      margin: 0 auto 40px auto;
+      padding: 0 4%;
+    }
+
+    .projects-subtitle {
+      font-size: 13px;
+      font-weight: 700;
+      color: #e52330;
+      text-transform: uppercase;
+      letter-spacing: 2px;
+      margin-bottom: 8px;
+      display: block;
+    }
+
+    .projects-title {
+      font-size: 32px;
+      font-weight: 800;
+      color: #152f4e;
+      letter-spacing: 0.5px;
+      text-transform: uppercase;
+    }
+
+    .projects-carousel-wrapper {
+      width: 100%;
+      overflow-x: auto;
+      scroll-behavior: smooth;
+      cursor: grab;
+      padding: 20px 0;
+      -webkit-overflow-scrolling: touch;
+      scrollbar-width: none;
+    }
+
+    .projects-carousel-wrapper::-webkit-scrollbar {
+      display: none;
+    }
+
+    .projects-track {
+      display: flex;
+      gap: 24px;
+      padding: 0 4%;
+      width: max-content;
+    }
+
+    .project-card {
+      flex: 0 0 420px;
+      background: #ffffff;
+      border: 1px solid #e2e8f0;
+      border-radius: 12px;
+      overflow: hidden;
+      box-shadow: 0 6px 20px rgba(0, 0, 0, 0.05);
+      transition: transform 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .project-card:hover {
+      transform: translateY(-6px);
+      border-color: #e52330;
+      box-shadow: 0 12px 30px rgba(229, 35, 48, 0.12);
+    }
+
+    /* Strict 16:9 Aspect Ratio Container */
+    .project-image-wrap {
+      width: 100%;
+      aspect-ratio: 16 / 9;
+      overflow: hidden;
+      position: relative;
+      background-color: #e2e8f0;
+    }
+
+    .project-image-wrap img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 0.5s ease;
+    }
+
+    .project-card:hover .project-image-wrap img {
+      transform: scale(1.06);
+    }
+
+    .project-content {
+      padding: 20px;
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
+
+    .project-card-title {
+      font-size: 15px;
+      font-weight: 800;
+      color: #152f4e;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      line-height: 1.35;
+    }
+
+    .project-card-desc {
+      font-size: 13px;
+      color: #64748b;
+      font-weight: 500;
+    }
+
+    /* Fixed Schedule Consultation Button */
+    .consultation-trigger-btn {
+      position: fixed;
+      top: 50%;
+      left: 0;
+      transform: translateY(-50%) rotate(180deg);
+      z-index: 9999;
+      padding: 18px 12px;
+      background-color: #e52330;
+      color: #ffffff;
+      border: none;
+      border-radius: 0 8px 8px 0;
+      font-family: 'Montserrat', sans-serif;
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      cursor: pointer;
+      box-shadow: 4px 0 16px rgba(229, 35, 48, 0.4);
+      transition: background-color 0.2s, padding-left 0.2s;
+      writing-mode: vertical-lr;
+      text-orientation: mixed;
+    }
+
+    .consultation-trigger-btn:hover {
+      background-color: #c41b26;
+      padding-left: 15px;
+    }
+
+    /* Modal Overlay & Form Container */
+    .modal-overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      height: 100dvh;
+      background-color: rgba(21, 47, 78, 0.8);
+      backdrop-filter: blur(8px);
+      z-index: 10000;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      opacity: 0;
+      visibility: hidden;
+      transition: opacity 0.25s ease, visibility 0.25s ease;
+      padding: 12px;
+      box-sizing: border-box;
+    }
+
+    .modal-overlay.is-open {
+      opacity: 1;
+      visibility: visible;
+    }
+
+    .modal-container {
+      position: relative;
+      width: 100%;
+      max-width: 680px;
+      margin: auto;
+      transform: scale(0.96);
+      transition: transform 0.25s ease;
+    }
+
+    .modal-overlay.is-open .modal-container {
+      transform: scale(1);
+    }
+
+    .form-wrapper {
+      background-color: #152f4e;
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      padding: 14px 40px 14px 14px;
+      border-radius: 12px;
+      box-shadow: 0 16px 36px rgba(0, 0, 0, 0.4);
+      font-family: 'Inter', system-ui, sans-serif;
+      box-sizing: border-box;
+      width: 100%;
+      position: relative;
+    }
+
+    .modal-close-btn {
+      position: absolute;
+      top: 50%;
+      right: 8px;
+      transform: translateY(-50%);
+      background: rgba(255, 255, 255, 0.1);
+      border: none;
+      border-radius: 50%;
+      width: 28px;
+      height: 28px;
+      font-size: 16px;
+      color: #ffffff;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      line-height: 1;
+      z-index: 20;
+    }
+
+    .modal-close-btn:hover {
+      background-color: #e52330;
+      color: #ffffff;
+    }
+
+    .form-single-line {
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      gap: 8px;
+      width: 100%;
+    }
+
+    .form-single-line input {
+      flex: 1;
+      min-width: 0;
+      height: 40px;
+      padding: 0 12px;
+      border: 1.5px solid rgba(255, 255, 255, 0.25);
+      border-radius: 8px;
+      font-size: 14px;
+      font-family: inherit;
+      box-sizing: border-box;
+      background-color: rgba(255, 255, 255, 0.08);
+      color: #ffffff;
+    }
+
+    .form-single-line input::placeholder {
+      color: rgba(255, 255, 255, 0.65);
+    }
+
+    .form-single-line input:focus {
+      outline: none;
+      border-color: #ffffff;
+      background-color: rgba(255, 255, 255, 0.15);
+      box-shadow: 0 0 0 3px rgba(229, 35, 48, 0.3);
+    }
+
+    .submit-btn {
+      height: 40px;
+      padding: 0 18px;
+      background-color: #e52330;
+      color: #ffffff;
+      border: none;
+      border-radius: 8px;
+      font-size: 14px;
+      font-weight: 600;
+      cursor: pointer;
+      white-space: nowrap;
+      transition: background-color 0.2s;
+      flex-shrink: 0;
+    }
+
+    .submit-btn:hover {
+      background-color: #c41b26;
+    }
+
+    .submit-btn:disabled {
+      background-color: #64748b;
+      cursor: not-allowed;
+    }
+
+    .form-status {
+      text-align: center;
+      padding: 4px 0;
+    }
+
+    .form-status.success h3 {
+      color: #ffffff;
+      font-size: 15px;
+      margin: 0;
+    }
+
+    .form-status.error p {
+      color: #ff6b6b;
+      font-size: 13px;
+      margin: 0;
+    }
+
+    /* Media Queries */
+    @media (max-width: 1200px) {
+      .services-grid, .why-us-grid {
+        grid-template-columns: repeat(3, 1fr);
+        gap: 20px;
+      }
+    }
+
+    @media (max-width: 900px) {
+      .hero-container {
+        flex-direction: column;
+        justify-content: center;
+        padding: 100px 24px 180px 24px;
+      }
+      .glass-tile {
+        width: 100%;
+        margin-right: 0;
+      }
+      .stats-bar-container {
+        left: 3%;
+        right: 3%;
+        width: 94%;
+        bottom: 15px;
+      }
+      .stats-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 16px;
+      }
+      .stat-item:nth-child(2)::after {
+        display: none;
+      }
+      .stat-number {
+        font-size: 22px;
+      }
+      .stat-label {
+        font-size: 10px;
+      }
+    }
+
+    @media (max-width: 768px) {
+      .services-grid, .why-us-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 16px;
+      }
+      .services-section, .why-us-section, .projects-section {
+        padding: 60px 0;
+      }
+      .project-card {
+        flex: 0 0 300px;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .services-grid, .why-us-grid {
+        grid-template-columns: 1fr;
+      }
+      .stats-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+      .stats-bar-container {
+        padding: 12px 3%;
+      }
+      .project-card {
+        flex: 0 0 260px;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- 1. Hero Section -->
+  <section class="hero-container">
+    <div class="hero-content">
+      <h1>
+        <span>PRECISION ENGINEERING.</span>
+        <span class="accent-text">VISIONARY</span>
+        <span>CONSTRUCTION.</span>
+      </h1>
+      <p>
+        Turnkey Planning, structural, and contracting solutions.<br>
+        100% Permit Approval Assistance.
+      </p>
+    </div>
+
+    <div class="glass-tile">
+  <div class="glass-tile-header">Accreditations & Credentials</div>
+  
+  <div class="glass-badge">
+    <div class="glass-badge-icon-wrap">
+      <img src="https://upload.wikimedia.org/wikipedia/en/f/ff/Institution_of_Engineers_%28India%29_Logo.svg" alt="Institution of Engineers India Official Seal" />
+    </div>
+    <div class="glass-badge-text">
+      Chartered Engineer
+      <span class="glass-badge-sub">Institution of Engineers (IEI)</span>
+    </div>
+  </div>
+
+  <div class="glass-badge">
+    <div class="glass-badge-icon-wrap">
+      <!-- Replaced warning triangle with a structural beam/building icon -->
+      <svg viewBox="0 0 24 24" fill="currentColor">
+        <path d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm-7 3c.83 0 1.5.67 1.5 1.5S12.83 9 12 9s-1.5-.67-1.5-1.5S11.17 6 12 6zm-5 4h10v2H7v-2zm0 4h10v2H7v-2zm0 4h10v2H7v-2z"/>
+      </svg>
+    </div>
+    <div class="glass-badge-text">
+      Structural Engineer License
+      <span class="glass-badge-sub">Statutory Approvals & Certifications</span>
+    </div>
+  </div>
+
+  <div class="glass-badge">
+    <div class="glass-badge-icon-wrap">
+      <svg viewBox="0 0 24 24" fill="currentColor">
+        <path d="M12 1L3 5v6c0 5.55 3.84 10.74 9 12 5.16-1.26 9-5.45 9-12V5l-9-4zm-2 16l-4-4 1.41-1.41L10 14.17l6.59-6.59L18 9l-8 8z"/>
+      </svg>
+    </div>
+    <div class="glass-badge-text">
+      PWD Licensed Contractor
+      <span class="glass-badge-sub">Government Registered</span>
+    </div>
+  </div>
+
+  <div class="glass-badge">
+    <div class="glass-badge-icon-wrap">
+      <svg viewBox="0 0 24 24" fill="currentColor">
+        <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/>
+      </svg>
+    </div>
+    <div class="glass-badge-text">
+      Established Experience
+      <span class="glass-badge-sub">Serving Projects Since 2019</span>
+    </div>
+  </div>
+</div>
+    <div class="stats-bar-container">
+      <div class="stats-grid">
+        <div class="stat-item">
+          <div class="stat-number"><span class="counter" data-target="7">0</span><span class="accent">+</span></div>
+          <div class="stat-label">Years Industrial Experience</div>
+        </div>
+        <div class="stat-item">
+          <div class="stat-number"><span class="counter" data-target="150">0</span><span class="accent">+</span></div>
+          <div class="stat-label">Projects Associated</div>
+        </div>
+        <div class="stat-item">
+          <div class="stat-number"><span class="counter" data-target="35">0</span><span class="accent">+</span></div>
+          <div class="stat-label">Construction Projects Completed</div>
+        </div>
+        <div class="stat-item">
+          <div class="stat-number"><span class="counter" data-target="100">0</span><span class="accent">%</span></div>
+          <div class="stat-label">Regulatory Approvals</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 2. Why Choose Us Section -->
+  <section class="why-us-section">
+    <div class="why-us-header">
+      <span class="why-us-subtitle">Why Choose Us</span>
+      <h2 class="why-us-title">Why Makkari</h2>
+      <p class="why-us-description">
+        We deliver a full spectrum of engineering and construction services with a focus on quality, precision, and reliability. As Chartered Engineers, Structural Engineers, and PWD Licensed Contractors, we are equipped to handle projects of all scales - from private developments to large public infrastructure works.
+      </p>
+    </div>
+
+    <div class="why-us-grid">
+  <!-- Premium Engineering: Replaced Warning Triangle with Gear Icon -->
+  <div class="why-us-card">
+    <div class="why-us-icon-wrap">
+      <svg viewBox="0 0 24 24" fill="currentColor">
+        <path d="M19.43 12.98c.04-.32.07-.64.07-.98 0-.34-.03-.66-.07-.98l2.11-1.65c.19-.15.24-.42.12-.64l-2-3.46c-.12-.22-.39-.3-.61-.22l-2.49 1c-.52-.4-1.08-.73-1.69-.98l-.38-2.65C14.46 2.18 14.25 2 14 2h-4c-.25 0-.46.18-.49.42l-.38 2.65c-.61.25-1.17.59-1.69.98l-2.49-1c-.23-.09-.49 0-.61.22l-2 3.46c-.13.22-.07.49.12.64l2.11 1.65c-.04.32-.07.65-.07.98 0 .33.03.66.07.98l-2.11 1.65c-.19.15-.24.42-.12.64l2 3.46c.12.22.39.3.61.22l2.49-1c.52.4 1.08.73 1.69.98l.38 2.65c.03.24.24.42.49.42h4c.25 0 .46-.18.49-.42l.38-2.65c.61-.25 1.17-.59 1.69-.98l2.49 1c.23.09.49 0 .61-.22l2-3.46c.12-.22.07-.49-.12-.64l-2.11-1.65zM12 15.5c-1.93 0-3.5-1.57-3.5-3.5s1.57-3.5 3.5-3.5 3.5 1.57 3.5 3.5-1.57 3.5-3.5 3.5z"/>
+      </svg>
+    </div>
+    <h3 class="why-us-card-title">Premium Engineering</h3>
+  </div>
+
+  <!-- Premium Design: Pencil/Edit Icon -->
+  <div class="why-us-card">
+    <div class="why-us-icon-wrap">
+      <svg viewBox="0 0 24 24" fill="currentColor">
+        <path d="M3 17.25V21h3.75L17.81 9.94l-3.75-3.75L3 17.25zM20.71 7.04c.39-.39.39-1.02 0-1.41l-2.34-2.34c-.39-.39-1.02-.39-1.41 0l-1.83 1.83 3.75 3.75 1.83-1.83z"/>
+      </svg>
+    </div>
+    <h3 class="why-us-card-title">Premium Design</h3>
+  </div>
+
+  <!-- Transparent Process: Eye Icon -->
+  <div class="why-us-card">
+    <div class="why-us-icon-wrap">
+      <svg viewBox="0 0 24 24" fill="currentColor">
+        <path d="M12 4.5C7 4.5 2.73 7.61 1 12c1.73 4.39 6 7.5 11 7.5s9.27-3.11 11-7.5c-1.73-4.39-6-7.5-11-7.5zM12 17c-2.76 0-5-2.24-5-5s2.24-5 5-5 5 2.24 5 5-2.24 5-5 5zm0-8c-1.66 0-3 1.34-3 3s1.34 3 3 3 3-1.34 3-3-1.34-3-3-3z"/>
+      </svg>
+    </div>
+    <h3 class="why-us-card-title">Transparent Process</h3>
+  </div>
+
+  <!-- On-Time Delivery: Clock Icon -->
+  <div class="why-us-card">
+    <div class="why-us-icon-wrap">
+      <svg viewBox="0 0 24 24" fill="currentColor">
+        <path d="M11.99 2C6.47 2 2 6.48 2 12s4.47 10 9.99 10C17.52 22 22 17.52 22 12S17.52 2 11.99 2zM12 20c-4.42 0-8-3.58-8-8s3.58-8 8-8 8 3.58 8 8-3.58 8-8 8zm.5-13H11v6l5.25 3.15.75-1.23-4.5-2.67z"/>
+      </svg>
+    </div>
+    <h3 class="why-us-card-title">On-Time Delivery</h3>
+  </div>
+
+  <!-- Structural Safety: Shield/Check Icon -->
+  <div class="why-us-card">
+    <div class="why-us-icon-wrap">
+      <svg viewBox="0 0 24 24" fill="currentColor">
+        <path d="M12 1L3 5v6c0 5.55 3.84 10.74 9 12 5.16-1.26 9-5.45 9-12V5l-9-4zm-2 16l-4-4 1.41-1.41L10 14.17l6.59-6.59L18 9l-8 8z"/>
+      </svg>
+    </div>
+    <h3 class="why-us-card-title">Structural Safety</h3>
+  </div>
+
+  <!-- Professional Consultation: Chat Icon -->
+  <div class="why-us-card">
+    <div class="why-us-icon-wrap">
+      <svg viewBox="0 0 24 24" fill="currentColor">
+        <path d="M20 2H4c-1.1 0-1.99.9-1.99 2L2 22l4-4h14c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zM6 9h12v2H6V9zm8 5H6v-2h8v2zm4-6H6V6h12v2z"/>
+      </svg>
+    </div>
+    <h3 class="why-us-card-title">Professional Consultation</h3>
+  </div>
+</div>
+
+  <!-- 3. What We Do Section -->
+  <section class="services-section">
+    <div class="services-header">
+      <span class="services-subtitle">What We Do</span>
+      <h2 class="services-title">Our Services</h2>
+    </div>
+
+    <div class="services-grid">
+      <div class="service-card">
+        <div class="service-image-wrap">
+          <img src="https://lh3.googleusercontent.com/d/1aAJ8xXltYjnchMgHS3LeQUoYqFUhUWDV" alt="Residential Design and Construction" />
+        </div>
+        <div class="service-content">
+          <h3 class="service-card-title">Residential Design & Construction</h3>
+        </div>
+      </div>
+
+      <div class="service-card">
+        <div class="service-image-wrap">
+          <img src="https://lh3.googleusercontent.com/d/1dGHdLeeTmVEv9-1LJswzjzGHRcHxBDti" alt="Commercial Buildings" />
+        </div>
+        <div class="service-content">
+          <h3 class="service-card-title">Commercial Buildings</h3>
+        </div>
+      </div>
+
+      <div class="service-card">
+        <div class="service-image-wrap">
+          <img src="https://lh3.googleusercontent.com/d/1kokvoOaIZaIX39KyNLEoWI-Gfjl2Kpn8" alt="Institutional Projects" />
+        </div>
+        <div class="service-content">
+          <h3 class="service-card-title">Institutional Projects</h3>
+        </div>
+      </div>
+
+      <div class="service-card">
+        <div class="service-image-wrap">
+          <img src="https://images.unsplash.com/photo-1503387762-592deb58ef4e?auto=format&fit=crop&w=600&q=80" alt="Structural Licensing and Verification" />
+        </div>
+        <div class="service-content">
+          <h3 class="service-card-title">Structural Licensing & Sign-Offs</h3>
+        </div>
+      </div>
+
+      <div class="service-card">
+        <div class="service-image-wrap">
+          <img src="https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?auto=format&fit=crop&w=600&q=80" alt="Building Permits and Ksmart Approvals" />
+        </div>
+        <div class="service-content">
+          <h3 class="service-card-title">Building Permits & KSMART Approvals</h3>
+        </div>
+      </div>
+
+      <div class="service-card">
+        <div class="service-image-wrap">
+          <img src="https://lh3.googleusercontent.com/d/1HqVhnNAem6A6MpTdQjLkWb7-Kui7vPb8" alt="Project Management" />
+        </div>
+        <div class="service-content">
+          <h3 class="service-card-title">Project Management</h3>
+        </div>
+      </div>
+    </div>
+  </section>
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+  <title>Featured Projects Carousel</title>
+  <style>
+    /* =========================================================
+       1. GLOBAL OVERFLOW CONTROL (Fixes iPhone page sliding)
+       ========================================================= */
+    *, *::before, *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html, body {
+      width: 100%;
+      max-width: 100vw;
+      overflow-x: hidden; /* Stops entire body from drifting sideways */
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+      background-color: #f8f9fa;
+      color: #152f4e;
+    }
+
+    /* =========================================================
+       2. CAROUSEL SECTION & CONTAINER STYLES
+       ========================================================= */
+    .projects-section {
+      width: 100%;
+      max-width: 100%;
+      padding: 40px 0;
+      overflow: hidden; /* Clips horizontal overflow at section boundary */
+      position: relative;
+    }
+
+    .projects-header {
+      text-align: center;
+      padding: 0 20px 24px 20px;
+    }
+
+    .projects-subtitle {
+      font-size: 0.85rem;
+      font-weight: 700;
+      letter-spacing: 2px;
+      color: #e52330;
+      text-transform: uppercase;
+      display: block;
+      margin-bottom: 6px;
+    }
+
+    .projects-title {
+      font-size: 2rem;
+      font-weight: 800;
+      color: #152f4e;
+    }
+
+    /* =========================================================
+       3. iOS SAFARI TOUCH & SCROLL FIXES
+       ========================================================= */
+    .projects-carousel-wrapper {
+      width: 100%;
+      overflow-x: auto;
+      overflow-y: hidden;
+      padding: 10px 20px 25px 20px;
+      
+      /* WebKit smooth scrolling & touch controls */
+      -webkit-overflow-scrolling: touch; 
+      touch-action: pan-x;               /* Prevents page vertical lag during horizontal gesture */
+      scroll-snap-type: x mandatory;     /* Clean snap on swipe */
+      
+      /* Hide scrollbar for clean UI */
+      scrollbar-width: none;             /* Firefox */
+      -ms-overflow-style: none;          /* IE/Edge */
+    }
+
+    .projects-carousel-wrapper::-webkit-scrollbar {
+      display: none;                     /* Chrome/Safari */
+    }
+
+    /* Track Layout & GPU Hardware Acceleration Fixes */
+    .projects-track {
+      display: flex;
+      gap: 20px;
+      width: max-content;
+      
+      /* Forces iOS Safari GPU layer retention to stop elements vanishing */
+      -webkit-backface-visibility: hidden;
+      backface-visibility: hidden;
+      -webkit-transform: translateZ(0);
+      transform: translateZ(0);
+    }
+
+    /* Card Sizing & iOS Stacking Context Fixes */
+    .project-card {
+      flex: 0 0 300px;                    /* Fixed width so cards don't shrink */
+      width: 300px;
+      background: #ffffff;
+      border-radius: 12px;
+      overflow: hidden;
+      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.08);
+      scroll-snap-align: start;
+      
+      /* Fixes blanking/disappearing card render glitch on iOS */
+      -webkit-transform: translate3d(0,0,0);
+      transform: translate3d(0,0,0);
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    @media (min-width: 768px) {
+      .project-card {
+        flex: 0 0 360px;
+        width: 360px;
+      }
+    }
+
+    /* Image Wrapper & Rendering Controls */
+    .project-image-wrap {
+      width: 100%;
+      height: 220px;
+      background-color: #e2e8f0;
+      overflow: hidden;
+      position: relative;
+    }
+
+    .project-image-wrap img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+      -webkit-user-drag: none;            /* Disables iOS native image drag conflict */
+      user-select: none;
+    }
+
+    .project-content {
+      padding: 20px;
+    }
+
+    .project-card-title {
+      font-size: 1.15rem;
+      font-weight: 700;
+      color: #152f4e;
+      margin-bottom: 6px;
+    }
+
+    .project-card-desc {
+      font-size: 0.9rem;
+      color: #64748b;
+      line-height: 1.4;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- 4. Featured Projects Section (Mouse Interactive Carousel) -->
+  <section class="projects-section" id="projectsSection">
+    <div class="projects-header">
+      <span class="projects-subtitle">FEATURED PROJECTS</span>
+      <h2 class="projects-title">Our Recent Works</h2>
+    </div>
+
+    <div class="projects-carousel-wrapper" id="projectsWrapper">
+      <div class="projects-track">
+        
+        <!-- Project 1 -->
+        <div class="project-card">
+          <div class="project-image-wrap">
+            <img src="https://lh3.googleusercontent.com/d/1K7uZdhhP_TjATdOi07OajLjN7ZMO9iW5" alt="Residential Building at Poonath-Kozhikode" loading="lazy" />
+          </div>
+          <div class="project-content">
+            <h3 class="project-card-title">Residential Building</h3>
+            <p class="project-card-desc">Poonath-Kozhikode</p>
+          </div>
+        </div>
+
+        <!-- Project 2 -->
+        <div class="project-card">
+          <div class="project-image-wrap">
+            <img src="https://lh3.googleusercontent.com/d/1dGHdLeeTmVEv9-1LJswzjzGHRcHxBDti" alt="Minu Commercial Centre" loading="lazy" />
+          </div>
+          <div class="project-content">
+            <h3 class="project-card-title">Minu Commercial Centre</h3>
+            <p class="project-card-desc">8,000 SQFT Building Naduvannur Kozhikode</p>
+          </div>
+        </div>
+
+        <!-- Project 3 -->
+        <div class="project-card">
+          <div class="project-image-wrap">
+            <img src="https://lh3.googleusercontent.com/d/1kokvoOaIZaIX39KyNLEoWI-Gfjl2Kpn8" alt="Markaz Academy of Women Cheruvannur" loading="lazy" />
+          </div>
+          <div class="project-content">
+            <h3 class="project-card-title">Markaz Academy of Women</h3>
+            <p class="project-card-desc">Cheruvannur - Institutional</p>
+          </div>
+        </div>
+
+        <!-- Project 4 -->
+        <div class="project-card">
+          <div class="project-image-wrap">
+            <img src="https://lh3.googleusercontent.com/d/1IKAm3T4s-bMgdEybnaXm4UHo8MZpYFbx" alt="Storage Building Industrial Hub Atholi" loading="lazy" />
+          </div>
+          <div class="project-content">
+            <h3 class="project-card-title">Storage Building</h3>
+            <p class="project-card-desc">Industrial Storage & Logistics Hub Atholi, Kozhikode 60,000 Sq. Ft.</p>
+          </div>
+        </div>
+
+        <!-- Project 5 -->
+        <div class="project-card">
+          <div class="project-image-wrap">
+            <img src="https://lh3.googleusercontent.com/d/18-w7af2UOcn38Z8G5IB2jdwUyUu4owC1" alt="Thinner Storage 30000sft" loading="lazy" />
+          </div>
+          <div class="project-content">
+            <h3 class="project-card-title">Thinner Storage</h3>
+            <p class="project-card-desc">30,000 SQFT Industrial Facility</p>
+          </div>
+        </div>
+
+        <!-- Project 6 -->
+        <div class="project-card">
+          <div class="project-image-wrap">
+            <img src="https://lh3.googleusercontent.com/d/1HE7L8zSknQp0wmF_WHhdUo7m9HhpMC2F" alt="Residential Building Poonoor-Kozhikode" loading="lazy" />
+          </div>
+          <div class="project-content">
+            <h3 class="project-card-title">Residential Building</h3>
+            <p class="project-card-desc">2,850 SQFT Poonoor-Kozhikode</p>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- Optional JS: Adds smooth mouse drag for desktop while leaving native touch intact for iOS/Android -->
+  <script>
+    const slider = document.getElementById('projectsWrapper');
+    let isDown = false;
+    let startX;
+    let scrollLeft;
+
+    slider.addEventListener('mousedown', (e) => {
+      isDown = true;
+      slider.style.cursor = 'grabbing';
+      startX = e.pageX - slider.offsetLeft;
+      scrollLeft = slider.scrollLeft;
+    });
+
+    slider.addEventListener('mouseleave', () => {
+      isDown = false;
+      slider.style.cursor = 'default';
+    });
+
+    slider.addEventListener('mouseup', () => {
+      isDown = false;
+      slider.style.cursor = 'default';
+    });
+
+    slider.addEventListener('mousemove', (e) => {
+      if (!isDown) return;
+      e.preventDefault();
+      const x = e.pageX - slider.offsetLeft;
+      const walk = (x - startX) * 1.5;
+      slider.scrollLeft = scrollLeft - walk;
+    });
+  </script>
+</body>
+</html>
+
+  <style>
+  /* Base styles for desktop/mobile button behavior */
+  .consultation-trigger-btn {
+    position: fixed;
+    z-index: 9999;
+  }
+
+  /* Target mobile screens to move button to the top-right corner */
+  @media (max-width: 768px) {
+    .consultation-trigger-btn {
+      top: auto !important;
+      right: auto !important;
+      left: auto !important;
+      bottom: auto !important;
+      transform: none !important; /* Disables vertical rotation from desktop */
+      writing-mode: horizontal-tb !important; /* Ensures text reads left-to-right */
+    }
+  }
+</style>
+
+<style>
+  .consultation-trigger-btn {
+    position: fixed;
+    z-index: 9999;
+  }
+
+  /* Target mobile screens */
+  @media (max-width: 768px) {
+    /* Reposition button to top right */
+    .consultation-trigger-btn {
+     Hide
+    }
+
+    /* Force all elements to have perfectly square corners */
+    .consultation-trigger-btn,
+    .modal-container,
+    .form-wrapper,
+    .modal-close-btn,
+    .form-single-line input,
+    .submit-btn {
+      border-radius: 0 !important;
+    }
+  }
+</style>
+
+<!-- Left Vertical Schedule Button -->
+<button class="consultation-trigger-btn" id="openModalBtn">
+  Schedule Consultation
+</button>
+
+<!-- Consultation Modal -->
+<div class="modal-overlay" id="consultationModal">
+  <div class="modal-container" id="modalContainer">
+    <div class="form-wrapper">
+      <button class="modal-close-btn" id="closeModalBtn" aria-label="Close modal">&times;</button>
+      
+      <div id="form-status" class="form-status" style="display: none;"></div>
+
+      <form id="my-form" action="https://formspree.io/f/xlgqpwnb" method="POST">
+        <div class="form-single-line">
+          <input type="text" id="name" name="name" placeholder="Your Name" required />
+          <input type="tel" id="phone" name="phone" placeholder="Mobile Number" required pattern="[0-9+\s-]{8,15}" title="Please enter a valid mobile number" />
+          <button type="submit" id="submit-btn" class="submit-btn">Send</button><style>
+  /* Applied directly to container and inner wrapper */
+  #modalContainer,
+  #modalContainer .form-wrapper {
+    /* Clockwise: top-left: 0 | top-right: 15px | bottom-right: 15px | bottom-left: 0 */
+    border-top-left-radius: 15px !important;
+    border-bottom-left-radius: 15px !important;
+    border-top-right-radius: 15px !important;
+    border-bottom-right-radius: 15px !important;
+    overflow: hidden !important; /* Clips right inner red background to the curved edges */
+  }
+</style>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+
+<!-- Right Floating Contact Buttons -->
+<div class="floating-contact-container" style="position: fixed; top: 80%; right: 15px; transform: translateY(-50%); flex-direction: column; gap: 10px; z-index: 9999;">
+  <!-- WhatsApp -->
+  <a href="https://wa.me/918281228549" target="_blank" rel="noopener noreferrer" style="width: 48px; height: 48px; background-color: #25D366; border-radius: 8px; display: flex; align-items: center; justify-content: center; box-shadow: 0 4px 12px rgba(0,0,0,0.25);">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="#ffffff" style="width: 24px; height: 24px;">
+      <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.521.151-.172.2-.296.3-.495.099-.198.05-.372-.025-.521-.075-.148-.669-1.611-.916-2.206-.242-.579-.487-.501-.669-.51l-.57-.01c-.198 0-.52.074-.792.372s-1.04 1.016-1.04 2.479 1.065 2.876 1.213 3.074c.149.198 2.096 3.2 5.077 4.487.709.306 1.263.489 1.694.626.712.226 1.36.194 1.872.118.572-.085 1.787-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.99c-.002 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/>
+    </svg>
+  </a>
+  <!-- Call -->
+  <a href="tel:+918281228549" style="width: 48px; height: 48px; background-color: #152f4e; border-radius: 8px; display: flex; align-items: center; justify-content: center; box-shadow: 0 4px 12px rgba(0,0,0,0.25);">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="#ffffff" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" style="width: 22px; height: 22px;">
+      <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path>
+    </svg>
+  </a>
+</div>
+
+<style>
+  /* Hidden by default on large screens/desktops */
+  .floating-contact-container {
+    display: none !important;
+  }
+
+  /* Display only on mobile and small screens (768px wide or smaller) */
+  @media screen and (max-width: 768px) {
+    .floating-contact-container {
+      display: flex !important;
+    }
+  }
+</style>
+  <script>
+    /* Modal Controls */
+    const openModalBtn = document.getElementById("openModalBtn");
+    const closeModalBtn = document.getElementById("closeModalBtn");
+    const modalOverlay = document.getElementById("consultationModal");
+    const modalContainer = document.getElementById("modalContainer");
+
+    openModalBtn.addEventListener("click", () => {
+      modalOverlay.classList.add("is-open");
+      document.body.style.overflow = "hidden";
+    });
+
+    function closeModal() {
+      modalOverlay.classList.remove("is-open");
+      document.body.style.overflow = "";
+    }
+
+    closeModalBtn.addEventListener("click", closeModal);
+
+    function handleOutsideClick(e) {
+      if (!modalContainer.contains(e.target) && e.target !== openModalBtn) {
+        closeModal();
+      }
+    }
+
+    modalOverlay.addEventListener("click", handleOutsideClick);
+
+    /* Form Handler */
+    const form = document.getElementById("my-form");
+    const formStatus = document.getElementById("form-status");
+    const submitBtn = document.getElementById("submit-btn");
+
+    async function handleSubmit(event) {
+      event.preventDefault();
+      submitBtn.disabled = true;
+      submitBtn.innerText = "Sending...";
+
+      const data = new FormData(event.target);
+
+      fetch(event.target.action, {
+        method: form.method,
+        body: data,
+        headers: {
+          'Accept': 'application/json'
+        }
+      }).then(response => {
+        if (response.ok) {
+          form.style.display = "none";
+          formStatus.className = "form-status success";
+          formStatus.innerHTML = "<h3>Request Received! We will call you back shortly.</h3>";
+          formStatus.style.display = "block";
+        } else {
+          response.json().then(data => {
+            if (Object.hasOwn(data, 'errors')) {
+              formStatus.innerHTML = data["errors"].map(error => error["message"]).join(", ");
+            } else {
+              formStatus.innerHTML = "<p>Oops! There was a problem submitting your request.</p>";
+            }
+            formStatus.className = "form-status error";
+            formStatus.style.display = "block";
+            submitBtn.disabled = false;
+            submitBtn.innerText = "Send";
+          });
+        }
+      }).catch(error => {
+        formStatus.innerHTML = "<p>Oops! There was a problem submitting your request.</p>";
+        formStatus.className = "form-status error";
+        formStatus.style.display = "block";
+        submitBtn.disabled = false;
+        submitBtn.innerText = "Send";
+      });
+    }
+
+    form.addEventListener("submit", handleSubmit);
+
+    /* Animated Counter for Bottom Stats Bar */
+    const counters = document.querySelectorAll('.counter');
+    const speed = 200;
+
+    const startCounters = () => {
+      counters.forEach(counter => {
+        const updateCount = () => {
+          const target = +counter.getAttribute('data-target');
+          const count = +counter.innerText;
+          const inc = target / speed;
+
+          if (count < target) {
+            counter.innerText = Math.ceil(count + inc);
+            setTimeout(updateCount, 15);
+          } else {
+            counter.innerText = target.toLocaleString();
+          }
+        };
+        updateCount();
+      });
+    };
+
+    let animated = false;
+    window.addEventListener('scroll', () => {
+      const statsSection = document.querySelector('.stats-bar-container');
+      if (statsSection) {
+        const position = statsSection.getBoundingClientRect().top;
+        const screenPosition = window.innerHeight;
+        if (position < screenPosition && !animated) {
+          startCounters();
+          animated = true;
+        }
+      }
+    });
+
+    document.addEventListener("DOMContentLoaded", () => {
+      startCounters();
+    });
+
+    /* Mouse Move Interactive Carousel Logic */
+    const projectsSection = document.getElementById('projectsSection');
+    const projectsWrapper = document.getElementById('projectsWrapper');
+
+    projectsSection.addEventListener('mousemove', (e) => {
+      const rect = projectsSection.getBoundingClientRect();
+      const mouseX = e.clientX - rect.left;
+      const percentage = Math.max(0, Math.min(1, mouseX / rect.width));
+      const maxScroll = projectsWrapper.scrollWidth - projectsWrapper.clientWidth;
+      
+      projectsWrapper.scrollLeft = percentage * maxScroll;
+    });
+  </script>
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Footer Component - Makkari Constructions</title>
+    <!-- Google Fonts: Archivo -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Archivo:ital,wght@0,400..700;1,400..700&display=swap" rel="stylesheet">
+    
+    <style>
+        :root {
+            --brand-primary: #152f4e;   /* Deep Navy */
+            --brand-accent: #e52330;    /* Vibrant Red */
+            --brand-light: #f9f9f9;     /* Light Gray Background */
+            --brand-white: #ffffff;     /* Pure White */
+            --font-heading: 'Archivo', sans-serif;
+            --font-body: 'Archivo', sans-serif;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: var(--font-body);
+            background-color: var(--brand-light);
+        }
+
+        .site-footer {
+            background-color: var(--brand-primary);
+            color: var(--brand-white);
+            padding: 60px 20px 20px;
+            font-size: 15px;
+            line-height: 1.6;
+        }
+
+        .footer-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 40px;
+        }
+
+        /* Company Info Section */
+        .footer-brand {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+
+        .footer-logo {
+            max-width: 220px;
+            height: auto;
+            display: block;
+        }
+
+        .brand-description {
+            color: rgba(255, 255, 255, 0.85);
+            font-size: 14px;
+        }
+
+        /* Titles */
+        .footer-heading {
+            font-family: var(--font-heading);
+            font-size: 18px;
+            font-weight: 700;
+            margin-bottom: 20px;
+            position: relative;
+            padding-bottom: 8px;
+            color: var(--brand-white);
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .footer-heading::after {
+            content: '';
+            position: absolute;
+            left: 0;
+            bottom: 0;
+            width: 40px;
+            height: 3px;
+            background-color: var(--brand-accent);
+            border-radius: 2px;
+        }
+
+        /* Quick Links */
+        .footer-links ul {
+            list-style: none;
+        }
+
+        .footer-links li {
+            margin-bottom: 12px;
+        }
+
+        .footer-links a {
+            color: rgba(255, 255, 255, 0.85);
+            text-decoration: none;
+            transition: all 0.3s ease;
+            display: inline-block;
+        }
+
+        .footer-links a:hover {
+            color: var(--brand-accent);
+            transform: translateX(5px);
+        }
+
+        /* Contact Details */
+        .contact-info {
+            list-style: none;
+        }
+
+        .contact-info li {
+            margin-bottom: 15px;
+            color: rgba(255, 255, 255, 0.85);
+            display: flex;
+            align-items: flex-start;
+            gap: 10px;
+        }
+
+        .contact-info a {
+            color: rgba(255, 255, 255, 0.85);
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        .contact-info a:hover {
+            color: var(--brand-accent);
+        }
+
+        .icon {
+            color: var(--brand-accent);
+            font-weight: bold;
+            flex-shrink: 0;
+        }
+
+        /* Bottom Bar */
+        .footer-bottom {
+            max-width: 1200px;
+            margin: 40px auto 0;
+            padding-top: 20px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            text-align: center;
+            font-size: 13px;
+            color: rgba(255, 255, 255, 0.6);
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .site-footer {
+                padding: 40px 20px 20px;
+            }
+            .footer-container {
+                gap: 30px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <footer class="site-footer">
+        <div class="footer-container">
+            
+            <!-- Branding & Logo Column -->
+            <div class="footer-brand">
+                <!-- Updated Google Drive Direct Image Link -->
+                <a href="https://www.makkariconstructions.com/">
+                    <img class="footer-logo" src="https://lh3.googleusercontent.com/d/17two9sD2_HX7rojcUk6QjUEVTKM-0sgm" alt="Makkari Constructions and Developers Logo">
+                </a>
+                <p class="brand-description">
+                    Building quality spaces and creating value through innovative design and high-standard construction solutions.
+                </p>
+            </div>
+
+            <!-- Quick Links Column -->
+            <div class="footer-links">
+                <h3 class="footer-heading">Quick Links</h3>
+                <ul>
+                    <li><a href="https://www.makkariconstructions.com/about-us">About Us</a></li>
+                    <li><a href="https://www.makkariconstructions.com/services">Services</a></li>
+                    <li><a href="https://www.makkariconstructions.com/projects">Projects</a></li>
+                    <li><a href="https://www.makkariconstructions.com/contact-us">Contact Us</a></li>
+                </ul>
+            </div>
+
+            <!-- Contact Information Column -->
+            <div class="footer-contact">
+                <h3 class="footer-heading">Contact Us</h3>
+                <ul class="contact-info">
+                    <li>
+                        <span class="icon">&#128205;</span>
+                        <span>Makkari Constructions and Developers,<br>Minu City Centre <br>Naduvannur <br>Kerala, India</span>
+                    </li>
+                    <li>
+                        <span class="icon">&#128222;</span>
+                        <span>Phone: <a href="tel:+918281228549">+91 82812 28549</a></span>
+                    </li>
+                    <li>
+                        <span class="icon">&#9993;</span>
+                        <span>Email: <a href="mailto:info@makkariconstructions.com">info.makkariconstructions@gmail.com</a></span>
+                    </li>
+                </ul>
+            </div>
+
+        </div>
+
+        <!-- Copyright Bar -->
+        <div class="footer-bottom">
+            <p>&copy; 2026 Makkari Constructions and Developers.</p>  <div><p>All Rights Reserved.</p>
+        </div>
+    </footer>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "GeneralContractor",
+  "name": "Makkari Constructions & Developers",
+  "url": "https://www.makkariconstructions.com/",
+  "logo": "https://lh3.googleusercontent.com/d/1Yx22rsiW7IBqtROqXqjXs8rGScuLonVR",
+  "image": "https://lh3.googleusercontent.com/d/1Yx22rsiW7IBqtROqXqjXs8rGScuLonVR",
+  "description": "Turnkey residential and commercial construction, architectural design consultation, PWD contracting, structural verification sign-offs, and K-SMART building permit approval services in Kozhikode, Kerala.",
+  "address": {
+    "@type": "PostalAddress",
+    "addressLocality": "Kozhikode",
+    "addressRegion": "Kerala",
+    "addressCountry": "IN"
+  },
+  "areaServed": {
+    "@type": "State",
+    "name": "Kerala"
+  },
+  "knowsAbout": [
+    "Turnkey Residential Construction",
+    "Commercial Complex Execution",
+    "Architectural Planning & Spatial Design",
+    "K-SMART Building Permit Approvals",
+    "Structural Engineering Verification",
+    "PWD Civil Contracting",
+    "Industrial Storage & Master Planning"
+  ]
+}
+</script>
+
+</body>
+</html>

@@ -1,0 +1,1171 @@
+<header class="site-header" id="makkari-auto-header" role="banner">
+  <div class="nav-container">
+
+    <a href="index.html" class="brand-container" aria-label="Go to Homepage">
+      <img src="https://lh3.googleusercontent.com/d/1RjhoHvjH6DbnNqLOpCNQUOySmpLD2EPv" alt="Company Logo" class="brand-logo-img">
+    </a>
+
+    <button class="mobile-toggle" id="mobile-toggle" aria-expanded="false" aria-controls="nav-menu" aria-label="Open navigation menu">
+      <span class="bar"></span>
+      <span class="bar"></span>
+      <span class="bar"></span>
+    </button>
+
+    <nav aria-label="Main navigation">
+      <ul class="nav-menu" id="nav-menu">
+        <li class="nav-item">
+          <a href="index.html" class="nav-link">Home</a>
+        </li>
+        <li class="nav-item">
+          <a href="about.html" class="nav-link">About Us</a>
+        </li>
+        <li class="nav-item">
+          <a href="services.html" class="nav-link">Services</a>
+        </li>
+        <li class="nav-item">
+          <a href="projects.html" class="nav-link">Projects</a>
+        </li>
+        <li class="nav-item">
+          <a href="estimator.html" class="nav-link">Estimator Modules</a>
+        </li>
+        <li class="nav-item">
+          <a href="contact.html" class="nav-link highlight">Contact Us</a>
+        </li>
+      </ul>
+    </nav>
+
+  </div>
+</header>
+
+<style>
+  :root {
+    --brand-navy: #152F4E;
+    --brand-red: #E52330;
+    --brand-red-hover: #c41c27;
+    --glass-bg: rgba(255, 255, 255, 0.75);
+    --glass-bg-scrolled: rgba(255, 255, 255, 0.9);
+    --glass-border: rgba(255, 255, 255, 0.5);
+    --glass-hover: rgba(21, 47, 78, 0.08);
+    --text-color: #152F4E;
+    --header-height: clamp(60px, 7vh, 75px);
+    --shadow-glass: 0 8px 32px 0 rgba(0, 0, 0, 0.12);
+    --transition-speed: 0.35s;
+    --ease-spring: cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  }
+
+  /* Floating Glass Bar with Entrance Animation */
+  .site-header {
+    position: fixed;
+    top: 8px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: min(92%, 1150px);
+    height: var(--header-height);
+    z-index: 1000;
+    border-radius: 100px;
+    
+    background: var(--glass-bg);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    border: 1px solid var(--glass-border);
+    box-shadow: var(--shadow-glass);
+    
+    /* Initial entrance state */
+    opacity: 0;
+    animation: headerEntrance 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+    transition: top var(--transition-speed) ease, 
+                background var(--transition-speed) ease, 
+                box-shadow var(--transition-speed) ease,
+                border-color var(--transition-speed) ease;
+  }
+
+  @keyframes headerEntrance {
+    0% {
+      opacity: 0;
+      transform: translate(-50%, -25px);
+    }
+    100% {
+      opacity: 1;
+      transform: translate(-50%, 0);
+    }
+  }
+
+  .site-header.scrolled {
+    background: var(--glass-bg-scrolled);
+    border-color: rgba(255, 255, 255, 0.8);
+    box-shadow: 0 12px 35px 0 rgba(0, 0, 0, 0.18);
+    top: 12px;
+  }
+
+  .nav-container {
+    width: 100%;
+    height: 100%;
+    margin: 0 auto;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 clamp(1.2rem, 3vw, 2rem);
+    position: relative;
+  }
+
+  /* Brand Logo Animations */
+  .brand-container {
+    display: flex;
+    align-items: center;
+    text-decoration: none;
+    height: 100%;
+    border-radius: 50px;
+  }
+
+  .brand-logo-img {
+    height: clamp(32px, 4.5vh, 42px);
+    width: auto;
+    object-fit: contain;
+    transition: transform 0.3s var(--ease-spring);
+  }
+
+  .brand-container:hover .brand-logo-img {
+    transform: scale(1.08) rotate(-1.5deg);
+  }
+
+  /* Desktop Menu & Staggered Link Animations */
+  .nav-menu {
+    display: flex;
+    list-style: none;
+    gap: clamp(0.3rem, 1vw, 0.8rem);
+    align-items: center;
+  }
+
+  /* Cascade menu links on page load */
+  .nav-item {
+    opacity: 0;
+    animation: navItemFade 0.5s ease forwards;
+  }
+
+  .nav-item:nth-child(1) { animation-delay: 0.2s; }
+  .nav-item:nth-child(2) { animation-delay: 0.27s; }
+  .nav-item:nth-child(3) { animation-delay: 0.34s; }
+  .nav-item:nth-child(4) { animation-delay: 0.41s; }
+  .nav-item:nth-child(5) { animation-delay: 0.48s; }
+  .nav-item:nth-child(6) { animation-delay: 0.55s; }
+
+  @keyframes navItemFade {
+    from {
+      opacity: 0;
+      transform: translateY(-8px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  .nav-link {
+    position: relative;
+    color: var(--text-color);
+    text-decoration: none;
+    font-size: clamp(0.85rem, 0.95vw, 0.95rem);
+    font-weight: 600;
+    padding: 0.55rem 1.1rem;
+    border-radius: 50px;
+    transition: color var(--transition-speed) ease, 
+                background-color var(--transition-speed) ease, 
+                transform var(--transition-speed) var(--ease-spring);
+    white-space: nowrap;
+    display: inline-block;
+  }
+
+  .nav-link:hover, 
+  .nav-link:focus-visible {
+    background-color: var(--glass-hover);
+    color: var(--brand-navy);
+    transform: translateY(-2px);
+    outline: none;
+  }
+
+  .nav-link.active-page {
+    background-color: rgba(21, 47, 78, 0.12);
+    color: var(--brand-navy);
+  }
+
+  .nav-link.highlight {
+    background-color: var(--brand-red);
+    color: #FFFFFF;
+    box-shadow: 0 4px 15px rgba(229, 35, 48, 0.3);
+    transition: all var(--transition-speed) ease;
+  }
+
+  .nav-link.highlight:hover {
+    background-color: var(--brand-red-hover);
+    color: #FFFFFF;
+    transform: translateY(-2px) scale(1.03);
+    box-shadow: 0 6px 20px rgba(229, 35, 48, 0.45);
+  }
+
+  /* Mobile Toggle Bar Transitions */
+  .mobile-toggle {
+    display: none;
+    flex-direction: column;
+    justify-content: space-between;
+    width: 26px;
+    height: 18px;
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    padding: 0;
+    margin-left: auto;
+    z-index: 101;
+  }
+
+  .mobile-toggle .bar {
+    height: 2px;
+    width: 100%;
+    background-color: var(--text-color);
+    border-radius: 2px;
+    transition: transform var(--transition-speed) var(--ease-spring), 
+                opacity var(--transition-speed) ease;
+  }
+
+  .mobile-toggle.active .bar:nth-child(1) {
+    transform: translateY(8px) rotate(45deg);
+  }
+  .mobile-toggle.active .bar:nth-child(2) {
+    opacity: 0;
+    transform: translateX(-10px);
+  }
+  .mobile-toggle.active .bar:nth-child(3) {
+    transform: translateY(-8px) rotate(-45deg);
+  }
+
+  /* Responsive Mobile Menu Dropdown */
+  @media (max-width: 900px) {
+    .mobile-toggle {
+      display: flex;
+    }
+
+    .nav-menu {
+      position: absolute;
+      top: calc(100% + 12px);
+      right: 0;
+      width: 100%;
+      max-width: 280px;
+      background: rgba(255, 255, 255, 0.95);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      flex-direction: column;
+      align-items: stretch;
+      opacity: 0;
+      visibility: hidden;
+      transform: translateY(-15px) scale(0.95);
+      transition: opacity var(--transition-speed) ease,
+                  transform var(--transition-speed) var(--ease-spring),
+                  visibility var(--transition-speed) ease;
+      box-shadow: 0 16px 32px rgba(0, 0, 0, 0.15);
+      border-radius: 20px;
+      border: 1px solid var(--glass-border);
+      padding: 0.5rem 0;
+      overflow: hidden;
+    }
+
+    .nav-menu.active {
+      opacity: 1;
+      visibility: visible;
+      transform: translateY(0) scale(1);
+    }
+
+    .nav-item {
+      animation: none;
+      opacity: 0;
+      transform: translateX(15px);
+      transition: opacity 0.3s ease, transform 0.3s ease;
+    }
+
+    .nav-menu.active .nav-item {
+      opacity: 1;
+      transform: translateX(0);
+    }
+
+    .nav-menu.active .nav-item:nth-child(1) { transition-delay: 0.05s; }
+    .nav-menu.active .nav-item:nth-child(2) { transition-delay: 0.10s; }
+    .nav-menu.active .nav-item:nth-child(3) { transition-delay: 0.15s; }
+    .nav-menu.active .nav-item:nth-child(4) { transition-delay: 0.20s; }
+    .nav-menu.active .nav-item:nth-child(5) { transition-delay: 0.25s; }
+    .nav-menu.active .nav-item:nth-child(6) { transition-delay: 0.30s; }
+
+    .nav-link {
+      display: block;
+      color: var(--text-color);
+      padding: 0.85rem 1.4rem;
+      border-radius: 0;
+      text-align: left;
+      transform: none !important;
+    }
+
+    .nav-link.highlight {
+      text-align: center;
+      margin: 0.5rem 1rem;
+      border-radius: 50px;
+    }
+  }
+</style>
+
+<script>
+  document.addEventListener("DOMContentLoaded", function () {
+    const header = document.getElementById('makkari-auto-header');
+    const mobileToggle = document.getElementById('mobile-toggle');
+    const navMenu = document.getElementById('nav-menu');
+
+    const handleScroll = () => {
+      if (window.scrollY > 20) {
+        header.classList.add('scrolled');
+      } else {
+        header.classList.remove('scrolled');
+      }
+    };
+
+    window.addEventListener('scroll', handleScroll);
+    handleScroll();
+
+    const currentPath = window.location.pathname.toLowerCase();
+    const navLinks = document.querySelectorAll('.nav-link');
+
+    navLinks.forEach(link => {
+      const hrefValue = link.getAttribute('href').toLowerCase();
+      const isHome = (hrefValue === 'index.html' && (currentPath === '/' || currentPath.endsWith('index.html')));
+      const isExactMatch = currentPath.includes(hrefValue.replace('.html', ''));
+
+      if (isHome || (hrefValue !== 'index.html' && isExactMatch)) {
+        link.classList.add('active-page');
+        link.setAttribute('aria-current', 'page');
+      }
+    });
+
+    if (mobileToggle && navMenu) {
+      const toggleMenu = (forceClose = false) => {
+        const isClosing = forceClose || navMenu.classList.contains('active');
+        if (isClosing) {
+          navMenu.classList.remove('active');
+          mobileToggle.classList.remove('active');
+          mobileToggle.setAttribute('aria-expanded', 'false');
+        } else {
+          navMenu.classList.add('active');
+          mobileToggle.classList.add('active');
+          mobileToggle.setAttribute('aria-expanded', 'true');
+        }
+      };
+
+      mobileToggle.addEventListener('click', (e) => {
+        e.stopPropagation();
+        toggleMenu();
+      });
+
+      document.addEventListener('click', (e) => {
+        if (!header.contains(e.target)) {
+          toggleMenu(true);
+        }
+      });
+    }
+  });
+</script>
+
+<!----------------------------------------->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Our Services & Portfolio | Makkari</title>
+  
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+  
+  <style>
+    :root {
+      --primary-navy: #152F4E;
+      --accent-red: #E52330;
+      --bg-light: #F4F6F9;
+      --card-white: #FFFFFF;
+      --text-main: #152F4E;
+      --text-muted: #5A6E85;
+      --border-color: #E2E8F0;
+      --border-hover: #CBD5E1;
+      
+      --radius-sm: 8px;
+      --radius-md: 12px;
+      --radius-lg: 16px;
+      
+      --shadow-sm: 0 2px 8px rgba(21, 47, 78, 0.04);
+      --shadow-md: 0 8px 24px rgba(21, 47, 78, 0.06);
+      --shadow-hover: 0 16px 32px rgba(21, 47, 78, 0.1);
+      
+      --transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: 'Archivo', sans-serif;
+      background-color: var(--bg-light);
+      color: var(--text-main);
+      line-height: 1.5;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    .wrapper {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: clamp(40px, 6vw, 80px) clamp(16px, 3vw, 24px);
+    }
+
+    /* Section Typography */
+    .section-header {
+      text-align: center;
+      margin-bottom: clamp(32px, 4vw, 48px);
+    }
+
+    .header-tag {
+      display: inline-block;
+      font-size: 0.8rem;
+      font-weight: 800;
+      color: var(--accent-red);
+      text-transform: uppercase;
+      letter-spacing: 1.5px;
+      margin-bottom: 8px;
+    }
+
+    .section-title {
+      font-size: clamp(1.8rem, 3.5vw, 2.5rem);
+      font-weight: 800;
+      color: var(--primary-navy);
+      letter-spacing: -0.5px;
+    }
+
+    /* Services Grid - Equal Height Uniform Layout */
+    .services-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+      gap: 24px;
+      margin-bottom: clamp(50px, 7vw, 90px);
+    }
+
+    .service-card {
+      background: var(--card-white);
+      border: 1px solid var(--border-color);
+      border-radius: var(--radius-md);
+      padding: 32px 28px;
+      box-shadow: var(--shadow-sm);
+      transition: var(--transition);
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-start;
+    }
+
+    .service-card:hover {
+      transform: translateY(-4px);
+      box-shadow: var(--shadow-hover);
+      border-color: var(--border-hover);
+    }
+
+    .card-top {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 20px;
+    }
+
+    .card-number {
+      font-size: 0.85rem;
+      font-weight: 800;
+      color: var(--accent-red);
+      background-color: rgba(229, 35, 48, 0.08);
+      padding: 4px 12px;
+      border-radius: 20px;
+    }
+
+    .service-card h3 {
+      font-size: 1.2rem;
+      font-weight: 700;
+      color: var(--primary-navy);
+      margin-bottom: 10px;
+      line-height: 1.3;
+    }
+
+    .service-card p {
+      font-size: 0.925rem;
+      color: var(--text-muted);
+      line-height: 1.6;
+    }
+
+    /* Stats Counter Bar Section */
+    .stats-section {
+      background: var(--card-white);
+      border: 1px solid var(--border-color);
+      border-radius: var(--radius-lg);
+      padding: clamp(28px, 4vw, 40px) clamp(16px, 3vw, 24px);
+      margin-bottom: clamp(50px, 7vw, 90px);
+      box-shadow: var(--shadow-sm);
+    }
+
+    .stats-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 16px;
+      text-align: center;
+    }
+
+    .stat-item {
+      position: relative;
+      padding: 8px 16px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .stat-item:not(:last-child)::after {
+      content: '';
+      position: absolute;
+      right: 0;
+      top: 15%;
+      height: 70%;
+      width: 1px;
+      background-color: var(--border-color);
+    }
+
+    .stat-number-box {
+      font-size: clamp(1.8rem, 3.2vw, 2.5rem);
+      font-weight: 800;
+      color: var(--accent-red);
+      line-height: 1.1;
+      margin-bottom: 6px;
+      letter-spacing: -0.5px;
+    }
+
+    .stat-label {
+      font-size: 0.8rem;
+      font-weight: 700;
+      color: var(--primary-navy);
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+
+    /* Why Makkari Grid - Neat Horizontal / Multi-Line Alignment */
+    .why-section {
+      margin-bottom: clamp(50px, 7vw, 90px);
+    }
+
+    .why-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(210px, 1fr));
+      gap: 20px;
+    }
+
+    .why-card {
+      background: var(--card-white);
+      border: 1px solid var(--border-color);
+      border-radius: var(--radius-md);
+      padding: 28px 22px;
+      box-shadow: var(--shadow-sm);
+      transition: var(--transition);
+      position: relative;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .why-card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 3px;
+      background-color: transparent;
+      transition: var(--transition);
+    }
+
+    .why-card:hover {
+      transform: translateY(-4px);
+      box-shadow: var(--shadow-hover);
+      border-color: var(--border-hover);
+    }
+
+    .why-card:hover::before {
+      background-color: var(--accent-red);
+    }
+
+    .why-number {
+      font-size: 1.1rem;
+      font-weight: 900;
+      color: var(--accent-red);
+      margin-bottom: 12px;
+    }
+
+    .why-card h3 {
+      font-size: 1.05rem;
+      font-weight: 700;
+      color: var(--primary-navy);
+      margin-bottom: 8px;
+      line-height: 1.3;
+    }
+
+    .why-card p {
+      font-size: 0.875rem;
+      color: var(--text-muted);
+      line-height: 1.5;
+    }
+
+    /* Featured Projects - Single Horizontal Row (Desktop) / Double Row / Consistent Grid */
+    .portfolio-section {
+      margin-bottom: clamp(50px, 7vw, 90px);
+    }
+
+    .portfolio-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 24px;
+    }
+
+    .portfolio-card {
+      background: var(--card-white);
+      border: 1px solid var(--border-color);
+      border-radius: var(--radius-md);
+      overflow: hidden;
+      box-shadow: var(--shadow-sm);
+      transition: var(--transition);
+      display: flex;
+      flex-direction: column;
+      height: 100%;
+    }
+
+    .portfolio-card:hover {
+      transform: translateY(-5px);
+      box-shadow: var(--shadow-hover);
+      border-color: var(--border-hover);
+    }
+
+    /* Fixed Aspect Ratio for Neat Image Cards */
+    .portfolio-image-wrapper {
+      position: relative;
+      width: 100%;
+      aspect-ratio: 16 / 10;
+      overflow: hidden;
+      background-color: #EBF0F5;
+    }
+
+    .portfolio-image-wrapper img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 0.4s ease;
+    }
+
+    .portfolio-card:hover .portfolio-image-wrapper img {
+      transform: scale(1.04);
+    }
+
+    .portfolio-badge {
+      position: absolute;
+      top: 14px;
+      left: 14px;
+      font-size: 0.68rem;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      color: #FFFFFF;
+      background-color: var(--primary-navy);
+      padding: 4px 10px;
+      border-radius: 4px;
+    }
+
+    .portfolio-body {
+      padding: 24px;
+      display: flex;
+      flex-direction: column;
+      flex-grow: 1;
+      justify-content: space-between;
+    }
+
+    .portfolio-header h3 {
+      font-size: 1.15rem;
+      font-weight: 700;
+      color: var(--primary-navy);
+      margin-bottom: 4px;
+      line-height: 1.3;
+    }
+
+    .portfolio-location {
+      font-size: 0.85rem;
+      color: var(--text-muted);
+      font-weight: 500;
+      margin-bottom: 20px;
+    }
+
+    .portfolio-footer {
+      border-top: 1px solid var(--border-color);
+      padding-top: 14px;
+      font-size: 0.72rem;
+      font-weight: 800;
+      color: var(--accent-red);
+      text-transform: uppercase;
+      letter-spacing: 0.8px;
+    }
+
+    /* Client Logos Grid Layout */
+    .clients-section {
+      margin-bottom: clamp(50px, 7vw, 90px);
+    }
+
+    .logo-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+      gap: 16px;
+      align-items: center;
+    }
+
+    .logo-card {
+      background: var(--card-white);
+      border: 1px solid var(--border-color);
+      border-radius: var(--radius-sm);
+      padding: 20px;
+      height: 90px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      transition: var(--transition);
+    }
+
+    .logo-card:hover {
+      border-color: var(--border-hover);
+      box-shadow: var(--shadow-sm);
+    }
+
+    .logo-card img {
+      max-width: 100%;
+      max-height: 48px;
+      object-fit: contain;
+    }
+
+    .logo-text-title {
+      font-size: 0.85rem;
+      font-weight: 700;
+      color: var(--primary-navy);
+      line-height: 1.2;
+    }
+
+    .logo-text-sub {
+      font-size: 0.75rem;
+      color: var(--text-muted);
+      margin-top: 2px;
+    }
+
+    /* Form Container */
+    .form-wrapper {
+      background: var(--card-white);
+      border: 1px solid var(--border-color);
+      border-radius: var(--radius-lg);
+      padding: clamp(20px, 4vw, 40px);
+      box-shadow: var(--shadow-sm);
+    }
+
+    /* Floating Contact Buttons */
+    .floating-contact-container {
+      position: fixed;
+      top: 50%;
+      right: clamp(10px, 2vw, 24px);
+      transform: translateY(-50%);
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      z-index: 9999;
+    }
+
+    .contact-btn {
+      width: 48px;
+      height: 48px;
+      border-radius: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #ffffff;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+      transition: var(--transition);
+    }
+
+    .contact-btn:hover {
+      transform: scale(1.08);
+    }
+
+    .wa-svg { width: 50%; height: 50%; }
+    .call-svg { width: 44%; height: 44%; }
+    .whatsapp-btn { background-color: #25D366; }
+    .call-btn { background-color: var(--primary-navy); }
+
+    /* Responsive Grid Breakpoints */
+    @media (max-width: 1024px) {
+      .portfolio-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+
+    @media (max-width: 768px) {
+      .stats-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 24px 16px;
+      }
+
+      .stat-item:nth-child(2)::after {
+        display: none;
+      }
+
+      .portfolio-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    @media (max-width: 550px) {
+      .stats-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .stat-item:not(:last-child)::after {
+        display: none;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <main class="wrapper">
+    
+    <!-- Services Section -->
+    <section class="services-section">
+      <div class="section-header">
+        <span class="header-tag">What We Do</span>
+        <h2 class="section-title">Our Services</h2>
+      </div>
+
+      <div class="services-grid">
+        <article class="service-card">
+          <div class="card-top">
+            <span class="card-number">01</span>
+          </div>
+          <h3>Residential & Private Project Constructions</h3>
+          <p>Custom modern homes, private villas, and bespoke residential developments built with precision, durability, and contemporary architectural standards.</p>
+        </article>
+
+        <article class="service-card">
+          <div class="card-top">
+            <span class="card-number">02</span>
+          </div>
+          <h3>Commercial & Institutional Projects</h3>
+          <p>End-to-end execution of commercial complexes, office spaces, and institutional facilities focused on modern functional layout and structural efficiency.</p>
+        </article>
+
+        <article class="service-card">
+          <div class="card-top">
+            <span class="card-number">03</span>
+          </div>
+          <h3>Infrastructure & Gov. Projects</h3>
+          <p>Reliable execution of public works and government infrastructural developments adhering strictly to quality, timeline, and safety standards.</p>
+        </article>
+
+        <article class="service-card">
+          <div class="card-top">
+            <span class="card-number">04</span>
+          </div>
+          <h3>Design & Structural Engineering</h3>
+          <p>Complete structural modeling, precise load calculations, and technical engineering solutions engineered for safety and architectural harmony.</p>
+        </article>
+
+        <article class="service-card">
+          <div class="card-top">
+            <span class="card-number">05</span>
+          </div>
+          <h3>Project Consultation</h3>
+          <p>Expert site evaluation, project feasibility analysis, structural inspections, and strategic technical consultation from start to finish.</p>
+        </article>
+      </div>
+    </section>
+
+    <!-- Key Statistics -->
+    <section class="stats-section">
+      <div class="stats-grid">
+        <div class="stat-item">
+          <div class="stat-number-box"><span class="counter" data-target="350">0</span>+</div>
+          <div class="stat-label">Building Approvals</div>
+        </div>
+
+        <div class="stat-item">
+          <div class="stat-number-box"><span class="counter" data-target="35">0</span>+</div>
+          <div class="stat-label">Completed Projects</div>
+        </div>
+
+        <div class="stat-item">
+          <div class="stat-number-box"><span class="counter" data-target="7">0</span>+ Years</div>
+          <div class="stat-label">Professional Experience</div>
+        </div>
+
+        <div class="stat-item">
+          <div class="stat-number-box"><span class="counter" data-target="35000" data-format="comma">0</span>+</div>
+          <div class="stat-label">sq.ft. Documentation</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Why Makkari Section -->
+    <section class="why-section">
+      <div class="section-header">
+        <span class="header-tag">The Makkari Difference</span>
+        <h2 class="section-title">Why Makkari</h2>
+      </div>
+
+      <div class="why-grid">
+        <article class="why-card">
+          <div class="why-number">01</div>
+          <h3>Engineering-Led Approach</h3>
+          <p>Every structure is designed and built on rigorous engineering standards and load calculations.</p>
+        </article>
+
+        <article class="why-card">
+          <div class="why-number">02</div>
+          <h3>Transparent Project Execution</h3>
+          <p>Clear timelines, honest material specifications, and regular project milestones keep you fully informed.</p>
+        </article>
+
+        <article class="why-card">
+          <div class="why-number">03</div>
+          <h3>Technical Documentation</h3>
+          <p>Thorough 3D BIM modeling, accurate site documentation, and structural drawings for site compliance.</p>
+        </article>
+
+        <article class="why-card">
+          <div class="why-number">04</div>
+          <h3>Quality & Compliance</h3>
+          <p>Strict adherence to regional building codes, government approvals, and material benchmarks.</p>
+        </article>
+
+        <article class="why-card">
+          <div class="why-number">05</div>
+          <h3>End-to-End Support</h3>
+          <p>Comprehensive management from initial site evaluation down to turn-key construction and delivery.</p>
+        </article>
+      </div>
+    </section>
+
+    <!-- Featured Projects (Clean 3-Card Single Line / Grid Layout) -->
+    <section class="portfolio-section">
+      <div class="section-header">
+        <span class="header-tag">Our Work</span>
+        <h2 class="section-title">Featured Projects</h2>
+      </div>
+
+      <div class="portfolio-grid">
+        <article class="portfolio-card">
+          <div class="portfolio-image-wrapper">
+            <span class="portfolio-badge">Residential</span>
+            <img src="https://lh3.googleusercontent.com/d/1K7uZdhhP_TjATdOi07OajLjN7ZMO9iW5" alt="Modern Residence Kottur Kozhikode" loading="lazy">
+          </div>
+          <div class="portfolio-body">
+            <div class="portfolio-header">
+              <h3>Modern Residence</h3>
+              <p class="portfolio-location">Kottur, Kozhikode</p>
+            </div>
+            <div class="portfolio-footer">
+              Design • Engineering • Construction
+            </div>
+          </div>
+        </article>
+
+        <article class="portfolio-card">
+          <div class="portfolio-image-wrapper">
+            <span class="portfolio-badge">Commercial</span>
+            <img src="https://lh3.googleusercontent.com/d/1Ipx99yiQYOeGwIrEJHfgG7KzQAdStuKG" alt="Minu Commercial Centre Naduvannur" loading="lazy">
+          </div>
+          <div class="portfolio-body">
+            <div class="portfolio-header">
+              <h3>Minu Commercial Centre</h3>
+              <p class="portfolio-location">Naduvannur, Kerala</p>
+            </div>
+            <div class="portfolio-footer">
+              Structural Engineering • Construction
+            </div>
+          </div>
+        </article>
+
+        <article class="portfolio-card">
+          <div class="portfolio-image-wrapper">
+            <span class="portfolio-badge">Institutional</span>
+            <img src="https://lh3.googleusercontent.com/d/1EexB87E78JO2GcsjiWh-NseXShcsQt5s" alt="Markaz Academy of Women Cheruvannur" loading="lazy">
+          </div>
+          <div class="portfolio-body">
+            <div class="portfolio-header">
+              <h3>Markaz Academy of Women</h3>
+              <p class="portfolio-location">Cheruvannur, Kerala</p>
+            </div>
+            <div class="portfolio-footer">
+              Planning • Approvals • Execution
+            </div>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <!-- Client Logos -->
+    <section class="clients-section">
+      <div class="section-header">
+        <span class="header-tag">Partnerships</span>
+        <h2 class="section-title">Trusted by Leading Organizations</h2>
+      </div>
+      
+      <div class="logo-grid">
+        <div class="logo-card">
+          <img src="https://markaz.in/assets/images/markaz-logo.png" alt="Markaz Logo" loading="lazy">
+        </div>
+
+        <div class="logo-card">
+          <img src="https://tse4.mm.bing.net/th/id/OIP.W_jpzqT7HsER_mcx3WllHgHaB4?r=0&pid=Api&P=0&h=180" alt="Malabar Medical College Logo" loading="lazy">
+        </div>
+
+        <div class="logo-card">
+          <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRpYjVUdkL2Pwf-SSH8LBekVlAJLhxKDKEFgZ5da14Tmmbd5vIbzq01bPh3&s=10" alt="EFF Logo" loading="lazy">
+        </div>
+
+        <div class="logo-card">
+          <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ9ITEA9FiqiJ9mKymd0zod_D9zzLdCH1fturqKqnaKf_YjTtai9Sym9uFD&s=10" alt="LSGD Logo" loading="lazy">
+        </div>
+
+        <div class="logo-card">
+          <div>
+            <div class="logo-text-title">KOLAKKAD MIXED LPS</div>
+            <div class="logo-text-sub">Muchukunnu</div>
+          </div>
+        </div>
+
+        <div class="logo-card">
+          <div>
+            <div class="logo-text-title">Athul Agri Warehouse</div>
+            <div class="logo-text-sub">Kongannur, Kozhikode</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- JotForm Embed -->
+    <section class="form-wrapper">
+      <div id="JFWebsiteWidget-019f8f9eaa4070008012171d50b365c40044"></div>
+      <script src="https://www.jotform.com/website-widgets/embed/019f8f9eaa4070008012171d50b365c40044"></script>
+    </section>
+
+  </main>
+
+ 
+
+  <!-- Counter Animation Script -->
+  <script>
+    document.addEventListener("DOMContentLoaded", () => {
+      const counters = document.querySelectorAll('.counter');
+      const duration = 2000;
+
+      const animateCounter = (counter) => {
+        const target = +counter.getAttribute('data-target');
+        const isComma = counter.getAttribute('data-format') === 'comma';
+        const startTime = performance.now();
+
+        const updateNumber = (currentTime) => {
+          const elapsedTime = currentTime - startTime;
+          const progress = Math.min(elapsedTime / duration, 1);
+          const easeOutProgress = 1 - Math.pow(1 - progress, 3);
+          const currentVal = Math.floor(easeOutProgress * target);
+
+          counter.innerText = isComma ? currentVal.toLocaleString('en-US') : currentVal;
+
+          if (progress < 1) {
+            requestAnimationFrame(updateNumber);
+          } else {
+            counter.innerText = isComma ? target.toLocaleString('en-US') : target;
+          }
+        };
+
+        requestAnimationFrame(updateNumber);
+      };
+
+      const observer = new IntersectionObserver((entries, observerInstance) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            animateCounter(entry.target);
+            observerInstance.unobserve(entry.target);
+          }
+        });
+      }, { threshold: 0.3 });
+
+      counters.forEach(counter => observer.observe(counter));
+    });
+  </script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "GeneralContractor",
+  "name": "Makkari Constructions & Developers",
+  "url": "https://www.makkariconstructions.com/",
+  "logo": "https://lh3.googleusercontent.com/d/1Yx22rsiW7IBqtROqXqjXs8rGScuLonVR",
+  "image": "https://lh3.googleusercontent.com/d/1Yx22rsiW7IBqtROqXqjXs8rGScuLonVR",
+  "description": "Turnkey residential and commercial construction, architectural design consultation, PWD contracting, structural verification sign-offs, and K-SMART building permit approval services in Kozhikode, Kerala.",
+  "address": {
+    "@type": "PostalAddress",
+    "addressLocality": "Kozhikode",
+    "addressRegion": "Kerala",
+    "addressCountry": "IN"
+  },
+  "areaServed": {
+    "@type": "State",
+    "name": "Kerala"
+  },
+  "knowsAbout": [
+    "Turnkey Residential Construction",
+    "Commercial Complex Execution",
+    "Architectural Planning & Spatial Design",
+    "K-SMART Building Permit Approvals",
+    "Structural Engineering Verification",
+    "PWD Civil Contracting",
+    "Industrial Storage & Master Planning"
+  ]
+}
+</script>
+</body>
+</html>
+<!-- Right Floating Contact Buttons -->
+<div class="floating-contact-container" style="position: fixed; top: 75%; right: 10px; transform: translateY(-50%); flex-direction: column; gap: 10px; z-index: 9999;">
+  <!-- WhatsApp -->
+  <a href="https://wa.me/918281228549" target="_blank" rel="noopener noreferrer" style="width: 48px; height: 48px; background-color: #25D366; border-radius: 8px; display: flex; align-items: center; justify-content: center; box-shadow: 0 4px 12px rgba(0,0,0,0.25);">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="#ffffff" style="width: 24px; height: 24px;">
+      <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.521.151-.172.2-.296.3-.495.099-.198.05-.372-.025-.521-.075-.148-.669-1.611-.916-2.206-.242-.579-.487-.501-.669-.51l-.57-.01c-.198 0-.52.074-.792.372s-1.04 1.016-1.04 2.479 1.065 2.876 1.213 3.074c.149.198 2.096 3.2 5.077 4.487.709.306 1.263.489 1.694.626.712.226 1.36.194 1.872.118.572-.085 1.787-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.99c-.002 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/>
+    </svg>
+  </a>
+  <!-- Call -->
+  <a href="tel:+918281228549" style="width: 48px; height: 48px; background-color: #152f4e; border-radius: 8px; display: flex; align-items: center; justify-content: center; box-shadow: 0 4px 12px rgba(0,0,0,0.25);">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="#ffffff" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" style="width: 22px; height: 22px;">
+      <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path>
+    </svg>
+  </a>
+</div>
+
+<style>
+  /* Hidden by default on large screens/desktops */
+  .floating-contact-container {
+    display: none !important;
+  }
+
+  /* Display only on mobile and small screens (768px wide or smaller) */
+  @media screen and (max-width: 768px) {
+    .floating-contact-container {
+      display: flex !important;
+    }
+  }
+</style>

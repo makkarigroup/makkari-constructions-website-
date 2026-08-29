@@ -1,0 +1,918 @@
+<header class="site-header" id="makkari-auto-header" role="banner">
+  <div class="nav-container">
+
+    <a href="index.html" class="brand-container" aria-label="Go to Homepage">
+      <img src="https://lh3.googleusercontent.com/d/1RjhoHvjH6DbnNqLOpCNQUOySmpLD2EPv" alt="Company Logo" class="brand-logo-img">
+    </a>
+
+    <button class="mobile-toggle" id="mobile-toggle" aria-expanded="false" aria-controls="nav-menu" aria-label="Open navigation menu">
+      <span class="bar"></span>
+      <span class="bar"></span>
+      <span class="bar"></span>
+    </button>
+
+    <nav aria-label="Main navigation">
+      <ul class="nav-menu" id="nav-menu">
+        <li class="nav-item">
+          <a href="index.html" class="nav-link">Home</a>
+        </li>
+        <li class="nav-item">
+          <a href="about.html" class="nav-link">About Us</a>
+        </li>
+        <li class="nav-item">
+          <a href="services.html" class="nav-link">Services</a>
+        </li>
+        <li class="nav-item">
+          <a href="projects.html" class="nav-link">Projects</a>
+        </li>
+        <li class="nav-item">
+          <a href="estimator.html" class="nav-link">Estimator Modules</a>
+        </li>
+        <li class="nav-item">
+          <a href="contact.html" class="nav-link highlight">Contact Us</a>
+        </li>
+      </ul>
+    </nav>
+
+  </div>
+</header>
+
+<style>
+  :root {
+    --brand-navy: #152F4E;
+    --brand-red: #E52330;
+    --brand-red-hover: #c41c27;
+    --glass-bg: rgba(255, 255, 255, 0.75);
+    --glass-bg-scrolled: rgba(255, 255, 255, 0.9);
+    --glass-border: rgba(255, 255, 255, 0.5);
+    --glass-hover: rgba(21, 47, 78, 0.08);
+    --text-color: #152F4E;
+    --header-height: clamp(60px, 7vh, 75px);
+    --shadow-glass: 0 8px 32px 0 rgba(0, 0, 0, 0.12);
+    --transition-speed: 0.35s;
+    --ease-spring: cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  }
+
+  /* Floating Glass Bar with Entrance Animation */
+  .site-header {
+    position: fixed;
+    top: 8px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: min(92%, 1150px);
+    height: var(--header-height);
+    z-index: 1000;
+    border-radius: 100px;
+    
+    background: var(--glass-bg);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    border: 1px solid var(--glass-border);
+    box-shadow: var(--shadow-glass);
+    
+    /* Initial entrance state */
+    opacity: 0;
+    animation: headerEntrance 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+    transition: top var(--transition-speed) ease, 
+                background var(--transition-speed) ease, 
+                box-shadow var(--transition-speed) ease,
+                border-color var(--transition-speed) ease;
+  }
+
+  @keyframes headerEntrance {
+    0% {
+      opacity: 0;
+      transform: translate(-50%, -25px);
+    }
+    100% {
+      opacity: 1;
+      transform: translate(-50%, 0);
+    }
+  }
+
+  .site-header.scrolled {
+    background: var(--glass-bg-scrolled);
+    border-color: rgba(255, 255, 255, 0.8);
+    box-shadow: 0 12px 35px 0 rgba(0, 0, 0, 0.18);
+    top: 12px;
+  }
+
+  .nav-container {
+    width: 100%;
+    height: 100%;
+    margin: 0 auto;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 clamp(1.2rem, 3vw, 2rem);
+    position: relative;
+  }
+
+  /* Brand Logo Animations */
+  .brand-container {
+    display: flex;
+    align-items: center;
+    text-decoration: none;
+    height: 100%;
+    border-radius: 50px;
+  }
+
+  .brand-logo-img {
+    height: clamp(32px, 4.5vh, 42px);
+    width: auto;
+    object-fit: contain;
+    transition: transform 0.3s var(--ease-spring);
+  }
+
+  .brand-container:hover .brand-logo-img {
+    transform: scale(1.08) rotate(-1.5deg);
+  }
+
+  /* Desktop Menu & Staggered Link Animations */
+  .nav-menu {
+    display: flex;
+    list-style: none;
+    gap: clamp(0.3rem, 1vw, 0.8rem);
+    align-items: center;
+  }
+
+  /* Cascade menu links on page load */
+  .nav-item {
+    opacity: 0;
+    animation: navItemFade 0.5s ease forwards;
+  }
+
+  .nav-item:nth-child(1) { animation-delay: 0.2s; }
+  .nav-item:nth-child(2) { animation-delay: 0.27s; }
+  .nav-item:nth-child(3) { animation-delay: 0.34s; }
+  .nav-item:nth-child(4) { animation-delay: 0.41s; }
+  .nav-item:nth-child(5) { animation-delay: 0.48s; }
+  .nav-item:nth-child(6) { animation-delay: 0.55s; }
+
+  @keyframes navItemFade {
+    from {
+      opacity: 0;
+      transform: translateY(-8px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  .nav-link {
+    position: relative;
+    color: var(--text-color);
+    text-decoration: none;
+    font-size: clamp(0.85rem, 0.95vw, 0.95rem);
+    font-weight: 600;
+    padding: 0.55rem 1.1rem;
+    border-radius: 50px;
+    transition: color var(--transition-speed) ease, 
+                background-color var(--transition-speed) ease, 
+                transform var(--transition-speed) var(--ease-spring);
+    white-space: nowrap;
+    display: inline-block;
+  }
+
+  .nav-link:hover, 
+  .nav-link:focus-visible {
+    background-color: var(--glass-hover);
+    color: var(--brand-navy);
+    transform: translateY(-2px);
+    outline: none;
+  }
+
+  .nav-link.active-page {
+    background-color: rgba(21, 47, 78, 0.12);
+    color: var(--brand-navy);
+  }
+
+  .nav-link.highlight {
+    background-color: var(--brand-red);
+    color: #FFFFFF;
+    box-shadow: 0 4px 15px rgba(229, 35, 48, 0.3);
+    transition: all var(--transition-speed) ease;
+  }
+
+  .nav-link.highlight:hover {
+    background-color: var(--brand-red-hover);
+    color: #FFFFFF;
+    transform: translateY(-2px) scale(1.03);
+    box-shadow: 0 6px 20px rgba(229, 35, 48, 0.45);
+  }
+
+  /* Mobile Toggle Bar Transitions */
+  .mobile-toggle {
+    display: none;
+    flex-direction: column;
+    justify-content: space-between;
+    width: 26px;
+    height: 18px;
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    padding: 0;
+    margin-left: auto;
+    z-index: 101;
+  }
+
+  .mobile-toggle .bar {
+    height: 2px;
+    width: 100%;
+    background-color: var(--text-color);
+    border-radius: 2px;
+    transition: transform var(--transition-speed) var(--ease-spring), 
+                opacity var(--transition-speed) ease;
+  }
+
+  .mobile-toggle.active .bar:nth-child(1) {
+    transform: translateY(8px) rotate(45deg);
+  }
+  .mobile-toggle.active .bar:nth-child(2) {
+    opacity: 0;
+    transform: translateX(-10px);
+  }
+  .mobile-toggle.active .bar:nth-child(3) {
+    transform: translateY(-8px) rotate(-45deg);
+  }
+
+  /* Responsive Mobile Menu Dropdown */
+  @media (max-width: 900px) {
+    .mobile-toggle {
+      display: flex;
+    }
+
+    .nav-menu {
+      position: absolute;
+      top: calc(100% + 12px);
+      right: 0;
+      width: 100%;
+      max-width: 280px;
+      background: rgba(255, 255, 255, 0.95);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      flex-direction: column;
+      align-items: stretch;
+      opacity: 0;
+      visibility: hidden;
+      transform: translateY(-15px) scale(0.95);
+      transition: opacity var(--transition-speed) ease,
+                  transform var(--transition-speed) var(--ease-spring),
+                  visibility var(--transition-speed) ease;
+      box-shadow: 0 16px 32px rgba(0, 0, 0, 0.15);
+      border-radius: 20px;
+      border: 1px solid var(--glass-border);
+      padding: 0.5rem 0;
+      overflow: hidden;
+    }
+
+    .nav-menu.active {
+      opacity: 1;
+      visibility: visible;
+      transform: translateY(0) scale(1);
+    }
+
+    .nav-item {
+      animation: none;
+      opacity: 0;
+      transform: translateX(15px);
+      transition: opacity 0.3s ease, transform 0.3s ease;
+    }
+
+    .nav-menu.active .nav-item {
+      opacity: 1;
+      transform: translateX(0);
+    }
+
+    .nav-menu.active .nav-item:nth-child(1) { transition-delay: 0.05s; }
+    .nav-menu.active .nav-item:nth-child(2) { transition-delay: 0.10s; }
+    .nav-menu.active .nav-item:nth-child(3) { transition-delay: 0.15s; }
+    .nav-menu.active .nav-item:nth-child(4) { transition-delay: 0.20s; }
+    .nav-menu.active .nav-item:nth-child(5) { transition-delay: 0.25s; }
+    .nav-menu.active .nav-item:nth-child(6) { transition-delay: 0.30s; }
+
+    .nav-link {
+      display: block;
+      color: var(--text-color);
+      padding: 0.85rem 1.4rem;
+      border-radius: 0;
+      text-align: left;
+      transform: none !important;
+    }
+
+    .nav-link.highlight {
+      text-align: center;
+      margin: 0.5rem 1rem;
+      border-radius: 50px;
+    }
+  }
+</style>
+
+<script>
+  document.addEventListener("DOMContentLoaded", function () {
+    const header = document.getElementById('makkari-auto-header');
+    const mobileToggle = document.getElementById('mobile-toggle');
+    const navMenu = document.getElementById('nav-menu');
+
+    const handleScroll = () => {
+      if (window.scrollY > 20) {
+        header.classList.add('scrolled');
+      } else {
+        header.classList.remove('scrolled');
+      }
+    };
+
+    window.addEventListener('scroll', handleScroll);
+    handleScroll();
+
+    const currentPath = window.location.pathname.toLowerCase();
+    const navLinks = document.querySelectorAll('.nav-link');
+
+    navLinks.forEach(link => {
+      const hrefValue = link.getAttribute('href').toLowerCase();
+      const isHome = (hrefValue === 'index.html' && (currentPath === '/' || currentPath.endsWith('index.html')));
+      const isExactMatch = currentPath.includes(hrefValue.replace('.html', ''));
+
+      if (isHome || (hrefValue !== 'index.html' && isExactMatch)) {
+        link.classList.add('active-page');
+        link.setAttribute('aria-current', 'page');
+      }
+    });
+
+    if (mobileToggle && navMenu) {
+      const toggleMenu = (forceClose = false) => {
+        const isClosing = forceClose || navMenu.classList.contains('active');
+        if (isClosing) {
+          navMenu.classList.remove('active');
+          mobileToggle.classList.remove('active');
+          mobileToggle.setAttribute('aria-expanded', 'false');
+        } else {
+          navMenu.classList.add('active');
+          mobileToggle.classList.add('active');
+          mobileToggle.setAttribute('aria-expanded', 'true');
+        }
+      };
+
+      mobileToggle.addEventListener('click', (e) => {
+        e.stopPropagation();
+        toggleMenu();
+      });
+
+      document.addEventListener('click', (e) => {
+        if (!header.contains(e.target)) {
+          toggleMenu(true);
+        }
+      });
+    }
+  });
+</script>
+
+<!-------------------------------------------------->
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Residential Projects Portfolio | Makkari Constructions & Developers</title>
+    <!-- Google Fonts: Archivo -->
+    <link href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <!-- Font Awesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <style>
+        :root {
+            --primary-color: #152f4e;   /* Brand Blue */
+            --accent-color: #e52330;    /* Brand Red */
+            --white: #ffffff;           /* Pure White */
+            --light-bg: #f8fafc;        /* Soft Off-White */
+            --card-bg: #ffffff;
+            --text-dark: #0f172a;
+            --text-muted: #475569;
+            --card-shadow: 0 10px 30px rgba(21, 47, 78, 0.05);
+            --card-shadow-hover: 0 20px 40px rgba(21, 47, 78, 0.12);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Archivo', sans-serif;
+            color: var(--text-dark);
+            line-height: 1.6;
+            background-color: var(--white);
+            -webkit-font-smoothing: antialiased;
+            padding-bottom: 60px;
+        }
+
+        h1, h2, h3, h4, h5 {
+            font-family: 'Archivo', sans-serif;
+            color: var(--primary-color);
+            font-weight: 700;
+        }
+
+        /* Hero Section Styling */
+        .hero-section {
+            background: linear-gradient(135deg, rgba(21, 47, 78, 0.95) 0%, rgba(15, 23, 42, 0.92) 100%), 
+                        url('https://drive.google.com/thumbnail?id=1gG4FnmHLcObUlLJS5TbKAHSLLwOXcqBW&sz=w1600') center/cover no-repeat;
+            color: var(--white);
+            padding: 70px 24px;
+            margin-bottom: 50px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(21, 47, 78, 0.15);
+        }
+
+        .hero-content {
+            max-width: 800px;
+            margin: 0 auto;
+            position: relative;
+            z-index: 2;
+        }
+
+        .hero-tagline {
+            display: inline-block;
+            color: var(--accent-color);
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            font-size: 0.85rem;
+            background: rgba(229, 35, 48, 0.12);
+            padding: 6px 40px;
+            border-radius: 20px;
+            margin-bottom: 16px;
+            margin-top: 40px;
+
+            border: 1px solid rgba(229, 35, 48, 0.3);
+        }
+
+        .hero-title {
+            color: var(--white);
+            font-size: 2.5rem;
+            font-weight: 800;
+            line-height: 1.25;
+            margin-bottom: 14px;
+            letter-spacing: -0.5px;
+        }
+
+        .hero-description {
+            color: rgba(255, 255, 255, 0.85);
+            font-size: 1.05rem;
+            max-width: 680px;
+            margin: 0 auto 24px;
+            line-height: 1.6;
+        }
+
+        .hero-badges {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            flex-wrap: wrap;
+        }
+
+        .hero-badge-item {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 0.88rem;
+            font-weight: 600;
+            color: rgba(255, 255, 255, 0.9);
+            background: rgba(255, 255, 255, 0.08);
+            padding: 8px 16px;
+            border-radius: 8px;
+            backdrop-filter: blur(4px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .hero-badge-item i {
+            color: var(--accent-color);
+        }
+
+        .container {
+            max-width: 1280px;
+            margin: 0 auto;
+            padding: 0 24px;
+        }
+
+        /* Section Title Setup */
+        .section-title {
+            text-align: center;
+            margin-bottom: 45px;
+        }
+
+        .section-title h1 {
+            font-size: 2.25rem;
+            font-weight: 800;
+            text-transform: uppercase;
+            color: var(--primary-color);
+            position: relative;
+            display: inline-block;
+            padding-bottom: 8px;
+            letter-spacing: -0.5px;
+        }
+
+        .section-title h1::after {
+            content: '';
+            position: absolute;
+            width: 60px;
+            height: 4px;
+            background-color: var(--accent-color);
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            border-radius: 2px;
+        }
+
+        /* Project Card Styling */
+        .project-card {
+            background-color: var(--white);
+            border-radius: 20px;
+            padding: 40px 35px;
+            margin-bottom: 50px;
+            box-shadow: var(--card-shadow);
+            border: 1px solid rgba(21, 47, 78, 0.08);
+            transition: all 0.3s ease;
+        }
+
+        .project-card:hover {
+            box-shadow: var(--card-shadow-hover);
+        }
+
+        .project-header {
+            margin-bottom: 20px;
+            border-bottom: 2px solid var(--light-bg);
+            padding-bottom: 15px;
+        }
+
+        .project-title {
+            font-size: 1.85rem;
+            color: var(--primary-color);
+            font-weight: 800;
+            margin-bottom: 10px;
+        }
+
+        .project-meta {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 12px 20px;
+            font-size: 0.95rem;
+            color: var(--accent-color);
+            font-weight: 700;
+        }
+
+        .project-meta-item {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .project-description {
+            font-size: 1.05rem;
+            color: var(--text-dark);
+            margin-bottom: 25px;
+            line-height: 1.75;
+        }
+
+        .highlights-title {
+            font-size: 1.25rem;
+            color: var(--primary-color);
+            font-weight: 700;
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .highlights-title i {
+            color: var(--accent-color);
+        }
+
+        .highlights-list {
+            list-style: none;
+            margin-bottom: 35px;
+            display: grid;
+            gap: 12px;
+        }
+
+        .highlights-list li {
+            position: relative;
+            padding-left: 28px;
+            font-size: 0.98rem;
+            color: var(--text-dark);
+        }
+
+        .highlights-list li::before {
+            content: '\f058';
+            font-family: 'Font Awesome 6 Free';
+            font-weight: 900;
+            position: absolute;
+            left: 0;
+            top: 0;
+            color: var(--accent-color);
+            font-size: 1.1rem;
+        }
+
+        .highlights-list strong {
+            color: var(--primary-color);
+            font-weight: 700;
+        }
+
+        /* Gallery Layout: CSS Columns Masonry */
+        .gallery-header {
+            font-size: 1.15rem;
+            font-weight: 700;
+            color: var(--primary-color);
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .gallery-header i {
+            color: var(--accent-color);
+        }
+
+        .gallery-grid {
+            column-count: 3;
+            column-gap: 20px;
+        }
+
+        .img-box {
+            position: relative;
+            border-radius: 14px;
+            overflow: hidden;
+            background-color: var(--light-bg);
+            box-shadow: var(--card-shadow);
+            border: 1px solid rgba(21, 47, 78, 0.08);
+            transition: all 0.3s ease;
+            break-inside: avoid;
+            margin-bottom: 20px;
+        }
+
+        .img-box img {
+            width: 100%;
+            height: auto;
+            display: block;
+            transition: transform 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
+        }
+
+        .img-box:hover {
+            transform: translateY(-4px);
+            box-shadow: var(--card-shadow-hover);
+            border-color: rgba(229, 35, 48, 0.3);
+        }
+
+        .img-box:hover img {
+            transform: scale(1.03);
+        }
+
+        /* Responsive Breakpoints for Masonry Columns */
+        @media (max-width: 992px) {
+            .gallery-grid {
+                column-count: 2;
+            }
+        }
+
+        @media (max-width: 576px) {
+            .hero-section {
+                padding: 50px 18px;
+            }
+            .hero-title {
+                font-size: 1.8rem;
+            }
+            .project-card {
+                padding: 25px 20px;
+            }
+            .project-title {
+                font-size: 1.5rem;
+            }
+            .gallery-grid {
+                column-count: 1;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    
+    <!-- HERO SECTION -->
+    <section class="hero-section">
+        <div class="hero-content">
+            <span class="hero-tagline"><i class="fas fa-hammer"></i> Engineering Excellence</span>
+            <h1 class="hero-title">Crafting Timeless Tropical Homes in Kerala</h1>
+            <p class="hero-description">
+                Explore our showcase of residential projects—combining climate-conscious design, complete turnkey execution, and structural precision.
+            </p>
+            <div class="hero-badges">
+                <div class="hero-badge-item"><i class="fas fa-check-circle"></i> Turnkey Execution</div>
+                <div class="hero-badge-item"><i class="fas fa-stamp"></i> PWD & Statutory Approvals</div>
+                <div class="hero-badge-item"><i class="fas fa-drafting-compass"></i> Custom Residential Design</div>
+            </div>
+        </div>
+    </section>
+
+    <div class="container">
+
+        <!-- SECTION TITLE -->
+        <div class="section-title">
+            <h1>Residential Projects</h1>
+        </div>
+
+        <!-- PROJECT 1: THE POONOOR RESIDENCE -->
+        <article class="project-card">
+            <div class="project-header">
+                <h2 class="project-title">1. The Poonoor Residence</h2>
+                <div class="project-meta">
+                    <span class="project-meta-item"><i class="fas fa-ruler-combined"></i> 2,800 Sq. Ft.</span>
+                    <span class="project-meta-item"><i class="fas fa-location-dot"></i> Poonoor, Kerala</span>
+                    <span class="project-meta-item"><i class="fas fa-building"></i> Makkari Constructions & Developers</span>
+                </div>
+            </div>
+
+            <p class="project-description">
+                Designed around the simple joy of tropical living, this home in Poonoor brings together the warmth of classic Kerala architecture with bright, open modern spaces. It is built to capture cool green breezes, natural morning light, and the quiet comfort of everyday family life.
+            </p>
+
+            <h3 class="highlights-title"><i class="fas fa-lightbulb"></i> Design Highlights</h3>
+            <ul class="highlights-list">
+                <li><strong>Sunlight & Sky Views:</strong> High glass gables fill the home with soft, natural daylight while framing views of the surrounding trees.</li>
+                <li><strong>Shaded Outdoor Living:</strong> Deep roof overhangs and open balconies offer comfortable, rain-sheltered spots to relax and enjoy the breeze.</li>
+                <li><strong>Modern Meets Traditional:</strong> Warm terracotta roof tiles paired with clean, contemporary lines—crafted to look timeless while standing strong against tropical weather.</li>
+            </ul>
+
+            <div class="gallery-header"><i class="fas fa-images"></i> Project Gallery </div>
+            <div class="gallery-grid">
+                <div class="img-box"><img src="https://drive.google.com/thumbnail?id=1gG4FnmHLcObUlLJS5TbKAHSLLwOXcqBW&sz=w1000" alt="Poonoor Residence Photo 1" loading="lazy"></div>
+                <div class="img-box"><img src="https://drive.google.com/thumbnail?id=1JgL4XiJsr3xMchKB1fMVZMVxTVXNCOSk&sz=w1000" alt="Poonoor Residence Photo 2" loading="lazy"></div>
+                <div class="img-box"><img src="https://drive.google.com/thumbnail?id=1GW2Uu9ZMXq_Irbph8v74hvqLZCZzd5Qc&sz=w1000" alt="Poonoor Residence Photo 3" loading="lazy"></div>
+                <div class="img-box"><img src="https://drive.google.com/thumbnail?id=1mv13M9WsLIS-baKRons2APccKAN5O7G6&sz=w1000" alt="Poonoor Residence Photo 4" loading="lazy"></div>
+                <div class="img-box"><img src="https://drive.google.com/thumbnail?id=1dRy0tG8jEkG_fJzpSwx2kVt7onpp18Ih&sz=w1000" alt="Poonoor Residence Photo 5" loading="lazy"></div>
+                <div class="img-box"><img src="https://drive.google.com/thumbnail?id=1hHAXD7mzev4Bz7uPhbm1crIcOUT8w9hy&sz=w1000" alt="Poonoor Residence Photo 6" loading="lazy"></div>
+            </div>
+        </article>
+
+        <!-- PROJECT 2: THE KARUMBAPOIL RESIDENCE -->
+        <article class="project-card">
+            <div class="project-header">
+                <h2 class="project-title">2. The Naduvannur Residence</h2>
+                <div class="project-meta">
+                    <span class="project-meta-item"><i class="fas fa-ruler-combined"></i> 2,400 Sq. Ft.</span>
+                    <span class="project-meta-item"><i class="fas fa-location-dot"></i> Karumbapoil, Naduvannur, Kerala</span>
+                    <span class="project-meta-item"><i class="fas fa-building"></i> Makkari Constructions & Developers</span>
+                    <span class="project-meta-item"><i class="fas fa-circle-check"></i> Completed 2024</span>
+                </div>
+            </div>
+
+            <p class="project-description">
+                Designed around family traditions and wide open horizons, this home in Naduvannur overlooks lush, green rice fields. Built with the family’s lifestyle at its heart, every space—from its sunlit rooms to its sprawling verandah—was shaped around how they live, relax, and celebrate.
+            </p>
+
+            <h3 class="highlights-title"><i class="fas fa-lightbulb"></i> Design Highlights</h3>
+            <ul class="highlights-list">
+                <li><strong>Festival & Paddy Field Views:</strong> Designed specifically at the client’s request, a spacious L-shaped verandah and wide balcony frame open views of the rice fields while offering the perfect vantage point to enjoy the annual local temple festival with family and friends.</li>
+                <li><strong>Breeze & Open Space:</strong> Positioned to capture cool breezes sweeping across the fields, keeping the home naturally bright and airy throughout the day.</li>
+                <li><strong>Textural Harmony:</strong> A rich blend of classic pitched terracotta roof tiles and clean, textured grey stone accents for a timeless modern-tropical aesthetic.</li>
+                <li><strong>Sheltered Outdoor Flow:</strong> Deep roof overhangs and shaded porticos provide comfortable, rain-sheltered spots to enjoy the countryside views year-round.</li>
+            </ul>
+
+            <div class="gallery-header"><i class="fas fa-images"></i> Project Gallery</div>
+            <div class="gallery-grid">
+                <div class="img-box"><img src="https://drive.google.com/thumbnail?id=16XeIXb8fu-uBTPUsVzkcGHGn3gOtbwp_&sz=w1000" alt="Naduvannur Residence Photo 1" loading="lazy"></div>
+                <div class="img-box"><img src="https://drive.google.com/thumbnail?id=1tVTgfpx2GJpmlNbQj5SEUG1Tu2VRMxVS&sz=w1000" alt="Naduvannur Residence Photo 2" loading="lazy"></div>
+                <div class="img-box"><img src="https://drive.google.com/thumbnail?id=15KJAh6r7P2gAcrt3AkcubVJfZ-P-eWyq&sz=w1000" alt="Naduvannur Residence Photo 3" loading="lazy"></div>
+            </div>
+        </article>
+
+        <!-- PROJECT 3: THE POONATH RESIDENCE -->
+        <article class="project-card">
+            <div class="project-header">
+                <h2 class="project-title">3. The Poonath Residence</h2>
+                <div class="project-meta">
+                    <span class="project-meta-item"><i class="fas fa-location-dot"></i> Poonath, Kerala</span>
+                    <span class="project-meta-item"><i class="fas fa-building"></i> Makkari Constructions & Developers</span>
+                    <span class="project-meta-item"><i class="fas fa-circle-check"></i> 2019–2022</span>
+                </div>
+            </div>
+
+            <p class="project-description">
+                Set deep within Poonath’s lush, forest-like canopy, this residence is a refined blend of regal Arabic geometry and tropical serenity. Designed to make a striking architectural statement without losing the warmth of home, it stands as a quiet, elegant sanctuary surrounded by nature.
+            </p>
+
+            <h3 class="highlights-title"><i class="fas fa-lightbulb"></i> Design Highlights</h3>
+            <ul class="highlights-list">
+                <li><strong>Arabic Architectural Elegance:</strong> Clean symmetry, stately proportions, and twin hipped rooflines bring a touch of Middle Eastern architectural grandeur to the Kerala landscape.</li>
+                <li><strong>Immersed in Greenery:</strong> Tucked gracefully into a dense woodland backdrop, keeping the home naturally shaded, quiet, and cool throughout the hot summer months.</li>
+                <li><strong>Warm, Sophisticated Palette:</strong> Crisp off-white facades contrasted with warm timber-toned windows and dark sloped roofs create a timeless, high-end finish.</li>
+                <li><strong>Light & Forest Breezes:</strong> Generous window framing invites soft daylight and constant forest breezes deep into the living spaces, blurring the line between inside and out.</li>
+            </ul>
+
+            <div class="gallery-header"><i class="fas fa-images"></i> Project Gallery</div>
+            <div class="gallery-grid">
+                <div class="img-box"><img src="https://drive.google.com/thumbnail?id=1ZCL-OCujTuFdvSCbrL_mCopCKTtxLmfB&sz=w1000" alt="Poonath Residence Photo 1" loading="lazy"></div>
+                <div class="img-box"><img src="https://drive.google.com/thumbnail?id=19PqsWRLoilWmwOO9DQy9K7aj-VWJaJvR&sz=w1000" alt="Poonath Residence Photo 2" loading="lazy"></div>
+                <div class="img-box"><img src="https://drive.google.com/thumbnail?id=1P1Vaoc4Mmo9cdxnh4ccyc1eRsmsFnr7A&sz=w1000" alt="Poonath Residence Photo 3" loading="lazy"></div>
+                <div class="img-box"><img src="https://drive.google.com/thumbnail?id=1peUg8jxy3lf6St901YtCjhShGsfEXRU5&sz=w1000" alt="Poonath Residence Photo 4" loading="lazy"></div>
+            </div>
+        </article>
+
+        <!-- PROJECT 4: TURNKEY PROJECTS & NOCHAD RESIDENCE -->
+        <article class="project-card">
+            <div class="project-header">
+                <h2 class="project-title">4. Turnkey Residence at Nochad</h2>
+                <div class="project-meta">
+                    <span class="project-meta-item"><i class="fas fa-location-dot"></i> Nochad, Kerala</span>
+                    <span class="project-meta-item"><i class="fas fa-key"></i> Turnkey Execution</span>
+                    <span class="project-meta-item"><i class="fas fa-building"></i> Makkari Constructions & Developers</span>
+                    <span class="project-meta-item"><i class="fas fa-spinner"></i> Ongoing Project</span>
+                </div>
+            </div>
+
+            <p class="project-description">
+                From initial ground excavation and raw brick masonry to the final coat of paint and polished details, our turnkey projects offer a complete, stress-free construction journey. We take full ownership of every phase—delivering thoughtfully designed, structurally sound homes built to stand the test of time.
+            </p>
+
+            <h3 class="highlights-title"><i class="fas fa-lightbulb"></i> Featured Turnkey Project Highlights</h3>
+            <ul class="highlights-list">
+                <li><strong>End-to-End Execution:</strong> Seamlessly managing structural brickwork, site engineering, and climate-conscious planning within lush local surroundings from concept to key handover.</li>
+                <li><strong>Refined Final Finishing:</strong> Delivering crisp white contemporary elevations, custom boundary walls with integrated planter niches, and rich wood-toned accents—crafted ready for move-in.</li>
+            </ul>
+
+            <div class="gallery-header"><i class="fas fa-images"></i> Project Gallery (Ongoing & Completed Stages)</div>
+            <div class="gallery-grid">
+                <div class="img-box"><img src="https://drive.google.com/thumbnail?id=19tyyrwvtVvDwcibthtLrEby94FmIF2Fo&sz=w1000" alt="Nochad Project Stage 1" loading="lazy"></div>
+                <div class="img-box"><img src="https://drive.google.com/thumbnail?id=1Hh1mM9R-ThHhlBl3AwsmWr3ibDravut-&sz=w1000" alt="Nochad Project Stage 2" loading="lazy"></div>
+            </div>
+        </article>
+
+        <!-- PROJECT 5: THE PANANGAD RESIDENCE -->
+        <article class="project-card">
+            <div class="project-header">
+                <h2 class="project-title">5. The Panangad Residence</h2>
+                <div class="project-meta">
+                    <span class="project-meta-item"><i class="fas fa-user"></i> Mr. Prajeesh</span>
+                    <span class="project-meta-item"><i class="fas fa-location-dot"></i> Panangad, Kerala</span>
+                    <span class="project-meta-item"><i class="fas fa-drafting-compass"></i> Design Consultation</span>
+                    <span class="project-meta-item"><i class="fas fa-building"></i> Makkari Constructions & Developers</span>
+                </div>
+            </div>
+
+            <p class="project-description">
+                A striking blend of bold modern lines and warm timber accents, this home in Panangad is designed for easy, light-filled tropical living. Bright indoor spaces and sheltered balconies create a warm, welcoming sanctuary for everyday family life.
+            </p>
+
+            <h3 class="highlights-title"><i class="fas fa-lightbulb"></i> Design Highlights</h3>
+            <ul class="highlights-list">
+                <li><strong>Timber Gable Feature:</strong> A high wood-clad gable forms a warm, soaring centerpiece for the front elevation.</li>
+                <li><strong>Modern Palette:</strong> Clean white and dark grey tones paired with rich wood finishes for a sleek visual contrast.</li>
+                <li><strong>Sheltered Outdoor Living:</strong> Private glass balconies and deep porticos offer comfortable, rain-protected spots to enjoy the breeze.</li>
+            </ul>
+
+            <div class="gallery-header"><i class="fas fa-images"></i> Project Gallery </div>
+            <div class="gallery-grid">
+                <div class="img-box"><img src="https://drive.google.com/thumbnail?id=1IjG7DGJtZAAXooMfPHxGXHVG8tlFzvaZ&sz=w1000" alt="Panangad Residence Photo 1" loading="lazy"></div>
+                <div class="img-box"><img src="https://drive.google.com/thumbnail?id=19IlTzV1lu8_it89Rgb_ehlFSNTMQL-Nu&sz=w1000" alt="Panangad Residence Photo 2" loading="lazy"></div>
+                <div class="img-box"><img src="https://drive.google.com/thumbnail?id=1WgWfkT3Yv60SUsM62cTIr6i4YdVykm31&sz=w1000" alt="Panangad Residence Photo 3" loading="lazy"></div>
+            </div>
+        </article>
+
+    </div>
+
+</body>
+</html>
+<!-- Right Floating Contact Buttons -->
+<div class="floating-contact-container" style="position: fixed; top: 75%; right: 10px; transform: translateY(-50%); flex-direction: column; gap: 10px; z-index: 9999;">
+  <!-- WhatsApp -->
+  <a href="https://wa.me/918281228549" target="_blank" rel="noopener noreferrer" style="width: 48px; height: 48px; background-color: #25D366; border-radius: 8px; display: flex; align-items: center; justify-content: center; box-shadow: 0 4px 12px rgba(0,0,0,0.25);">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="#ffffff" style="width: 24px; height: 24px;">
+      <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.521.151-.172.2-.296.3-.495.099-.198.05-.372-.025-.521-.075-.148-.669-1.611-.916-2.206-.242-.579-.487-.501-.669-.51l-.57-.01c-.198 0-.52.074-.792.372s-1.04 1.016-1.04 2.479 1.065 2.876 1.213 3.074c.149.198 2.096 3.2 5.077 4.487.709.306 1.263.489 1.694.626.712.226 1.36.194 1.872.118.572-.085 1.787-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.99c-.002 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/>
+    </svg>
+  </a>
+  <!-- Call -->
+  <a href="tel:+918281228549" style="width: 48px; height: 48px; background-color: #152f4e; border-radius: 8px; display: flex; align-items: center; justify-content: center; box-shadow: 0 4px 12px rgba(0,0,0,0.25);">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="#ffffff" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" style="width: 22px; height: 22px;">
+      <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path>
+    </svg>
+  </a>
+</div>
+
+<style>
+  /* Hidden by default on large screens/desktops */
+  .floating-contact-container {
+    display: none !important;
+  }
+
+  /* Display only on mobile and small screens (768px wide or smaller) */
+  @media screen and (max-width: 768px) {
+    .floating-contact-container {
+      display: flex !important;
+    }
+  }
+</style>

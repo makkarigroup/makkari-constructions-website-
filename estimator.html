@@ -1,0 +1,673 @@
+<header class="site-header" id="makkari-auto-header" role="banner">
+  <div class="nav-container">
+
+    <a href="index.html" class="brand-container" aria-label="Go to Homepage">
+      <img src="https://lh3.googleusercontent.com/d/1RjhoHvjH6DbnNqLOpCNQUOySmpLD2EPv" alt="Company Logo" class="brand-logo-img">
+    </a>
+
+    <button class="mobile-toggle" id="mobile-toggle" aria-expanded="false" aria-controls="nav-menu" aria-label="Open navigation menu">
+      <span class="bar"></span>
+      <span class="bar"></span>
+      <span class="bar"></span>
+    </button>
+
+    <nav aria-label="Main navigation">
+      <ul class="nav-menu" id="nav-menu">
+        <li class="nav-item">
+          <a href="index.html" class="nav-link">Home</a>
+        </li>
+        <li class="nav-item">
+          <a href="about.html" class="nav-link">About Us</a>
+        </li>
+        <li class="nav-item">
+          <a href="services.html" class="nav-link">Services</a>
+        </li>
+        <li class="nav-item">
+          <a href="projects.html" class="nav-link">Projects</a>
+        </li>
+        <li class="nav-item">
+          <a href="estimator.html" class="nav-link">Estimator Modules</a>
+        </li>
+        <li class="nav-item">
+          <a href="contact.html" class="nav-link highlight">Contact Us</a>
+        </li>
+      </ul>
+    </nav>
+
+  </div>
+</header>
+
+<style>
+  :root {
+    --brand-navy: #152F4E;
+    --brand-red: #E52330;
+    --brand-red-hover: #c41c27;
+    --glass-bg: rgba(255, 255, 255, 0.75);
+    --glass-bg-scrolled: rgba(255, 255, 255, 0.9);
+    --glass-border: rgba(255, 255, 255, 0.5);
+    --glass-hover: rgba(21, 47, 78, 0.08);
+    --text-color: #152F4E;
+    --header-height: clamp(60px, 7vh, 75px);
+    --shadow-glass: 0 8px 32px 0 rgba(0, 0, 0, 0.12);
+    --transition-speed: 0.35s;
+    --ease-spring: cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  }
+
+  /* Floating Glass Bar with Entrance Animation */
+  .site-header {
+    position: fixed;
+    top: 8px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: min(92%, 1150px);
+    height: var(--header-height);
+    z-index: 1000;
+    border-radius: 100px;
+    
+    background: var(--glass-bg);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    border: 1px solid var(--glass-border);
+    box-shadow: var(--shadow-glass);
+    
+    /* Initial entrance state */
+    opacity: 0;
+    animation: headerEntrance 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+    transition: top var(--transition-speed) ease, 
+                background var(--transition-speed) ease, 
+                box-shadow var(--transition-speed) ease,
+                border-color var(--transition-speed) ease;
+  }
+
+  @keyframes headerEntrance {
+    0% {
+      opacity: 0;
+      transform: translate(-50%, -25px);
+    }
+    100% {
+      opacity: 1;
+      transform: translate(-50%, 0);
+    }
+  }
+
+  .site-header.scrolled {
+    background: var(--glass-bg-scrolled);
+    border-color: rgba(255, 255, 255, 0.8);
+    box-shadow: 0 12px 35px 0 rgba(0, 0, 0, 0.18);
+    top: 12px;
+  }
+
+  .nav-container {
+    width: 100%;
+    height: 100%;
+    margin: 0 auto;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 clamp(1.2rem, 3vw, 2rem);
+    position: relative;
+  }
+
+  /* Brand Logo Animations */
+  .brand-container {
+    display: flex;
+    align-items: center;
+    text-decoration: none;
+    height: 100%;
+    border-radius: 50px;
+  }
+
+  .brand-logo-img {
+    height: clamp(32px, 4.5vh, 42px);
+    width: auto;
+    object-fit: contain;
+    transition: transform 0.3s var(--ease-spring);
+  }
+
+  .brand-container:hover .brand-logo-img {
+    transform: scale(1.08) rotate(-1.5deg);
+  }
+
+  /* Desktop Menu & Staggered Link Animations */
+  .nav-menu {
+    display: flex;
+    list-style: none;
+    gap: clamp(0.3rem, 1vw, 0.8rem);
+    align-items: center;
+  }
+
+  /* Cascade menu links on page load */
+  .nav-item {
+    opacity: 0;
+    animation: navItemFade 0.5s ease forwards;
+  }
+
+  .nav-item:nth-child(1) { animation-delay: 0.2s; }
+  .nav-item:nth-child(2) { animation-delay: 0.27s; }
+  .nav-item:nth-child(3) { animation-delay: 0.34s; }
+  .nav-item:nth-child(4) { animation-delay: 0.41s; }
+  .nav-item:nth-child(5) { animation-delay: 0.48s; }
+  .nav-item:nth-child(6) { animation-delay: 0.55s; }
+
+  @keyframes navItemFade {
+    from {
+      opacity: 0;
+      transform: translateY(-8px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  .nav-link {
+    position: relative;
+    color: var(--text-color);
+    text-decoration: none;
+    font-size: clamp(0.85rem, 0.95vw, 0.95rem);
+    font-weight: 600;
+    padding: 0.55rem 1.1rem;
+    border-radius: 50px;
+    transition: color var(--transition-speed) ease, 
+                background-color var(--transition-speed) ease, 
+                transform var(--transition-speed) var(--ease-spring);
+    white-space: nowrap;
+    display: inline-block;
+  }
+
+  .nav-link:hover, 
+  .nav-link:focus-visible {
+    background-color: var(--glass-hover);
+    color: var(--brand-navy);
+    transform: translateY(-2px);
+    outline: none;
+  }
+
+  .nav-link.active-page {
+    background-color: rgba(21, 47, 78, 0.12);
+    color: var(--brand-navy);
+  }
+
+  .nav-link.highlight {
+    background-color: var(--brand-red);
+    color: #FFFFFF;
+    box-shadow: 0 4px 15px rgba(229, 35, 48, 0.3);
+    transition: all var(--transition-speed) ease;
+  }
+
+  .nav-link.highlight:hover {
+    background-color: var(--brand-red-hover);
+    color: #FFFFFF;
+    transform: translateY(-2px) scale(1.03);
+    box-shadow: 0 6px 20px rgba(229, 35, 48, 0.45);
+  }
+
+  /* Mobile Toggle Bar Transitions */
+  .mobile-toggle {
+    display: none;
+    flex-direction: column;
+    justify-content: space-between;
+    width: 26px;
+    height: 18px;
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    padding: 0;
+    margin-left: auto;
+    z-index: 101;
+  }
+
+  .mobile-toggle .bar {
+    height: 2px;
+    width: 100%;
+    background-color: var(--text-color);
+    border-radius: 2px;
+    transition: transform var(--transition-speed) var(--ease-spring), 
+                opacity var(--transition-speed) ease;
+  }
+
+  .mobile-toggle.active .bar:nth-child(1) {
+    transform: translateY(8px) rotate(45deg);
+  }
+  .mobile-toggle.active .bar:nth-child(2) {
+    opacity: 0;
+    transform: translateX(-10px);
+  }
+  .mobile-toggle.active .bar:nth-child(3) {
+    transform: translateY(-8px) rotate(-45deg);
+  }
+
+  /* Responsive Mobile Menu Dropdown */
+  @media (max-width: 900px) {
+    .mobile-toggle {
+      display: flex;
+    }
+
+    .nav-menu {
+      position: absolute;
+      top: calc(100% + 12px);
+      right: 0;
+      width: 100%;
+      max-width: 280px;
+      background: rgba(255, 255, 255, 0.95);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      flex-direction: column;
+      align-items: stretch;
+      opacity: 0;
+      visibility: hidden;
+      transform: translateY(-15px) scale(0.95);
+      transition: opacity var(--transition-speed) ease,
+                  transform var(--transition-speed) var(--ease-spring),
+                  visibility var(--transition-speed) ease;
+      box-shadow: 0 16px 32px rgba(0, 0, 0, 0.15);
+      border-radius: 20px;
+      border: 1px solid var(--glass-border);
+      padding: 0.5rem 0;
+      overflow: hidden;
+    }
+
+    .nav-menu.active {
+      opacity: 1;
+      visibility: visible;
+      transform: translateY(0) scale(1);
+    }
+
+    .nav-item {
+      animation: none;
+      opacity: 0;
+      transform: translateX(15px);
+      transition: opacity 0.3s ease, transform 0.3s ease;
+    }
+
+    .nav-menu.active .nav-item {
+      opacity: 1;
+      transform: translateX(0);
+    }
+
+    .nav-menu.active .nav-item:nth-child(1) { transition-delay: 0.05s; }
+    .nav-menu.active .nav-item:nth-child(2) { transition-delay: 0.10s; }
+    .nav-menu.active .nav-item:nth-child(3) { transition-delay: 0.15s; }
+    .nav-menu.active .nav-item:nth-child(4) { transition-delay: 0.20s; }
+    .nav-menu.active .nav-item:nth-child(5) { transition-delay: 0.25s; }
+    .nav-menu.active .nav-item:nth-child(6) { transition-delay: 0.30s; }
+
+    .nav-link {
+      display: block;
+      color: var(--text-color);
+      padding: 0.85rem 1.4rem;
+      border-radius: 0;
+      text-align: left;
+      transform: none !important;
+    }
+
+    .nav-link.highlight {
+      text-align: center;
+      margin: 0.5rem 1rem;
+      border-radius: 50px;
+    }
+  }
+</style>
+
+<script>
+  document.addEventListener("DOMContentLoaded", function () {
+    const header = document.getElementById('makkari-auto-header');
+    const mobileToggle = document.getElementById('mobile-toggle');
+    const navMenu = document.getElementById('nav-menu');
+
+    const handleScroll = () => {
+      if (window.scrollY > 20) {
+        header.classList.add('scrolled');
+      } else {
+        header.classList.remove('scrolled');
+      }
+    };
+
+    window.addEventListener('scroll', handleScroll);
+    handleScroll();
+
+    const currentPath = window.location.pathname.toLowerCase();
+    const navLinks = document.querySelectorAll('.nav-link');
+
+    navLinks.forEach(link => {
+      const hrefValue = link.getAttribute('href').toLowerCase();
+      const isHome = (hrefValue === 'index.html' && (currentPath === '/' || currentPath.endsWith('index.html')));
+      const isExactMatch = currentPath.includes(hrefValue.replace('.html', ''));
+
+      if (isHome || (hrefValue !== 'index.html' && isExactMatch)) {
+        link.classList.add('active-page');
+        link.setAttribute('aria-current', 'page');
+      }
+    });
+
+    if (mobileToggle && navMenu) {
+      const toggleMenu = (forceClose = false) => {
+        const isClosing = forceClose || navMenu.classList.contains('active');
+        if (isClosing) {
+          navMenu.classList.remove('active');
+          mobileToggle.classList.remove('active');
+          mobileToggle.setAttribute('aria-expanded', 'false');
+        } else {
+          navMenu.classList.add('active');
+          mobileToggle.classList.add('active');
+          mobileToggle.setAttribute('aria-expanded', 'true');
+        }
+      };
+
+      mobileToggle.addEventListener('click', (e) => {
+        e.stopPropagation();
+        toggleMenu();
+      });
+
+      document.addEventListener('click', (e) => {
+        if (!header.contains(e.target)) {
+          toggleMenu(true);
+        }
+      });
+    }
+  });
+</script>
+
+<!----------------------------------------------->
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Estimator Modules Dashboard</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;600;700&display=swap" rel="stylesheet">
+  
+  <style>
+    /* Global Reset & Base Styles */
+    :root {
+      --primary-navy: #152F4E;
+      --accent-red: #E52230;
+      --accent-red-hover: #C41B27;
+      --bg-light: #F9F9F9;
+      --card-bg: #FFFFFF;
+      --text-dark: #1E293B;
+      --text-muted: #64748B;
+      --border-color: #E2E8F0;
+      --shadow-sm: 0 4px 6px -1px rgba(21, 47, 78, 0.05), 0 2px 4px -1px rgba(21, 47, 78, 0.03);
+      --shadow-hover: 0 12px 20px -5px rgba(21, 47, 78, 0.1);
+      --transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+
+      /* Popup variables */
+      --ice-navy-900: #0f172a;
+      --ice-navy-800: #1e293b;
+      --ice-orange-500: #f59e0b;
+      --ice-slate-500: #64748b;
+      --ice-slate-200: #e2e8f0;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: 'Archivo', -apple-system, BlinkMacSystemFont, sans-serif;
+      background-color: var(--bg-light);
+      color: var(--text-dark);
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 2rem 1rem;
+    }
+
+    /* Container Layout */
+    .dashboard-container {
+      width: 100%;
+      max-width: 1000px;
+      margin: 0 auto;
+    }
+
+    .header-section {
+      text-align: center;
+      margin-bottom: 2rem;
+    }
+
+    .header-title {
+      font-size: 1.75rem;
+      font-weight: 700;
+      color: var(--primary-navy);
+      letter-spacing: -0.025em;
+      margin-bottom: 0.5rem;
+    }
+
+    .header-title::after {
+      content: '';
+      display: block;
+      width: 48px;
+      height: 3px;
+      background-color: var(--accent-red);
+      margin: 0.5rem auto 0;
+      border-radius: 2px;
+    }
+
+    .header-subtitle {
+      font-size: 0.95rem;
+      color: var(--text-muted);
+      max-width: 500px;
+      margin: 0 auto;
+    }
+
+    /* Cards Grid */
+    .cards-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 1.25rem;
+    }
+
+    /* Individual Card Style (Standard Tile Size) */
+    .estimator-card {
+      background-color: var(--card-bg);
+      border-radius: 12px;
+      border: 1px solid var(--border-color);
+      box-shadow: var(--shadow-sm);
+      padding: 1.25rem;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      position: relative;
+      overflow: hidden;
+      transition: var(--transition);
+    }
+
+    .estimator-card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 3px;
+      background-color: var(--primary-navy);
+      transition: var(--transition);
+    }
+
+    .estimator-card:hover {
+      transform: translateY(-4px);
+      box-shadow: var(--shadow-hover);
+      border-color: rgba(21, 47, 78, 0.15);
+    }
+
+    .estimator-card:hover::before {
+      background-color: var(--accent-red);
+    }
+
+    /* Card Content */
+    .card-icon-wrapper {
+      width: 42px;
+      height: 42px;
+      border-radius: 8px;
+      background-color: rgba(21, 47, 78, 0.05);
+      color: var(--primary-navy);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 1rem;
+      transition: var(--transition);
+    }
+
+    .estimator-card:hover .card-icon-wrapper {
+      background-color: var(--accent-red);
+      color: #ffffff;
+    }
+
+    .card-icon-wrapper svg {
+      width: 22px;
+      height: 22px;
+      stroke-width: 2;
+    }
+
+    .card-title {
+      font-size: 1.1rem;
+      font-weight: 600;
+      color: var(--primary-navy);
+      margin-bottom: 0.5rem;
+    }
+
+    .card-description {
+      font-size: 0.875rem;
+      color: var(--text-muted);
+      line-height: 1.45;
+      margin-bottom: 1.25rem;
+      flex-grow: 1;
+    }
+
+    /* Action Button */
+    .launch-btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 100%;
+      padding: 0.625rem 1rem;
+      background-color: var(--primary-navy);
+      color: #ffffff;
+      font-weight: 600;
+      font-size: 0.875rem;
+      border: none;
+      border-radius: 6px;
+      text-decoration: none;
+      cursor: pointer;
+      transition: var(--transition);
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+    }
+
+    .launch-btn svg {
+      width: 16px;
+      height: 16px;
+      margin-left: 0.375rem;
+      transition: transform 0.2s ease;
+    }
+
+    .launch-btn:hover {
+      background-color: var(--accent-red);
+      box-shadow: 0 4px 10px rgba(229, 34, 48, 0.25);
+    }
+
+    .launch-btn:hover svg {
+      transform: translateX(3px);
+    }
+
+    /* Mobile Responsive Styles */
+    @media (max-width: 768px) {
+      body {
+        padding-top: 80px; /* Space added for top mobile navigation bar */
+        justify-content: flex-start; /* Prevents vertical centering overlap */
+      }
+
+      .header-title {
+        font-size: 1.5rem;
+      }
+      
+      .cards-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="dashboard-container">
+    
+    <header class="header-section">
+      <h1 class="header-title">Valuation & Inspection Suite</h1>
+      <p class="header-subtitle">Select a specialized module below to launch the estimator tool in a new tab.</p>
+    </header>
+
+    <main class="cards-grid">
+
+      <article class="estimator-card">
+        <div class="card-content">
+          <div class="card-icon-wrapper">
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5m0 0h4m-4 0V11m0 0h4m-4 0H7" />
+            </svg>
+          </div>
+          <h2 class="card-title">CPWD Valuation</h2>
+          <p class="card-description">Calculate public works building valuations accurately using standard CPWD plinth area metrics and specifications.</p>
+        </div>
+        <div>
+          <a href="C:\Users\ASUS\Desktop\Makkari Constructions & Developers\cpwd-valuation.html"target="_blank" rel="noopener noreferrer" class="launch-btn">
+            Open Module
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
+            </svg>
+          </a>
+        </div>
+      </article>
+
+      <article class="estimator-card">
+        <div class="card-content">
+          <div class="card-icon-wrapper">
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M8 14v3m4-3v3m4-3v3M3 21h18M3 10h18M3 7l9-4 9 4M4 10h16v11H4V10z" />
+            </svg>
+          </div>
+          <h2 class="card-title">Valuation for Bank</h2>
+          <p class="card-description">Generate comprehensive bank stage certificates, property mortgage assessments, and financial valuation reports.</p>
+        </div>
+        <div>
+          <a href="C:\Users\ASUS\Desktop\Makkari Constructions & Developers\bank-valuation.html" target="_blank" rel="noopener noreferrer" class="launch-btn">
+            Open Module
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
+            </svg>
+          </a>
+        </div>
+      </article>
+
+      <article class="estimator-card">
+        <div class="card-content">
+          <div class="card-icon-wrapper">
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-6 9l2 2 4-4" />
+            </svg>
+          </div>
+          <h2 class="card-title">Site Inspection Module</h2>
+          <p class="card-description">Document structural stage progress, perform field audits, and log site observation checklist reports.</p>
+        </div>
+        <div>
+          <a href="C:\Users\ASUS\Desktop\Makkari Constructions & Developers\siteinspection.html" target="_blank" rel="noopener noreferrer" class="launch-btn">
+            Open Module
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
+            </svg>
+          </a>
+        </div>
+      </article>
+
+    </main>
+
+  </div>
+
+</body>
+</html>

@@ -1,0 +1,1246 @@
+<!-- Top Navigation Bar Container -->
+<div class="glass-header-wrapper">
+  <div class="glass-nav-container">
+    <a href="Estimator.html" class="glass-btn btn-prev">
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m15 18-6-6 6-6"/></svg>
+      Previous
+    </a>
+    <a href="index.html" class="glass-btn btn-home">
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m3 9 9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+      Home
+    </a>
+  </div>
+</div>
+
+<!-- Place all your page content below this wrapper -->
+<main class="page-content">
+  <!-- Your main HTML content goes here -->
+</main>
+
+<style>
+  .glass-header-wrapper {
+    position: sticky;
+    top: 0;
+    z-index: 9999;
+    width: 100%;
+    display: flex;
+    justify-content: flex-end;
+    padding: 16px;
+    box-sizing: border-box;
+    pointer-events: none; /* Allows clicking background elements outside the buttons */
+  }
+
+  .glass-nav-container {
+    pointer-events: auto; /* Restores button clickability */
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 6px;
+    background: rgba(249, 249, 249, 0.45);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border: 1px solid rgba(255, 255, 255, 0.6);
+    border-radius: 12px;
+    box-shadow: 0 8px 32px 0 rgba(21, 47, 78, 0.12);
+  }
+
+  .glass-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 6px 12px;
+    font-family: system-ui, -apple-system, sans-serif;
+    font-size: 13px;
+    font-weight: 500;
+    text-decoration: none;
+    border-radius: 8px;
+    backdrop-filter: blur(6px);
+    -webkit-backdrop-filter: blur(6px);
+    border: 1px solid rgba(255, 255, 255, 0.4);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+  }
+
+  /* Previous Button */
+  .btn-prev {
+    background: rgba(21, 47, 78, 0.08);
+    color: #152f4e;
+  }
+
+  .btn-prev:hover {
+    background: rgba(21, 47, 78, 0.16);
+    border-color: rgba(21, 47, 78, 0.2);
+  }
+
+  /* Home Button */
+  .btn-home {
+    background: rgba(229, 35, 48, 0.85);
+    color: #ffffff;
+    border-color: rgba(255, 255, 255, 0.3);
+  }
+
+  .btn-home:hover {
+    background: rgba(229, 35, 48, 0.95);
+    box-shadow: 0 4px 12px rgba(229, 35, 48, 0.3);
+  }
+
+  .page-content {
+    position: relative;
+    z-index: 1;
+  }
+</style>
+
+
+<!----------------------------------->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Makkari Constructions &amp; Developers - Engineering Portal</title>
+    
+    <!-- jsPDF & AutoTable Libraries for Detailed PDF Reports -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/3.5.28/jspdf.plugin.autotable.min.js"></script>
+    
+    <style>
+        :root {
+            --brand-navy: #152f4e;
+            --brand-navy-dark: #0d2037;
+            --brand-accent: #e63946;
+            --brand-accent-hover: #d62828;
+            --bg: #f4f7f6;
+            --panel-bg: #ffffff;
+            --card-bg: #f1f5f9;
+            --text-main: #152f4e;
+            --text-muted: #64748b;
+            --border: #152f4e;
+        }
+
+        * { 
+            box-sizing: border-box; 
+            margin: 0; 
+            padding: 0; 
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, sans-serif; 
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        body {
+            background-color: var(--bg);
+            color: var(--text-main);
+            overflow-x: hidden;
+            min-height: 100dvh;
+        }
+
+        /* --- AUTH SCREEN OVERLAY --- */
+        #authOverlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            background-color: var(--brand-navy-dark);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 9999;
+            padding: 20px;
+        }
+
+        .auth-card {
+            background: #ffffff;
+            border-radius: 12px;
+            padding: 35px 25px;
+            max-width: 400px;
+            width: 100%;
+            text-align: center;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.3);
+            border: 2px solid var(--brand-accent);
+        }
+
+        .auth-card h2 {
+            font-size: 1.3rem;
+            color: var(--brand-navy);
+            margin-bottom: 8px;
+            font-weight: 800;
+        }
+
+        .auth-card p {
+            font-size: 0.85rem;
+            color: var(--text-muted);
+            margin-bottom: 20px;
+        }
+
+        .auth-input-group {
+            margin-bottom: 15px;
+        }
+
+        .auth-input-group input {
+            text-align: center;
+            font-size: 1.5rem;
+            letter-spacing: 6px;
+            font-weight: bold;
+            height: 50px;
+        }
+
+        .auth-btn {
+            width: 100%;
+            height: 48px;
+            background: var(--brand-accent);
+            color: #ffffff;
+            border: none;
+            border-radius: 6px;
+            font-weight: 800;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: background 0.2s;
+        }
+
+        .auth-btn:hover {
+            background: var(--brand-accent-hover);
+        }
+
+        .auth-error {
+            color: var(--brand-accent);
+            font-size: 0.8rem;
+            font-weight: 700;
+            margin-top: 10px;
+            display: none;
+        }
+
+        /* View Controller */
+        .app-view {
+            display: none;
+            min-height: 100vh;
+            width: 100%;
+        }
+        .app-view.active {
+            display: block;
+            animation: fadeIn 0.3s ease-in-out;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(5px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* --- PORTAL UI --- */
+        .portal-header {
+            background-color: var(--brand-navy);
+            color: #ffffff;
+            padding: 40px 15px;
+            text-align: center;
+            border-bottom: 4px solid var(--brand-accent);
+        }
+        .portal-header h1 {
+            font-size: clamp(1rem, 4.2vw, 1.6rem);
+            font-weight: 800;
+            letter-spacing: 0.5px;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+        .portal-header p {
+            font-size: 0.85rem;
+            color: #cbd5e1;
+            margin-top: 8px;
+        }
+
+        .portal-container {
+            max-width: 800px;
+            margin: 40px auto;
+            padding: 0 20px;
+        }
+
+        .app-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 20px;
+        }
+        @media (min-width: 600px) {
+            .app-grid { grid-template-columns: 1fr 1fr; }
+        }
+
+        .app-card {
+            background: var(--panel-bg);
+            border: 2px solid var(--border);
+            border-radius: 12px;
+            padding: 30px 20px;
+            text-align: center;
+            cursor: pointer;
+            box-shadow: 0 4px 12px rgba(21, 47, 78, 0.08);
+            transition: all 0.2s ease;
+        }
+        .app-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 8px 24px rgba(21, 47, 78, 0.15);
+            border-color: var(--brand-accent);
+        }
+        .app-icon {
+            font-size: 3rem;
+            margin-bottom: 16px;
+            display: inline-block;
+        }
+        .app-card h2 {
+            font-size: 1.2rem;
+            color: var(--brand-navy);
+            margin-bottom: 8px;
+        }
+        .app-card p {
+            font-size: 0.85rem;
+            color: var(--text-muted);
+            line-height: 1.4;
+        }
+
+        /* --- INDIVIDUAL APP UI --- */
+        .app-nav-bar {
+            position: sticky;
+            top: 0;
+            background: var(--brand-navy);
+            color: white;
+            padding: 16px 20px;
+            display: flex;
+            align-items: center;
+            z-index: 100;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        .btn-back {
+            background: rgba(255,255,255,0.15);
+            border: 1px solid rgba(255,255,255,0.3);
+            color: white;
+            padding: 6px 12px;
+            border-radius: 6px;
+            font-size: 0.85rem;
+            font-weight: bold;
+            cursor: pointer;
+            margin-right: 16px;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            flex-shrink: 0;
+        }
+        .btn-back:hover {
+            background: rgba(255,255,255,0.25);
+        }
+        .app-title {
+            font-size: 1.1rem;
+            font-weight: 700;
+            white-space: nowrap;
+        }
+
+        .app-content {
+            max-width: 700px;
+            margin: 20px auto;
+            padding: 0 16px 40px 16px;
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        .panel {
+            background: var(--panel-bg);
+            border-radius: 10px;
+            padding: 20px;
+            border: 1.5px solid var(--border);
+            box-shadow: 0 4px 10px rgba(21, 47, 78, 0.05);
+        }
+        .section-title {
+            font-size: 0.95rem;
+            font-weight: 800;
+            margin-bottom: 16px;
+            color: var(--brand-navy);
+            border-bottom: 2px solid var(--border);
+            padding-bottom: 8px;
+        }
+        .form-row { display: flex; gap: 12px; margin-bottom: 12px; }
+        .form-group { flex: 1; min-width: 0; margin-bottom: 12px; }
+        .form-row .form-group { margin-bottom: 0; }
+        
+        label {
+            display: block;
+            font-size: 0.75rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            color: var(--brand-navy);
+            margin-bottom: 6px;
+            letter-spacing: 0.3px;
+        }
+
+        input, select {
+            width: 100%; height: 44px;
+            padding: 0 12px;
+            border-radius: 6px;
+            border: 1.5px solid var(--border);
+            background: #ffffff;
+            color: var(--text-main);
+            font-size: 0.95rem;
+            font-weight: 600;
+            outline: none;
+            appearance: none;
+            -webkit-appearance: none;
+        }
+        select {
+            background-image: url("data:image/svg+xml;charset=US-ASCII,%3Csvg%20xmlns%3D%22http%3A%22%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%22292.4%22%20height%3D%22292.4%22%3E%3Cpath%20fill%3D%22%23152f4e%22%20d%3D%22M287%2069.4a17.6%2017.6%200%200%200-13-5.4H18.4c-5%200-9.3%201.8-12.9%205.4A17.6%2017.6%200%200%200%200%2082.2c0%205%201.8%209.3%205.4%2012.9l128%20127.9c3.6%203.6%207.8%205.4%2012.8%205.4s9.2-1.8%2012.8-5.4L287%2095c3.5-3.5%205.4-7.8%205.4-12.8%200-5-1.9-9.2-5.5-12.8z%22%2F%3E%3C%2Fsvg%3E");
+            background-repeat: no-repeat;
+            background-position: right 12px top 50%;
+            background-size: 10px auto;
+            padding-right: 30px;
+        }
+        input:focus, select:focus { 
+            border-color: var(--brand-accent);
+            box-shadow: 0 0 0 2px rgba(230, 57, 70, 0.15);
+        }
+
+        .checkbox-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+        .checkbox-card {
+            background: var(--card-bg);
+            border: 1.5px solid var(--border);
+            padding: 12px;
+            border-radius: 6px;
+            display: flex; align-items: center; gap: 8px;
+            cursor: pointer;
+            font-size: 0.85rem; font-weight: 700; color: var(--brand-navy);
+        }
+        .checkbox-card input[type="checkbox"] { 
+            accent-color: var(--brand-accent); 
+            width: 18px; height: 18px; 
+        }
+
+        .total-box {
+            background: var(--brand-navy);
+            color: #ffffff;
+            padding: 24px;
+            border-radius: 10px;
+            text-align: center;
+            border: 1.5px solid var(--border);
+        }
+        .total-title { font-size: 0.8rem; text-transform: uppercase; letter-spacing: 1px; color: #cbd5e1; }
+        .total-amount { font-size: 2rem; font-weight: 800; margin: 8px 0; }
+        .total-rate { font-size: 0.85rem; color: #e2e8f0; }
+
+        .download-btn {
+            width: 100%; height: 50px;
+            background: var(--brand-accent);
+            color: #ffffff; border: 1.5px solid var(--border); border-radius: 8px;
+            font-weight: 800; font-size: 1rem; cursor: pointer;
+            margin-top: 16px; transition: background 0.2s;
+            display: flex; align-items: center; justify-content: center; gap: 8px;
+            box-shadow: 0 4px 6px rgba(230, 57, 70, 0.2);
+        }
+        .download-btn:hover { background: var(--brand-accent-hover); }
+
+        .tab-menu {
+            display: flex; gap: 8px; margin-bottom: 16px;
+            border-bottom: 2px solid var(--border); padding-bottom: 8px;
+        }
+        .tab-btn {
+            background: transparent; border: 1px solid transparent;
+            color: var(--brand-navy); padding: 8px 12px;
+            font-weight: 700; cursor: pointer;
+            font-size: 0.9rem; border-radius: 4px; flex: 1;
+        }
+        .tab-btn.active { 
+            background: var(--brand-navy); color: #ffffff; border-color: var(--border);
+        }
+        .tab-content { display: none; }
+        .tab-content.active { display: block; }
+        .data-table { width: 100%; border-collapse: collapse; font-size: 0.85rem; }
+        .data-table th, .data-table td { padding: 12px 10px; text-align: left; border-bottom: 1px solid var(--border); }
+        .data-table th { background-color: var(--brand-navy); color: #ffffff; font-size: 0.75rem; text-transform: uppercase; font-weight: 700; }
+        .data-table td { font-weight: 600; color: var(--brand-navy); }
+
+        .salvage-badge {
+            display: none; padding: 10px; border-radius: 6px;
+            font-size: 0.8rem; font-weight: 600; margin-top: 12px;
+            background-color: #fef3c7; color: #92400e; border: 1px solid #fde68a; text-align: center;
+        }
+        
+        .val-result-group { background: #f8f9fa; padding: 16px; border-radius: 10px; border: 1.5px solid var(--border); margin-top: 16px; }
+        .val-result-item { display: flex; justify-content: space-between; margin-bottom: 10px; font-weight: 600; color: var(--brand-navy); font-size: 0.85rem; gap: 10px; }
+        .val-result-item.highlight { background: #e2e8f0; padding: 6px 8px; border-radius: 4px; font-weight: 700; }
+        .val-result-item.sub-header { background: var(--brand-navy); color: white; padding: 6px 8px; border-radius: 4px; font-weight: 700; font-size: 0.8rem; text-transform: uppercase; margin-top: 10px; }
+        .val-result-item.final { font-size: 0.95rem; border-top: 1px dashed var(--border); padding-top: 10px; margin-top: 6px; font-weight: 800; }
+        .val-value { font-family: SFMono-Regular, Consolas, monospace; font-weight: 700; text-align: right; }
+
+        /* EQUATION CARD COMPONENT */
+        .formula-card {
+            background: #ffffff;
+            border: 2px solid var(--brand-navy);
+            border-radius: 8px;
+            padding: 14px;
+            margin-top: 12px;
+            margin-bottom: 12px;
+            box-shadow: 0 2px 6px rgba(0,0,0,0.05);
+        }
+        .formula-header {
+            font-size: 0.75rem;
+            font-weight: 800;
+            color: var(--brand-navy);
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            margin-bottom: 8px;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+        .formula-box {
+            background: var(--card-bg);
+            border: 1px solid #cbd5e1;
+            padding: 10px;
+            border-radius: 6px;
+            text-align: center;
+            font-family: 'Courier New', Courier, monospace;
+            font-weight: 700;
+            font-size: 0.85rem;
+            color: var(--brand-navy-dark);
+            overflow-x: auto;
+            white-space: nowrap;
+        }
+        .formula-step {
+            margin-top: 8px;
+            font-size: 0.8rem;
+            color: var(--brand-navy);
+            font-family: SFMono-Regular, Consolas, monospace;
+            line-height: 1.5;
+            background: #fff;
+            padding: 8px;
+            border-radius: 4px;
+            border-left: 3px solid var(--brand-accent);
+        }
+
+        .portal-tag {
+            text-align: center;
+            font-size: 0.75rem;
+            font-weight: 700;
+            color: var(--text-muted);
+            margin-top: 16px;
+            padding-top: 12px;
+            border-top: 1px solid #cbd5e1;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+    </style>
+</head>
+<body>
+
+<!-- PASSCODE AUTHENTICATION OVERLAY -->
+<div id="authOverlay">
+    <div class="auth-card">
+        <h2>Protected Access</h2>
+        <p>Please enter the security PIN to access the portal</p>
+        <div class="auth-input-group">
+            <input type="password" id="passcodeInput" maxlength="6" placeholder="••••" onkeydown="handleKeyAuth(event)">
+        </div>
+        <button class="auth-btn" onclick="verifyPasscode()">Unlock Portal</button>
+        <div class="auth-error" id="authError">Incorrect PIN. Please try again.</div>
+    </div>
+</div>
+
+<!-- HOME PORTAL -->
+<div id="viewHome" class="app-view active">
+    <div class="portal-header">
+        <h1>Makkari Constructions &amp; Developers</h1>
+        <p>Engineering Valuation &amp; Estimation Portal</p>
+    </div>
+    
+    <div class="portal-container">
+        <div class="app-grid">
+            <div class="app-card" onclick="navigate('viewEstimator')">
+                <div class="app-icon">🏗️</div>
+                <h2>Plinth Area Estimator</h2>
+                <p>Calculate project budgets, stage-wise payments, and material quantities.</p>
+            </div>
+            
+            <div class="app-card" onclick="navigate('viewValuation')">
+                <div class="app-icon">📊</div>
+                <h2>CPWD Valuation</h2>
+                <p>Assess building depreciation, structural life, and current value.</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- APP 1: ESTIMATOR -->
+<div id="viewEstimator" class="app-view">
+    <div class="app-nav-bar">
+        <button class="btn-back" onclick="navigate('viewHome')">
+            <span>&larr;</span> Back
+        </button>
+        <div class="app-title">Plinth Area Estimator</div>
+    </div>
+    
+    <div class="app-content">
+        <div class="panel">
+            <div class="section-title">Project Metadata</div>
+            <div class="form-row">
+                <div class="form-group">
+                    <label>Project / Client Name</label>
+                    <input type="text" id="estClientName" value="" placeholder="e.g. Residence Project" oninput="calculateEstimator()">
+                </div>
+                <div class="form-group">
+                    <label>Location / Site</label>
+                    <input type="text" id="estSiteLoc" value="" placeholder="e.g. Calicut, Kerala" oninput="calculateEstimator()">
+                </div>
+            </div>
+
+            <div class="section-title" style="margin-top: 16px;">Building Area &amp; Grade</div>
+            <div class="form-row">
+                <div class="form-group">
+                    <label>Ground Flr (sq.ft)</label>
+                    <input type="number" id="gfArea" value="1200" min="100" oninput="calculateEstimator()">
+                </div>
+                <div class="form-group">
+                    <label>First Flr (sq.ft)</label>
+                    <input type="number" id="ffArea" value="800" min="0" oninput="calculateEstimator()">
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label>Finishing Grade</label>
+                <select id="gradeSelect" onchange="calculateEstimator()">
+                    <option value="1900">Economy (Rs. 1,900.00/sq.ft)</option>
+                    <option value="2300" selected>Standard (Rs. 2,300.00/sq.ft)</option>
+                    <option value="3200">Luxury (Rs. 3,200.00/sq.ft)</option>
+                    <option value="4500">Ultra Luxury (Rs. 4,500.00/sq.ft)</option>
+                </select>
+            </div>
+
+            <div class="form-row">
+                <div class="form-group">
+                    <label>Roof Style</label>
+                    <select id="roofSelect" onchange="calculateEstimator()">
+                        <option value="0">Flat RCC Slab</option>
+                        <option value="220" selected>Truss + Clay Tiles</option>
+                        <option value="350">RCC Slope + Shingles</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label>Soil Type</label>
+                    <select id="foundationSelect" onchange="calculateEstimator()">
+                        <option value="0">Normal Soil</option>
+                        <option value="0.08">Loose Clay (+8%)</option>
+                        <option value="0.18">Low-Lying (+18%)</option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="section-title" style="margin-top: 24px;">Site &amp; Exterior Add-ons</div>
+            <div class="form-row">
+                <div class="form-group">
+                    <label>Compound Wall (ft)</label>
+                    <input type="number" id="wallFt" value="100" step="10" oninput="calculateEstimator()">
+                </div>
+                <div class="form-group">
+                    <label>Paving (sq.ft)</label>
+                    <input type="number" id="pavingFt" value="500" step="50" oninput="calculateEstimator()">
+                </div>
+            </div>
+
+            <div class="checkbox-grid">
+                <label class="checkbox-card"><input type="checkbox" id="chkWell" checked onchange="calculateEstimator()"> Well (Rs. 85k)</label>
+                <label class="checkbox-card"><input type="checkbox" id="chkGate" checked onchange="calculateEstimator()"> Gate (Rs. 65k)</label>
+                <label class="checkbox-card"><input type="checkbox" id="chkSeptic" checked onchange="calculateEstimator()"> Septic (Rs. 55k)</label>
+                <label class="checkbox-card"><input type="checkbox" id="chkKitchen" checked onchange="calculateEstimator()"> Modular Kitchen</label>
+            </div>
+        </div>
+
+        <div class="panel">
+            <div class="total-box">
+                <div class="total-title">Total Estimated Cost</div>
+                <div class="total-amount" id="totalAmountDisplay">Rs. 0.00</div>
+                <div class="total-rate" id="avgRateDisplay">Rate: Rs. 0.00 / sq.ft</div>
+            </div>
+
+            <div class="tab-menu" style="margin-top: 16px;">
+                <button class="tab-btn active" onclick="showTab('tabBreakdown', this)">Breakdown</button>
+                <button class="tab-btn" onclick="showTab('tabPayment', this)">Stages</button>
+                <button class="tab-btn" onclick="showTab('tabMaterials', this)">Materials</button>
+            </div>
+
+            <div id="tabBreakdown" class="tab-content active">
+                <table class="data-table">
+                    <thead><tr><th>Item</th><th>Cost</th></tr></thead>
+                    <tbody>
+                        <tr><td>Plinth Structure</td><td id="rowBase">Rs. 0.00</td></tr>
+                        <tr><td>Roof Add-on</td><td id="rowRoof">Rs. 0.00</td></tr>
+                        <tr><td>Foundation Extra</td><td id="rowFoundation">Rs. 0.00</td></tr>
+                        <tr><td>Exterior Work</td><td id="rowExterior">Rs. 0.00</td></tr>
+                        <tr><td>Custom Add-ons</td><td id="rowAddons">Rs. 0.00</td></tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <div id="tabPayment" class="tab-content">
+                <table class="data-table">
+                    <thead><tr><th>Milestone</th><th>%</th><th>Amount</th></tr></thead>
+                    <tbody>
+                        <tr><td>Foundation</td><td>20.00%</td><td id="pStage1">Rs. 0.00</td></tr>
+                        <tr><td>Slab &amp; Columns</td><td>35.00%</td><td id="pStage2">Rs. 0.00</td></tr>
+                        <tr><td>Brickwork &amp; Plaster</td><td>15.00%</td><td id="pStage3">Rs. 0.00</td></tr>
+                        <tr><td>Flooring &amp; Fittings</td><td>20.00%</td><td id="pStage4">Rs. 0.00</td></tr>
+                        <tr><td>Painting &amp; Handover</td><td>10.00%</td><td id="pStage5">Rs. 0.00</td></tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <div id="tabMaterials" class="tab-content">
+                <table class="data-table">
+                    <thead><tr><th>Material</th><th>Est. Quantity</th></tr></thead>
+                    <tbody>
+                        <tr><td>Cement (50kg)</td><td id="matCement">0.00 Bags</td></tr>
+                        <tr><td>TMT Steel</td><td id="matSteel">0.00 Tons</td></tr>
+                        <tr><td>M-Sand / Sand</td><td id="matSand">0.00 Cu. Ft.</td></tr>
+                        <tr><td>Flooring Tiles</td><td id="matTiles">0.00 Sq. Ft.</td></tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <div class="portal-tag">Generated by Makkari Constructions and Developers Web portal</div>
+
+            <button class="download-btn" onclick="downloadEstimatorPDF()">
+                <span>📄</span> Download Detailed Estimation Report PDF
+            </button>
+        </div>
+    </div>
+</div>
+
+<!-- APP 2: VALUATION -->
+<div id="viewValuation" class="app-view">
+    <div class="app-nav-bar">
+        <button class="btn-back" onclick="navigate('viewHome')">
+            <span>&larr;</span> Back
+        </button>
+        <div class="app-title">CPWD Valuation Calculator</div>
+    </div>
+    
+    <div class="app-content">
+        <div class="panel">
+            <div class="section-title">Building Identification</div>
+            <div class="form-row">
+                <div class="form-group">
+                    <label>Building Name / No.</label>
+                    <input type="text" id="valBldgNo" value="" placeholder="e.g. Structure #A-102" oninput="calculateValuation()">
+                </div>
+                <div class="form-group">
+                    <label>Owner Name</label>
+                    <input type="text" id="valOwnerName" value="" placeholder="e.g. John Doe" oninput="calculateValuation()">
+                </div>
+            </div>
+        </div>
+
+        <div class="panel">
+            <div class="section-title">Valuation Parameters</div>
+
+            <div class="form-group">
+                <label>Plinth Area Rate (Rs. / sq.m)</label>
+                <input type="number" id="valBaseRate" value="20750.00" inputmode="numeric" step="0.01" oninput="calculateValuation()">
+            </div>
+
+            <div class="form-group">
+                <label>Structure &amp; Roof Type</label>
+                <select id="valStructureFactor" onchange="handleStructureChange()">
+                    <option value="75" data-rate="24410">Framed Structure - RCC (Life: 75 yrs) [Rs. 24,410.00/sq.m]</option>
+                    <option value="55" data-rate="20750" selected>Load Bearing - Concrete Roof (Life: 55 yrs) [Rs. 20,750.00/sq.m]</option>
+                    <option value="45" data-rate="20750" data-deduct="3000">Load Bearing - Tiled Roof (Life: 45 yrs) [-Rs. 3,000.00/sq.m]</option>
+                    <option value="35" data-rate="20750" data-deduct="3000">Load Bearing - Temp Hut (Life: 35 yrs) [-Rs. 3,000.00/sq.m]</option>
+                </select>
+            </div>
+
+            <div class="form-row">
+                <div class="form-group">
+                    <label>Location (Cost Index as on 1/4/2026)</label>
+                    <select id="valLocationSelect" onchange="handleValLocationChange()">
+                        <option value="1.35">Trivandrum (1.35)</option>
+                        <option value="1.34">Kottayam (1.34)</option>
+                        <option value="1.34">Pathanamthitta / Chenneekara (1.34)</option>
+                        <option value="1.34">Kollam (1.34)</option>
+                        <option value="1.34">Munnar (1.34)</option>
+                        <option value="1.35">Idukki (1.35)</option>
+                        <option value="1.33">Alleppey (1.33)</option>
+                        <option value="1.34">Pala (1.34)</option>
+                        <option value="1.34">Kayamkulam / Nooranad (1.34)</option>
+                        <option value="1.35">Ernakulam (1.35)</option>
+                        <option value="1.36">Trichur (1.36)</option>
+                        <option value="1.36">Palakkad (1.36)</option>
+                        <option value="2.12">Kavaratti (2.12)</option>
+                        <option value="1.34">Kasaragod (1.34)</option>
+                        <option value="1.34">Kannur / Mahe (1.34)</option>
+                        <option value="1.33">Wayanad (1.33)</option>
+                        <option value="1.32" selected>Calicut (1.32)</option>
+                        <option value="1.31">Malappuram (1.31)</option>
+                        <option value="custom">Custom Location</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label>Cost Index Factor</label>
+                    <input type="number" id="valCostIndex" value="1.32" step="0.01" inputmode="decimal" oninput="handleValCostInput()">
+                </div>
+            </div>
+
+            <div class="form-row">
+                <div class="form-group">
+                    <label>Bldg Age (Yrs)</label>
+                    <input type="number" id="valAge" value="12" min="0" step="0.01" inputmode="numeric" oninput="calculateValuation()">
+                </div>
+                <div class="form-group">
+                    <label>Electrical &amp; Plumbing (%)</label>
+                    <input type="number" id="valEpPercent" value="7.5" step="0.01" inputmode="decimal" oninput="calculateValuation()">
+                </div>
+            </div>
+
+            <div class="form-row">
+                <div class="form-group">
+                    <label>Deduction (%)</label>
+                    <input type="number" id="valDeductionPercent" value="0" step="0.01" inputmode="decimal" oninput="calculateValuation()">
+                </div>
+                <div class="form-group">
+                    <label>Total Area (sq.ft)</label>
+                    <input type="number" id="valBuildingArea" value="1800" step="0.01" inputmode="numeric" oninput="calculateValuation()">
+                </div>
+            </div>
+        </div>
+
+        <div class="panel">
+            <div class="section-title">Valuation Results</div>
+            
+            <div class="total-box">
+                <div class="total-title">Total Building Valuation</div>
+                <div class="total-amount" id="valTotalValuation">Rs. 0.00</div>
+            </div>
+
+            <div class="val-result-group">
+                <div class="val-result-item highlight">
+                    <span>Building / Owner:</span>
+                    <span class="val-value" id="valResultBldgNo">-</span>
+                </div>
+                <div class="val-result-item">
+                    <span>Structure Type:</span>
+                    <span class="val-value" id="valResultType">-</span>
+                </div>
+                <div class="val-result-item">
+                    <span>Location &amp; Cost Index:</span>
+                    <span class="val-value" id="valResultLocation">-</span>
+                </div>
+                <div class="val-result-item">
+                    <span>Gross Area (sq.ft / sq.m):</span>
+                    <span class="val-value" id="valAreaDisplay">0.00 sq.ft / 0.00 sq.m</span>
+                </div>
+                <div class="val-result-item">
+                    <span>Effective Base Rate (CPWD):</span>
+                    <span class="val-value" id="valBaseRateDisplay">Rs. 0.00/sq.m</span>
+                </div>
+                <div class="val-result-item">
+                    <span>Unindexed Base Replacement Cost:</span>
+                    <span class="val-value" id="valBaseCostDisplay">Rs. 0.00</span>
+                </div>
+                <div class="val-result-item">
+                    <span>Cost Incl. Electrical &amp; Plumbing:</span>
+                    <span class="val-value" id="valEpCostDisplay">Rs. 0.00</span>
+                </div>
+                <div class="val-result-item">
+                    <span>Replacement Cost (Post-Deduction):</span>
+                    <span class="val-value" id="valDeductedCostDisplay">Rs. 0.00</span>
+                </div>
+
+                <!-- DETAILED DEPRECIATION SECTION WITH EQUATION DISPLAY -->
+                <div class="val-result-item sub-header">
+                    <span>Detailed Depreciation Breakdown</span>
+                </div>
+
+                <!-- EQUATION DISPLAY CARD -->
+                <div class="formula-card">
+                    <div class="formula-header">📐 Depreciation Formula</div>
+                    <div class="formula-box">
+                        D = Replacement Cost &times; 0.95 &times; (Age / Life)
+                    </div>
+                    <div class="formula-step" id="valFormulaExpansion">
+                        D = Rs. 0.00 &times; 0.95 &times; (12.00 / 55.00) = Rs. 0.00
+                    </div>
+                </div>
+
+                <div class="val-result-item">
+                    <span>Structural Design Life:</span>
+                    <span class="val-value" id="valDepDesignLife">0.00 Yrs</span>
+                </div>
+                <div class="val-result-item">
+                    <span>Current Building Age:</span>
+                    <span class="val-value" id="valDepAge">0.00 Yrs</span>
+                </div>
+                <div class="val-result-item">
+                    <span>Calculated Depreciation Rate:</span>
+                    <span class="val-value" id="valDepRatePercent">0.00%</span>
+                </div>
+                <div class="val-result-item">
+                    <span>Accumulated Depreciation Amount (D):</span>
+                    <span class="val-value" id="valDepreciationTotal">Rs. 0.00</span>
+                </div>
+                <div class="val-result-item">
+                    <span>Unindexed Depreciated Value:</span>
+                    <span class="val-value" id="valUnindexedDepValDisplay">Rs. 0.00</span>
+                </div>
+                <div class="val-result-item">
+                    <span>Cost Index Multiplier:</span>
+                    <span class="val-value" id="valIndexedCostDisplay">x 1.00</span>
+                </div>
+
+                <div class="val-result-item final">
+                    <span>Final Valued Rate (per sq.ft):</span>
+                    <span class="val-value" id="valFinalRateSqft">Rs. 0.00</span>
+                </div>
+
+                <div class="val-result-item final" style="display:block;">
+                    <span style="display:block; margin-bottom:6px;">Final Amount in Words:</span>
+                    <span class="val-value" id="valAmountInWords" style="display:block; text-align:left; line-height:1.4;">Rupees Zero Only</span>
+                </div>
+
+                <div class="salvage-badge" id="valSalvageNotice">
+                    ⚠️ Building age exceeds or equals structural design life. Maximum 95.00% depreciation applied (5.00% Salvage Value retained).
+                </div>
+            </div>
+
+            <div class="portal-tag">Generated by Makkari Constructions and Developers Web portal</div>
+
+            <button class="download-btn" onclick="downloadValuationPDF()">
+                <span>📄</span> Download Valuation Certificate Report PDF
+            </button>
+        </div>
+    </div>
+</div>
+
+<script>
+    /* PASSCODE VERIFICATION */
+    function verifyPasscode() {
+        const input = document.getElementById('passcodeInput').value;
+        const errorEl = document.getElementById('authError');
+        
+        if (input === '2613') {
+            document.getElementById('authOverlay').style.display = 'none';
+        } else {
+            errorEl.style.display = 'block';
+            document.getElementById('passcodeInput').value = '';
+        }
+    }
+
+    function handleKeyAuth(e) {
+        if (e.key === 'Enter') {
+            verifyPasscode();
+        }
+    }
+
+    /* APP NAVIGATION */
+    function navigate(viewId) {
+        document.querySelectorAll('.app-view').forEach(view => {
+            view.classList.remove('active');
+        });
+        
+        document.getElementById(viewId).classList.add('active');
+        window.scrollTo(0, 0);
+
+        if(viewId === 'viewEstimator') calculateEstimator();
+        if(viewId === 'viewValuation') calculateValuation();
+    }
+
+    /* HELPER FUNCTIONS */
+    function formatINR(val) {
+        if (isNaN(val)) return "Rs. 0.00";
+        return "Rs. " + Number(val).toLocaleString('en-IN', {
+            minimumFractionDigits: 2,
+            maximumFractionDigits: 2
+        });
+    }
+
+    function numberToWordsIndian(num) {
+        num = Math.round(Number(num) || 0);
+        if (num === 0) return "Rupees Zero Only";
+
+        const ones = ["", "One", "Two", "Three", "Four", "Five", "Six", "Seven", "Eight", "Nine",
+            "Ten", "Eleven", "Twelve", "Thirteen", "Fourteen", "Fifteen", "Sixteen",
+            "Seventeen", "Eighteen", "Nineteen"];
+        const tens = ["", "", "Twenty", "Thirty", "Forty", "Fifty", "Sixty", "Seventy", "Eighty", "Ninety"];
+
+        function twoDigits(n) {
+            if (n < 20) return ones[n];
+            return tens[Math.floor(n / 10)] + (n % 10 ? " " + ones[n % 10] : "");
+        }
+
+        function underThousand(n) {
+            let result = "";
+            if (n >= 100) {
+                result += ones[Math.floor(n / 100)] + " Hundred";
+                n %= 100;
+                if (n) result += " ";
+            }
+            if (n) result += twoDigits(n);
+            return result;
+        }
+
+        const parts = [];
+        const crore = Math.floor(num / 10000000);
+        num %= 10000000;
+        const lakh = Math.floor(num / 100000);
+        num %= 100000;
+        const thousand = Math.floor(num / 1000);
+        num %= 1000;
+
+        if (crore) parts.push(underThousand(crore) + " Crore");
+        if (lakh) parts.push(underThousand(lakh) + " Lakh");
+        if (thousand) parts.push(underThousand(thousand) + " Thousand");
+        if (num) parts.push(underThousand(num));
+
+        return "Rupees " + parts.join(" ") + " Only";
+    }
+
+    /* ESTIMATOR LOGIC */
+    function showTab(tabId, btn) {
+        document.querySelectorAll('.tab-content').forEach(t => t.classList.remove('active'));
+        document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+        document.getElementById(tabId).classList.add('active');
+        btn.classList.add('active');
+    }
+
+    function calculateEstimator() {
+        const gfArea = parseFloat(document.getElementById('gfArea').value) || 0;
+        const ffArea = parseFloat(document.getElementById('ffArea').value) || 0;
+        const totalSqft = gfArea + ffArea;
+
+        const gradeRate = parseFloat(document.getElementById('gradeSelect').value) || 0;
+        const roofRate = parseFloat(document.getElementById('roofSelect').value) || 0;
+        const foundationPct = parseFloat(document.getElementById('foundationSelect').value) || 0;
+
+        const baseCost = totalSqft * gradeRate;
+        const roofCost = totalSqft * roofRate;
+        const foundationCost = baseCost * foundationPct;
+
+        const wallFt = parseFloat(document.getElementById('wallFt').value) || 0;
+        const pavingFt = parseFloat(document.getElementById('pavingFt').value) || 0;
+        const exteriorCost = (wallFt * 1200) + (pavingFt * 80);
+
+        let addonsCost = 0;
+        if (document.getElementById('chkWell').checked) addonsCost += 85000;
+        if (document.getElementById('chkGate').checked) addonsCost += 65000;
+        if (document.getElementById('chkSeptic').checked) addonsCost += 55000;
+        if (document.getElementById('chkKitchen').checked) addonsCost += 150000;
+
+        const grandTotal = baseCost + roofCost + foundationCost + exteriorCost + addonsCost;
+        const avgRate = totalSqft > 0 ? (grandTotal / totalSqft) : 0;
+
+        document.getElementById('totalAmountDisplay').innerText = formatINR(grandTotal);
+        document.getElementById('avgRateDisplay').innerText = `Rate: ${formatINR(avgRate)} / sq.ft`;
+
+        document.getElementById('rowBase').innerText = formatINR(baseCost);
+        document.getElementById('rowRoof').innerText = formatINR(roofCost);
+        document.getElementById('rowFoundation').innerText = formatINR(foundationCost);
+        document.getElementById('rowExterior').innerText = formatINR(exteriorCost);
+        document.getElementById('rowAddons').innerText = formatINR(addonsCost);
+
+        document.getElementById('pStage1').innerText = formatINR(grandTotal * 0.20);
+        document.getElementById('pStage2').innerText = formatINR(grandTotal * 0.35);
+        document.getElementById('pStage3').innerText = formatINR(grandTotal * 0.15);
+        document.getElementById('pStage4').innerText = formatINR(grandTotal * 0.20);
+        document.getElementById('pStage5').innerText = formatINR(grandTotal * 0.10);
+
+        document.getElementById('matCement').innerText = `${(totalSqft * 0.4).toFixed(2)} Bags`;
+        document.getElementById('matSteel').innerText = `${(totalSqft * 0.0018).toFixed(2)} Tons`;
+        document.getElementById('matSand').innerText = `${(totalSqft * 1.8).toFixed(2)} Cu. Ft.`;
+        document.getElementById('matTiles').innerText = `${(totalSqft * 0.7).toFixed(2)} Sq. Ft.`;
+    }
+
+    /* VALUATION LOGIC */
+    function handleStructureChange() {
+        const select = document.getElementById('valStructureFactor');
+        const opt = select.options[select.selectedIndex];
+        let rate = parseFloat(opt.getAttribute('data-rate')) || 20750;
+        if (opt.getAttribute('data-deduct')) {
+            rate -= parseFloat(opt.getAttribute('data-deduct'));
+        }
+        document.getElementById('valBaseRate').value = rate.toFixed(2);
+        calculateValuation();
+    }
+
+    function handleValLocationChange() {
+        const select = document.getElementById('valLocationSelect');
+        if (select.value !== 'custom') {
+            document.getElementById('valCostIndex').value = parseFloat(select.value).toFixed(2);
+        }
+        calculateValuation();
+    }
+
+    function handleValCostInput() {
+        document.getElementById('valLocationSelect').value = 'custom';
+        calculateValuation();
+    }
+
+    function calculateValuation() {
+        const bldgNo = document.getElementById('valBldgNo').value || "N/A";
+        const ownerName = document.getElementById('valOwnerName').value || "N/A";
+        
+        const structSelect = document.getElementById('valStructureFactor');
+        const lifeOfBuilding = parseFloat(structSelect.value) || 55;
+        const structText = structSelect.options[structSelect.selectedIndex].text.split('(')[0].trim();
+
+        const areaSqft = parseFloat(document.getElementById('valBuildingArea').value) || 0;
+        const areaSqm = Math.round((areaSqft / 10.76) * 100) / 100;
+
+        const baseRate = parseFloat(document.getElementById('valBaseRate').value) || 0;
+        const baseCost = areaSqm * baseRate;
+
+        const epPercent = parseFloat(document.getElementById('valEpPercent').value) || 0;
+        const epCost = baseCost * (1 + epPercent / 100);
+
+        const deductPercent = parseFloat(document.getElementById('valDeductionPercent').value) || 0;
+        const totalReplacementCost = epCost * (1 - deductPercent / 100);
+
+        const ageOfBuilding = parseFloat(document.getElementById('valAge').value) || 0;
+        
+        let isSalvage = false;
+        let depreciationAmount = 0;
+        let depRatePercent = 0;
+        let ratio = 0;
+
+        if (lifeOfBuilding > 0) {
+            ratio = ageOfBuilding / lifeOfBuilding;
+            if (ratio >= 1.0) {
+                ratio = 1.0;
+                isSalvage = true;
+            }
+            depreciationAmount = totalReplacementCost * 0.95 * ratio;
+            depRatePercent = 0.95 * ratio * 100;
+        }
+
+        const unindexedDepValue = totalReplacementCost - depreciationAmount;
+
+        const costIndex = parseFloat(document.getElementById('valCostIndex').value) || 1.0;
+        const finalValuation = unindexedDepValue * costIndex;
+
+        const finalRateSqft = areaSqft > 0 ? (finalValuation / areaSqft) : 0;
+
+        const locSelect = document.getElementById('valLocationSelect');
+        const locName = locSelect.options[locSelect.selectedIndex].text.split('(')[0].trim();
+
+        // UI Updates strictly formatted to 2 decimal places
+        document.getElementById('valTotalValuation').innerText = formatINR(finalValuation);
+        document.getElementById('valResultBldgNo').innerText = `${bldgNo} / ${ownerName}`;
+        document.getElementById('valResultType').innerText = structText;
+        document.getElementById('valResultLocation').innerText = `${locName} (CI: ${costIndex.toFixed(2)})`;
+        document.getElementById('valAreaDisplay').innerText = `${areaSqft.toFixed(2)} sq.ft / ${areaSqm.toFixed(2)} sq.m`;
+        
+        document.getElementById('valBaseRateDisplay').innerText = `Rs. ${baseRate.toFixed(2)}/sq.m`;
+        document.getElementById('valBaseCostDisplay').innerText = formatINR(baseCost);
+        document.getElementById('valEpCostDisplay').innerText = formatINR(epCost);
+        document.getElementById('valDeductedCostDisplay').innerText = formatINR(totalReplacementCost);
+
+        // Update Equation Dynamic Expansion
+        document.getElementById('valFormulaExpansion').innerText = 
+            `D = ${formatINR(totalReplacementCost)} × 0.95 × (${ageOfBuilding.toFixed(2)} / ${lifeOfBuilding.toFixed(2)}) = ${formatINR(depreciationAmount)}`;
+
+        document.getElementById('valDepDesignLife').innerText = `${lifeOfBuilding.toFixed(2)} Yrs`;
+        document.getElementById('valDepAge').innerText = `${ageOfBuilding.toFixed(2)} Yrs`;
+        document.getElementById('valDepRatePercent').innerText = `${depRatePercent.toFixed(2)}%`;
+        document.getElementById('valDepreciationTotal').innerText = formatINR(depreciationAmount);
+        document.getElementById('valUnindexedDepValDisplay').innerText = formatINR(unindexedDepValue);
+        document.getElementById('valIndexedCostDisplay').innerText = `x ${costIndex.toFixed(2)}`;
+
+        document.getElementById('valFinalRateSqft').innerText = `${formatINR(finalRateSqft)} / sq.ft`;
+        document.getElementById('valAmountInWords').innerText = numberToWordsIndian(finalValuation);
+
+        const notice = document.getElementById('valSalvageNotice');
+        if (notice) notice.style.display = isSalvage ? 'block' : 'none';
+    }
+
+    /* PDF EXPORT - ESTIMATOR */
+    function downloadEstimatorPDF() {
+        const { jsPDF } = window.jspdf;
+        const doc = new jsPDF();
+        
+        doc.setFontSize(16);
+        doc.setTextColor(21, 47, 78);
+        doc.text("Makkari Constructions & Developers", 14, 20);
+        doc.setFontSize(12);
+        doc.text("Plinth Area Estimation Report", 14, 28);
+
+        const client = document.getElementById('estClientName').value || "N/A";
+        const location = document.getElementById('estSiteLoc').value || "N/A";
+        const total = document.getElementById('totalAmountDisplay').innerText;
+
+        doc.setFontSize(10);
+        doc.setTextColor(100);
+        doc.text(`Client: ${client} | Location: ${location}`, 14, 36);
+        doc.text(`Total Estimate: ${total}`, 14, 42);
+
+        doc.autoTable({
+            startY: 50,
+            head: [['Cost Breakdown Item', 'Amount']],
+            body: [
+                ['Plinth Structure', document.getElementById('rowBase').innerText],
+                ['Roof Add-on', document.getElementById('rowRoof').innerText],
+                ['Foundation Extra', document.getElementById('rowFoundation').innerText],
+                ['Exterior Work', document.getElementById('rowExterior').innerText],
+                ['Custom Add-ons', document.getElementById('rowAddons').innerText],
+            ],
+            headStyles: { fillColor: [21, 47, 78] }
+        });
+
+        const finalY = doc.lastAutoTable.finalY + 15;
+        doc.setFontSize(9);
+        doc.setTextColor(120);
+        doc.text("Generated by Makkari Constructions and Developers Web portal", 14, finalY);
+
+        doc.save("Estimation_Report.pdf");
+    }
+
+    /* PDF EXPORT - VALUATION */
+    function downloadValuationPDF() {
+        const { jsPDF } = window.jspdf;
+        const doc = new jsPDF();
+
+        doc.setFontSize(16);
+        doc.setTextColor(21, 47, 78);
+        doc.text("Makkari Constructions & Developers", 14, 20);
+        doc.setFontSize(12);
+        doc.text("CPWD Building Valuation Certificate", 14, 28);
+
+        doc.autoTable({
+            startY: 36,
+            head: [['Valuation Parameter', 'Calculated Value']],
+            body: [
+                ['Building / Owner', document.getElementById('valResultBldgNo').innerText],
+                ['Structure Type', document.getElementById('valResultType').innerText],
+                ['Location & Cost Index', document.getElementById('valResultLocation').innerText],
+                ['Gross Area', document.getElementById('valAreaDisplay').innerText],
+                ['Effective Base Rate', document.getElementById('valBaseRateDisplay').innerText],
+                ['Base Replacement Cost', document.getElementById('valBaseCostDisplay').innerText],
+                ['Cost Incl. E&P', document.getElementById('valEpCostDisplay').innerText],
+                ['Net Replacement Cost', document.getElementById('valDeductedCostDisplay').innerText],
+                ['Depreciation Formula', 'D = Replacement Cost x 0.95 x (Age / Life)'],
+                ['Formula Calculation Step', document.getElementById('valFormulaExpansion').innerText],
+                ['Design Life / Age', `${document.getElementById('valDepDesignLife').innerText} / ${document.getElementById('valDepAge').innerText}`],
+                ['Depreciation Rate (%)', document.getElementById('valDepRatePercent').innerText],
+                ['Total Depreciation Amount (D)', document.getElementById('valDepreciationTotal').innerText],
+                ['Unindexed Depreciated Value', document.getElementById('valUnindexedDepValDisplay').innerText],
+                ['Cost Index Multiplier', document.getElementById('valIndexedCostDisplay').innerText],
+                ['Final Valued Rate', document.getElementById('valFinalRateSqft').innerText],
+                ['Total Valuation', document.getElementById('valTotalValuation').innerText],
+            ],
+            headStyles: { fillColor: [21, 47, 78] }
+        });
+
+        const finalY = doc.lastAutoTable.finalY + 10;
+        doc.setFontSize(10);
+        doc.setTextColor(21, 47, 78);
+        doc.text(`Amount in Words: ${document.getElementById('valAmountInWords').innerText}`, 14, finalY);
+
+        doc.setFontSize(9);
+        doc.setTextColor(120);
+        doc.text("Generated by Makkari Constructions and Developers Web portal", 14, finalY + 10);
+
+        doc.save("CPWD_Valuation_Certificate.pdf");
+    }
+
+    // Initial load calculation
+    window.onload = function() {
+        calculateEstimator();
+        calculateValuation();
+    };
+</script>
+</body>
+</html>

@@ -1,0 +1,2671 @@
+<!-- Top Navigation Bar Container -->
+<div class="glass-header-wrapper">
+  <div class="glass-nav-container">
+    <a href="Estimator.html" class="glass-btn btn-prev">
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m15 18-6-6 6-6"/></svg>
+      Previous
+    </a>
+    <a href="index.html" class="glass-btn btn-home">
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m3 9 9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+      Home
+    </a>
+  </div>
+</div>
+
+<!-- Place all your page content below this wrapper -->
+<main class="page-content">
+  <!-- Your main HTML content goes here -->
+</main>
+
+<style>
+  .glass-header-wrapper {
+    position: sticky;
+    top: 0;
+    z-index: 9999;
+    width: 100%;
+    display: flex;
+    justify-content: flex-end;
+    padding: 16px;
+    box-sizing: border-box;
+    pointer-events: none; /* Allows clicking background elements outside the buttons */
+  }
+
+  .glass-nav-container {
+    pointer-events: auto; /* Restores button clickability */
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 6px;
+    background: rgba(249, 249, 249, 0.45);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border: 1px solid rgba(255, 255, 255, 0.6);
+    border-radius: 12px;
+    box-shadow: 0 8px 32px 0 rgba(21, 47, 78, 0.12);
+  }
+
+  .glass-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 6px 12px;
+    font-family: system-ui, -apple-system, sans-serif;
+    font-size: 13px;
+    font-weight: 500;
+    text-decoration: none;
+    border-radius: 8px;
+    backdrop-filter: blur(6px);
+    -webkit-backdrop-filter: blur(6px);
+    border: 1px solid rgba(255, 255, 255, 0.4);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+  }
+
+  /* Previous Button */
+  .btn-prev {
+    background: rgba(21, 47, 78, 0.08);
+    color: #152f4e;
+  }
+
+  .btn-prev:hover {
+    background: rgba(21, 47, 78, 0.16);
+    border-color: rgba(21, 47, 78, 0.2);
+  }
+
+  /* Home Button */
+  .btn-home {
+    background: rgba(229, 35, 48, 0.85);
+    color: #ffffff;
+    border-color: rgba(255, 255, 255, 0.3);
+  }
+
+  .btn-home:hover {
+    background: rgba(229, 35, 48, 0.95);
+    box-shadow: 0 4px 12px rgba(229, 35, 48, 0.3);
+  }
+
+  .page-content {
+    position: relative;
+    z-index: 1;
+  }
+</style>
+
+<!--------------------------------->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Stage Completion & Technical Valuation Certificate</title>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Archivo:wght@500;600;700;800&display=swap" rel="stylesheet">
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
+
+<style>
+
+/* =========================================================
+   GLOBAL
+========================================================= */
+
+* {
+    box-sizing: border-box;
+}
+
+html,
+body {
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    background: #e8edf3;
+    color: #172033;
+    font-family: 'Inter', Arial, sans-serif;
+    font-size: 9pt;
+    line-height: 1.4;
+}
+
+button,
+input,
+textarea,
+select {
+    font-family: inherit;
+}
+
+/* =========================================================
+   LOCK SCREEN
+========================================================= */
+
+#lockScreen {
+    position: fixed;
+    inset: 0;
+    z-index: 99999;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    background: rgba(10, 22, 38, 0.96);
+    backdrop-filter: blur(10px);
+}
+
+.lock-box {
+    width: 380px;
+    max-width: calc(100% - 30px);
+
+    padding: 38px 34px;
+
+    background: #fff;
+    border-radius: 12px;
+
+    box-shadow: 0 30px 70px rgba(0,0,0,.30);
+
+    text-align: center;
+}
+
+.lock-icon {
+    width: 54px;
+    height: 54px;
+
+    margin: 0 auto 16px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    border-radius: 50%;
+
+    background: #eef2f7;
+    color: #152f4e;
+}
+
+.lock-box h2 {
+    margin: 0 0 6px;
+
+    font-family: 'Archivo', sans-serif;
+    font-size: 17pt;
+    color: #152f4e;
+}
+
+.lock-box p {
+    margin: 0 0 20px;
+
+    color: #64748b;
+    font-size: 8.5pt;
+}
+
+.lock-box input {
+    width: 100%;
+
+    padding: 12px;
+
+    border: 1px solid #cbd5e1;
+    border-radius: 6px;
+
+    text-align: center;
+    letter-spacing: 5px;
+    font-size: 12pt;
+
+    outline: none;
+}
+
+.lock-box input:focus {
+    border-color: #152f4e;
+    box-shadow: 0 0 0 3px rgba(21,47,78,.10);
+}
+
+.btn-unlock {
+    width: 100%;
+
+    margin-top: 14px;
+
+    padding: 12px;
+
+    border: 0;
+    border-radius: 6px;
+
+    background: #152f4e;
+    color: #fff;
+
+    font-size: 9pt;
+    font-weight: 700;
+
+    cursor: pointer;
+}
+
+.error-msg {
+    display: none;
+
+    margin-top: 10px;
+
+    color: #dc2626;
+    font-size: 8pt;
+    font-weight: 600;
+}
+
+/* =========================================================
+   TOP TOOLBAR
+========================================================= */
+
+.toolbar {
+    position: fixed;
+    top: 80px;
+    right: 20px;
+    z-index: 5000;
+
+    display: flex;
+    align-items: center;
+    gap: 8px;
+
+    padding: 8px 10px;
+
+    background: #fff;
+
+    border: 1px solid #d6dde7;
+    border-radius: 8px;
+
+    box-shadow: 0 8px 25px rgba(15,23,42,.10);
+}
+
+.status {
+    padding: 5px 9px;
+
+    background: #eef6f1;
+    color: #16734a;
+
+    border: 1px solid #c7e6d4;
+    border-radius: 4px;
+
+    font-size: 7pt;
+    font-weight: 700;
+
+    text-transform: uppercase;
+}
+
+.toolbar button {
+    padding: 7px 12px;
+
+    border-radius: 5px;
+
+    font-size: 8pt;
+    font-weight: 700;
+
+    cursor: pointer;
+}
+
+.btn-lock {
+    background: #f1f5f9;
+    border: 1px solid #cbd5e1;
+    color: #475569;
+}
+
+.btn-generate {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+
+    background: #152f4e;
+    border: 1px solid #152f4e;
+
+    color: #fff;
+}
+
+.btn-generate:hover {
+    background: #0e243d;
+}
+
+.btn-generate:disabled {
+    opacity: .6;
+    cursor: wait;
+}
+
+/* =========================================================
+   A4 PAGE
+========================================================= */
+
+.page-wrapper {
+    width: 210mm;
+    min-height: 297mm;
+
+    margin: 30px auto;
+
+    background: #fff;
+
+    box-shadow: 0 10px 35px rgba(15,23,42,.12);
+}
+
+.certificate {
+    width: 210mm;
+    min-height: 297mm;
+
+    padding: 13mm 13mm 14mm;
+
+    background: #fff;
+
+    position: relative;
+}
+
+/* =========================================================
+   HEADER
+========================================================= */
+
+.header {
+    border-bottom: 2px solid #152f4e;
+
+    padding-bottom: 8px;
+    margin-bottom: 10px;
+
+    position: relative;
+}
+
+.header-top {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 20px;
+}
+
+.company-block {
+    flex: 1;
+}
+
+.company-name {
+    margin: 0;
+
+    color: #152f4e;
+
+    font-family: 'Archivo', sans-serif;
+    font-size: 18pt;
+    font-weight: 800;
+
+    letter-spacing: .2px;
+
+    text-transform: uppercase;
+}
+
+.company-subtitle {
+    margin-top: 3px;
+
+    color: #64748b;
+
+    font-size: 7.5pt;
+    font-weight: 600;
+
+    letter-spacing: .8px;
+
+    text-transform: uppercase;
+}
+
+.document-code {
+    min-width: 145px;
+
+    text-align: right;
+}
+
+.document-code-label {
+    color: #64748b;
+
+    font-size: 6.5pt;
+    font-weight: 700;
+
+    text-transform: uppercase;
+}
+
+.document-code input {
+    width: 145px;
+
+    margin-top: 3px;
+
+    padding: 4px 6px;
+
+    border: 0;
+    border-bottom: 1px solid #94a3b8;
+
+    text-align: right;
+
+    font-size: 8pt;
+    font-weight: 700;
+
+    outline: none;
+}
+
+.document-title {
+    margin-top: 8px;
+
+    color: #152f4e;
+
+    font-family: 'Archivo', sans-serif;
+    font-size: 11pt;
+    font-weight: 700;
+
+    text-transform: uppercase;
+    letter-spacing: .8px;
+}
+
+/* =========================================================
+   NOTICE
+========================================================= */
+
+.notice {
+    margin-bottom: 10px;
+
+    padding: 7px 10px;
+
+    background: #f3f6f9;
+
+    border-left: 3px solid #e63946;
+    border-top: 1px solid #dce3eb;
+    border-right: 1px solid #dce3eb;
+    border-bottom: 1px solid #dce3eb;
+
+    color: #334155;
+
+    font-size: 7.5pt;
+    font-weight: 600;
+
+    text-transform: uppercase;
+}
+
+/* =========================================================
+   SECTION HEADINGS
+========================================================= */
+
+.section {
+    margin-top: 11px;
+
+    page-break-inside: avoid;
+    break-inside: avoid;
+}
+
+.section-heading {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+
+    margin-bottom: 6px;
+
+    color: #152f4e;
+
+    font-family: 'Archivo', sans-serif;
+    font-size: 8.5pt;
+    font-weight: 700;
+
+    text-transform: uppercase;
+    letter-spacing: .6px;
+}
+
+.section-heading::before {
+    content: "";
+
+    width: 4px;
+    height: 14px;
+
+    background: #e63946;
+
+    flex: 0 0 auto;
+}
+
+/* =========================================================
+   INFORMATION GRID
+========================================================= */
+
+.info-grid {
+    display: grid;
+
+    grid-template-columns: 1.7fr 1fr;
+
+    border-top: 1px solid #cbd5e1;
+    border-left: 1px solid #cbd5e1;
+}
+
+.field {
+    min-height: 43px;
+
+    padding: 6px 8px;
+
+    border-right: 1px solid #cbd5e1;
+    border-bottom: 1px solid #cbd5e1;
+}
+
+.field-label {
+    display: block;
+
+    margin-bottom: 3px;
+
+    color: #64748b;
+
+    font-size: 6.5pt;
+    font-weight: 700;
+
+    text-transform: uppercase;
+    letter-spacing: .45px;
+}
+
+.field input,
+.field select {
+    width: 100%;
+
+    padding: 2px 0;
+
+    border: 0;
+
+    background: transparent;
+
+    color: #172033;
+
+    font-size: 8.5pt;
+    font-weight: 600;
+
+    outline: none;
+}
+
+.field input::placeholder {
+    color: #a1acb9;
+    font-weight: 400;
+}
+
+/* =========================================================
+   FINANCIAL SUMMARY
+========================================================= */
+
+.financial-box {
+    border: 1px solid #b9c5d2;
+
+    background: #f8fafc;
+
+    page-break-inside: avoid;
+    break-inside: avoid;
+}
+
+.financial-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+}
+
+.financial-item {
+    min-height: 67px;
+
+    padding: 9px 10px;
+
+    border-right: 1px solid #cbd5e1;
+}
+
+.financial-item:last-child {
+    border-right: 0;
+}
+
+.financial-label {
+    display: block;
+
+    margin-bottom: 6px;
+
+    color: #64748b;
+
+    font-size: 6.7pt;
+    font-weight: 700;
+
+    text-transform: uppercase;
+}
+
+.financial-item input {
+    width: 100%;
+
+    padding: 0;
+
+    border: 0;
+
+    background: transparent;
+
+    color: #152f4e;
+
+    font-family: 'Archivo', sans-serif;
+    font-size: 12pt;
+    font-weight: 700;
+
+    outline: none;
+}
+
+.recommended {
+    background: #eef8f2;
+}
+
+.recommended input {
+    color: #087443;
+}
+
+.financial-note {
+    padding: 6px 9px;
+
+    border-top: 1px solid #cbd5e1;
+
+    color: #475569;
+
+    font-size: 7pt;
+    font-weight: 500;
+}
+
+.financial-note strong {
+    color: #152f4e;
+}
+
+/* =========================================================
+   VALUATION TABLE
+========================================================= */
+
+.valuation-table {
+    width: 100%;
+
+    border-collapse: collapse;
+
+    table-layout: fixed;
+
+    border: 1px solid #aeb9c6;
+
+    page-break-inside: auto;
+}
+
+.valuation-table thead {
+    display: table-header-group;
+}
+
+.valuation-table th {
+    padding: 7px 6px;
+
+    background: #152f4e;
+    color: #fff;
+
+    border: 1px solid #152f4e;
+
+    font-size: 6.8pt;
+    font-weight: 700;
+
+    text-align: left;
+
+    text-transform: uppercase;
+    letter-spacing: .3px;
+}
+
+.valuation-table td {
+    padding: 5px 5px;
+
+    border: 1px solid #cbd5e1;
+
+    background: #fff;
+
+    vertical-align: middle;
+
+    font-size: 7.8pt;
+
+    page-break-inside: avoid;
+    break-inside: avoid;
+}
+
+.valuation-table input {
+    width: 100%;
+
+    padding: 2px 3px;
+
+    border: 0;
+
+    background: transparent;
+
+    color: #172033;
+
+    font-size: 7.8pt;
+
+    outline: none;
+}
+
+.col-stage {
+    width: 31%;
+}
+
+.col-status {
+    width: 14%;
+}
+
+.col-value {
+    width: 21%;
+}
+
+.col-remarks {
+    width: 29%;
+}
+
+.col-action {
+    width: 5%;
+}
+
+.table-footer td {
+    background: #f1f5f9;
+
+    font-weight: 700;
+}
+
+.table-footer .total {
+    color: #152f4e;
+    font-size: 8.5pt;
+}
+
+.table-footer .extra {
+    color: #475569;
+    font-size: 7pt;
+}
+
+.add-stage {
+    margin-bottom: 6px;
+
+    text-align: right;
+}
+
+.btn-add {
+    padding: 5px 10px;
+
+    border: 1px solid #152f4e;
+    border-radius: 4px;
+
+    background: #152f4e;
+    color: #fff;
+
+    font-size: 7pt;
+    font-weight: 700;
+
+    cursor: pointer;
+}
+
+.btn-delete {
+    width: 20px;
+    height: 20px;
+
+    padding: 0;
+
+    border: 1px solid #fca5a5;
+    border-radius: 3px;
+
+    background: #fff1f2;
+    color: #dc2626;
+
+    cursor: pointer;
+}
+
+/* =========================================================
+   PHOTO SECTION
+========================================================= */
+
+.photo-toolbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    margin-bottom: 6px;
+}
+
+.aspect-control {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+
+    color: #64748b;
+
+    font-size: 7pt;
+    font-weight: 600;
+}
+
+.aspect-control select {
+    padding: 4px 7px;
+
+    border: 1px solid #cbd5e1;
+    border-radius: 4px;
+
+    background: #fff;
+
+    font-size: 7pt;
+}
+
+.photo-grid {
+    display: grid;
+
+    grid-template-columns: 1fr 1fr;
+
+    gap: 9px;
+
+    page-break-inside: avoid;
+    break-inside: avoid;
+}
+
+.photo-card {
+    padding: 7px;
+
+    border: 1px solid #cbd5e1;
+
+    background: #f8fafc;
+
+    page-break-inside: avoid;
+    break-inside: avoid;
+}
+
+.photo-preview {
+    width: 100%;
+
+    aspect-ratio: 16 / 9;
+
+    overflow: hidden;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    background: #fff;
+
+    border: 1px solid #d5dce5;
+}
+
+.photo-preview.ratio-4-3 {
+    aspect-ratio: 4 / 3;
+}
+
+.photo-preview img {
+    width: 100%;
+    height: 100%;
+
+    object-fit: cover;
+}
+
+.photo-placeholder {
+    color: #94a3b8;
+
+    font-size: 7.5pt;
+    font-weight: 500;
+}
+
+.photo-upload {
+    width: 100%;
+
+    margin-top: 5px;
+
+    font-size: 7pt;
+}
+
+.photo-caption {
+    width: 100%;
+
+    margin-top: 5px;
+
+    padding: 5px 6px;
+
+    border: 1px solid #cbd5e1;
+    border-radius: 3px;
+
+    background: #fff;
+
+    font-size: 7.5pt;
+
+    outline: none;
+}
+
+/* =========================================================
+   REMARKS
+========================================================= */
+
+.remarks-box {
+    border: 1px solid #cbd5e1;
+
+    page-break-inside: avoid;
+    break-inside: avoid;
+}
+
+.remarks-box textarea {
+    width: 100%;
+
+    min-height: 67px;
+
+    padding: 8px;
+
+    border: 0;
+
+    resize: vertical;
+
+    font-size: 8pt;
+    line-height: 1.5;
+
+    outline: none;
+}
+
+/* =========================================================
+   CERTIFICATION
+========================================================= */
+
+.certification {
+    padding: 9px 11px;
+
+    border: 1px solid #b9c5d2;
+    border-left: 4px solid #152f4e;
+
+    background: #f8fafc;
+
+    color: #334155;
+
+    font-size: 7.5pt;
+    line-height: 1.55;
+
+    page-break-inside: avoid;
+    break-inside: avoid;
+}
+
+.certification strong {
+    color: #152f4e;
+}
+
+/* =========================================================
+   SIGNATURE SECTION
+   5 CM GAP BEFORE SIGNATURE LINE
+========================================================= */
+
+.signature-section {
+    margin-top: 12px;
+
+    page-break-inside: avoid;
+    break-inside: avoid;
+}
+
+.signature-table {
+    width: 100%;
+
+    border-collapse: collapse;
+}
+
+.signature-table td {
+    width: 50%;
+
+    padding: 0 18px;
+
+    vertical-align: bottom;
+}
+
+/*
+   EXACT 5 CM SIGNATURE GAP
+   This creates approximately 50 mm
+   of blank signing space before
+   the signature line.
+*/
+
+.signature-space {
+    height: 50mm;
+}
+
+.signature-line {
+    padding-top: 6px;
+
+    border-top: 1px solid #172033;
+
+    color: #172033;
+
+    font-size: 7.8pt;
+    font-weight: 700;
+
+    text-align: center;
+
+    text-transform: uppercase;
+}
+
+.signature-subtitle {
+    margin-top: 3px;
+
+    color: #64748b;
+
+    font-size: 6.8pt;
+
+    text-align: center;
+}
+
+/* =========================================================
+   FOOTER
+========================================================= */
+
+.document-footer {
+    margin-top: 10px;
+
+    padding-top: 6px;
+
+    border-top: 1px solid #cbd5e1;
+
+    display: flex;
+    justify-content: space-between;
+
+    color: #64748b;
+
+    font-size: 6.5pt;
+}
+
+/* =========================================================
+   PDF MODE
+========================================================= */
+
+.pdf-mode {
+    background: #fff !important;
+}
+
+.pdf-mode .page-wrapper {
+    width: 210mm;
+    min-height: 297mm;
+
+    margin: 0;
+
+    box-shadow: none;
+}
+
+.pdf-mode .certificate {
+    width: 210mm;
+    min-height: 297mm;
+}
+
+.pdf-hide {
+    display: none !important;
+}
+
+.pdf-mode input,
+.pdf-mode select,
+.pdf-mode textarea {
+    color: #172033 !important;
+}
+
+.pdf-mode .photo-upload {
+    display: none !important;
+}
+
+.pdf-mode .photo-preview {
+    border-color: #cbd5e1;
+}
+
+/* =========================================================
+   MOBILE
+========================================================= */
+
+@media screen and (max-width: 900px) {
+
+    .toolbar {
+        position: sticky;
+
+        top: 0;
+        right: auto;
+
+        width: 100%;
+
+        justify-content: center;
+
+        border-radius: 0;
+
+        margin-bottom: 10px;
+    }
+
+    .page-wrapper {
+        transform-origin: top center;
+        margin: 10px auto;
+    }
+
+}
+
+</style>
+</head>
+
+<body>
+
+<!-- =========================================================
+     PASSWORD
+========================================================= -->
+
+<div id="lockScreen">
+
+    <div class="lock-box">
+
+        <div class="lock-icon">
+
+            <svg width="25" height="25"
+                 viewBox="0 0 24 24"
+                 fill="none"
+                 stroke="currentColor"
+                 stroke-width="2">
+
+                <rect x="3" y="11"
+                      width="18"
+                      height="11"
+                      rx="2"></rect>
+
+                <path d="M7 11V7a5 5 0 0 1 10 0v4"></path>
+
+            </svg>
+
+        </div>
+
+        <h2>Protected Certificate</h2>
+
+        <p>
+            Enter the access code to edit the technical valuation certificate.
+        </p>
+
+        <input
+            id="passInput"
+            type="password"
+            maxlength="8"
+            placeholder="••••"
+            onkeydown="checkEnter(event)"
+        >
+
+        <button
+            class="btn-unlock"
+            onclick="verifyPassword()">
+            Access Certificate
+        </button>
+
+        <div
+            id="errorMsg"
+            class="error-msg">
+            Incorrect password. Please try again.
+        </div>
+
+    </div>
+
+</div>
+
+
+<!-- =========================================================
+     TOOLBAR
+========================================================= -->
+
+<div class="toolbar no-print">
+
+    <span class="status">
+        Editable Certificate
+    </span>
+
+    <button
+        class="btn-lock"
+        onclick="lockDocument()">
+        Lock
+    </button>
+
+    <button
+        class="btn-generate"
+        id="pdfButton"
+        onclick="generatePDF()">
+
+        <svg width="14" height="14"
+             viewBox="0 0 24 24"
+             fill="none"
+             stroke="currentColor"
+             stroke-width="2">
+
+            <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
+
+            <polyline points="7 10 12 15 17 10"></polyline>
+
+            <line x1="12" y1="15"
+                  x2="12" y2="3"></line>
+
+        </svg>
+
+        Generate PDF
+
+    </button>
+
+</div>
+
+
+<!-- =========================================================
+     A4 PAGE
+========================================================= -->
+
+<div class="page-wrapper">
+
+<div
+    class="certificate"
+    id="certificate">
+
+
+    <!-- =====================================================
+         HEADER
+    ====================================================== -->
+
+    <header class="header">
+
+        <div class="header-top">
+
+            <div class="company-block">
+
+                <div
+                    class="company-name"
+                    contenteditable="true">
+                    Makkari Constructions &amp; Developers
+                </div>
+
+                <div class="company-subtitle">
+                    Construction • Technical Inspection • Valuation
+                </div>
+
+            </div>
+
+
+            <div class="document-code">
+
+                <div class="document-code-label">
+                    Certificate Ref. No.
+                </div>
+
+                <input
+                    type="text"
+                    placeholder="Enter reference number">
+
+                <div
+                    class="document-code-label"
+                    style="margin-top:5px;">
+                    Date of Inspection
+                </div>
+
+                <input
+                    type="date"
+                    id="inspectionDate">
+
+            </div>
+
+        </div>
+
+
+        <div
+            class="document-title"
+            contenteditable="true">
+
+            Stage Completion &amp; Technical Valuation Certificate
+
+        </div>
+
+    </header>
+
+
+    <!-- =====================================================
+         NOTICE
+    ====================================================== -->
+
+    <div class="notice">
+
+        Official Technical Inspection &amp; Progress Valuation
+        for Bank Loan Disbursement
+
+    </div>
+
+
+    <!-- =====================================================
+         PROJECT INFORMATION
+    ====================================================== -->
+
+    <div class="section">
+
+        <div class="section-heading">
+            Project &amp; Borrower Information
+        </div>
+
+
+        <div class="info-grid">
+
+            <div class="field">
+
+                <span class="field-label">
+                    Borrower / Client Name
+                </span>
+
+                <input
+                    id="clientName"
+                    type="text"
+                    placeholder="Enter full name">
+
+            </div>
+
+
+            <div class="field">
+
+                <span class="field-label">
+                    Loan Account No.
+                </span>
+
+                <input
+                    type="text"
+                    placeholder="Enter loan account number">
+
+            </div>
+
+
+            <div class="field">
+
+                <span class="field-label">
+                    Financing Bank &amp; Branch
+                </span>
+
+                <input
+                    type="text"
+                    placeholder="Bank name and branch">
+
+            </div>
+
+
+            <div class="field">
+
+                <span class="field-label">
+                    Building Permit No.
+                </span>
+
+                <input
+                    type="text"
+                    placeholder="Permit number">
+
+            </div>
+
+
+            <div class="field">
+
+                <span class="field-label">
+                    Property / Site Address
+                </span>
+
+                <input
+                    type="text"
+                    placeholder="Complete construction site address">
+
+            </div>
+
+
+            <div class="field">
+
+                <span class="field-label">
+                    Permitted Plinth Area
+                </span>
+
+                <input
+                    type="text"
+                    placeholder="Sq.ft / Sq.m">
+
+            </div>
+
+
+            <div class="field">
+
+                <span class="field-label">
+                    Current Stage of Construction
+                </span>
+
+                <input
+                    type="text"
+                    placeholder="Current construction stage">
+
+            </div>
+
+
+            <div class="field">
+
+                <span class="field-label">
+                    Project Type
+                </span>
+
+                <select>
+
+                    <option value="">
+                        Select project type
+                    </option>
+
+                    <option>
+                        Residential
+                    </option>
+
+                    <option>
+                        Commercial
+                    </option>
+
+                    <option>
+                        Apartment
+                    </option>
+
+                    <option>
+                        Other
+                    </option>
+
+                </select>
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <!-- =====================================================
+         FINANCIAL SUMMARY
+    ====================================================== -->
+
+    <div class="section">
+
+        <div class="section-heading">
+            Financial Progress &amp; Recommended Disbursement
+        </div>
+
+
+        <div class="financial-box">
+
+            <div class="financial-grid">
+
+                <div class="financial-item">
+
+                    <span class="financial-label">
+                        Total Estimated Project Cost
+                    </span>
+
+                    <input
+                        type="number"
+                        id="totalEstCost"
+                        placeholder="₹ 0.00"
+                        oninput="calculateTotals()">
+
+                </div>
+
+
+                <div class="financial-item">
+
+                    <span class="financial-label">
+                        Total Valued Work Done
+                    </span>
+
+                    <input
+                        type="text"
+                        id="totalWorkDone"
+                        value="₹ 0.00"
+                        readonly>
+
+                </div>
+
+
+                <div class="financial-item recommended">
+
+                    <span class="financial-label">
+                        Recommended Disbursement
+                    </span>
+
+                    <input
+                        type="text"
+                        id="recDisbursement"
+                        value="₹ 0.00"
+                        readonly>
+
+                </div>
+
+            </div>
+
+
+            <div class="financial-note">
+
+                <strong>Calculation basis:</strong>
+                Recommended disbursement is calculated at
+                <strong>110% of total valued work done</strong>,
+                subject to the maximum limit of the
+                <strong>total estimated project cost</strong>.
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <!-- =====================================================
+         VALUATION
+    ====================================================== -->
+
+    <div class="section">
+
+        <div class="section-heading">
+            Itemized Stage Valuation
+        </div>
+
+
+        <div class="add-stage no-print">
+
+            <button
+                class="btn-add"
+                onclick="addRow()">
+                + Add Stage Item
+            </button>
+
+        </div>
+
+
+        <table
+            class="valuation-table"
+            id="valuationTable">
+
+            <thead>
+
+                <tr>
+
+                    <th class="col-stage">
+                        Construction Stage / Component
+                    </th>
+
+                    <th class="col-status">
+                        Status
+                    </th>
+
+                    <th class="col-value text-right">
+                        Valued Work Done (₹)
+                    </th>
+
+                    <th class="col-remarks">
+                        Remarks
+                    </th>
+
+                    <th class="col-action no-print">
+                    </th>
+
+                </tr>
+
+            </thead>
+
+
+            <tbody id="tableBody">
+
+                <tr>
+
+                    <td>
+                        <input
+                            type="text"
+                            placeholder="Foundation / Substructure">
+                    </td>
+
+                    <td>
+                        <input
+                            type="text"
+                            placeholder="100%">
+                    </td>
+
+                    <td>
+                        <input
+                            type="number"
+                            class="row-done text-right"
+                            placeholder="0"
+                            oninput="calculateTotals()">
+                    </td>
+
+                    <td>
+                        <input
+                            type="text"
+                            placeholder="Technical remarks">
+                    </td>
+
+                    <td class="text-center no-print">
+
+                        <button
+                            class="btn-delete"
+                            onclick="deleteRow(this)">
+                            ×
+                        </button>
+
+                    </td>
+
+                </tr>
+
+
+                <tr>
+
+                    <td>
+                        <input
+                            type="text"
+                            placeholder="RCC Superstructure / Columns">
+                    </td>
+
+                    <td>
+                        <input
+                            type="text"
+                            placeholder="100%">
+                    </td>
+
+                    <td>
+                        <input
+                            type="number"
+                            class="row-done text-right"
+                            placeholder="0"
+                            oninput="calculateTotals()">
+                    </td>
+
+                    <td>
+                        <input
+                            type="text"
+                            placeholder="Technical remarks">
+                    </td>
+
+                    <td class="text-center no-print">
+
+                        <button
+                            class="btn-delete"
+                            onclick="deleteRow(this)">
+                            ×
+                        </button>
+
+                    </td>
+
+                </tr>
+
+
+                <tr>
+
+                    <td>
+                        <input
+                            type="text"
+                            placeholder="Roof Slab / Roofing">
+                    </td>
+
+                    <td>
+                        <input
+                            type="text"
+                            placeholder="100%">
+                    </td>
+
+                    <td>
+                        <input
+                            type="number"
+                            class="row-done text-right"
+                            placeholder="0"
+                            oninput="calculateTotals()">
+                    </td>
+
+                    <td>
+                        <input
+                            type="text"
+                            placeholder="Technical remarks">
+                    </td>
+
+                    <td class="text-center no-print">
+
+                        <button
+                            class="btn-delete"
+                            onclick="deleteRow(this)">
+                            ×
+                        </button>
+
+                    </td>
+
+                </tr>
+
+
+                <tr>
+
+                    <td>
+                        <input
+                            type="text"
+                            placeholder="Brickwork / Plastering">
+                    </td>
+
+                    <td>
+                        <input
+                            type="text"
+                            placeholder="In Progress">
+                    </td>
+
+                    <td>
+                        <input
+                            type="number"
+                            class="row-done text-right"
+                            placeholder="0"
+                            oninput="calculateTotals()">
+                    </td>
+
+                    <td>
+                        <input
+                            type="text"
+                            placeholder="Technical remarks">
+                    </td>
+
+                    <td class="text-center no-print">
+
+                        <button
+                            class="btn-delete"
+                            onclick="deleteRow(this)">
+                            ×
+                        </button>
+
+                    </td>
+
+                </tr>
+
+
+                <tr>
+
+                    <td>
+                        <input
+                            type="text"
+                            placeholder="Flooring / Finishing">
+                    </td>
+
+                    <td>
+                        <input
+                            type="text"
+                            placeholder="Pending">
+                    </td>
+
+                    <td>
+                        <input
+                            type="number"
+                            class="row-done text-right"
+                            placeholder="0"
+                            oninput="calculateTotals()">
+                    </td>
+
+                    <td>
+                        <input
+                            type="text"
+                            placeholder="Technical remarks">
+                    </td>
+
+                    <td class="text-center no-print">
+
+                        <button
+                            class="btn-delete"
+                            onclick="deleteRow(this)">
+                            ×
+                        </button>
+
+                    </td>
+
+                </tr>
+
+            </tbody>
+
+
+            <tfoot>
+
+                <tr class="table-footer">
+
+                    <td colspan="2">
+                        TOTAL VALUED WORK DONE
+                    </td>
+
+                    <td
+                        class="text-right total"
+                        id="footerDoneTotal">
+                        ₹ 0.00
+                    </td>
+
+                    <td
+                        class="extra"
+                        id="footerExtraCalc">
+                        10% Extra = ₹ 0.00
+                    </td>
+
+                    <td class="no-print"></td>
+
+                </tr>
+
+            </tfoot>
+
+        </table>
+
+    </div>
+
+
+    <!-- =====================================================
+         SITE PHOTOS
+    ====================================================== -->
+
+    <div class="section">
+
+        <div class="photo-toolbar">
+
+            <div class="section-heading"
+                 style="margin-bottom:0;">
+                Site Inspection Photographs
+            </div>
+
+
+            <div class="aspect-control no-print">
+
+                Image Ratio:
+
+                <select
+                    id="aspectRatio"
+                    onchange="changeAspectRatio()">
+
+                    <option value="16:9">
+                        16:9
+                    </option>
+
+                    <option value="4:3">
+                        4:3
+                    </option>
+
+                </select>
+
+            </div>
+
+        </div>
+
+
+        <div class="photo-grid">
+
+            <!-- PHOTO 1 -->
+
+            <div class="photo-card">
+
+                <div
+                    class="photo-preview"
+                    id="preview1">
+
+                    <span class="photo-placeholder">
+                        SITE PHOTOGRAPH 01
+                    </span>
+
+                </div>
+
+
+                <input
+                    type="file"
+                    accept="image/*"
+                    class="photo-upload no-print"
+                    onchange="previewImage(event,'preview1')">
+
+
+                <input
+                    type="text"
+                    class="photo-caption"
+                    placeholder="Photo 1 caption">
+
+            </div>
+
+
+            <!-- PHOTO 2 -->
+
+            <div class="photo-card">
+
+                <div
+                    class="photo-preview"
+                    id="preview2">
+
+                    <span class="photo-placeholder">
+                        SITE PHOTOGRAPH 02
+                    </span>
+
+                </div>
+
+
+                <input
+                    type="file"
+                    accept="image/*"
+                    class="photo-upload no-print"
+                    onchange="previewImage(event,'preview2')">
+
+
+                <input
+                    type="text"
+                    class="photo-caption"
+                    placeholder="Photo 2 caption">
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <!-- =====================================================
+         TECHNICAL REMARKS
+    ====================================================== -->
+
+    <div class="section">
+
+        <div class="section-heading">
+            Overall Site Condition &amp; Technical Remarks
+        </div>
+
+
+        <div class="remarks-box">
+
+            <textarea
+                placeholder="Enter physical progress, quality of construction, materials, workmanship, structural condition, deviations if any, and other technical observations."></textarea>
+
+        </div>
+
+    </div>
+
+
+    <!-- =====================================================
+         CERTIFICATION
+    ====================================================== -->
+
+    <div class="section">
+
+        <div class="section-heading">
+            Technical Certification &amp; Declaration
+        </div>
+
+
+        <div
+            class="certification"
+            contenteditable="true">
+
+            <strong>Certification:</strong>
+
+            I/We hereby certify that the subject property was
+            physically inspected on the date mentioned in this
+            certificate. The construction stage and value of
+            work reported herein represent the physical progress
+            verified at site to the best of our professional
+            assessment.
+
+            <br><br>
+
+            The recommended disbursement has been calculated as
+            10% above the total valued work done, subject to the
+            total estimated project cost. This certificate is
+            issued for technical progress verification and
+            valuation purposes in connection with the proposed
+            bank loan disbursement.
+
+        </div>
+
+    </div>
+
+
+    <!-- =====================================================
+         SIGNATURES
+    ====================================================== -->
+
+    <div class="signature-section">
+
+        <div class="section-heading">
+            Verification &amp; Signatures
+        </div>
+
+
+        <table class="signature-table">
+
+            <tr>
+
+                <td>
+
+                    <!-- EXACT 5 CM SPACE -->
+
+                    <div class="signature-space"></div>
+
+                    <div
+                        class="signature-line"
+                        contenteditable="true">
+
+                        Borrower / Client Signature
+
+                    </div>
+
+                    <div
+                        class="signature-subtitle"
+                        contenteditable="true">
+
+                        Verification Confirmation
+
+                    </div>
+
+                </td>
+
+
+                <td>
+
+                    <!-- EXACT 5 CM SPACE -->
+
+                    <div class="signature-space"></div>
+
+                    <div
+                        class="signature-line"
+                        contenteditable="true">
+
+                        Authorized Technical Inspector
+
+                    </div>
+
+                    <div
+                        class="signature-subtitle"
+                        contenteditable="true">
+
+                        Makkari Constructions &amp; Developers
+
+                    </div>
+
+                </td>
+
+            </tr>
+
+        </table>
+
+    </div>
+
+
+    <!-- =====================================================
+         FOOTER
+    ====================================================== -->
+
+    <div class="document-footer">
+
+        <span>
+            Stage Completion &amp; Technical Valuation Certificate
+        </span>
+
+        <span>
+            For Bank Loan Disbursement
+        </span>
+
+    </div>
+
+
+</div>
+</div>
+
+
+<script>
+
+/* =========================================================
+   DATE
+========================================================= */
+
+document.getElementById('inspectionDate').valueAsDate = new Date();
+
+
+/* =========================================================
+   PASSWORD
+========================================================= */
+
+function verifyPassword() {
+
+    const password =
+        document.getElementById('passInput').value;
+
+    if (password === '2613') {
+
+        const screen =
+            document.getElementById('lockScreen');
+
+        screen.style.opacity = '0';
+
+        setTimeout(() => {
+
+            screen.style.display = 'none';
+
+        }, 250);
+
+    } else {
+
+        document.getElementById('errorMsg').style.display =
+            'block';
+
+        document.getElementById('passInput').value = '';
+
+        document.getElementById('passInput').focus();
+
+    }
+
+}
+
+
+function checkEnter(event) {
+
+    if (event.key === 'Enter') {
+
+        verifyPassword();
+
+    }
+
+}
+
+
+function lockDocument() {
+
+    const screen =
+        document.getElementById('lockScreen');
+
+    screen.style.display = 'flex';
+
+    screen.style.opacity = '1';
+
+    document.getElementById('passInput').value = '';
+
+    document.getElementById('errorMsg').style.display =
+        'none';
+
+}
+
+
+/* =========================================================
+   CURRENCY
+========================================================= */
+
+function formatCurrency(value) {
+
+    return '₹ ' +
+        Number(value || 0).toLocaleString(
+            'en-IN',
+            {
+                minimumFractionDigits: 2,
+                maximumFractionDigits: 2
+            }
+        );
+
+}
+
+
+/* =========================================================
+   CALCULATION
+========================================================= */
+
+function calculateTotals() {
+
+    const estimated =
+        parseFloat(
+            document.getElementById('totalEstCost').value
+        ) || 0;
+
+
+    let workDone = 0;
+
+
+    document
+        .querySelectorAll('.row-done')
+        .forEach(input => {
+
+            workDone +=
+                parseFloat(input.value) || 0;
+
+        });
+
+
+    let recommended =
+        workDone * 1.10;
+
+
+    /*
+       Maximum recommended disbursement
+       cannot exceed estimated cost.
+    */
+
+    if (
+        estimated > 0 &&
+        recommended > estimated
+    ) {
+
+        recommended = estimated;
+
+    }
+
+
+    document.getElementById('totalWorkDone').value =
+        formatCurrency(workDone);
+
+
+    document.getElementById('recDisbursement').value =
+        formatCurrency(recommended);
+
+
+    document.getElementById('footerDoneTotal').innerText =
+        formatCurrency(workDone);
+
+
+    document.getElementById('footerExtraCalc').innerText =
+        '10% Extra = ' +
+        formatCurrency(recommended);
+
+}
+
+
+/* =========================================================
+   ADD ROW
+========================================================= */
+
+function addRow() {
+
+    const tbody =
+        document.getElementById('tableBody');
+
+
+    const row =
+        document.createElement('tr');
+
+
+    row.innerHTML = `
+
+        <td>
+            <input
+                type="text"
+                placeholder="Construction stage">
+        </td>
+
+        <td>
+            <input
+                type="text"
+                placeholder="Status">
+        </td>
+
+        <td>
+            <input
+                type="number"
+                class="row-done text-right"
+                placeholder="0"
+                oninput="calculateTotals()">
+        </td>
+
+        <td>
+            <input
+                type="text"
+                placeholder="Remarks">
+        </td>
+
+        <td class="text-center no-print">
+
+            <button
+                class="btn-delete"
+                onclick="deleteRow(this)">
+                ×
+            </button>
+
+        </td>
+
+    `;
+
+
+    tbody.appendChild(row);
+
+}
+
+
+/* =========================================================
+   DELETE ROW
+========================================================= */
+
+function deleteRow(button) {
+
+    const row =
+        button.closest('tr');
+
+    if (row) {
+
+        row.remove();
+
+    }
+
+    calculateTotals();
+
+}
+
+
+/* =========================================================
+   IMAGE ASPECT RATIO
+========================================================= */
+
+function changeAspectRatio() {
+
+    const ratio =
+        document.getElementById('aspectRatio').value;
+
+
+    document
+        .querySelectorAll('.photo-preview')
+        .forEach(preview => {
+
+            if (ratio === '4:3') {
+
+                preview.classList.add(
+                    'ratio-4-3'
+                );
+
+            } else {
+
+                preview.classList.remove(
+                    'ratio-4-3'
+                );
+
+            }
+
+        });
+
+}
+
+
+/* =========================================================
+   IMAGE UPLOAD
+========================================================= */
+
+function previewImage(event, containerId) {
+
+    const file =
+        event.target.files[0];
+
+    if (!file) {
+        return;
+    }
+
+
+    if (!file.type.startsWith('image/')) {
+
+        alert('Please select an image file.');
+
+        return;
+
+    }
+
+
+    const container =
+        document.getElementById(containerId);
+
+
+    const reader =
+        new FileReader();
+
+
+    reader.onload = function(e) {
+
+        container.innerHTML = `
+
+            <img
+                src="${e.target.result}"
+                alt="Site inspection photograph">
+
+        `;
+
+    };
+
+
+    reader.readAsDataURL(file);
+
+}
+
+
+/* =========================================================
+   PDF GENERATION
+========================================================= */
+
+async function generatePDF() {
+
+    const certificate =
+        document.getElementById('certificate');
+
+    const button =
+        document.getElementById('pdfButton');
+
+    const toolbar =
+        document.querySelector('.toolbar');
+
+    const lockScreen =
+        document.getElementById('lockScreen');
+
+
+    if (!certificate) {
+
+        alert('Certificate could not be found.');
+
+        return;
+
+    }
+
+
+    calculateTotals();
+
+
+    button.disabled = true;
+
+    button.innerHTML = 'Preparing A4 PDF...';
+
+
+    /*
+       PDF mode.
+    */
+
+    document.body.classList.add('pdf-mode');
+
+
+    /*
+       Hide editing controls.
+    */
+
+    const hideElements =
+        document.querySelectorAll(
+            '.no-print, .photo-upload'
+        );
+
+
+    hideElements.forEach(element => {
+
+        element.classList.add('pdf-hide');
+
+    });
+
+
+    toolbar.classList.add('pdf-hide');
+
+    lockScreen.classList.add('pdf-hide');
+
+
+    /*
+       Give browser time to render
+       uploaded photographs and fields.
+    */
+
+    await new Promise(resolve =>
+        setTimeout(resolve, 500)
+    );
+
+
+    /*
+       Filename.
+    */
+
+    let client =
+        document
+            .getElementById('clientName')
+            .value
+            .trim();
+
+
+    if (!client) {
+
+        client = 'Client';
+
+    }
+
+
+    client =
+        client
+            .replace(/[<>:"/\\|?*]+/g, '')
+            .replace(/\s+/g, '_')
+            .substring(0, 60);
+
+
+    const date =
+        document
+            .getElementById('inspectionDate')
+            .value ||
+        new Date()
+            .toISOString()
+            .slice(0,10);
+
+
+    const filename =
+        'Stage_Valuation_Certificate_' +
+        client +
+        '_' +
+        date +
+        '.pdf';
+
+
+    /*
+       A4 PDF settings.
+
+       210 × 297 mm
+    */
+
+    const options = {
+
+        margin: [
+            0,
+            0,
+            0,
+            0
+        ],
+
+        filename: filename,
+
+        image: {
+            type: 'jpeg',
+            quality: 0.98
+        },
+
+        html2canvas: {
+
+            scale: 2,
+
+            useCORS: true,
+
+            allowTaint: true,
+
+            backgroundColor: '#ffffff',
+
+            logging: false,
+
+            scrollX: 0,
+
+            scrollY: 0
+
+        },
+
+        jsPDF: {
+
+            unit: 'mm',
+
+            format: [
+                210,
+                297
+            ],
+
+            orientation: 'portrait',
+
+            compress: true
+
+        },
+
+        pagebreak: {
+
+            mode: [
+                'css',
+                'legacy'
+            ],
+
+            avoid: [
+
+                '.section',
+
+                '.financial-box',
+
+                '.photo-grid',
+
+                '.photo-card',
+
+                '.remarks-box',
+
+                '.certification',
+
+                '.signature-section',
+
+                'tr'
+
+            ]
+
+        }
+
+    };
+
+
+    try {
+
+        await html2pdf()
+            .set(options)
+            .from(certificate)
+            .save();
+
+
+    } catch (error) {
+
+        console.error(error);
+
+        alert(
+            'PDF generation failed. Please try again.'
+        );
+
+
+    } finally {
+
+        /*
+           Restore screen.
+        */
+
+        hideElements.forEach(element => {
+
+            element.classList.remove(
+                'pdf-hide'
+            );
+
+        });
+
+
+        toolbar.classList.remove(
+            'pdf-hide'
+        );
+
+
+        lockScreen.classList.remove(
+            'pdf-hide'
+        );
+
+
+        document.body.classList.remove(
+            'pdf-mode'
+        );
+
+
+        button.disabled = false;
+
+
+        button.innerHTML = `
+
+            <svg width="14" height="14"
+                 viewBox="0 0 24 24"
+                 fill="none"
+                 stroke="currentColor"
+                 stroke-width="2">
+
+                <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
+
+                <polyline points="7 10 12 15 17 10"></polyline>
+
+                <line x1="12" y1="15"
+                      x2="12" y2="3"></line>
+
+            </svg>
+
+            Generate PDF
+
+        `;
+
+    }
+
+}
+
+
+/* =========================================================
+   INITIAL CALCULATION
+========================================================= */
+
+calculateTotals();
+
+</script>
+
+</body>
+</html>

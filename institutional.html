@@ -1,0 +1,911 @@
+<header class="site-header" id="makkari-auto-header" role="banner">
+  <div class="nav-container">
+
+    <a href="index.html" class="brand-container" aria-label="Go to Homepage">
+      <img src="https://lh3.googleusercontent.com/d/1RjhoHvjH6DbnNqLOpCNQUOySmpLD2EPv" alt="Company Logo" class="brand-logo-img">
+    </a>
+
+    <button class="mobile-toggle" id="mobile-toggle" aria-expanded="false" aria-controls="nav-menu" aria-label="Open navigation menu">
+      <span class="bar"></span>
+      <span class="bar"></span>
+      <span class="bar"></span>
+    </button>
+
+    <nav aria-label="Main navigation">
+      <ul class="nav-menu" id="nav-menu">
+        <li class="nav-item">
+          <a href="index.html" class="nav-link">Home</a>
+        </li>
+        <li class="nav-item">
+          <a href="about.html" class="nav-link">About Us</a>
+        </li>
+        <li class="nav-item">
+          <a href="services.html" class="nav-link">Services</a>
+        </li>
+        <li class="nav-item">
+          <a href="projects.html" class="nav-link">Projects</a>
+        </li>
+        <li class="nav-item">
+          <a href="estimator.html" class="nav-link">Estimator Modules</a>
+        </li>
+        <li class="nav-item">
+          <a href="contact.html" class="nav-link highlight">Contact Us</a>
+        </li>
+      </ul>
+    </nav>
+
+  </div>
+</header>
+
+<style>
+  :root {
+    --brand-navy: #152F4E;
+    --brand-red: #E52330;
+    --brand-red-hover: #c41c27;
+    --glass-bg: rgba(255, 255, 255, 0.75);
+    --glass-bg-scrolled: rgba(255, 255, 255, 0.9);
+    --glass-border: rgba(255, 255, 255, 0.5);
+    --glass-hover: rgba(21, 47, 78, 0.08);
+    --text-color: #152F4E;
+    --header-height: clamp(60px, 7vh, 75px);
+    --shadow-glass: 0 8px 32px 0 rgba(0, 0, 0, 0.12);
+    --transition-speed: 0.35s;
+    --ease-spring: cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  }
+
+  /* Floating Glass Bar with Entrance Animation */
+  .site-header {
+    position: fixed;
+    top: 8px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: min(92%, 1150px);
+    height: var(--header-height);
+    z-index: 1000;
+    border-radius: 100px;
+    
+    background: var(--glass-bg);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    border: 1px solid var(--glass-border);
+    box-shadow: var(--shadow-glass);
+    
+    /* Initial entrance state */
+    opacity: 0;
+    animation: headerEntrance 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+    transition: top var(--transition-speed) ease, 
+                background var(--transition-speed) ease, 
+                box-shadow var(--transition-speed) ease,
+                border-color var(--transition-speed) ease;
+  }
+
+  @keyframes headerEntrance {
+    0% {
+      opacity: 0;
+      transform: translate(-50%, -25px);
+    }
+    100% {
+      opacity: 1;
+      transform: translate(-50%, 0);
+    }
+  }
+
+  .site-header.scrolled {
+    background: var(--glass-bg-scrolled);
+    border-color: rgba(255, 255, 255, 0.8);
+    box-shadow: 0 12px 35px 0 rgba(0, 0, 0, 0.18);
+    top: 12px;
+  }
+
+  .nav-container {
+    width: 100%;
+    height: 100%;
+    margin: 0 auto;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 clamp(1.2rem, 3vw, 2rem);
+    position: relative;
+  }
+
+  /* Brand Logo Animations */
+  .brand-container {
+    display: flex;
+    align-items: center;
+    text-decoration: none;
+    height: 100%;
+    border-radius: 50px;
+  }
+
+  .brand-logo-img {
+    height: clamp(32px, 4.5vh, 42px);
+    width: auto;
+    object-fit: contain;
+    transition: transform 0.3s var(--ease-spring);
+  }
+
+  .brand-container:hover .brand-logo-img {
+    transform: scale(1.08) rotate(-1.5deg);
+  }
+
+  /* Desktop Menu & Staggered Link Animations */
+  .nav-menu {
+    display: flex;
+    list-style: none;
+    gap: clamp(0.3rem, 1vw, 0.8rem);
+    align-items: center;
+  }
+
+  /* Cascade menu links on page load */
+  .nav-item {
+    opacity: 0;
+    animation: navItemFade 0.5s ease forwards;
+  }
+
+  .nav-item:nth-child(1) { animation-delay: 0.2s; }
+  .nav-item:nth-child(2) { animation-delay: 0.27s; }
+  .nav-item:nth-child(3) { animation-delay: 0.34s; }
+  .nav-item:nth-child(4) { animation-delay: 0.41s; }
+  .nav-item:nth-child(5) { animation-delay: 0.48s; }
+  .nav-item:nth-child(6) { animation-delay: 0.55s; }
+
+  @keyframes navItemFade {
+    from {
+      opacity: 0;
+      transform: translateY(-8px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  .nav-link {
+    position: relative;
+    color: var(--text-color);
+    text-decoration: none;
+    font-size: clamp(0.85rem, 0.95vw, 0.95rem);
+    font-weight: 600;
+    padding: 0.55rem 1.1rem;
+    border-radius: 50px;
+    transition: color var(--transition-speed) ease, 
+                background-color var(--transition-speed) ease, 
+                transform var(--transition-speed) var(--ease-spring);
+    white-space: nowrap;
+    display: inline-block;
+  }
+
+  .nav-link:hover, 
+  .nav-link:focus-visible {
+    background-color: var(--glass-hover);
+    color: var(--brand-navy);
+    transform: translateY(-2px);
+    outline: none;
+  }
+
+  .nav-link.active-page {
+    background-color: rgba(21, 47, 78, 0.12);
+    color: var(--brand-navy);
+  }
+
+  .nav-link.highlight {
+    background-color: var(--brand-red);
+    color: #FFFFFF;
+    box-shadow: 0 4px 15px rgba(229, 35, 48, 0.3);
+    transition: all var(--transition-speed) ease;
+  }
+
+  .nav-link.highlight:hover {
+    background-color: var(--brand-red-hover);
+    color: #FFFFFF;
+    transform: translateY(-2px) scale(1.03);
+    box-shadow: 0 6px 20px rgba(229, 35, 48, 0.45);
+  }
+
+  /* Mobile Toggle Bar Transitions */
+  .mobile-toggle {
+    display: none;
+    flex-direction: column;
+    justify-content: space-between;
+    width: 26px;
+    height: 18px;
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    padding: 0;
+    margin-left: auto;
+    z-index: 101;
+  }
+
+  .mobile-toggle .bar {
+    height: 2px;
+    width: 100%;
+    background-color: var(--text-color);
+    border-radius: 2px;
+    transition: transform var(--transition-speed) var(--ease-spring), 
+                opacity var(--transition-speed) ease;
+  }
+
+  .mobile-toggle.active .bar:nth-child(1) {
+    transform: translateY(8px) rotate(45deg);
+  }
+  .mobile-toggle.active .bar:nth-child(2) {
+    opacity: 0;
+    transform: translateX(-10px);
+  }
+  .mobile-toggle.active .bar:nth-child(3) {
+    transform: translateY(-8px) rotate(-45deg);
+  }
+
+  /* Responsive Mobile Menu Dropdown */
+  @media (max-width: 900px) {
+    .mobile-toggle {
+      display: flex;
+    }
+
+    .nav-menu {
+      position: absolute;
+      top: calc(100% + 12px);
+      right: 0;
+      width: 100%;
+      max-width: 280px;
+      background: rgba(255, 255, 255, 0.95);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      flex-direction: column;
+      align-items: stretch;
+      opacity: 0;
+      visibility: hidden;
+      transform: translateY(-15px) scale(0.95);
+      transition: opacity var(--transition-speed) ease,
+                  transform var(--transition-speed) var(--ease-spring),
+                  visibility var(--transition-speed) ease;
+      box-shadow: 0 16px 32px rgba(0, 0, 0, 0.15);
+      border-radius: 20px;
+      border: 1px solid var(--glass-border);
+      padding: 0.5rem 0;
+      overflow: hidden;
+    }
+
+    .nav-menu.active {
+      opacity: 1;
+      visibility: visible;
+      transform: translateY(0) scale(1);
+    }
+
+    .nav-item {
+      animation: none;
+      opacity: 0;
+      transform: translateX(15px);
+      transition: opacity 0.3s ease, transform 0.3s ease;
+    }
+
+    .nav-menu.active .nav-item {
+      opacity: 1;
+      transform: translateX(0);
+    }
+
+    .nav-menu.active .nav-item:nth-child(1) { transition-delay: 0.05s; }
+    .nav-menu.active .nav-item:nth-child(2) { transition-delay: 0.10s; }
+    .nav-menu.active .nav-item:nth-child(3) { transition-delay: 0.15s; }
+    .nav-menu.active .nav-item:nth-child(4) { transition-delay: 0.20s; }
+    .nav-menu.active .nav-item:nth-child(5) { transition-delay: 0.25s; }
+    .nav-menu.active .nav-item:nth-child(6) { transition-delay: 0.30s; }
+
+    .nav-link {
+      display: block;
+      color: var(--text-color);
+      padding: 0.85rem 1.4rem;
+      border-radius: 0;
+      text-align: left;
+      transform: none !important;
+    }
+
+    .nav-link.highlight {
+      text-align: center;
+      margin: 0.5rem 1rem;
+      border-radius: 50px;
+    }
+  }
+</style>
+
+<script>
+  document.addEventListener("DOMContentLoaded", function () {
+    const header = document.getElementById('makkari-auto-header');
+    const mobileToggle = document.getElementById('mobile-toggle');
+    const navMenu = document.getElementById('nav-menu');
+
+    const handleScroll = () => {
+      if (window.scrollY > 20) {
+        header.classList.add('scrolled');
+      } else {
+        header.classList.remove('scrolled');
+      }
+    };
+
+    window.addEventListener('scroll', handleScroll);
+    handleScroll();
+
+    const currentPath = window.location.pathname.toLowerCase();
+    const navLinks = document.querySelectorAll('.nav-link');
+
+    navLinks.forEach(link => {
+      const hrefValue = link.getAttribute('href').toLowerCase();
+      const isHome = (hrefValue === 'index.html' && (currentPath === '/' || currentPath.endsWith('index.html')));
+      const isExactMatch = currentPath.includes(hrefValue.replace('.html', ''));
+
+      if (isHome || (hrefValue !== 'index.html' && isExactMatch)) {
+        link.classList.add('active-page');
+        link.setAttribute('aria-current', 'page');
+      }
+    });
+
+    if (mobileToggle && navMenu) {
+      const toggleMenu = (forceClose = false) => {
+        const isClosing = forceClose || navMenu.classList.contains('active');
+        if (isClosing) {
+          navMenu.classList.remove('active');
+          mobileToggle.classList.remove('active');
+          mobileToggle.setAttribute('aria-expanded', 'false');
+        } else {
+          navMenu.classList.add('active');
+          mobileToggle.classList.add('active');
+          mobileToggle.setAttribute('aria-expanded', 'true');
+        }
+      };
+
+      mobileToggle.addEventListener('click', (e) => {
+        e.stopPropagation();
+        toggleMenu();
+      });
+
+      document.addEventListener('click', (e) => {
+        if (!header.contains(e.target)) {
+          toggleMenu(true);
+        }
+      });
+    }
+  });
+</script>
+
+<!-------------------------------------------------->
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Institutional Projects Portfolio | Makkari Constructions & Developers</title>
+    
+    <!-- Google Fonts: Archivo -->
+    <link href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    
+    <!-- Font Awesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <style>
+        :root {
+            --primary-color: #152f4e;   /* Brand Blue */
+            --accent-color: #e52330;    /* Brand Red */
+            --white: #ffffff;           /* Pure White */
+            --light-bg: #f8fafc;        /* Soft Off-White */
+            --card-bg: #ffffff;
+            --text-dark: #0f172a;
+            --text-muted: #475569;
+            --card-shadow: 0 10px 30px rgba(21, 47, 78, 0.05);
+            --card-shadow-hover: 0 20px 40px rgba(21, 47, 78, 0.12);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Archivo', sans-serif;
+            color: var(--text-dark);
+            line-height: 1.6;
+            background-color: var(--light-bg);
+            -webkit-font-smoothing: antialiased;
+            padding-bottom: 60px;
+        }
+
+        h1, h2, h3, h4, h5 {
+            font-family: 'Archivo', sans-serif;
+            color: var(--primary-color);
+            font-weight: 700;
+        }
+
+        .container {
+            max-width: 1280px;
+            margin: 0 auto;
+            padding: 0 24px;
+        }
+
+        /* HEROIC HEADER SECTION */
+        .hero-section {
+            background: linear-gradient(135deg, rgba(21, 47, 78, 0.92) 0%, rgba(15, 23, 42, 0.88) 100%), 
+                        url('https://lh3.googleusercontent.com/d/1wP6IsUMb0xxfxskmtgzFWqDCKWYzQ9k-') center/cover no-repeat;
+            color: var(--white);
+            padding: 80px 24px;
+            margin-bottom: 45px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(21, 47, 78, 0.15);
+        }
+
+        .hero-content {
+            max-width: 820px;
+            margin: 0 auto;
+            position: relative;
+            z-index: 2;
+        }
+
+        .hero-tagline {
+            display: inline-block;
+            color: var(--accent-color);
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            font-size: 0.85rem;
+            background: rgba(229, 35, 48, 0.12);
+            padding: 6px 16px;
+            border-radius: 20px;
+            margin-bottom: 16px;
+            border: 1px solid rgba(229, 35, 48, 0.3);
+        }
+
+        .hero-title {
+            color: var(--white);
+            font-size: 2.5rem;
+            font-weight: 800;
+            line-height: 1.25;
+            margin-bottom: 14px;
+            letter-spacing: -0.5px;
+        }
+
+        .hero-description {
+            color: rgba(255, 255, 255, 0.85);
+            font-size: 1.05rem;
+            max-width: 680px;
+            margin: 0 auto 24px;
+            line-height: 1.6;
+        }
+
+        .hero-badges {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            flex-wrap: wrap;
+        }
+
+        .hero-badge-item {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 0.88rem;
+            font-weight: 600;
+            color: rgba(255, 255, 255, 0.9);
+            background: rgba(255, 255, 255, 0.08);
+            padding: 8px 16px;
+            border-radius: 8px;
+            backdrop-filter: blur(4px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        /* Section Title Setup */
+        .section-title {
+            text-align: center;
+            margin-bottom: 45px;
+        }
+
+        .section-title h1 {
+            font-size: 2.25rem;
+            font-weight: 800;
+            text-transform: uppercase;
+            color: var(--primary-color);
+            position: relative;
+            display: inline-block;
+            padding-bottom: 8px;
+            letter-spacing: -0.5px;
+        }
+
+        .section-title h1::after {
+            content: '';
+            position: absolute;
+            width: 60px;
+            height: 4px;
+            background-color: var(--accent-color);
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            border-radius: 2px;
+        }
+
+        /* Project Card Styling */
+        .project-card {
+            background-color: var(--white);
+            border-radius: 20px;
+            padding: 40px 35px;
+            margin-bottom: 50px;
+            box-shadow: var(--card-shadow);
+            border: 1px solid rgba(21, 47, 78, 0.08);
+            transition: all 0.3s ease;
+        }
+
+        .project-card:hover {
+            box-shadow: var(--card-shadow-hover);
+        }
+
+        .project-header {
+            margin-bottom: 20px;
+            border-bottom: 2px solid var(--light-bg);
+            padding-bottom: 15px;
+        }
+
+        .project-title {
+            font-size: 1.85rem;
+            color: var(--primary-color);
+            font-weight: 800;
+            margin-bottom: 10px;
+        }
+
+        .project-meta {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 12px 20px;
+            font-size: 0.95rem;
+            color: var(--accent-color);
+            font-weight: 700;
+        }
+
+        .project-meta-item {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .project-description {
+            font-size: 1.05rem;
+            color: var(--text-dark);
+            margin-bottom: 25px;
+            line-height: 1.75;
+        }
+
+        .highlights-title {
+            font-size: 1.25rem;
+            color: var(--primary-color);
+            font-weight: 700;
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .highlights-title i {
+            color: var(--accent-color);
+        }
+
+        .highlights-list {
+            list-style: none;
+            margin-bottom: 35px;
+            display: grid;
+            gap: 12px;
+        }
+
+        .highlights-list li {
+            position: relative;
+            padding-left: 28px;
+            font-size: 0.98rem;
+            color: var(--text-dark);
+        }
+
+        .highlights-list li::before {
+            content: '\f058';
+            font-family: 'Font Awesome 6 Free';
+            font-weight: 900;
+            position: absolute;
+            left: 0;
+            top: 0;
+            color: var(--accent-color);
+            font-size: 1.1rem;
+        }
+
+        .highlights-list strong {
+            color: var(--primary-color);
+            font-weight: 700;
+        }
+
+        /* DYNAMIC AUTO-ALIGNING MASONRY GALLERY */
+        .gallery-header {
+            font-size: 1.15rem;
+            font-weight: 700;
+            color: var(--primary-color);
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .gallery-header i {
+            color: var(--accent-color);
+        }
+
+        .gallery-masonry {
+            column-count: 3;
+            column-gap: 20px;
+        }
+
+        .gallery-item {
+            break-inside: avoid;
+            margin-bottom: 20px;
+            border-radius: 12px;
+            overflow: hidden;
+            background-color: var(--light-bg);
+            border: 1px solid rgba(21, 47, 78, 0.1);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.04);
+            transition: all 0.3s ease;
+        }
+
+        .gallery-item:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 8px 24px rgba(21, 47, 78, 0.12);
+        }
+
+        .gallery-item img {
+            width: 100%;
+            height: auto;
+            display: block;
+            object-fit: contain;
+        }
+
+        @media (max-width: 992px) {
+            .gallery-masonry {
+                column-count: 2;
+            }
+        }
+
+        @media (max-width: 576px) {
+            .gallery-masonry {
+                column-count: 1;
+            }
+            .project-card {
+                padding: 25px 20px;
+            }
+            .project-title {
+                font-size: 1.5rem;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- HEROIC HEADER SECTION WITH EMBEDDED BACKGROUND IMAGE -->
+    <header class="hero-section">
+        <div class="hero-content">
+            <span class="hero-tagline"><i class="fas fa-building-columns" style="margin-right: 6px;"></i> Institutional Portfolio</span>
+            <h1 class="hero-title">Educational & Medical Campus Infrastructure</h1>
+            <p class="hero-description">
+                Delivering high-capacity campus road networks, specialized slope gradients, technical site supervision, and safety-focused developments for healthcare and educational institutions across Kerala.
+            </p>
+            <div class="hero-badges">
+                <div class="hero-badge-item"><i class="fas fa-road" style="color: var(--accent-color);"></i> Campus Road Networks</div>
+                <div class="hero-badge-item"><i class="fas fa-user-shield" style="color: var(--accent-color);"></i> Technical Supervision & Finishing</div>
+                <div class="hero-badge-item"><i class="fas fa-school" style="color: var(--accent-color);"></i> Campus Development</div>
+            </div>
+        </div>
+    </header>
+
+    <div class="container">
+
+        <!-- SECTION TITLE -->
+        <div class="section-title">
+            <h1>INSTITUTIONAL PROJECTS</h1>
+        </div>
+
+        <!-- INSTITUTIONAL PROJECT 1: MALABAR MEDICAL COLLEGE HOSPITAL CAMPUS -->
+        <article class="project-card">
+            <div class="project-header">
+                <h2 class="project-title">1. Campus Road Infrastructure – Malabar Medical College Hospital Campus</h2>
+                <div class="project-meta">
+                    <span class="project-meta-item"><i class="fas fa-road"></i> Infrastructure & Civil Work</span>
+                    <span class="project-meta-item"><i class="fas fa-calendar-alt"></i> 2019–2025</span>
+                    <span class="project-meta-item"><i class="fas fa-hospital-user"></i> Healthcare Campus Logistics</span>
+                    <span class="project-meta-item"><i class="fas fa-hard-hat"></i> Makkari Constructions & Developers</span>
+                </div>
+            </div>
+
+            <p class="project-description">
+                A multi-phase civil infrastructure project involving the development, gradient management, and high-durability bituminous paving of internal roads across the expansive Malabar Medical College Hospital campus. Executed across a six-year timeline, the work was carefully planned to ensure seamless campus connectivity while maintaining continuous, uninterrupted access for emergency vehicles and daily hospital traffic.
+            </p>
+
+            <h3 class="highlights-title"><i class="fas fa-lightbulb"></i> Execution & Technical Highlights</h3>
+            <ul class="highlights-list">
+                <li><strong>Phased Campus Development:</strong> Planned and constructed in stages (2019–2025) to avoid disturbing round-the-clock medical operations, patient transport, and emergency services.</li>
+                <li><strong>Heavy-Duty Asphalt Surfacing:</strong> Full-depth earthwork preparation, sub-base compaction, and heavy-duty bituminous laying designed to handle heavy daily traffic from ambulances, supply trucks, and visitor vehicles.</li>
+                <li><strong>Complex Contour & Slope Navigation:</strong> Specialized grading and retaining wall alignments designed to manage steep campus elevations and ensure safe vehicle transitions around multi-story hospital blocks.</li>
+                <li><strong>Critical Logistics Flow:</strong> Expanded and smooth thoroughfares connecting essential zones—including emergency trauma bays, outpatient departments, parking areas, and service entrances.</li>
+            </ul>
+
+            <div class="gallery-header"><i class="fas fa-images"></i> Project Photos</div>
+            <div class="gallery-masonry">
+                <div class="gallery-item">
+                    <img src="https://lh3.googleusercontent.com/d/1wP6IsUMb0xxfxskmtgzFWqDCKWYzQ9k-" alt="Malabar Medical College Road Work" loading="lazy">
+                </div>
+                <div class="gallery-item">
+                    <img src="https://lh3.googleusercontent.com/d/1h5V5h4DrbYHnCWIseV4eTaaRkrrDX4hF" alt="Campus Road Infrastructure" loading="lazy">
+                </div>
+                <div class="gallery-item">
+                    <img src="https://lh3.googleusercontent.com/d/14cI1YXJKodsb-_qHbaAxiXNyxf6s500L" alt="Bituminous Paving" loading="lazy">
+                </div>
+            </div>
+        </article>
+
+        <!-- INSTITUTIONAL PROJECT 2: KOLAKKAD MIXED SCHOOL -->
+        <article class="project-card">
+            <div class="project-header">
+                <h2 class="project-title">2. Kolakkad Mixed School</h2>
+                <div class="project-meta">
+                    <span class="project-meta-item"><i class="fas fa-location-dot"></i> Muchukunnu, Kozhikode</span>
+                    <span class="project-meta-item"><i class="fas fa-user-gear"></i> Construction Supervision & Finishing</span>
+                    <span class="project-meta-item"><i class="fas fa-school"></i> Educational Campus</span>
+                    <span class="project-meta-item"><i class="fas fa-building"></i> Makkari Constructions & Developers</span>
+                </div>
+            </div>
+
+            <p class="project-description">
+                A community-centered educational project at Muchukunnu, dedicated to creating a safe, vibrant, and durable learning environment for young students. Makkari Constructions & Developers stepped in to lead the technical site supervision and deliver complete interior and exterior finishing, ensuring high standards of safety, aesthetic appeal, and construction quality.
+            </p>
+
+            <h3 class="highlights-title"><i class="fas fa-lightbulb"></i> Scope & Finishing Highlights</h3>
+            <ul class="highlights-list">
+                <li><strong>On-Site Construction Supervision:</strong> Continuous technical oversight on-site to ensure structural integrity, child-safety standards, and strict adherence to technical plans.</li>
+                <li><strong>Refined Exterior & Interior Finishing:</strong> High-quality wall plastering, weather-resistant exterior painting, and smooth interior surface finishing built to withstand heavy daily school use and monsoon weather.</li>
+                <li><strong>Bright & Functional Learning Spaces:</strong> Delivered clean, well-ventilated, and light-filled classroom environments and safe common pathways tailored for student activity.</li>
+            </ul>
+
+            <div class="gallery-header"><i class="fas fa-images"></i> Project Photos</div>
+            <div class="gallery-masonry">
+                <div class="gallery-item">
+                    <img src="https://lh3.googleusercontent.com/d/1GxDxParPMXod8n08kgW3htbhF2zToI7v" alt="Kolakkad Mixed School" loading="lazy">
+                </div>
+                <div class="gallery-item">
+                    <img src="https://lh3.googleusercontent.com/d/1gIbtu1sdr6Yfjyc54G2neANa3SI83rqU" alt="School Finishing Works 1" loading="lazy">
+                </div>
+                <div class="gallery-item">
+                    <img src="https://lh3.googleusercontent.com/d/1T3olTCS8xtKLTHmLthnGvbhpH9JifhNx" alt="School Finishing Works 2" loading="lazy">
+                </div>
+                <div class="gallery-item">
+                    <img src="https://lh3.googleusercontent.com/d/1GDPELluieXpqjKRQSGDzAP_M69CRFTSr" alt="School Finishing Works 3" loading="lazy">
+                </div>
+            </div>
+        </article>
+
+        <!-- INSTITUTIONAL PROJECT 3: MARKAZ PUBLIC SCHOOL -->
+        <article class="project-card">
+            <div class="project-header">
+                <h2 class="project-title">3. Markaz Public School</h2>
+                <div class="project-meta">
+                    <span class="project-meta-item"><i class="fas fa-school"></i> Primary & Secondary Campus</span>
+                    <span class="project-meta-item"><i class="fas fa-building-columns"></i> Educational Facilities</span>
+                    <span class="project-meta-item"><i class="fas fa-building"></i> Makkari Constructions & Developers</span>
+                </div>
+            </div>
+
+            <p class="project-description">
+                An essential academic development executed to accommodate modern educational standards, structural safety, and high-footfall campus traffic for students and staff alike.
+            </p>
+
+            <h3 class="highlights-title"><i class="fas fa-lightbulb"></i> Project Highlights</h3>
+            <ul class="highlights-list">
+                <li><strong>Child-Safe Construction Details:</strong> Focused on secure stairwell enclosures, wide access corridors, and high-durability floor finishes suited for high-density student movement.</li>
+                <li><strong>Institutional Finishes:</strong> Executed with low-maintenance, weather-resistant facade materials ensuring clean aesthetics and structural longevity.</li>
+            </ul>
+
+            <div class="gallery-header"><i class="fas fa-images"></i> Project Photos</div>
+            <div class="gallery-masonry">
+                <div class="gallery-item">
+                    <img src="https://lh3.googleusercontent.com/d/1Etzc3naUHeqMbyS02VII8bIKG0hEpMKt" alt="Markaz Public School Building" loading="lazy">
+                </div>
+            </div>
+        </article>
+
+        <!-- INSTITUTIONAL PROJECT 4: MARKAZ ACADEMY OF WOMEN FOR ISLAMIC STUDIES (MARKAZ AWIS) -->
+        <article class="project-card">
+            <div class="project-header">
+                <h2 class="project-title">4. Markaz Academy of Women for Islamic Studies (MARKAZ AWIS)</h2>
+                <div class="project-meta">
+                    <span class="project-meta-item"><i class="fas fa-book-open"></i> Higher Education Campus</span>
+                    <span class="project-meta-item"><i class="fas fa-landmark"></i> Institutional Infrastructure</span>
+                    <span class="project-meta-item"><i class="fas fa-building"></i> Makkari Constructions & Developers</span>
+                </div>
+            </div>
+
+            <p class="project-description">
+                A dedicated higher-education institution designed to provide an empowering, quiet, and highly functional academic setting for specialized studies.
+            </p>
+
+            <h3 class="highlights-title"><i class="fas fa-lightbulb"></i> Project Highlights</h3>
+            <ul class="highlights-list">
+                <li><strong>Spacious Academic Layouts:</strong> Layouts built for large lecture halls, administrative blocks, and well-ventilated study spaces.</li>
+                <li><strong>Quality Civil Construction:</strong> Robust structural execution and high-spec surface finishing tailored to support a long-term institutional campus.</li>
+            </ul>
+
+            <div class="gallery-header"><i class="fas fa-images"></i> Project Photos</div>
+            <div class="gallery-masonry">
+                <div class="gallery-item">
+                    <img src="https://lh3.googleusercontent.com/d/1YQbSqXHws-_br_cTS0_U7u85tkXOuOCv" alt="Markaz AWIS Campus 1" loading="lazy">
+                </div>
+                <div class="gallery-item">
+                    <img src="https://lh3.googleusercontent.com/d/1kQtuo6GKW0N6qiRkf9A3rtxpzxFngkEU" alt="Markaz AWIS Campus 2" loading="lazy">
+                </div>
+            </div>
+        </article>
+
+        <!-- INSTITUTIONAL PROJECT 5: WAYANAD BOYS SCHOOL -->
+        <article class="project-card">
+            <div class="project-header">
+                <h2 class="project-title">5. Wayanad Boys School</h2>
+                <div class="project-meta">
+                    <span class="project-meta-item"><i class="fas fa-school"></i> Educational Campus</span>
+                    <span class="project-meta-item"><i class="fas fa-location-dot"></i> Wayanad</span>
+                    <span class="project-meta-item"><i class="fas fa-building"></i> Makkari Constructions & Developers</span>
+                </div>
+            </div>
+
+            <p class="project-description">
+                A robust educational facility development focused on providing quality learning environments in Wayanad. Our involvement ensures durable construction and institutional-grade finishes that cater to modern educational needs.
+            </p>
+
+            <h3 class="highlights-title"><i class="fas fa-lightbulb"></i> Project Highlights</h3>
+            <ul class="highlights-list">
+                <li><strong>Institutional Standards:</strong> Execution aligned with high-quality educational infrastructure requirements.</li>
+                <li><strong>Structural Focus:</strong> Emphasizing safe, enduring civil frameworks and child-safe access routes.</li>
+            </ul>
+
+            <div class="gallery-header"><i class="fas fa-images"></i> Project Photos</div>
+            <div class="gallery-masonry">
+                <div class="gallery-item">
+                    <img src="https://lh3.googleusercontent.com/d/1JlvM1mRzoVNnjV-BITKjPGtvnXTbGCSq" alt="Wayanad Boys School" loading="lazy">
+                </div>
+            </div>
+        </article>
+
+    </div>
+
+</body>
+</html>
+<!-- Right Floating Contact Buttons -->
+<div class="floating-contact-container" style="position: fixed; top: 75%; right: 10px; transform: translateY(-50%); flex-direction: column; gap: 10px; z-index: 9999;">
+  <!-- WhatsApp -->
+  <a href="https://wa.me/918281228549" target="_blank" rel="noopener noreferrer" style="width: 48px; height: 48px; background-color: #25D366; border-radius: 8px; display: flex; align-items: center; justify-content: center; box-shadow: 0 4px 12px rgba(0,0,0,0.25);">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="#ffffff" style="width: 24px; height: 24px;">
+      <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.521.151-.172.2-.296.3-.495.099-.198.05-.372-.025-.521-.075-.148-.669-1.611-.916-2.206-.242-.579-.487-.501-.669-.51l-.57-.01c-.198 0-.52.074-.792.372s-1.04 1.016-1.04 2.479 1.065 2.876 1.213 3.074c.149.198 2.096 3.2 5.077 4.487.709.306 1.263.489 1.694.626.712.226 1.36.194 1.872.118.572-.085 1.787-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.99c-.002 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/>
+    </svg>
+  </a>
+  <!-- Call -->
+  <a href="tel:+918281228549" style="width: 48px; height: 48px; background-color: #152f4e; border-radius: 8px; display: flex; align-items: center; justify-content: center; box-shadow: 0 4px 12px rgba(0,0,0,0.25);">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="#ffffff" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" style="width: 22px; height: 22px;">
+      <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path>
+    </svg>
+  </a>
+</div>
+
+<style>
+  /* Hidden by default on large screens/desktops */
+  .floating-contact-container {
+    display: none !important;
+  }
+
+  /* Display only on mobile and small screens (768px wide or smaller) */
+  @media screen and (max-width: 768px) {
+    .floating-contact-container {
+      display: flex !important;
+    }
+  }
+</style>

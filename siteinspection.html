@@ -1,0 +1,934 @@
+<!-- Top Navigation Bar Container -->
+<div class="glass-header-wrapper">
+  <div class="glass-nav-container">
+    <a href="Estimator.html" class="glass-btn btn-prev">
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m15 18-6-6 6-6"/></svg>
+      Previous
+    </a>
+    <a href="index.html" class="glass-btn btn-home">
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m3 9 9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+      Home
+    </a>
+  </div>
+</div>
+
+<!-- Place all your page content below this wrapper -->
+<main class="page-content">
+  <!-- Your main HTML content goes here -->
+</main>
+
+<style>
+  .glass-header-wrapper {
+    position: sticky;
+    top: 0;
+    z-index: 9999;
+    width: 100%;
+    display: flex;
+    justify-content: flex-end;
+    padding: 16px;
+    box-sizing: border-box;
+    pointer-events: none; /* Allows clicking background elements outside the buttons */
+  }
+
+  .glass-nav-container {
+    pointer-events: auto; /* Restores button clickability */
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 6px;
+    background: rgba(249, 249, 249, 0.45);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border: 1px solid rgba(255, 255, 255, 0.6);
+    border-radius: 12px;
+    box-shadow: 0 8px 32px 0 rgba(21, 47, 78, 0.12);
+  }
+
+  .glass-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 6px 12px;
+    font-family: system-ui, -apple-system, sans-serif;
+    font-size: 13px;
+    font-weight: 500;
+    text-decoration: none;
+    border-radius: 8px;
+    backdrop-filter: blur(6px);
+    -webkit-backdrop-filter: blur(6px);
+    border: 1px solid rgba(255, 255, 255, 0.4);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+  }
+
+  /* Previous Button */
+  .btn-prev {
+    background: rgba(21, 47, 78, 0.08);
+    color: #152f4e;
+  }
+
+  .btn-prev:hover {
+    background: rgba(21, 47, 78, 0.16);
+    border-color: rgba(21, 47, 78, 0.2);
+  }
+
+  /* Home Button */
+  .btn-home {
+    background: rgba(229, 35, 48, 0.85);
+    color: #ffffff;
+    border-color: rgba(255, 255, 255, 0.3);
+  }
+
+  .btn-home:hover {
+    background: rgba(229, 35, 48, 0.95);
+    box-shadow: 0 4px 12px rgba(229, 35, 48, 0.3);
+  }
+
+  .page-content {
+    position: relative;
+    z-index: 1;
+  }
+</style>
+
+<!--------------------------------->
+<!-- ========================================== -->
+<!-- LANDING SCREEN (BEFORE OPENING THE REPORT) -->
+<!-- ========================================== -->
+<div class="landing-hero-container">
+  
+  <div class="landing-header">
+    <span class="landing-badge">🏢 MAKKARI PORTAL</span>
+    <h1>Site Inspection & Documentation Module</h1>
+    <p>Professional Field Audit, Quality Control & Inspection PDF Generator</p>
+  </div>
+
+  <div class="landing-action-area">
+    <button class="launch-report-btn" onclick="openPinModal()">
+      🔒 Launch Site Inspection Portal
+    </button>
+  </div>
+
+  <div class="landing-graphic-grid">
+    <div class="landing-card">
+      <div class="landing-icon">📸</div>
+      <div class="landing-card-body">
+        <h4>High-Res Mobile Capture</h4>
+        <p>Sharp image processing with metadata preservation and custom photo observations.</p>
+      </div>
+    </div>
+
+    <div class="landing-card">
+      <div class="landing-icon">🏗️</div>
+      <div class="landing-card-body">
+        <h4>Executive Layout</h4>
+        <p>Formatted specifically for Makkari Constructions & Developers site documentation.</p>
+      </div>
+    </div>
+
+    <div class="landing-card">
+      <div class="landing-icon">📝</div>
+      <div class="landing-card-body">
+        <h4>Smart Dynamic Notes</h4>
+        <p>Automatically suppresses empty note fields to guarantee a clean, professional PDF output.</p>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<!-- ========================================== -->
+<!-- PIN PROTECTION OVERLAY MODAL               -->
+<!-- ========================================== -->
+<div id="pinModal" style="display:none; position:fixed; top:0; left:0; width:100vw; height:100vh; background:rgba(15, 23, 42, 0.85); backdrop-filter:blur(6px); z-index:1000000; align-items:center; justify-content:center;">
+  <div class="pin-card">
+    <div class="pin-icon">🔐</div>
+    <h3 style="color:#152f4e; font-size:18px; margin-bottom:4px;">Protected Portal</h3>
+    <p style="color:#64748b; font-size:12px; margin-bottom:16px;">Enter Security PIN to Access Documentation Module</p>
+    
+    <div style="display:flex; flex-direction:column; gap:10px; width:100%;">
+      <input type="password" id="portalPinInput" maxlength="8" placeholder="Enter PIN" onkeydown="if(event.key==='Enter') checkPin()" style="width:100%; padding:10px; border:1px solid #cbd5e1; border-radius:4px; font-size:16px; text-align:center; letter-spacing:4px; outline:none;">
+      <div id="pinError" style="color:#dc2626; font-size:11px; font-weight:600; min-height:16px; display:none;">Invalid PIN. Please try again.</div>
+      
+      <div style="display:flex; gap:8px; margin-top:6px;">
+        <button onclick="closePinModal()" style="flex:1; padding:9px; background:#e2e8f0; color:#334155; border:none; border-radius:4px; font-weight:600; cursor:pointer; font-size:12px;">Cancel</button>
+        <button onclick="checkPin()" style="flex:1; padding:9px; background:#152f4e; color:#ffffff; border:none; border-radius:4px; font-weight:700; cursor:pointer; font-size:12px;">Unlock Portal</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ========================================== -->
+<!-- OVERLAY MODAL (OPENS ON SUCCESSFUL PIN)    -->
+<!-- ========================================== -->
+<div id="reportOverlay" style="display:none; position:fixed; top:0; left:0; width:100vw; height:100vh; background:rgba(21, 47, 78, 0.85); backdrop-filter:blur(4px); z-index:999999; overflow-y:auto; padding:20px 0;">  
+  
+  <div style="text-align:right; max-width:210mm; margin:0 auto 10px auto; padding:0 10px;">    
+    <button onclick="closeReportOverlay()" style="padding: 8px 16px; background: #dc2626; color: white; border: none; border-radius: 4px; font-weight: bold; cursor: pointer; box-shadow: 0 2px 4px rgba(0,0,0,0.2);">✕ Lock & Close Portal</button>  
+  </div>  
+
+  <!-- A4 Report Document Area -->
+  <div id="reportContainer"></div>
+
+</div>
+
+<!-- html2pdf Library -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
+
+<script>
+// CONFIGURABLE PORTAL PIN
+const PORTAL_PIN = "2613";
+
+function openPinModal() {
+  const pinModal = document.getElementById('pinModal');
+  const pinInput = document.getElementById('portalPinInput');
+  const pinError = document.getElementById('pinError');
+  
+  pinInput.value = '';
+  pinError.style.display = 'none';
+  pinModal.style.display = 'flex';
+  setTimeout(() => pinInput.focus(), 100);
+}
+
+function closePinModal() {
+  document.getElementById('pinModal').style.display = 'none';
+}
+
+function checkPin() {
+  const pinInput = document.getElementById('portalPinInput');
+  const pinError = document.getElementById('pinError');
+
+  if (pinInput.value === PORTAL_PIN) {
+    closePinModal();
+    openSiteVisitReport();
+  } else {
+    pinError.style.display = 'block';
+    pinInput.value = '';
+    pinInput.focus();
+  }
+}
+
+function openSiteVisitReport() {  
+  const overlay = document.getElementById('reportOverlay');  
+  const container = document.getElementById('reportContainer');  
+  overlay.style.display = 'block';
+
+  const reportGenTime = new Date().toLocaleString('en-US', {    
+    dateStyle: 'medium',    
+    timeStyle: 'short'  
+  });
+
+  container.innerHTML = `    
+    <div class="a4-page" id="reportContent">      
+      
+      <!-- EXECUTIVE HEADER -->
+      <div class="header">        
+        <div class="header-brand-block">
+          <div class="company-brand">MAKKARI CONSTRUCTIONS & DEVELOPERS</div>
+          <h1>SITE INSPECTION & FIELD AUDIT REPORT</h1>          
+          <div class="gen-badge">📅 Audit Date: ${reportGenTime}</div>        
+        </div>        
+        <div class="header-right-meta">
+          <div class="doc-id">DOC REF: MC-INSP-${Math.floor(1000 + Math.random() * 9000)}</div>
+        </div>
+      </div>
+
+      <!-- INTERACTIVE CONTROLS -->
+      <div class="controls-panel" id="controlsPanel">        
+        <label class="btn btn-primary">📷 Take Photo <input type="file" id="cameraInput" accept="image/*" capture="environment"></label>
+        <label class="btn btn-secondary">📁 Upload Image <input type="file" id="fileInput" accept="image/*"></label>
+        <button class="btn btn-note" onclick="toggleNoteSection()">📝 Toggle Notes</button>
+        <button class="btn btn-pdf" onclick="downloadPDF()">📄 Download Executive PDF</button>
+        <span id="statusText" style="font-size: 11px; color: #64748b; margin-left: auto; font-weight: 600;">Ready.</span>      
+      </div>
+
+      <div id="reportDynamicBody" style="display: flex; flex-direction: column; gap: 10px;">
+        <!-- PHOTO GRID -->
+        <div id="photoGrid" class="photo-grid"></div>
+
+        <!-- NOTES SECTION -->
+        <div class="note-section" id="noteSection">        
+          <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px; flex-wrap: wrap; gap: 6px;">          
+            <div class="section-title">
+              <span class="title-bar"></span>
+              <h4>Site Observations & Inspection Remarks</h4>          
+            </div>
+            <div class="no-pdf" style="display: flex; gap: 4px; align-items: center;">
+              <button class="btn-pos" onclick="moveNotes('before')">⬆️ Notes Top</button>
+              <button class="btn-pos" onclick="moveNotes('after')">⬇️ Notes Bottom</button>
+              <button class="btn-add-note" onclick="addMoreNoteField()">+ Add Field</button>        
+            </div>
+          </div>        
+          <div id="notesContainer">          
+            <div class="note-item">            
+              <span class="note-number">1.</span>
+              <div style="flex-grow: 1;">
+                <textarea class="note-textarea" placeholder="Type site inspection note, structural finding, or quality check observation..." oninput="syncOverallNotes()"></textarea>            
+                <div class="note-print-text" style="display:none;"></div>          
+              </div>
+            </div>        
+          </div>      
+        </div>
+      </div>
+
+      <!-- FOOTER -->
+      <div class="footer"> 
+        <span>Field Documentation Portal</span>
+        <span>Makkari Constructions & Developers</span>
+      </div>    
+    </div>  `;
+  initReportEvents();
+}
+
+function closeReportOverlay() {  
+  document.getElementById('reportOverlay').style.display = 'none';
+}
+
+function initReportEvents() {  
+  const cameraInput = document.getElementById('cameraInput');  
+  const fileInput = document.getElementById('fileInput');
+
+  if(cameraInput) cameraInput.addEventListener('change', (e) => handleImageUpload(e.target.files[0]));  
+  if(fileInput) fileInput.addEventListener('change', (e) => handleImageUpload(e.target.files[0]));
+}
+
+function handleImageUpload(file) {  
+  if (!file) return;  
+  const photoGrid = document.getElementById('photoGrid');
+
+  if (photoGrid.children.length >= 6) {    
+    alert("Maximum 6 photos allowed per single A4 inspection page.");    
+    return;  
+  }
+
+  document.getElementById('statusText').innerText = "Processing image...";  
+  const timestamp = new Date().toLocaleString('en-US', { dateStyle: 'short', timeStyle: 'short' });  
+  const deviceType = getDeviceInfo();
+
+  renderPhotoCard(file, timestamp, deviceType);
+}
+
+function getDeviceInfo() {  
+  const ua = navigator.userAgent;  
+  if (/android/i.test(ua)) return "Android Mobile";  
+  if (/iPhone|iPad|iPod/i.test(ua)) return "iOS Device";  
+  if (/Windows/i.test(ua)) return "Windows PC";  
+  if (/Macintosh/i.test(ua)) return "Mac Workstation";  
+  return "Field Mobile Device";
+}
+
+function renderPhotoCard(file, timestamp, device) {  
+  const photoGrid = document.getElementById('photoGrid');  
+  const reader = new FileReader();
+
+  reader.onload = function(e) {    
+    const card = document.createElement('div');    
+    card.className = 'photo-card';
+
+    card.innerHTML = `      
+      <button class="delete-photo-btn no-pdf" onclick="removePhotoCard(this)" title="Remove photo">✕</button>      
+      <div class="photo-wrapper">        
+        <img src="${e.target.result}" alt="Site Visit Photo">      
+      </div>      
+      <div class="photo-details">        
+        <table class="meta-table">          
+          <tr><td class="label">DATE/TIME:</td><td class="value">${timestamp}</td></tr>          
+          <tr><td class="label">DEVICE:</td><td class="value">${device}</td></tr>          
+          <tr><td class="label">FILE:</td><td class="value">${file.name}</td></tr>          
+          <tr>            
+            <td class="label">REMARK:</td>            
+            <td class="value">              
+              <input type="text" class="remark-input" placeholder="Add observation remark..." oninput="syncRemark(this)">              
+              <span class="remark-print-text" style="display:none;">-</span>            
+            </td>          
+          </tr>        
+        </table>      
+      </div>    `;
+
+    photoGrid.appendChild(card);    
+    updateStatus();  
+  };  
+  reader.readAsDataURL(file);
+}
+
+function removePhotoCard(button) {  
+  const card = button.closest('.photo-card');  
+  if (card) {    
+    card.remove();    
+    updateStatus();  
+  }
+}
+
+function syncRemark(input) {  
+  const printSpan = input.nextElementSibling;  
+  printSpan.innerText = input.value || '-';
+}
+
+function toggleNoteSection() {  
+  const noteSection = document.getElementById('noteSection');  
+  noteSection.style.display = noteSection.style.display === 'block' ? 'none' : 'block';
+}
+
+function moveNotes(position) {
+  const dynamicBody = document.getElementById('reportDynamicBody');
+  const noteSection = document.getElementById('noteSection');
+  const photoGrid = document.getElementById('photoGrid');
+
+  if (position === 'before') {
+    dynamicBody.insertBefore(noteSection, photoGrid);
+  } else {
+    dynamicBody.appendChild(noteSection);
+  }
+}
+
+function addMoreNoteField() {  
+  const container = document.getElementById('notesContainer');  
+  const noteItem = document.createElement('div');  
+  noteItem.className = 'note-item';  
+  noteItem.style.marginTop = '4px';  
+  noteItem.innerHTML = `    
+    <span class="note-number"></span>
+    <div style="flex-grow: 1; display: flex; gap: 4px; align-items: flex-start;">      
+      <div style="flex-grow: 1;">
+        <textarea class="note-textarea" placeholder="Type additional observation..." oninput="syncOverallNotes()"></textarea>      
+        <div class="note-print-text" style="display:none;"></div>  
+      </div>
+      <button class="no-pdf" onclick="this.closest('.note-item').remove(); renumberNotes(); syncOverallNotes();" style="background:#dc2626; color:#fff; border:none; padding:2px 6px; border-radius:2px; font-weight:bold; cursor:pointer;">✕</button>    
+    </div>  `;  
+  container.appendChild(noteItem);
+  renumberNotes();
+}
+
+function renumberNotes() {
+  let count = 1;
+  document.querySelectorAll('#notesContainer .note-item').forEach((item) => {
+    const numSpan = item.querySelector('.note-number');
+    if (numSpan && item.style.display !== 'none') {
+      numSpan.innerText = count + '.';
+      count++;
+    }
+  });
+}
+
+function syncOverallNotes() {  
+  document.querySelectorAll('.note-item').forEach(item => {    
+    const textarea = item.querySelector('.note-textarea');    
+    const printText = item.querySelector('.note-print-text');    
+    if (textarea && printText) {      
+      printText.innerText = textarea.value || '';    
+    }  
+  });
+}
+
+function updateStatus() {  
+  const count = document.getElementById('photoGrid').children.length;  
+  document.getElementById('statusText').innerText = `${count} of 6 photos added.`;
+}
+
+function downloadPDF() {  
+  const element = document.getElementById('reportContent');  
+  const controls = document.getElementById('controlsPanel');  
+  const statusText = document.getElementById('statusText');
+
+  // Hide Controls Panel
+  controls.style.display = 'none';
+
+  // Hide UI elements meant only for editing
+  const noPdfElements = document.querySelectorAll('.no-pdf');
+  noPdfElements.forEach(el => el.style.setProperty('display', 'none', 'important'));
+
+  // Sync Remarks Inputs to Plain Text
+  document.querySelectorAll('.photo-card').forEach(card => {    
+    const input = card.querySelector('.remark-input');    
+    const span = card.querySelector('.remark-print-text');    
+    if (input && span) {      
+      span.innerText = input.value.trim() || 'No specific remark recorded.';      
+      span.style.display = 'block';      
+      input.style.display = 'none';    
+    }  
+  });
+
+  // Process Notes Section (SUPPRESS EMPTY NOTES)
+  const noteSection = document.getElementById('noteSection');  
+  let validNotesCount = 0;
+
+  if (noteSection) {    
+    document.querySelectorAll('.note-item').forEach(item => {      
+      const textarea = item.querySelector('.note-textarea');      
+      const printText = item.querySelector('.note-print-text');      
+      if (textarea && printText) {        
+        const textValue = textarea.value.trim();
+        if (textValue !== '') {
+          printText.innerText = textValue;        
+          printText.style.display = 'block';        
+          textarea.style.display = 'none';      
+          validNotesCount++;
+        } else {
+          item.style.display = 'none';
+        }
+      }    
+    });  
+
+    renumberNotes();
+
+    if (validNotesCount === 0) {
+      noteSection.style.display = 'none';
+    }
+  }
+
+  const options = {    
+    margin:       0,    
+    filename:     'Makkari_Executive_Site_Inspection_Report.pdf',    
+    image:        { type: 'jpeg', quality: 0.98 },    
+    html2canvas:  { 
+      scale: 3, 
+      useCORS: true, 
+      scrollY: 0, 
+      logging: false,
+      dpi: 300,
+      letterRendering: true
+    },    
+    jsPDF:        { unit: 'mm', format: 'a4', orientation: 'portrait', compress: true },    
+    pagebreak:    { mode: 'avoid-all' }  
+  };
+
+  statusText.innerText = "Generating Executive PDF...";
+
+  html2pdf().set(options).from(element).outputPdf('blob').then((pdfBlob) => {    
+    const blobUrl = URL.createObjectURL(pdfBlob);    
+    const a = document.createElement('a');    
+    a.href = blobUrl;    
+    a.download = 'Makkari_Executive_Site_Inspection_Report.pdf';    
+    document.body.appendChild(a);    
+    a.click();    
+    document.body.removeChild(a);
+
+    // Restore UI State
+    controls.style.display = 'flex';    
+    noPdfElements.forEach(el => el.style.display = '');
+
+    document.querySelectorAll('.photo-card').forEach(card => {      
+      const input = card.querySelector('.remark-input');      
+      const span = card.querySelector('.remark-print-text');      
+      if (input && span) {        
+        span.style.display = 'none';        
+        input.style.display = 'block';      
+      }    
+    });
+
+    if (noteSection) { 
+      noteSection.style.display = 'block';
+      document.querySelectorAll('.note-item').forEach(item => {        
+        item.style.display = 'flex';
+        const textarea = item.querySelector('.note-textarea');        
+        const printText = item.querySelector('.note-print-text');        
+        if (textarea && printText) {          
+          printText.style.display = 'none';          
+          textarea.style.display = 'block';        
+        }      
+      });    
+      renumberNotes();
+    }
+
+    updateStatus();  
+  }).catch(err => {    
+    console.error(err);    
+    controls.style.display = 'flex';    
+    noPdfElements.forEach(el => el.style.display = '');
+    window.print();  
+  });
+}
+</script>
+
+<style>  
+  @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+
+  * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Inter', sans-serif; }  
+
+  /* Front Landing UI Styles */
+  .landing-hero-container {
+    max-width: 850px;
+    margin: 40px auto;
+    padding: 30px;
+    background: #ffffff;
+    border: 1px solid #cbd5e1;
+    border-radius: 8px;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.06);
+    text-align: center;
+  }
+  .landing-badge {
+    font-size: 11px;
+    font-weight: 700;
+    color: #152f4e;
+    background: #e2e8f0;
+    padding: 4px 12px;
+    border-radius: 20px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+  }
+  .landing-header h1 {
+    font-size: 22px;
+    color: #152f4e;
+    margin: 12px 0 6px 0;
+    text-transform: uppercase;
+    font-weight: 700;
+  }
+  .landing-header p {
+    font-size: 13px;
+    color: #64748b;
+    margin-bottom: 24px;
+  }
+  .landing-action-area {
+    margin-bottom: 30px;
+  }
+  .launch-report-btn {
+    padding: 14px 32px;
+    background-color: #152f4e;
+    color: #ffffff;
+    border: none;
+    border-radius: 6px;
+    font-size: 15px;
+    font-weight: 700;
+    cursor: pointer;
+    box-shadow: 0 4px 12px rgba(21, 47, 78, 0.25);
+    transition: transform 0.2s ease, background 0.2s ease;
+  }
+  .launch-report-btn:hover {
+    background-color: #1d3d66;
+    transform: translateY(-2px);
+  }
+  .landing-graphic-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 16px;
+    text-align: left;
+    border-top: 1px solid #e2e8f0;
+    padding-top: 24px;
+  }
+  .landing-card {
+    background: #f8fafc;
+    border: 1px solid #e2e8f0;
+    border-radius: 6px;
+    padding: 16px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+  .landing-icon {
+    font-size: 22px;
+    background: #ffffff;
+    width: 42px;
+    height: 42px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 6px;
+    border: 1px solid #cbd5e1;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.04);
+  }
+  .landing-card-body h4 {
+    font-size: 13px;
+    font-weight: 700;
+    color: #152f4e;
+    margin-bottom: 4px;
+  }
+  .landing-card-body p {
+    font-size: 11px;
+    color: #475569;
+    line-height: 1.4;
+  }
+
+  /* PIN Modal Styles */
+  .pin-card {
+    background: #ffffff;
+    padding: 24px;
+    border-radius: 8px;
+    width: 320px;
+    max-width: 90%;
+    text-align: center;
+    box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  .pin-icon {
+    font-size: 28px;
+    background: #f1f5f9;
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 12px;
+  }
+
+  /* A4 Report Executive Sheet */
+  .a4-page { 
+    width: 210mm; 
+    max-width: 100%; 
+    min-height: 295mm; 
+    background: #ffffff; 
+    padding: 10mm 12mm 8mm 12mm; 
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1); 
+    border-radius: 4px; 
+    display: flex; 
+    flex-direction: column; 
+    position: relative; 
+    margin: 0 auto; 
+  }  
+
+  /* Header Styling */
+  .header { 
+    border-bottom: 2px solid #152f4e; 
+    padding-bottom: 8px; 
+    margin-bottom: 12px; 
+    display: flex; 
+    justify-content: space-between; 
+    align-items: flex-end; 
+  }  
+  .company-brand { 
+    font-size: 11px; 
+    font-weight: 800; 
+    color: #152f4e; 
+    letter-spacing: 0.8px; 
+    text-transform: uppercase;
+    margin-bottom: 2px;
+  }  
+  .header-brand-block h1 { 
+    color: #152f4e; 
+    font-size: 17px; 
+    font-weight: 800; 
+    letter-spacing: 0.2px; 
+    line-height: 1.1; 
+  }  
+  .gen-badge { 
+    font-size: 9.5px; 
+    color: #152f4e; 
+    background: #f1f5f9; 
+    padding: 3px 6px; 
+    border-radius: 3px; 
+    margin-top: 5px; 
+    display: inline-block; 
+    font-weight: 600; 
+    border: 1px solid #e2e8f0;
+  }  
+  .header-right-meta { 
+    text-align: right; 
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    gap: 4px;
+  }  
+  .doc-id {
+    font-size: 9px;
+    font-weight: 700;
+    color: #152f4e;
+  }
+
+  /* Controls Panel */
+  .controls-panel { 
+    background: #f8fafc; 
+    border: 1px solid #cbd5e1; 
+    padding: 8px 12px; 
+    border-radius: 4px; 
+    margin-bottom: 10px; 
+    display: flex; 
+    flex-wrap: wrap; 
+    gap: 8px; 
+    align-items: center; 
+  }  
+  .btn { 
+    display: inline-flex; 
+    align-items: center; 
+    gap: 5px; 
+    background-color: #152f4e; 
+    color: white; 
+    padding: 6px 12px; 
+    border: none; 
+    border-radius: 4px; 
+    cursor: pointer; 
+    font-size: 11px; 
+    font-weight: 600; 
+  }  
+  .btn-secondary { background-color: #254a78; }  
+  .btn-note { background-color: #d97706; }  
+  .btn-pdf { background-color: #dc2626; }  
+  .btn-add-note { background-color: #152f4e; color: white; border: none; padding: 3px 8px; border-radius: 3px; font-size: 9.5px; font-weight: 700; cursor: pointer; }  
+  .btn-pos { background-color: #475569; color: white; border: none; padding: 3px 8px; border-radius: 3px; font-size: 9px; font-weight: 600; cursor: pointer; }
+  input[type="file"] { display: none; }  
+  
+  /* Photo Grid - 3 Column Fixed Layout for A4 Balance */
+  .photo-grid { 
+    display: grid; 
+    grid-template-columns: repeat(3, 1fr) !important; 
+    gap: 8px; 
+    flex-shrink: 0; 
+  }  
+  .photo-card { 
+    border: 1px solid #cbd5e1; 
+    border-radius: 4px; 
+    overflow: hidden; 
+    background: #ffffff; 
+    display: flex; 
+    flex-direction: column; 
+    position: relative; 
+    box-shadow: 0 1px 3px rgba(0,0,0,0.03);
+  }    
+  .delete-photo-btn { 
+    position: absolute; 
+    top: 4px; 
+    right: 4px; 
+    background: rgba(220, 38, 38, 0.9); 
+    color: #ffffff; 
+    border: none; 
+    width: 20px; 
+    height: 20px; 
+    border-radius: 50%; 
+    font-size: 11px; 
+    font-weight: bold; 
+    cursor: pointer; 
+    display: flex; 
+    align-items: center; 
+    justify-content: center; 
+    z-index: 10; 
+  }  
+  .photo-wrapper { 
+    width: 100%; 
+    height: 120px; 
+    background-color: #152f4e; 
+    overflow: hidden; 
+    display: flex; 
+    align-items: center; 
+    justify-content: center; 
+  }  
+  .photo-card img { 
+    width: 100%; 
+    height: 100%; 
+    object-fit: cover; 
+    object-position: center; 
+  }    
+  
+  /* Professional Metadata Table */
+  .photo-details { 
+    padding: 6px 8px; 
+    background: #f8fafc; 
+    border-top: 1px solid #e2e8f0; 
+    flex-grow: 1;
+  }  
+  .meta-table { 
+    width: 100%; 
+    border-collapse: collapse; 
+    font-size: 8.5px; 
+    line-height: 1.3; 
+  }  
+  .meta-table td { 
+    padding: 2px 0; 
+    vertical-align: top; 
+  }  
+  .meta-table td.label { 
+    font-weight: 700; 
+    color: #152f4e; 
+    width: 32%; 
+    font-size: 8px;
+    letter-spacing: 0.2px;
+  }  
+  .meta-table td.value { 
+    color: #334155; 
+    word-break: break-all; 
+    font-weight: 500;
+  }  
+  .remark-input { 
+    width: 100%; 
+    font-size: 8.5px; 
+    padding: 2px 4px; 
+    border: 1px solid #cbd5e1; 
+    border-radius: 2px; 
+    background: #ffffff;
+  }  
+  .remark-print-text {
+    font-size: 8.5px;
+    color: #152f4e;
+    font-weight: 600;
+  }
+
+  /* Section Titles & Notes */
+  .section-title {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+  }
+  .title-bar {
+    width: 3px;
+    height: 12px;
+    background: #152f4e;
+    border-radius: 2px;
+  }
+  .note-section { 
+    padding: 8px 10px; 
+    background-color: #f8fafc; 
+    border: 1px solid #e2e8f0;
+    border-left: 3px solid #152f4e; 
+    border-radius: 3px; 
+    display: none; 
+  }  
+  .note-section h4 { 
+    font-size: 10.5px; 
+    color: #152f4e; 
+    text-transform: uppercase; 
+    font-weight: 700; 
+    letter-spacing: 0.3px;
+  }  
+  .note-item { 
+    display: flex; 
+    align-items: flex-start; 
+    gap: 6px; 
+    margin-bottom: 4px; 
+  }
+  .note-number { 
+    font-size: 9.5px; 
+    font-weight: 700; 
+    color: #152f4e; 
+    min-width: 14px; 
+    padding-top: 2px; 
+  }
+  .note-textarea { 
+    width: 100%; 
+    height: 38px; 
+    font-size: 9.5px; 
+    padding: 4px; 
+    border: 1px solid #cbd5e1; 
+    border-radius: 2px; 
+    resize: none; 
+    font-family: inherit; 
+  }  
+  .note-print-text { 
+    font-size: 9.5px; 
+    color: #152f4e; 
+    white-space: pre-wrap; 
+    line-height: 1.35; 
+    font-weight: 500;
+  }  
+
+  /* Footer */
+  .footer { 
+    margin-top: auto; 
+    padding-top: 8px; 
+    border-top: 1px solid #cbd5e1; 
+    display: flex;
+    justify-content: space-between;
+    font-size: 8.5px; 
+    color: #64748b; 
+    font-weight: 600; 
+  }
+
+  @media print {
+    .no-pdf, .delete-photo-btn, .controls-panel, .landing-hero-container, #pinModal {
+      display: none !important;
+    }
+  }
+
+  @media (max-width: 600px) {    
+    .landing-graphic-grid { grid-template-columns: repeat(1, 1fr); }
+    .a4-page { width: 100%; padding: 8px 6px; }  
+    .photo-wrapper { height: 95px; }
+  }
+</style>
