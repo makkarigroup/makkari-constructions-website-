@@ -1172,3 +1172,223 @@
     }
   }
 </style>
+<!--------------------------------->
+
+
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Footer Component - Makkari Constructions</title>
+    <!-- Google Fonts: Archivo -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Archivo:ital,wght@0,400..700;1,400..700&display=swap" rel="stylesheet">
+    
+    <style>
+        :root {
+            --brand-primary: #152f4e;   /* Deep Navy */
+            --brand-accent: #e52330;    /* Vibrant Red */
+            --brand-light: #f9f9f9;     /* Light Gray Background */
+            --brand-white: #ffffff;     /* Pure White */
+            --font-heading: 'Archivo', sans-serif;
+            --font-body: 'Archivo', sans-serif;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: var(--font-body);
+            background-color: var(--brand-light);
+        }
+
+        .site-footer {
+            background-color: var(--brand-primary);
+            color: var(--brand-white);
+            padding: 60px 20px 20px;
+            font-size: 15px;
+            line-height: 1.6;
+        }
+
+        .footer-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 40px;
+        }
+
+        /* Company Info Section */
+        .footer-brand {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+
+        .footer-logo {
+            max-width: 220px;
+            height: auto;
+            display: block;
+        }
+
+        .brand-description {
+            color: rgba(255, 255, 255, 0.85);
+            font-size: 14px;
+        }
+
+        /* Titles */
+        .footer-heading {
+            font-family: var(--font-heading);
+            font-size: 18px;
+            font-weight: 700;
+            margin-bottom: 20px;
+            position: relative;
+            padding-bottom: 8px;
+            color: var(--brand-white);
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .footer-heading::after {
+            content: '';
+            position: absolute;
+            left: 0;
+            bottom: 0;
+            width: 40px;
+            height: 3px;
+            background-color: var(--brand-accent);
+            border-radius: 2px;
+        }
+
+        /* Quick Links */
+        .footer-links ul {
+            list-style: none;
+        }
+
+        .footer-links li {
+            margin-bottom: 12px;
+        }
+
+        .footer-links a {
+            color: rgba(255, 255, 255, 0.85);
+            text-decoration: none;
+            transition: all 0.3s ease;
+            display: inline-block;
+        }
+
+        .footer-links a:hover {
+            color: var(--brand-accent);
+            transform: translateX(5px);
+        }
+
+        /* Contact Details */
+        .contact-info {
+            list-style: none;
+        }
+
+        .contact-info li {
+            margin-bottom: 15px;
+            color: rgba(255, 255, 255, 0.85);
+            display: flex;
+            align-items: flex-start;
+            gap: 10px;
+        }
+
+        .contact-info a {
+            color: rgba(255, 255, 255, 0.85);
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        .contact-info a:hover {
+            color: var(--brand-accent);
+        }
+
+        .icon {
+            color: var(--brand-accent);
+            font-weight: bold;
+            flex-shrink: 0;
+        }
+
+        /* Bottom Bar */
+        .footer-bottom {
+            max-width: 1200px;
+            margin: 40px auto 0;
+            padding-top: 20px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            text-align: center;
+            font-size: 13px;
+            color: rgba(255, 255, 255, 0.6);
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .site-footer {
+                padding: 40px 20px 20px;
+            }
+            .footer-container {
+                gap: 30px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <footer class="site-footer">
+        <div class="footer-container">
+            
+            <!-- Branding & Logo Column -->
+            <div class="footer-brand">
+                <!-- Updated Google Drive Direct Image Link -->
+                <a href="https://www.makkariconstructions.com/">
+                    <img class="footer-logo" src="https://lh3.googleusercontent.com/d/17two9sD2_HX7rojcUk6QjUEVTKM-0sgm" alt="Makkari Constructions and Developers Logo">
+                </a>
+                <p class="brand-description">
+                    Building quality spaces and creating value through innovative design and high-standard construction solutions.
+                </p>
+            </div>
+
+            <!-- Quick Links Column -->
+            <div class="footer-links">
+                <h3 class="footer-heading">Quick Links</h3>
+                <ul>
+                    <li><a href="https://www.makkariconstructions.com/about.html">About Us</a></li>
+                    <li><a href="https://www.makkariconstructions.com/services">Services</a></li>
+                    <li><a href="https://www.makkariconstructions.com/projects">Projects</a></li>
+                    <li><a href="https://www.makkariconstructions.com/contact">Contact Us</a></li>
+                </ul>
+            </div>
+
+            <!-- Contact Information Column -->
+            <div class="footer-contact">
+                <h3 class="footer-heading">Contact Us</h3>
+                <ul class="contact-info">
+                    <li>
+                        <span class="icon">&#128205;</span>
+                        <span>Makkari Constructions and Developers,<br>Minu City Centre <br>Naduvannur, Kozhikode <br>Kerala, India</span>
+                    </li>
+                    <li>
+                        <span class="icon">&#128222;</span>
+                        <span>Phone: <a href="tel:+918281228549">+91 82812 28549</a></span>
+                    </li>
+                    <li>
+                        <span class="icon">&#9993;</span>
+                        <span>Email: <a href="mailto:info.makkarigroup@gmail.com" data-cfasync="false">info.makkarigroup@gmail.com</a></span>
+                    </li>
+                </ul>
+            </div>
+
+        </div>
+
+        <!-- Copyright Bar -->
+        <div class="footer-bottom">
+            <p>&copy; 2026 Makkari Constructions and Developers.</p>  <div><p>All Rights Reserved.</p>
+        </div>
+    </footer>
