@@ -1222,7 +1222,14 @@ footer::after,
   background-color: #ffffff;     /* Pure White */
   z-index: -1;
 }
-
+/* Mobile viewport adjustments */
+@media (max-width: 768px) {
+  footer, 
+  .site-footer {
+    width: 100%;
+    padding: 24px 20px;
+  }
+}
         * {
             box-sizing: border-box;
             margin: 0;
