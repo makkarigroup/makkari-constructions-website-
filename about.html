@@ -1118,7 +1118,40 @@
             --font-heading: 'Archivo', sans-serif;
             --font-body: 'Archivo', sans-serif;
         }
+/* Container wrapping the footer area */
+footer, 
+.site-footer {
+  width: min(92%, 1400px);     /* Creates left & right gap/blank space */
+  margin: 40px auto 0 auto;     /* Auto-centers the card box */
+  padding: 40px;                 /* Inner spacing for content */
+  background-color: #152F4E;    /* Matching brand dark navy background */
+  border-radius: 0px;           /* Gives it a clean box appearance */
+  box-sizing: border-box;
+  position: relative;
+}
 
+/* Dark bottom space element */
+footer::after, 
+.site-footer::after {
+  content: '';
+  display: block;
+  position: absolute;
+  left: -50vw;
+  right: -50vw;
+  bottom: -70px;
+  height: 70px;
+  background-color: #ffffff;     /* Pure White */
+  z-index: -1;
+}
+
+/* Mobile viewport adjustments */
+@media (max-width: 768px) {
+  footer, 
+  .site-footer {
+    width: 95%;
+    padding: 24px 20px;
+  }
+}
         * {
             box-sizing: border-box;
             margin: 0;
