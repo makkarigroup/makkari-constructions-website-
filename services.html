@@ -1061,12 +1061,156 @@
     </section>
 
     <!-- JotForm Embed -->
-    <section class="form-wrapper">
-      <div id="JFWebsiteWidget-019f8f9eaa4070008012171d50b365c40044"></div>
-      <script src="https://www.jotform.com/website-widgets/embed/019f8f9eaa4070008012171d50b365c40044"></script>
-    </section>
+   <!----------------------------------------------------------------->
+<!-- DOWNLOAD PDF PORTFOLIO SECTION (HIGH GLASSMORPHISM STYLE) -->
+<!----------------------------------------------------------------->
 
-  </main>
+<style>
+  .download-portfolio-section {
+    margin-bottom: clamp(50px, 7vw, 90px);
+  }
+
+  .download-card-glass {
+    /* Pure Frosted White Glass */
+    background: rgba(255, 255, 255, 0.45) !important;
+    backdrop-filter: blur(28px) saturate(180%);
+    -webkit-backdrop-filter: blur(28px) saturate(180%);
+    border: 1.5px solid rgba(255, 255, 255, 0.75);
+    border-radius: var(--radius-lg);
+    padding: clamp(32px, 5vw, 56px) clamp(24px, 4vw, 48px);
+    
+    /* Layered Glass Depth Shadows */
+    box-shadow: 
+      0 10px 40px -10px rgba(21, 47, 78, 0.08),
+      inset 0 1px 1px 0 rgba(255, 255, 255, 0.9),
+      inset 0 -1px 2px 0 rgba(21, 47, 78, 0.03);
+      
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 32px;
+    position: relative;
+    overflow: hidden;
+    transition: var(--transition);
+  }
+
+  .download-card-glass:hover {
+    background: rgba(255, 255, 255, 0.65) !important;
+    border-color: rgba(255, 255, 255, 0.95);
+    box-shadow: 
+      0 20px 50px -15px rgba(21, 47, 78, 0.12),
+      inset 0 1px 2px 0 rgba(255, 255, 255, 1);
+    transform: translateY(-3px);
+  }
+
+  .download-content {
+    max-width: 650px;
+    z-index: 1;
+  }
+
+  .download-tag {
+    display: inline-block;
+    font-size: 0.78rem;
+    font-weight: 800;
+    color: var(--primary-navy);
+    background: rgba(21, 47, 78, 0.06);
+    border: 1px solid rgba(21, 47, 78, 0.08);
+    padding: 4px 14px;
+    border-radius: 20px;
+    text-transform: uppercase;
+    letter-spacing: 1.2px;
+    margin-bottom: 12px;
+  }
+
+  .download-title {
+    font-size: clamp(1.5rem, 2.8vw, 2.2rem);
+    font-weight: 800;
+    color: var(--primary-navy);
+    line-height: 1.25;
+    margin-bottom: 12px;
+    letter-spacing: -0.5px;
+  }
+
+  .download-desc {
+    font-size: 0.95rem;
+    color: var(--text-muted);
+    line-height: 1.6;
+  }
+
+  .download-action {
+    z-index: 1;
+    flex-shrink: 0;
+  }
+
+  .btn-download-pdf {
+    display: inline-flex;
+    align-items: center;
+    gap: 12px;
+    background-color: var(--accent-red);
+    color: #FFFFFF;
+    font-size: 0.95rem;
+    font-weight: 700;
+    padding: 16px 28px;
+    border-radius: 50px;
+    text-decoration: none;
+    box-shadow: 0 6px 20px rgba(229, 35, 48, 0.28);
+    transition: var(--transition);
+    white-space: nowrap;
+  }
+
+  .btn-download-pdf:hover {
+    background-color: #c41c27;
+    color: #FFFFFF;
+    transform: translateY(-3px) scale(1.02);
+    box-shadow: 0 10px 25px rgba(229, 35, 48, 0.45);
+  }
+
+  .btn-download-pdf svg {
+    width: 20px;
+    height: 20px;
+    fill: currentColor;
+    transition: transform 0.3s ease;
+  }
+
+  .btn-download-pdf:hover svg {
+    transform: translateY(2px);
+  }
+
+  @media (max-width: 850px) {
+    .download-card-glass {
+      flex-direction: column;
+      text-align: center;
+      align-items: center;
+    }
+
+    .download-action {
+      width: 100%;
+    }
+
+    .btn-download-pdf {
+      width: 100%;
+      justify-content: center;
+    }
+  }
+</style>
+
+<section class="download-portfolio-section">
+  <div class="download-card-glass">
+    <div class="download-content">
+      <span class="download-tag">Company Profile</span>
+      <h2 class="download-title">Download Our Official Portfolio</h2>
+      <p class="download-desc">Get a detailed PDF deck featuring our complete architectural portfolio, structural credentials, past projects, and engineering consultation services.</p>
+    </div>
+    <div class="download-action">
+      <a href="https://raw.githubusercontent.com/makkarigroup/makkari-constructions-website-/refs/heads/main/MAKKARI_PORTFOLIO.pdf" class="btn-download-pdf" download target="_blank" rel="noopener">
+        <svg viewBox="0 0 24 24">
+          <path d="M19 9h-4V3H9v6H5l7 7 7-7zM5 18v2h14v-2H5z"/>
+        </svg>
+        Download PDF Portfolio
+      </a>
+    </div>
+  </div>
+</section>
 
  
 
@@ -1173,9 +1317,6 @@
   }
 </style>
 <!--------------------------------->
-
-
-
 
 <!DOCTYPE html>
 <html lang="en">
