@@ -1062,38 +1062,56 @@
 
     <!-- JotForm Embed -->
  <!----------------------------------------------------------------->
-<!-- MOBILE-COMPATIBLE PDF VIEWER & DOWNLOAD TILE -->
+<!-- ULTRA-GLASSMORPHIC PDF HUB (LARGE SCREEN OPTIMIZED) -->
 <!----------------------------------------------------------------->
 
 <style>
-  .portfolio-glass-tile {
-    width: 100%;
-    max-width: 900px;
-    margin: 0 auto 60px auto;
-    font-family: 'Montserrat', sans-serif;
+  :root {
+    --navy-core: #152F4E;
+    --red-core: #E52330;
+    --glass-bg: rgba(255, 255, 255, 0.45);
+    --glass-hover: rgba(255, 255, 255, 0.68);
+    --glass-border: rgba(255, 255, 255, 0.85);
   }
 
+  .portfolio-glass-tile {
+    width: 100%;
+    max-width: 1200px; /* Expanded for Large Desktop Displays */
+    margin: 0 auto 60px auto;
+    font-family: 'Montserrat', sans-serif;
+    position: relative;
+    box-sizing: border-box;
+  }
+
+  /* Glass Card Interface */
   .glass-tile-card {
-    background: rgba(255, 255, 255, 0.5) !important;
-    backdrop-filter: blur(30px) saturate(190%);
-    -webkit-backdrop-filter: blur(30px) saturate(190%);
-    border: 1.5px solid rgba(255, 255, 255, 0.85);
-    border-radius: 20px;
-    padding: clamp(24px, 5vw, 40px);
+    background: var(--glass-bg) !important;
+    backdrop-filter: blur(35px) saturate(200%);
+    -webkit-backdrop-filter: blur(35px) saturate(200%);
+    border: 1.5px solid var(--glass-border);
+    border-radius: 24px;
+    padding: clamp(24px, 4vw, 36px);
     box-shadow: 
-      0 12px 40px -10px rgba(21, 47, 78, 0.08),
-      inset 0 1.5px 2px 0 rgba(255, 255, 255, 0.95),
-      inset 0 -1.5px 2px 0 rgba(21, 47, 78, 0.03);
+      0 20px 50px -10px rgba(21, 47, 78, 0.1),
+      0 0 30px rgba(255, 255, 255, 0.5),
+      inset 0 2px 3px 0 rgba(255, 255, 255, 0.95),
+      inset 0 -2px 3px 0 rgba(21, 47, 78, 0.03);
     display: flex;
     align-items: center;
     justify-content: space-between;
     gap: 24px;
     position: relative;
     overflow: hidden;
-    transition: all 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+    transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
   }
 
-  /* Shimmer Animation */
+  .glass-tile-card:hover {
+    background: var(--glass-hover) !important;
+    transform: translateY(-3px);
+    box-shadow: 0 25px 60px -10px rgba(21, 47, 78, 0.15);
+  }
+
+  /* Glass Shimmer Sweep Animation */
   .glass-tile-card::after {
     content: '';
     position: absolute;
@@ -1104,11 +1122,11 @@
     background: linear-gradient(
       60deg, 
       rgba(255, 255, 255, 0) 20%, 
-      rgba(255, 255, 255, 0.5) 50%, 
+      rgba(255, 255, 255, 0.6) 50%, 
       rgba(255, 255, 255, 0) 80%
     );
     transform: rotate(25deg);
-    animation: glassShimmer 5s infinite ease-in-out;
+    animation: glassShimmer 6s infinite ease-in-out;
     pointer-events: none;
   }
 
@@ -1118,7 +1136,7 @@
   }
 
   .glass-tile-content {
-    max-width: 500px;
+    max-width: 600px;
     z-index: 2;
   }
 
@@ -1128,52 +1146,54 @@
     gap: 8px;
     font-size: 0.75rem;
     font-weight: 800;
-    color: #152F4E;
-    background: rgba(21, 47, 78, 0.06);
-    border: 1px solid rgba(21, 47, 78, 0.1);
+    color: var(--navy-core);
+    background: rgba(255, 255, 255, 0.65);
+    border: 1px solid rgba(21, 47, 78, 0.12);
     padding: 6px 14px;
     border-radius: 50px;
     text-transform: uppercase;
     letter-spacing: 1.2px;
     margin-bottom: 12px;
+    box-shadow: 0 4px 12px rgba(21, 47, 78, 0.04);
   }
 
   .pulse-dot {
-    width: 7px;
-    height: 7px;
-    background-color: #E52330;
+    width: 8px;
+    height: 8px;
+    background-color: var(--red-core);
     border-radius: 50%;
     box-shadow: 0 0 0 rgba(229, 35, 48, 0.4);
     animation: pulseDot 2s infinite;
   }
 
   @keyframes pulseDot {
-    0% { box-shadow: 0 0 0 0 rgba(229, 35, 48, 0.7); }
+    0% { box-shadow: 0 0 0 0 rgba(229, 35, 48, 0.8); }
     70% { box-shadow: 0 0 0 8px rgba(229, 35, 48, 0); }
     100% { box-shadow: 0 0 0 0 rgba(229, 35, 48, 0); }
   }
 
   .glass-tile-title {
     font-family: 'Archivo', sans-serif;
-    font-size: clamp(1.3rem, 2.5vw, 1.8rem);
+    font-size: clamp(1.4rem, 2.5vw, 2rem);
     font-weight: 800;
-    color: #152F4E;
-    line-height: 1.25;
+    color: var(--navy-core);
+    line-height: 1.2;
     margin: 0 0 8px 0;
     letter-spacing: -0.4px;
   }
 
   .glass-tile-desc {
-    font-size: 0.9rem;
-    color: #54657E;
+    font-size: 0.92rem;
+    color: #4A5B73;
     line-height: 1.5;
     margin: 0;
+    font-weight: 500;
   }
 
   .glass-tile-actions {
     z-index: 2;
     display: flex;
-    flex-direction: column;
+    flex-wrap: wrap;
     gap: 10px;
     flex-shrink: 0;
   }
@@ -1183,24 +1203,23 @@
     align-items: center;
     justify-content: center;
     gap: 10px;
-    background-color: #E52330;
+    background: linear-gradient(135deg, #E52330 0%, #C41C27 100%);
     color: #FFFFFF !important;
     font-size: 0.88rem;
     font-weight: 700;
-    padding: 14px 26px;
+    padding: 14px 24px;
     border-radius: 50px;
     text-decoration: none;
-    box-shadow: 0 8px 25px rgba(229, 35, 48, 0.32);
+    box-shadow: 0 8px 25px rgba(229, 35, 48, 0.35);
     transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
     white-space: nowrap;
-    border: none;
+    border: 1px solid rgba(255, 255, 255, 0.2);
     cursor: pointer;
   }
 
   .btn-glass-primary:hover {
-    background-color: #c41c27;
     transform: translateY(-2px);
-    box-shadow: 0 12px 30px rgba(229, 35, 48, 0.48);
+    box-shadow: 0 12px 30px rgba(229, 35, 48, 0.5);
   }
 
   .btn-glass-secondary {
@@ -1208,21 +1227,23 @@
     align-items: center;
     justify-content: center;
     gap: 10px;
-    background-color: rgba(21, 47, 78, 0.08);
-    color: #152F4E !important;
+    background: rgba(255, 255, 255, 0.5);
+    backdrop-filter: blur(15px);
+    color: var(--navy-core) !important;
     font-size: 0.88rem;
     font-weight: 700;
-    padding: 12px 26px;
+    padding: 12px 22px;
     border-radius: 50px;
     text-decoration: none;
-    border: 1px solid rgba(21, 47, 78, 0.15);
+    border: 1.5px solid rgba(21, 47, 78, 0.15);
     transition: all 0.3s ease;
     white-space: nowrap;
     cursor: pointer;
   }
 
   .btn-glass-secondary:hover {
-    background-color: rgba(21, 47, 78, 0.15);
+    background: rgba(255, 255, 255, 0.85);
+    border-color: var(--navy-core);
     transform: translateY(-2px);
   }
 
@@ -1232,25 +1253,100 @@
     fill: currentColor;
   }
 
+  /* Inline High-Efficiency Large Display Container */
   .pdf-viewer-container {
     display: none;
-    margin-top: 16px;
-    background: rgba(255, 255, 255, 0.6) !important;
-    backdrop-filter: blur(25px);
-    -webkit-backdrop-filter: blur(25px);
-    border: 1.5px solid rgba(255, 255, 255, 0.85);
-    border-radius: 20px;
-    padding: 8px;
-    box-shadow: 0 15px 35px rgba(21, 47, 78, 0.1);
+    margin-top: 20px;
+    background: rgba(255, 255, 255, 0.55) !important;
+    backdrop-filter: blur(35px) saturate(200%);
+    -webkit-backdrop-filter: blur(35px) saturate(200%);
+    border: 1.5px solid var(--glass-border);
+    border-radius: 24px;
+    padding: 12px;
+    box-shadow: 0 25px 50px -10px rgba(21, 47, 78, 0.12);
+    animation: fadeInSlide 0.4s ease-out;
+  }
+
+  @keyframes fadeInSlide {
+    from { opacity: 0; transform: translateY(-10px); }
+    to { opacity: 1; transform: translateY(0); }
   }
 
   .pdf-viewer-container iframe {
     width: 100%;
-    height: 550px;
+    /* Viewport-Height Scaling for Ultra-Wide / Large Displays */
+    height: clamp(550px, 75vh, 850px);
     border: none;
-    border-radius: 12px;
+    border-radius: 16px;
+    background: #FFFFFF;
   }
 
+  /* Fullscreen Glass Lightbox Mode */
+  .glass-modal-overlay {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background: rgba(15, 32, 53, 0.6);
+    backdrop-filter: blur(25px);
+    -webkit-backdrop-filter: blur(25px);
+    z-index: 99999;
+    padding: 20px;
+    box-sizing: border-box;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .glass-modal-container {
+    width: 100%;
+    max-width: 1400px;
+    height: 92vh;
+    background: rgba(255, 255, 255, 0.85);
+    border: 1.5px solid #FFFFFF;
+    border-radius: 24px;
+    padding: 16px;
+    box-shadow: 0 30px 80px rgba(0, 0, 0, 0.3);
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+  }
+
+  .glass-modal-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 10px;
+  }
+
+  .glass-modal-title {
+    font-family: 'Archivo', sans-serif;
+    font-weight: 800;
+    color: var(--navy-core);
+    margin: 0;
+    font-size: 1.2rem;
+  }
+
+  .btn-close-modal {
+    background: var(--red-core);
+    color: #FFF;
+    border: none;
+    padding: 8px 18px;
+    border-radius: 50px;
+    font-weight: 700;
+    cursor: pointer;
+    font-size: 0.85rem;
+  }
+
+  .glass-modal-container iframe {
+    width: 100%;
+    height: 100%;
+    border: none;
+    border-radius: 16px;
+  }
+
+  /* Responsive Mobile Fallbacks */
   @media (max-width: 820px) {
     .glass-tile-card {
       flex-direction: column;
@@ -1260,12 +1356,13 @@
     }
     .glass-tile-actions {
       width: 100%;
+      flex-direction: column;
     }
     .btn-glass-primary, .btn-glass-secondary {
       width: 100%;
     }
     .pdf-viewer-container iframe {
-      height: 420px;
+      height: 480px;
     }
   }
 </style>
@@ -1278,43 +1375,76 @@
       <p class="glass-tile-desc">View or download our engineering credentials, project showcases, and compliance records.</p>
     </div>
     <div class="glass-tile-actions">
-      <!-- Universal Mobile Download Link via PDF.js Engine -->
+      <!-- Direct Engine Viewer Link -->
       <a href="https://mozilla.github.io/pdf.js/web/viewer.html?file=https://raw.githubusercontent.com/makkarigroup/makkari-constructions-website-/1a47f40f168740470db4d0073f40f8820b2ddde9/MAKKARI%20CONSTRUCTIONS%20PORTFOLIO%20copy.pdf" target="_blank" rel="noopener noreferrer" class="btn-glass-primary">
         <svg viewBox="0 0 24 24"><path d="M19 9h-4V3H9v6H5l7 7 7-7zM5 18v2h14v-2H5z"/></svg>
-        Download / Open PDF
+        Download PDF
       </a>
       
-      <!-- Mobile-Compatible Inline Preview Toggle -->
-      <button onclick="toggleMobilePdf()" class="btn-glass-secondary" id="mobileToggleBtn">
+      <!-- Inline Preview -->
+      <button onclick="toggleMobilePdf()" class="btn-glass-secondary">
         <svg viewBox="0 0 24 24"><path d="M12 4.5C7 4.5 2.73 7.61 1 12c1.73 4.39 6 7.5 11 7.5s9.27-3.11 11-7.5c-1.73-4.39-6-7.5-11-7.5zM12 17c-2.76 0-5-2.24-5-5s2.24-5 5-5 5 2.24 5 5-2.24 5-5 5zm0-8c-1.66 0-3 1.34-3 3s1.34 3 3 3 3-1.34 3-3-1.34-3-3-3z"/></svg>
-        <span id="mobileBtnText">Preview Inline</span>
+        <span id="mobileBtnText">Inline View</span>
+      </button>
+
+      <!-- Large Screen Fullscreen Modal -->
+      <button onclick="openGlassModal()" class="btn-glass-secondary">
+        <svg viewBox="0 0 24 24"><path d="M7 14H5v5h5v-2H7v-3zm-2-4h2V7h3V5H5v5zm12 7h-3v2h5v-5h-2v3zM14 5v2h3v3h2V5h-5z"/></svg>
+        Expand Fullscreen
       </button>
     </div>
   </div>
 
+  <!-- Inline Large Viewport Container -->
   <div class="pdf-viewer-container" id="mobilePdfWrapper">
     <iframe id="mobilePdfFrame"></iframe>
   </div>
 </div>
 
+<!-- Glass Lightbox Overlay for Desktop Screens -->
+<div class="glass-modal-overlay" id="glassModal">
+  <div class="glass-modal-container">
+    <div class="glass-modal-header">
+      <h3 class="glass-modal-title">Company Portfolio Viewer</h3>
+      <button onclick="closeGlassModal()" class="btn-close-modal">Close [Esc]</button>
+    </div>
+    <iframe id="glassModalFrame"></iframe>
+  </div>
+</div>
+
 <script>
+  const pdfJsViewerUrl = "https://mozilla.github.io/pdf.js/web/viewer.html?file=https://raw.githubusercontent.com/makkarigroup/makkari-constructions-website-/1a47f40f168740470db4d0073f40f8820b2ddde9/MAKKARI%20CONSTRUCTIONS%20PORTFOLIO%20copy.pdf";
+
   function toggleMobilePdf() {
     const wrapper = document.getElementById('mobilePdfWrapper');
     const frame = document.getElementById('mobilePdfFrame');
     const btnText = document.getElementById('mobileBtnText');
-    const pdfJsViewerUrl = "https://mozilla.github.io/pdf.js/web/viewer.html?file=https://raw.githubusercontent.com/makkarigroup/makkari-constructions-website-/1a47f40f168740470db4d0073f40f8820b2ddde9/MAKKARI%20CONSTRUCTIONS%20PORTFOLIO%20copy.pdf";
 
     if (wrapper.style.display === 'block') {
       wrapper.style.display = 'none';
-      btnText.textContent = 'Preview Inline';
+      btnText.textContent = 'Inline View';
     } else {
-      if (!frame.src) {
-        frame.src = pdfJsViewerUrl;
-      }
+      if (!frame.src) frame.src = pdfJsViewerUrl;
       wrapper.style.display = 'block';
-      btnText.textContent = 'Close Preview';
+      btnText.textContent = 'Close View';
     }
   }
+
+  function openGlassModal() {
+    const modal = document.getElementById('glassModal');
+    const modalFrame = document.getElementById('glassModalFrame');
+    if (!modalFrame.src) modalFrame.src = pdfJsViewerUrl;
+    modal.style.display = 'flex';
+  }
+
+  function closeGlassModal() {
+    document.getElementById('glassModal').style.display = 'none';
+  }
+
+  /* Escape Key Close Event */
+  document.addEventListener('keydown', function(e) {
+    if (e.key === 'Escape') closeGlassModal();
+  });
 </script>
 
   <!-- Counter Animation Script -->
