@@ -1,377 +1,3 @@
-<!-- Favicon -->
-<link rel="icon" type="image/png" href="https://raw.githubusercontent.com/makkarigroup/makkari-constructions-website-/refs/heads/main/Fevicon.png">
-
-<header class="site-header" id="makkari-auto-header" role="banner">
-  <div class="nav-container">
-
-    <a href="index.html" class="brand-container" aria-label="Go to Homepage">
-      <img src="https://raw.githubusercontent.com/makkarigroup/makkari-constructions-website-/refs/heads/main/MAKKARI%20LOGO.png" alt="Company Logo" class="brand-logo-img">
-    </a>
-
-    <button class="mobile-toggle" id="mobile-toggle" aria-expanded="false" aria-controls="nav-menu" aria-label="Open navigation menu">
-      <span class="bar"></span>
-      <span class="bar"></span>
-      <span class="bar"></span>
-    </button>
-
-    <nav aria-label="Main navigation">
-      <ul class="nav-menu" id="nav-menu">
-        <li class="nav-item">
-          <a href="index.html" class="nav-link">Home</a>
-        </li>
-        <li class="nav-item">
-          <a href="about.html" class="nav-link">About Us</a>
-        </li>
-        <li class="nav-item">
-          <a href="services.html" class="nav-link">Services</a>
-        </li>
-        <li class="nav-item">
-          <a href="projects.html" class="nav-link">Projects</a>
-        </li>
-        <li class="nav-item">
-          <a href="estimator.html" class="nav-link">Estimator Modules</a>
-        </li>
-        <li class="nav-item">
-          <a href="contact.html" class="nav-link highlight">Contact Us</a>
-        </li>
-      </ul>
-    </nav>
-
-  </div>
-</header>
-
-<style>
-  :root {
-    --brand-navy: #152F4E;
-    --brand-red: #E52330;
-    --brand-red-hover: #c41c27;
-    --glass-bg: rgba(255, 255, 255, 0.75);
-    --glass-bg-scrolled: rgba(255, 255, 255, 0.9);
-    --glass-border: rgba(255, 255, 255, 0.5);
-    --glass-hover: rgba(21, 47, 78, 0.08);
-    --text-color: #152F4E;
-    --header-height: clamp(60px, 7vh, 75px);
-    --shadow-glass: 0 8px 32px 0 rgba(0, 0, 0, 0.12);
-    --transition-speed: 0.35s;
-    --ease-spring: cubic-bezier(0.175, 0.885, 0.32, 1.275);
-  }
-
-  /* Floating Glass Bar with Entrance Animation */
-  .site-header {
-    position: fixed;
-    top: 8px;
-    left: 50%;
-    transform: translateX(-50%);
-    width: min(92%, 1150px);
-    height: var(--header-height);
-    z-index: 1000;
-    border-radius: 100px;
-    
-    background: var(--glass-bg);
-    backdrop-filter: blur(16px);
-    -webkit-backdrop-filter: blur(16px);
-    border: 1px solid var(--glass-border);
-    box-shadow: var(--shadow-glass);
-    
-    /* Initial entrance state */
-    opacity: 0;
-    animation: headerEntrance 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
-    transition: top var(--transition-speed) ease, 
-                background var(--transition-speed) ease, 
-                box-shadow var(--transition-speed) ease,
-                border-color var(--transition-speed) ease;
-  }
-
-  @keyframes headerEntrance {
-    0% {
-      opacity: 0;
-      transform: translate(-50%, -25px);
-    }
-    100% {
-      opacity: 1;
-      transform: translate(-50%, 0);
-    }
-  }
-
-  .site-header.scrolled {
-    background: var(--glass-bg-scrolled);
-    border-color: rgba(255, 255, 255, 0.8);
-    box-shadow: 0 12px 35px 0 rgba(0, 0, 0, 0.18);
-    top: 12px;
-  }
-
-  .nav-container {
-    width: 100%;
-    height: 100%;
-    margin: 0 auto;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 0 clamp(1.2rem, 3vw, 2rem);
-    position: relative;
-  }
-
-  /* Brand Logo Animations */
-  .brand-container {
-    display: flex;
-    align-items: center;
-    text-decoration: none;
-    height: 100%;
-    border-radius: 50px;
-  }
-
-  .brand-logo-img {
-    height: clamp(32px, 4.5vh, 42px);
-    width: auto;
-    object-fit: contain;
-    transition: transform 0.3s var(--ease-spring);
-  }
-
-  .brand-container:hover .brand-logo-img {
-    transform: scale(1.08) rotate(-1.5deg);
-  }
-
-  /* Desktop Menu & Staggered Link Animations */
-  .nav-menu {
-    display: flex;
-    list-style: none;
-    gap: clamp(0.3rem, 1vw, 0.8rem);
-    align-items: center;
-  }
-
-  /* Cascade menu links on page load */
-  .nav-item {
-    opacity: 0;
-    animation: navItemFade 0.5s ease forwards;
-  }
-
-  .nav-item:nth-child(1) { animation-delay: 0.2s; }
-  .nav-item:nth-child(2) { animation-delay: 0.27s; }
-  .nav-item:nth-child(3) { animation-delay: 0.34s; }
-  .nav-item:nth-child(4) { animation-delay: 0.41s; }
-  .nav-item:nth-child(5) { animation-delay: 0.48s; }
-  .nav-item:nth-child(6) { animation-delay: 0.55s; }
-
-  @keyframes navItemFade {
-    from {
-      opacity: 0;
-      transform: translateY(-8px);
-    }
-    to {
-      opacity: 1;
-      transform: translateY(0);
-    }
-  }
-
-  .nav-link {
-    position: relative;
-    color: var(--text-color);
-    text-decoration: none;
-    font-size: clamp(0.85rem, 0.95vw, 0.95rem);
-    font-weight: 600;
-    padding: 0.55rem 1.1rem;
-    border-radius: 50px;
-    transition: color var(--transition-speed) ease, 
-                background-color var(--transition-speed) ease, 
-                transform var(--transition-speed) var(--ease-spring);
-    white-space: nowrap;
-    display: inline-block;
-  }
-
-  .nav-link:hover, 
-  .nav-link:focus-visible {
-    background-color: var(--glass-hover);
-    color: var(--brand-navy);
-    transform: translateY(-2px);
-    outline: none;
-  }
-
-  .nav-link.active-page {
-    background-color: rgba(21, 47, 78, 0.12);
-    color: var(--brand-navy);
-  }
-
-  .nav-link.highlight {
-    background-color: var(--brand-red);
-    color: #FFFFFF;
-    box-shadow: 0 4px 15px rgba(229, 35, 48, 0.3);
-    transition: all var(--transition-speed) ease;
-  }
-
-  .nav-link.highlight:hover {
-    background-color: var(--brand-red-hover);
-    color: #FFFFFF;
-    transform: translateY(-2px) scale(1.03);
-    box-shadow: 0 6px 20px rgba(229, 35, 48, 0.45);
-  }
-
-  /* Mobile Toggle Bar Transitions */
-  .mobile-toggle {
-    display: none;
-    flex-direction: column;
-    justify-content: space-between;
-    width: 26px;
-    height: 18px;
-    background: transparent;
-    border: none;
-    cursor: pointer;
-    padding: 0;
-    margin-left: auto;
-    z-index: 101;
-  }
-
-  .mobile-toggle .bar {
-    height: 2px;
-    width: 100%;
-    background-color: var(--text-color);
-    border-radius: 2px;
-    transition: transform var(--transition-speed) var(--ease-spring), 
-                opacity var(--transition-speed) ease;
-  }
-
-  .mobile-toggle.active .bar:nth-child(1) {
-    transform: translateY(8px) rotate(45deg);
-  }
-  .mobile-toggle.active .bar:nth-child(2) {
-    opacity: 0;
-    transform: translateX(-10px);
-  }
-  .mobile-toggle.active .bar:nth-child(3) {
-    transform: translateY(-8px) rotate(-45deg);
-  }
-
-  /* Responsive Mobile Menu Dropdown */
-  @media (max-width: 900px) {
-    .mobile-toggle {
-      display: flex;
-    }
-
-    .nav-menu {
-      position: absolute;
-      top: calc(100% + 12px);
-      right: 0;
-      width: 100%;
-      max-width: 280px;
-      background: rgba(255, 255, 255, 0.95);
-      backdrop-filter: blur(20px);
-      -webkit-backdrop-filter: blur(20px);
-      flex-direction: column;
-      align-items: stretch;
-      opacity: 0;
-      visibility: hidden;
-      transform: translateY(-15px) scale(0.95);
-      transition: opacity var(--transition-speed) ease,
-                  transform var(--transition-speed) var(--ease-spring),
-                  visibility var(--transition-speed) ease;
-      box-shadow: 0 16px 32px rgba(0, 0, 0, 0.15);
-      border-radius: 20px;
-      border: 1px solid var(--glass-border);
-      padding: 0.5rem 0;
-      overflow: hidden;
-    }
-
-    .nav-menu.active {
-      opacity: 1;
-      visibility: visible;
-      transform: translateY(0) scale(1);
-    }
-
-    .nav-item {
-      animation: none;
-      opacity: 0;
-      transform: translateX(15px);
-      transition: opacity 0.3s ease, transform 0.3s ease;
-    }
-
-    .nav-menu.active .nav-item {
-      opacity: 1;
-      transform: translateX(0);
-    }
-
-    .nav-menu.active .nav-item:nth-child(1) { transition-delay: 0.05s; }
-    .nav-menu.active .nav-item:nth-child(2) { transition-delay: 0.10s; }
-    .nav-menu.active .nav-item:nth-child(3) { transition-delay: 0.15s; }
-    .nav-menu.active .nav-item:nth-child(4) { transition-delay: 0.20s; }
-    .nav-menu.active .nav-item:nth-child(5) { transition-delay: 0.25s; }
-    .nav-menu.active .nav-item:nth-child(6) { transition-delay: 0.30s; }
-
-    .nav-link {
-      display: block;
-      color: var(--text-color);
-      padding: 0.85rem 1.4rem;
-      border-radius: 0;
-      text-align: left;
-      transform: none !important;
-    }
-
-    .nav-link.highlight {
-      text-align: center;
-      margin: 0.5rem 1rem;
-      border-radius: 50px;
-    }
-  }
-</style>
-
-<script>
-  document.addEventListener("DOMContentLoaded", function () {
-    const header = document.getElementById('makkari-auto-header');
-    const mobileToggle = document.getElementById('mobile-toggle');
-    const navMenu = document.getElementById('nav-menu');
-
-    const handleScroll = () => {
-      if (window.scrollY > 20) {
-        header.classList.add('scrolled');
-      } else {
-        header.classList.remove('scrolled');
-      }
-    };
-
-    window.addEventListener('scroll', handleScroll);
-    handleScroll();
-
-    const currentPath = window.location.pathname.toLowerCase();
-    const navLinks = document.querySelectorAll('.nav-link');
-
-    navLinks.forEach(link => {
-      const hrefValue = link.getAttribute('href').toLowerCase();
-      const isHome = (hrefValue === 'index.html' && (currentPath === '/' || currentPath.endsWith('index.html')));
-      const isExactMatch = currentPath.includes(hrefValue.replace('.html', ''));
-
-      if (isHome || (hrefValue !== 'index.html' && isExactMatch)) {
-        link.classList.add('active-page');
-        link.setAttribute('aria-current', 'page');
-      }
-    });
-
-    if (mobileToggle && navMenu) {
-      const toggleMenu = (forceClose = false) => {
-        const isClosing = forceClose || navMenu.classList.contains('active');
-        if (isClosing) {
-          navMenu.classList.remove('active');
-          mobileToggle.classList.remove('active');
-          mobileToggle.setAttribute('aria-expanded', 'false');
-        } else {
-          navMenu.classList.add('active');
-          mobileToggle.classList.add('active');
-          mobileToggle.setAttribute('aria-expanded', 'true');
-        }
-      };
-
-      mobileToggle.addEventListener('click', (e) => {
-        e.stopPropagation();
-        toggleMenu();
-      });
-
-      document.addEventListener('click', (e) => {
-        if (!header.contains(e.target)) {
-          toggleMenu(true);
-        }
-      });
-    }
-  });
-</script>
-
-<!----------------------------------------->
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -379,12 +5,33 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Our Services & Portfolio | Makkari</title>
   
+  <link rel="icon" type="image/png" href="https://raw.githubusercontent.com/makkarigroup/makkari-constructions-website-/refs/heads/main/Fevicon.png">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
-  
+  <link href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;600;700;800;900&family=Montserrat:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
   <style>
+    /* Reset implicit body spacing */
+    html, body {
+      margin: 0;
+      padding: 0;
+      width: 100%;
+    }
+
     :root {
+      --brand-navy: #152F4E;
+      --brand-red: #E52330;
+      --brand-red-hover: #c41c27;
+      --glass-bg: rgba(255, 255, 255, 0.75);
+      --glass-bg-scrolled: rgba(255, 255, 255, 0.9);
+      --glass-border: rgba(255, 255, 255, 0.5);
+      --glass-hover: rgba(21, 47, 78, 0.08);
+      --text-color: #152F4E;
+      --header-height: clamp(60px, 7vh, 75px);
+      --shadow-glass: 0 8px 32px 0 rgba(0, 0, 0, 0.12);
+      --transition-speed: 0.35s;
+      --ease-spring: cubic-bezier(0.175, 0.885, 0.32, 1.275);
+      
       --primary-navy: #152F4E;
       --accent-red: #E52330;
       --bg-light: #F4F6F9;
@@ -403,6 +50,12 @@
       --shadow-hover: 0 16px 32px rgba(21, 47, 78, 0.1);
       
       --transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+
+      --navy-core: #152F4E;
+      --red-core: #E52330;
+      --glass-tile-bg: rgba(255, 255, 255, 0.45);
+      --glass-tile-hover: rgba(255, 255, 255, 0.68);
+      --glass-tile-border: rgba(255, 255, 255, 0.85);
     }
 
     * {
@@ -419,13 +72,168 @@
       -webkit-font-smoothing: antialiased;
     }
 
+    /* Floating Glass Header */
+    .site-header {
+      position: fixed;
+      top: 8px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: min(92%, 1150px);
+      height: var(--header-height);
+      z-index: 1000;
+      border-radius: 100px;
+      background: var(--glass-bg);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      border: 1px solid var(--glass-border);
+      box-shadow: var(--shadow-glass);
+      opacity: 0;
+      animation: headerEntrance 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+      transition: top var(--transition-speed) ease, 
+                  background var(--transition-speed) ease, 
+                  box-shadow var(--transition-speed) ease,
+                  border-color var(--transition-speed) ease;
+    }
+
+    @keyframes headerEntrance {
+      0% { opacity: 0; transform: translate(-50%, -25px); }
+      100% { opacity: 1; transform: translate(-50%, 0); }
+    }
+
+    .site-header.scrolled {
+      background: var(--glass-bg-scrolled);
+      border-color: rgba(255, 255, 255, 0.8);
+      box-shadow: 0 12px 35px 0 rgba(0, 0, 0, 0.18);
+      top: 12px;
+    }
+
+    .nav-container {
+      width: 100%;
+      height: 100%;
+      margin: 0 auto;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 0 clamp(1.2rem, 3vw, 2rem);
+      position: relative;
+    }
+
+    .brand-container {
+      display: flex;
+      align-items: center;
+      text-decoration: none;
+      height: 100%;
+      border-radius: 50px;
+    }
+
+    .brand-logo-img {
+      height: clamp(32px, 4.5vh, 42px);
+      width: auto;
+      object-fit: contain;
+      transition: transform 0.3s var(--ease-spring);
+    }
+
+    .brand-container:hover .brand-logo-img {
+      transform: scale(1.08) rotate(-1.5deg);
+    }
+
+    .nav-menu {
+      display: flex;
+      list-style: none;
+      gap: clamp(0.3rem, 1vw, 0.8rem);
+      align-items: center;
+    }
+
+    .nav-item {
+      opacity: 0;
+      animation: navItemFade 0.5s ease forwards;
+    }
+
+    .nav-item:nth-child(1) { animation-delay: 0.2s; }
+    .nav-item:nth-child(2) { animation-delay: 0.27s; }
+    .nav-item:nth-child(3) { animation-delay: 0.34s; }
+    .nav-item:nth-child(4) { animation-delay: 0.41s; }
+    .nav-item:nth-child(5) { animation-delay: 0.48s; }
+    .nav-item:nth-child(6) { animation-delay: 0.55s; }
+
+    @keyframes navItemFade {
+      from { opacity: 0; transform: translateY(-8px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .nav-link {
+      position: relative;
+      color: var(--text-color);
+      text-decoration: none;
+      font-size: clamp(0.85rem, 0.95vw, 0.95rem);
+      font-weight: 600;
+      padding: 0.55rem 1.1rem;
+      border-radius: 50px;
+      transition: color var(--transition-speed) ease, 
+                  background-color var(--transition-speed) ease, 
+                  transform var(--transition-speed) var(--ease-spring);
+      white-space: nowrap;
+      display: inline-block;
+    }
+
+    .nav-link:hover, .nav-link:focus-visible {
+      background-color: var(--glass-hover);
+      color: var(--brand-navy);
+      transform: translateY(-2px);
+      outline: none;
+    }
+
+    .nav-link.active-page {
+      background-color: rgba(21, 47, 78, 0.12);
+      color: var(--brand-navy);
+    }
+
+    .nav-link.highlight {
+      background-color: var(--brand-red);
+      color: #FFFFFF;
+      box-shadow: 0 4px 15px rgba(229, 35, 48, 0.3);
+      transition: all var(--transition-speed) ease;
+    }
+
+    .nav-link.highlight:hover {
+      background-color: var(--brand-red-hover);
+      color: #FFFFFF;
+      transform: translateY(-2px) scale(1.03);
+      box-shadow: 0 6px 20px rgba(229, 35, 48, 0.45);
+    }
+
+    .mobile-toggle {
+      display: none;
+      flex-direction: column;
+      justify-content: space-between;
+      width: 26px;
+      height: 18px;
+      background: transparent;
+      border: none;
+      cursor: pointer;
+      padding: 0;
+      margin-left: auto;
+      z-index: 101;
+    }
+
+    .mobile-toggle .bar {
+      height: 2px;
+      width: 100%;
+      background-color: var(--text-color);
+      border-radius: 2px;
+      transition: transform var(--transition-speed) var(--ease-spring), opacity var(--transition-speed) ease;
+    }
+
+    .mobile-toggle.active .bar:nth-child(1) { transform: translateY(8px) rotate(45deg); }
+    .mobile-toggle.active .bar:nth-child(2) { opacity: 0; transform: translateX(-10px); }
+    .mobile-toggle.active .bar:nth-child(3) { transform: translateY(-8px) rotate(-45deg); }
+
     .wrapper {
       max-width: 1200px;
       margin: 0 auto;
-      padding: clamp(80px, 6vw, 80px) clamp(16px, 3vw, 24px);
+      padding: clamp(100px, 8vw, 120px) clamp(16px, 3vw, 24px) 0 clamp(16px, 3vw, 24px);
     }
 
-    /* Section Typography */
     .section-header {
       text-align: center;
       margin-bottom: clamp(32px, 4vw, 48px);
@@ -448,7 +256,6 @@
       letter-spacing: -0.5px;
     }
 
-    /* Services Grid - Equal Height Uniform Layout */
     .services-grid {
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
@@ -504,7 +311,6 @@
       line-height: 1.6;
     }
 
-    /* Stats Counter Bar Section */
     .stats-section {
       background: var(--card-white);
       border: 1px solid var(--border-color);
@@ -557,7 +363,6 @@
       letter-spacing: 0.5px;
     }
 
-    /* Why Makkari Grid - Neat Horizontal / Multi-Line Alignment */
     .why-section {
       margin-bottom: clamp(50px, 7vw, 90px);
     }
@@ -623,7 +428,6 @@
       line-height: 1.5;
     }
 
-    /* Featured Projects - Single Horizontal Row (Desktop) / Double Row / Consistent Grid */
     .portfolio-section {
       margin-bottom: clamp(50px, 7vw, 90px);
     }
@@ -652,7 +456,6 @@
       border-color: var(--border-hover);
     }
 
-    /* Fixed Aspect Ratio for Neat Image Cards */
     .portfolio-image-wrapper {
       position: relative;
       width: 100%;
@@ -719,7 +522,6 @@
       letter-spacing: 0.8px;
     }
 
-    /* Client Logos Grid Layout */
     .clients-section {
       margin-bottom: clamp(50px, 7vw, 90px);
     }
@@ -768,52 +570,110 @@
       margin-top: 2px;
     }
 
-    /* Form Container */
-    .form-wrapper {
-      background: var(--card-white);
-      border: 1px solid var(--border-color);
-      border-radius: var(--radius-lg);
-      padding: clamp(20px, 4vw, 40px);
-      box-shadow: var(--shadow-sm);
+    .portfolio-glass-tile {
+      width: 100%;
+      max-width: 1200px;
+      margin: 0 auto 0 auto;
+      font-family: 'Montserrat', sans-serif;
+      position: relative;
+      box-sizing: border-box;
     }
 
-    /* Floating Contact Buttons */
-    .floating-contact-container {
-      position: fixed;
-      top: 50%;
-      right: clamp(10px, 2vw, 24px);
-      transform: translateY(-50%);
-      display: flex;
-      flex-direction: column;
-      gap: 12px;
-      z-index: 9999;
-    }
-
-    .contact-btn {
-      width: 48px;
-      height: 48px;
-      border-radius: 10px;
+    .glass-tile-card {
+      background: var(--glass-tile-bg) !important;
+      backdrop-filter: blur(35px) saturate(200%);
+      -webkit-backdrop-filter: blur(35px) saturate(200%);
+      border: 1.5px solid var(--glass-tile-border);
+      border-radius: 24px;
+      padding: clamp(24px, 4vw, 36px);
+      box-shadow: 
+        0 20px 50px -10px rgba(21, 47, 78, 0.1),
+        0 0 30px rgba(255, 255, 255, 0.5),
+        inset 0 2px 3px 0 rgba(255, 255, 255, 0.95),
+        inset 0 -2px 3px 0 rgba(21, 47, 78, 0.03);
       display: flex;
       align-items: center;
-      justify-content: center;
-      color: #ffffff;
-      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
-      transition: var(--transition);
+      justify-content: space-between;
+      gap: 24px;
+      position: relative;
+      overflow: hidden;
+      transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
     }
 
-    .contact-btn:hover {
-      transform: scale(1.08);
+    .glass-tile-card:hover {
+      background: var(--glass-tile-hover) !important;
+      transform: translateY(-3px);
+      box-shadow: 0 25px 60px -10px rgba(21, 47, 78, 0.15);
     }
 
-    .wa-svg { width: 50%; height: 50%; }
-    .call-svg { width: 44%; height: 44%; }
-    .whatsapp-btn { background-color: #25D366; }
-    .call-btn { background-color: var(--primary-navy); }
+    .glass-tile-card::after {
+      content: '';
+      position: absolute;
+      top: -50%;
+      left: -150%;
+      width: 100%;
+      height: 200%;
+      background: linear-gradient(60deg, transparent, rgba(255, 255, 255, 0.4), transparent);
+      transition: all 0.8s ease;
+    }
 
-    /* Responsive Grid Breakpoints */
+    .glass-tile-card:hover::after {
+      left: 150%;
+    }
+
     @media (max-width: 1024px) {
-      .portfolio-grid {
-        grid-template-columns: repeat(2, 1fr);
+      .portfolio-grid { grid-template-columns: repeat(2, 1fr); }
+    }
+
+    @media (max-width: 900px) {
+      .mobile-toggle { display: flex; }
+      .nav-menu {
+        position: absolute;
+        top: calc(100% + 12px);
+        right: 0;
+        width: 100%;
+        max-width: 280px;
+        background: rgba(255, 255, 255, 0.95);
+        backdrop-filter: blur(20px);
+        -webkit-backdrop-filter: blur(20px);
+        flex-direction: column;
+        align-items: stretch;
+        opacity: 0;
+        visibility: hidden;
+        transform: translateY(-15px) scale(0.95);
+        transition: opacity var(--transition-speed) ease,
+                    transform var(--transition-speed) var(--ease-spring),
+                    visibility var(--transition-speed) ease;
+        box-shadow: 0 16px 32px rgba(0, 0, 0, 0.15);
+        border-radius: 20px;
+        border: 1px solid var(--glass-border);
+        padding: 0.5rem 0;
+        overflow: hidden;
+      }
+      .nav-menu.active {
+        opacity: 1;
+        visibility: visible;
+        transform: translateY(0) scale(1);
+      }
+      .nav-item {
+        animation: none;
+        opacity: 0;
+        transform: translateX(15px);
+        transition: opacity 0.3s ease, transform 0.3s ease;
+      }
+      .nav-menu.active .nav-item { opacity: 1; transform: translateX(0); }
+      .nav-link {
+        display: block;
+        color: var(--text-color);
+        padding: 0.85rem 1.4rem;
+        border-radius: 0;
+        text-align: left;
+        transform: none !important;
+      }
+      .nav-link.highlight {
+        text-align: center;
+        margin: 0.5rem 1rem;
+        border-radius: 50px;
       }
     }
 
@@ -822,31 +682,45 @@
         grid-template-columns: repeat(2, 1fr);
         gap: 24px 16px;
       }
-
-      .stat-item:nth-child(2)::after {
-        display: none;
-      }
-
-      .portfolio-grid {
-        grid-template-columns: 1fr;
-      }
+      .stat-item:nth-child(2)::after { display: none; }
+      .portfolio-grid { grid-template-columns: 1fr; }
     }
 
     @media (max-width: 550px) {
-      .stats-grid {
-        grid-template-columns: 1fr;
-      }
-
-      .stat-item:not(:last-child)::after {
-        display: none;
-      }
+      .stats-grid { grid-template-columns: 1fr; }
+      .stat-item:not(:last-child)::after { display: none; }
     }
   </style>
 </head>
 <body>
 
+  <!-- Site Header -->
+  <header class="site-header" id="makkari-auto-header" role="banner">
+    <div class="nav-container">
+      <a href="index.html" class="brand-container" aria-label="Go to Homepage">
+        <img src="https://raw.githubusercontent.com/makkarigroup/makkari-constructions-website-/refs/heads/main/MAKKARI%20LOGO.png" alt="Company Logo" class="brand-logo-img">
+      </a>
+
+      <button class="mobile-toggle" id="mobile-toggle" aria-expanded="false" aria-controls="nav-menu" aria-label="Open navigation menu">
+        <span class="bar"></span>
+        <span class="bar"></span>
+        <span class="bar"></span>
+      </button>
+
+      <nav aria-label="Main navigation">
+        <ul class="nav-menu" id="nav-menu">
+          <li class="nav-item"><a href="index.html" class="nav-link">Home</a></li>
+          <li class="nav-item"><a href="about.html" class="nav-link">About Us</a></li>
+          <li class="nav-item"><a href="services.html" class="nav-link">Services</a></li>
+          <li class="nav-item"><a href="projects.html" class="nav-link">Projects</a></li>
+          <li class="nav-item"><a href="estimator.html" class="nav-link">Estimator Modules</a></li>
+          <li class="nav-item"><a href="contact.html" class="nav-link highlight">Contact Us</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
   <main class="wrapper">
-    
     <!-- Services Section -->
     <section class="services-section">
       <div class="section-header">
@@ -856,41 +730,31 @@
 
       <div class="services-grid">
         <article class="service-card">
-          <div class="card-top">
-            <span class="card-number">01</span>
-          </div>
+          <div class="card-top"><span class="card-number">01</span></div>
           <h3>Residential & Private Project Constructions</h3>
           <p>Custom modern homes, private villas, and bespoke residential developments built with precision, durability, and contemporary architectural standards.</p>
         </article>
 
         <article class="service-card">
-          <div class="card-top">
-            <span class="card-number">02</span>
-          </div>
+          <div class="card-top"><span class="card-number">02</span></div>
           <h3>Commercial & Institutional Projects</h3>
           <p>End-to-end execution of commercial complexes, office spaces, and institutional facilities focused on modern functional layout and structural efficiency.</p>
         </article>
 
         <article class="service-card">
-          <div class="card-top">
-            <span class="card-number">03</span>
-          </div>
+          <div class="card-top"><span class="card-number">03</span></div>
           <h3>Infrastructure & Gov. Projects</h3>
           <p>Reliable execution of public works and government infrastructural developments adhering strictly to quality, timeline, and safety standards.</p>
         </article>
 
         <article class="service-card">
-          <div class="card-top">
-            <span class="card-number">04</span>
-          </div>
+          <div class="card-top"><span class="card-number">04</span></div>
           <h3>Design & Structural Engineering</h3>
-          <p>Complete structural modeling, precise load calculations, and technical engineering solutions engineered for safety and architectural harmony.</p>
+          <p>Complete structural modeling, statutory verification, and technical engineering solutions engineered for safety and architectural harmony.</p>
         </article>
 
         <article class="service-card">
-          <div class="card-top">
-            <span class="card-number">05</span>
-          </div>
+          <div class="card-top"><span class="card-number">05</span></div>
           <h3>Project Consultation</h3>
           <p>Expert site evaluation, project feasibility analysis, structural inspections, and strategic technical consultation from start to finish.</p>
         </article>
@@ -904,17 +768,14 @@
           <div class="stat-number-box"><span class="counter" data-target="350">0</span>+</div>
           <div class="stat-label">Building Approvals</div>
         </div>
-
         <div class="stat-item">
           <div class="stat-number-box"><span class="counter" data-target="35">0</span>+</div>
           <div class="stat-label">Completed Projects</div>
         </div>
-
         <div class="stat-item">
           <div class="stat-number-box"><span class="counter" data-target="7">0</span>+ Years</div>
           <div class="stat-label">Professional Experience</div>
         </div>
-
         <div class="stat-item">
           <div class="stat-number-box"><span class="counter" data-target="35000" data-format="comma">0</span>+</div>
           <div class="stat-label">sq.ft. Documentation</div>
@@ -933,27 +794,23 @@
         <article class="why-card">
           <div class="why-number">01</div>
           <h3>Engineering-Led Approach</h3>
-          <p>Every structure is designed and built on rigorous engineering standards and load calculations.</p>
+          <p>Every structure is designed and built on rigorous engineering standards and compliance verification.</p>
         </article>
-
         <article class="why-card">
           <div class="why-number">02</div>
           <h3>Transparent Project Execution</h3>
           <p>Clear timelines, honest material specifications, and regular project milestones keep you fully informed.</p>
         </article>
-
         <article class="why-card">
           <div class="why-number">03</div>
           <h3>Technical Documentation</h3>
-          <p>Thorough 3D BIM modeling, accurate site documentation, and structural drawings for site compliance.</p>
+          <p>Thorough 3D modeling, accurate site documentation, and structural drawings for site compliance.</p>
         </article>
-
         <article class="why-card">
           <div class="why-number">04</div>
           <h3>Quality & Compliance</h3>
           <p>Strict adherence to regional building codes, government approvals, and material benchmarks.</p>
         </article>
-
         <article class="why-card">
           <div class="why-number">05</div>
           <h3>End-to-End Support</h3>
@@ -962,7 +819,7 @@
       </div>
     </section>
 
-    <!-- Featured Projects (Clean 3-Card Single Line / Grid Layout) -->
+    <!-- Featured Projects -->
     <section class="portfolio-section">
       <div class="section-header">
         <span class="header-tag">Our Work</span>
@@ -980,9 +837,7 @@
               <h3>Modern Residence</h3>
               <p class="portfolio-location">Kottur, Kozhikode</p>
             </div>
-            <div class="portfolio-footer">
-              Design • Engineering • Construction
-            </div>
+            <div class="portfolio-footer">Design • Engineering • Construction</div>
           </div>
         </article>
 
@@ -996,9 +851,7 @@
               <h3>Minu Commercial Centre</h3>
               <p class="portfolio-location">Naduvannur, Kerala</p>
             </div>
-            <div class="portfolio-footer">
-              Structural Engineering • Construction
-            </div>
+            <div class="portfolio-footer">Structural Verification • Construction</div>
           </div>
         </article>
 
@@ -1012,9 +865,7 @@
               <h3>Markaz Academy of Women</h3>
               <p class="portfolio-location">Cheruvannur, Kerala</p>
             </div>
-            <div class="portfolio-footer">
-              Planning • Approvals • Execution
-            </div>
+            <div class="portfolio-footer">Planning • Approvals • Execution</div>
           </div>
         </article>
       </div>
@@ -1026,31 +877,26 @@
         <span class="header-tag">Partnerships</span>
         <h2 class="section-title">Trusted by Leading Organizations</h2>
       </div>
-      
+
       <div class="logo-grid">
         <div class="logo-card">
           <img src="https://markaz.in/assets/images/markaz-logo.png" alt="Markaz Logo" loading="lazy">
         </div>
-
         <div class="logo-card">
           <img src="https://tse4.mm.bing.net/th/id/OIP.W_jpzqT7HsER_mcx3WllHgHaB4?r=0&pid=Api&P=0&h=180" alt="Malabar Medical College Logo" loading="lazy">
         </div>
-
         <div class="logo-card">
           <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRpYjVUdkL2Pwf-SSH8LBekVlAJLhxKDKEFgZ5da14Tmmbd5vIbzq01bPh3&s=10" alt="EFF Logo" loading="lazy">
         </div>
-
         <div class="logo-card">
           <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ9ITEA9FiqiJ9mKymd0zod_D9zzLdCH1fturqKqnaKf_YjTtai9Sym9uFD&s=10" alt="LSGD Logo" loading="lazy">
         </div>
-
         <div class="logo-card">
           <div>
             <div class="logo-text-title">KOLAKKAD MIXED LPS</div>
             <div class="logo-text-sub">Muchukunnu</div>
           </div>
         </div>
-
         <div class="logo-card">
           <div>
             <div class="logo-text-title">Athul Agri Warehouse</div>
@@ -1059,6 +905,75 @@
         </div>
       </div>
     </section>
+
+    <!-- Glassmorphic Hub -->
+    <section class="portfolio-glass-tile">
+      
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <script>
+    document.addEventListener("DOMContentLoaded", function () {
+      const header = document.getElementById('makkari-auto-header');
+      const mobileToggle = document.getElementById('mobile-toggle');
+      const navMenu = document.getElementById('nav-menu');
+
+      const handleScroll = () => {
+        if (window.scrollY > 20) {
+          header.classList.add('scrolled');
+        } else {
+          header.classList.remove('scrolled');
+        }
+      };
+
+      window.addEventListener('scroll', handleScroll);
+      handleScroll();
+
+      const currentPath = window.location.pathname.toLowerCase();
+      const navLinks = document.querySelectorAll('.nav-link');
+
+      navLinks.forEach(link => {
+        const hrefValue = link.getAttribute('href').toLowerCase();
+        const isHome = (hrefValue === 'index.html' && (currentPath === '/' || currentPath.endsWith('index.html')));
+        const isExactMatch = currentPath.includes(hrefValue.replace('.html', ''));
+
+        if (isHome || (hrefValue !== 'index.html' && isExactMatch)) {
+          link.classList.add('active-page');
+          link.setAttribute('aria-current', 'page');
+        }
+      });
+
+      if (mobileToggle && navMenu) {
+        const toggleMenu = (forceClose = false) => {
+          const isClosing = forceClose || navMenu.classList.contains('active');
+          if (isClosing) {
+            navMenu.classList.remove('active');
+            mobileToggle.classList.remove('active');
+            mobileToggle.setAttribute('aria-expanded', 'false');
+          } else {
+            navMenu.classList.add('active');
+            mobileToggle.classList.add('active');
+            mobileToggle.setAttribute('aria-expanded', 'true');
+          }
+        };
+
+        mobileToggle.addEventListener('click', (e) => {
+          e.stopPropagation();
+          toggleMenu();
+        });
+
+        document.addEventListener('click', (e) => {
+          if (!header.contains(e.target)) {
+            toggleMenu(true);
+          }
+        });
+      }
+    });
+  </script>
+</body>
+</html>
 
     <!-- JotForm Embed -->
  <!----------------------------------------------------------------->
@@ -1518,8 +1433,6 @@
   ]
 }
 </script>
-</body>
-</html>
 <!-- Right Floating Contact Buttons -->
 <div class="floating-contact-container" style="position: fixed; top: 80%; right: 12px; transform: translateY(-50%); flex-direction: column; gap: 10px; z-index: 9999;">
   <!-- WhatsApp -->
@@ -1549,12 +1462,9 @@
     }
   }
 </style>
-<!--------------------------------->
 
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
+
+ <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Footer Component - Makkari Constructions</title>
     <!-- Google Fonts: Archivo -->
@@ -1571,11 +1481,10 @@
             --font-heading: 'Archivo', sans-serif;
             --font-body: 'Archivo', sans-serif;
         }
-    
-/* Container wrapping the footer area */
+        /* Container wrapping the footer area */
 footer, 
 .site-footer {
-  width: min(100%, 1400px);     /* Creates left & right gap/blank space */
+  width: min(10%, 1400px);     /* Creates left & right gap/blank space */
   margin: 40px auto 0 auto;     /* Auto-centers the card box */
   padding: 40px;                 /* Inner spacing for content */
   background-color: #152F4E;    /* Matching brand dark navy background */
@@ -1787,7 +1696,7 @@ footer::after,
                     </li>
                     <li>
                         <span class="icon">&#9993;</span>
-                        <span>Email: <a href="mailto:info.makkarigroup@gmail.com" data-cfasync="false">info.makkarigroup@gmail.com</a></span>
+                        <span>Email: <a href="/cdn-cgi/l/email-protection#d5bcbbb3bafbb8b4bebeb4a7bcb2a7baa0a595b2b8b4bcb9fbb6bab8" data-cfasync="false"><span class="__cf_email__" data-cfemail="70191e161f5e1d111b1b11021917021f050030171d11191c5e131f1d">[email&#160;protected]</span></a></span>
                     </li>
                 </ul>
             </div>
@@ -1796,6 +1705,7 @@ footer::after,
 
         <!-- Copyright Bar -->
         <div class="footer-bottom">
-           <p>&copy; 2026 Makkari Constructions and Developers.</p><p>All rights reserved. | Developed In-House.</p>
+            <p>&copy; 2026 Makkari Constructions and Developers.</p><p>All rights reserved. | Developed In-House.</p>
         </div>
     </footer>
+<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script>
