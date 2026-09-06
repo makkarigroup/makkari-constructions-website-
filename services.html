@@ -1061,158 +1061,261 @@
     </section>
 
     <!-- JotForm Embed -->
-   <!----------------------------------------------------------------->
-<!-- DOWNLOAD PDF PORTFOLIO SECTION (HIGH GLASSMORPHISM STYLE) -->
+ <!----------------------------------------------------------------->
+<!-- MOBILE-COMPATIBLE PDF VIEWER & DOWNLOAD TILE -->
 <!----------------------------------------------------------------->
 
 <style>
-  .download-portfolio-section {
-    margin-bottom: clamp(50px, 7vw, 90px);
+  .portfolio-glass-tile {
+    width: 100%;
+    max-width: 900px;
+    margin: 0 auto 60px auto;
+    font-family: 'Montserrat', sans-serif;
   }
 
-  .download-card-glass {
-    /* Pure Frosted White Glass */
-    background: rgba(255, 255, 255, 0.45) !important;
-    backdrop-filter: blur(28px) saturate(180%);
-    -webkit-backdrop-filter: blur(28px) saturate(180%);
-    border: 1.5px solid rgba(255, 255, 255, 0.75);
-    border-radius: var(--radius-lg);
-    padding: clamp(32px, 5vw, 56px) clamp(24px, 4vw, 48px);
-    
-    /* Layered Glass Depth Shadows */
+  .glass-tile-card {
+    background: rgba(255, 255, 255, 0.5) !important;
+    backdrop-filter: blur(30px) saturate(190%);
+    -webkit-backdrop-filter: blur(30px) saturate(190%);
+    border: 1.5px solid rgba(255, 255, 255, 0.85);
+    border-radius: 20px;
+    padding: clamp(24px, 5vw, 40px);
     box-shadow: 
-      0 10px 40px -10px rgba(21, 47, 78, 0.08),
-      inset 0 1px 1px 0 rgba(255, 255, 255, 0.9),
-      inset 0 -1px 2px 0 rgba(21, 47, 78, 0.03);
-      
+      0 12px 40px -10px rgba(21, 47, 78, 0.08),
+      inset 0 1.5px 2px 0 rgba(255, 255, 255, 0.95),
+      inset 0 -1.5px 2px 0 rgba(21, 47, 78, 0.03);
     display: flex;
     align-items: center;
     justify-content: space-between;
-    gap: 32px;
+    gap: 24px;
     position: relative;
     overflow: hidden;
-    transition: var(--transition);
+    transition: all 0.35s cubic-bezier(0.16, 1, 0.3, 1);
   }
 
-  .download-card-glass:hover {
-    background: rgba(255, 255, 255, 0.65) !important;
-    border-color: rgba(255, 255, 255, 0.95);
-    box-shadow: 
-      0 20px 50px -15px rgba(21, 47, 78, 0.12),
-      inset 0 1px 2px 0 rgba(255, 255, 255, 1);
-    transform: translateY(-3px);
+  /* Shimmer Animation */
+  .glass-tile-card::after {
+    content: '';
+    position: absolute;
+    top: -50%;
+    left: -150%;
+    width: 100%;
+    height: 200%;
+    background: linear-gradient(
+      60deg, 
+      rgba(255, 255, 255, 0) 20%, 
+      rgba(255, 255, 255, 0.5) 50%, 
+      rgba(255, 255, 255, 0) 80%
+    );
+    transform: rotate(25deg);
+    animation: glassShimmer 5s infinite ease-in-out;
+    pointer-events: none;
   }
 
-  .download-content {
-    max-width: 650px;
-    z-index: 1;
+  @keyframes glassShimmer {
+    0% { left: -150%; }
+    100% { left: 150%; }
   }
 
-  .download-tag {
-    display: inline-block;
-    font-size: 0.78rem;
+  .glass-tile-content {
+    max-width: 500px;
+    z-index: 2;
+  }
+
+  .glass-tile-tag {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 0.75rem;
     font-weight: 800;
-    color: var(--primary-navy);
+    color: #152F4E;
     background: rgba(21, 47, 78, 0.06);
-    border: 1px solid rgba(21, 47, 78, 0.08);
-    padding: 4px 14px;
-    border-radius: 20px;
+    border: 1px solid rgba(21, 47, 78, 0.1);
+    padding: 6px 14px;
+    border-radius: 50px;
     text-transform: uppercase;
     letter-spacing: 1.2px;
     margin-bottom: 12px;
   }
 
-  .download-title {
-    font-size: clamp(1.5rem, 2.8vw, 2.2rem);
+  .pulse-dot {
+    width: 7px;
+    height: 7px;
+    background-color: #E52330;
+    border-radius: 50%;
+    box-shadow: 0 0 0 rgba(229, 35, 48, 0.4);
+    animation: pulseDot 2s infinite;
+  }
+
+  @keyframes pulseDot {
+    0% { box-shadow: 0 0 0 0 rgba(229, 35, 48, 0.7); }
+    70% { box-shadow: 0 0 0 8px rgba(229, 35, 48, 0); }
+    100% { box-shadow: 0 0 0 0 rgba(229, 35, 48, 0); }
+  }
+
+  .glass-tile-title {
+    font-family: 'Archivo', sans-serif;
+    font-size: clamp(1.3rem, 2.5vw, 1.8rem);
     font-weight: 800;
-    color: var(--primary-navy);
+    color: #152F4E;
     line-height: 1.25;
-    margin-bottom: 12px;
-    letter-spacing: -0.5px;
+    margin: 0 0 8px 0;
+    letter-spacing: -0.4px;
   }
 
-  .download-desc {
-    font-size: 0.95rem;
-    color: var(--text-muted);
-    line-height: 1.6;
+  .glass-tile-desc {
+    font-size: 0.9rem;
+    color: #54657E;
+    line-height: 1.5;
+    margin: 0;
   }
 
-  .download-action {
-    z-index: 1;
+  .glass-tile-actions {
+    z-index: 2;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
     flex-shrink: 0;
   }
 
-  .btn-download-pdf {
+  .btn-glass-primary {
     display: inline-flex;
     align-items: center;
-    gap: 12px;
-    background-color: var(--accent-red);
-    color: #FFFFFF;
-    font-size: 0.95rem;
+    justify-content: center;
+    gap: 10px;
+    background-color: #E52330;
+    color: #FFFFFF !important;
+    font-size: 0.88rem;
     font-weight: 700;
-    padding: 16px 28px;
+    padding: 14px 26px;
     border-radius: 50px;
     text-decoration: none;
-    box-shadow: 0 6px 20px rgba(229, 35, 48, 0.28);
-    transition: var(--transition);
+    box-shadow: 0 8px 25px rgba(229, 35, 48, 0.32);
+    transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
     white-space: nowrap;
+    border: none;
+    cursor: pointer;
   }
 
-  .btn-download-pdf:hover {
+  .btn-glass-primary:hover {
     background-color: #c41c27;
-    color: #FFFFFF;
-    transform: translateY(-3px) scale(1.02);
-    box-shadow: 0 10px 25px rgba(229, 35, 48, 0.45);
+    transform: translateY(-2px);
+    box-shadow: 0 12px 30px rgba(229, 35, 48, 0.48);
   }
 
-  .btn-download-pdf svg {
-    width: 20px;
-    height: 20px;
+  .btn-glass-secondary {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    background-color: rgba(21, 47, 78, 0.08);
+    color: #152F4E !important;
+    font-size: 0.88rem;
+    font-weight: 700;
+    padding: 12px 26px;
+    border-radius: 50px;
+    text-decoration: none;
+    border: 1px solid rgba(21, 47, 78, 0.15);
+    transition: all 0.3s ease;
+    white-space: nowrap;
+    cursor: pointer;
+  }
+
+  .btn-glass-secondary:hover {
+    background-color: rgba(21, 47, 78, 0.15);
+    transform: translateY(-2px);
+  }
+
+  .btn-glass-primary svg, .btn-glass-secondary svg {
+    width: 18px;
+    height: 18px;
     fill: currentColor;
-    transition: transform 0.3s ease;
   }
 
-  .btn-download-pdf:hover svg {
-    transform: translateY(2px);
+  .pdf-viewer-container {
+    display: none;
+    margin-top: 16px;
+    background: rgba(255, 255, 255, 0.6) !important;
+    backdrop-filter: blur(25px);
+    -webkit-backdrop-filter: blur(25px);
+    border: 1.5px solid rgba(255, 255, 255, 0.85);
+    border-radius: 20px;
+    padding: 8px;
+    box-shadow: 0 15px 35px rgba(21, 47, 78, 0.1);
   }
 
-  @media (max-width: 850px) {
-    .download-card-glass {
+  .pdf-viewer-container iframe {
+    width: 100%;
+    height: 550px;
+    border: none;
+    border-radius: 12px;
+  }
+
+  @media (max-width: 820px) {
+    .glass-tile-card {
       flex-direction: column;
       text-align: center;
       align-items: center;
+      padding: 28px 20px;
     }
-
-    .download-action {
+    .glass-tile-actions {
       width: 100%;
     }
-
-    .btn-download-pdf {
+    .btn-glass-primary, .btn-glass-secondary {
       width: 100%;
-      justify-content: center;
+    }
+    .pdf-viewer-container iframe {
+      height: 420px;
     }
   }
 </style>
 
-<section class="download-portfolio-section">
-  <div class="download-card-glass">
-    <div class="download-content">
-      <span class="download-tag">Company Profile</span>
-      <h2 class="download-title">Download Our Official Portfolio</h2>
-      <p class="download-desc">Get a detailed PDF deck featuring our complete architectural portfolio, structural credentials, past projects, and engineering consultation services.</p>
+<div class="portfolio-glass-tile">
+  <div class="glass-tile-card">
+    <div class="glass-tile-content">
+      <span class="glass-tile-tag"><span class="pulse-dot"></span>Company Profile</span>
+      <h2 class="glass-tile-title">Official Company Portfolio</h2>
+      <p class="glass-tile-desc">View or download our engineering credentials, project showcases, and compliance records.</p>
     </div>
-    <div class="download-action">
-      <a href=https://github.com/makkarigroup/makkari-constructions-website-/blob/c26323e04e2987ecada2e010fb569c170af4f90f/MAKKARI%20CONSTRUCTIONS%20PORTFOLIO%20copy.pdf class="btn-download-pdf" download target="_blank" rel="noopener">
-        <svg viewBox="0 0 24 24">
-          <path d="M19 9h-4V3H9v6H5l7 7 7-7zM5 18v2h14v-2H5z"/>
-        </svg>
-        Download PDF Portfolio
+    <div class="glass-tile-actions">
+      <!-- Universal Mobile Download Link via PDF.js Engine -->
+      <a href="https://mozilla.github.io/pdf.js/web/viewer.html?file=https://raw.githubusercontent.com/makkarigroup/makkari-constructions-website-/1a47f40f168740470db4d0073f40f8820b2ddde9/MAKKARI%20CONSTRUCTIONS%20PORTFOLIO%20copy.pdf" target="_blank" rel="noopener noreferrer" class="btn-glass-primary">
+        <svg viewBox="0 0 24 24"><path d="M19 9h-4V3H9v6H5l7 7 7-7zM5 18v2h14v-2H5z"/></svg>
+        Download / Open PDF
       </a>
+      
+      <!-- Mobile-Compatible Inline Preview Toggle -->
+      <button onclick="toggleMobilePdf()" class="btn-glass-secondary" id="mobileToggleBtn">
+        <svg viewBox="0 0 24 24"><path d="M12 4.5C7 4.5 2.73 7.61 1 12c1.73 4.39 6 7.5 11 7.5s9.27-3.11 11-7.5c-1.73-4.39-6-7.5-11-7.5zM12 17c-2.76 0-5-2.24-5-5s2.24-5 5-5 5 2.24 5 5-2.24 5-5 5zm0-8c-1.66 0-3 1.34-3 3s1.34 3 3 3 3-1.34 3-3-1.34-3-3-3z"/></svg>
+        <span id="mobileBtnText">Preview Inline</span>
+      </button>
     </div>
   </div>
-</section>
 
- 
+  <div class="pdf-viewer-container" id="mobilePdfWrapper">
+    <iframe id="mobilePdfFrame"></iframe>
+  </div>
+</div>
+
+<script>
+  function toggleMobilePdf() {
+    const wrapper = document.getElementById('mobilePdfWrapper');
+    const frame = document.getElementById('mobilePdfFrame');
+    const btnText = document.getElementById('mobileBtnText');
+    const pdfJsViewerUrl = "https://mozilla.github.io/pdf.js/web/viewer.html?file=https://raw.githubusercontent.com/makkarigroup/makkari-constructions-website-/1a47f40f168740470db4d0073f40f8820b2ddde9/MAKKARI%20CONSTRUCTIONS%20PORTFOLIO%20copy.pdf";
+
+    if (wrapper.style.display === 'block') {
+      wrapper.style.display = 'none';
+      btnText.textContent = 'Preview Inline';
+    } else {
+      if (!frame.src) {
+        frame.src = pdfJsViewerUrl;
+      }
+      wrapper.style.display = 'block';
+      btnText.textContent = 'Close Preview';
+    }
+  }
+</script>
 
   <!-- Counter Animation Script -->
   <script>
