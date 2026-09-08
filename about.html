@@ -1,388 +1,33 @@
-
-<header class="site-header" id="makkari-auto-header" role="banner">
-  <div class="nav-container">
-
-    <a href="index.html" class="brand-container" aria-label="Go to Homepage">
-      <img src="https://lh3.googleusercontent.com/d/1RjhoHvjH6DbnNqLOpCNQUOySmpLD2EPv" alt="Company Logo" class="brand-logo-img">
-    </a>
-
-    <button class="mobile-toggle" id="mobile-toggle" aria-expanded="false" aria-controls="nav-menu" aria-label="Open navigation menu">
-      <span class="bar"></span>
-      <span class="bar"></span>
-      <span class="bar"></span>
-    </button>
-
-    <nav aria-label="Main navigation">
-      <ul class="nav-menu" id="nav-menu">
-        <li class="nav-item">
-          <a href="index.html" class="nav-link">Home</a>
-        </li>
-        <li class="nav-item">
-          <a href="about.html" class="nav-link">About Us</a>
-        </li>
-        <li class="nav-item">
-          <a href="services.html" class="nav-link">Services</a>
-        </li>
-        <li class="nav-item">
-          <a href="projects.html" class="nav-link">Projects</a>
-        </li>
-        <li class="nav-item">
-          <a href="estimator.html" class="nav-link">Estimator Modules</a>
-        </li>
-        <li class="nav-item">
-          <a href="contact.html" class="nav-link highlight">Contact Us</a>
-        </li>
-      </ul>
-    </nav>
-
-  </div>
-</header>
-
-<style>
-  :root {
-    --brand-navy: #152F4E;
-    --brand-red: #E52330;
-    --brand-red-hover: #c41c27;
-    --glass-bg: rgba(255, 255, 255, 0.75);
-    --glass-bg-scrolled: rgba(255, 255, 255, 0.9);
-    --glass-border: rgba(255, 255, 255, 0.5);
-    --glass-hover: rgba(21, 47, 78, 0.08);
-    --text-color: #152F4E;
-    --header-height: clamp(60px, 7vh, 75px);
-    --shadow-glass: 0 8px 32px 0 rgba(0, 0, 0, 0.12);
-    --transition-speed: 0.35s;
-    --ease-spring: cubic-bezier(0.175, 0.885, 0.32, 1.275);
-  }
-
-  /* Floating Glass Bar with Entrance Animation */
-  .site-header {
-    position: fixed;
-    top: 8px;
-    left: 50%;
-    transform: translateX(-50%);
-    width: min(92%, 1150px);
-    height: var(--header-height);
-    z-index: 1000;
-    border-radius: 100px;
-    
-    background: var(--glass-bg);
-    backdrop-filter: blur(16px);
-    -webkit-backdrop-filter: blur(16px);
-    border: 1px solid var(--glass-border);
-    box-shadow: var(--shadow-glass);
-    
-    /* Initial entrance state */
-    opacity: 0;
-    animation: headerEntrance 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
-    transition: top var(--transition-speed) ease, 
-                background var(--transition-speed) ease, 
-                box-shadow var(--transition-speed) ease,
-                border-color var(--transition-speed) ease;
-  }
-
-  @keyframes headerEntrance {
-    0% {
-      opacity: 0;
-      transform: translate(-50%, -25px);
-    }
-    100% {
-      opacity: 1;
-      transform: translate(-50%, 0);
-    }
-  }
-
-  .site-header.scrolled {
-    background: var(--glass-bg-scrolled);
-    border-color: rgba(255, 255, 255, 0.8);
-    box-shadow: 0 12px 35px 0 rgba(0, 0, 0, 0.18);
-    top: 12px;
-  }
-
-  .nav-container {
-    width: 100%;
-    height: 100%;
-    margin: 0 auto;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 0 clamp(1.2rem, 3vw, 2rem);
-    position: relative;
-  }
-
-  /* Brand Logo Animations */
-  .brand-container {
-    display: flex;
-    align-items: center;
-    text-decoration: none;
-    height: 100%;
-    border-radius: 50px;
-  }
-
-  .brand-logo-img {
-    height: clamp(32px, 4.5vh, 42px);
-    width: auto;
-    object-fit: contain;
-    transition: transform 0.3s var(--ease-spring);
-  }
-
-  .brand-container:hover .brand-logo-img {
-    transform: scale(1.08) rotate(-1.5deg);
-  }
-
-  /* Desktop Menu & Staggered Link Animations */
-  .nav-menu {
-    display: flex;
-    list-style: none;
-    gap: clamp(0.3rem, 1vw, 0.8rem);
-    align-items: center;
-  }
-
-  /* Cascade menu links on page load */
-  .nav-item {
-    opacity: 0;
-    animation: navItemFade 0.5s ease forwards;
-  }
-
-  .nav-item:nth-child(1) { animation-delay: 0.2s; }
-  .nav-item:nth-child(2) { animation-delay: 0.27s; }
-  .nav-item:nth-child(3) { animation-delay: 0.34s; }
-  .nav-item:nth-child(4) { animation-delay: 0.41s; }
-  .nav-item:nth-child(5) { animation-delay: 0.48s; }
-  .nav-item:nth-child(6) { animation-delay: 0.55s; }
-
-  @keyframes navItemFade {
-    from {
-      opacity: 0;
-      transform: translateY(-8px);
-    }
-    to {
-      opacity: 1;
-      transform: translateY(0);
-    }
-  }
-
-  .nav-link {
-    position: relative;
-    color: var(--text-color);
-    text-decoration: none;
-    font-size: clamp(0.85rem, 0.95vw, 0.95rem);
-    font-weight: 600;
-    padding: 0.55rem 1.1rem;
-    border-radius: 50px;
-    transition: color var(--transition-speed) ease, 
-                background-color var(--transition-speed) ease, 
-                transform var(--transition-speed) var(--ease-spring);
-    white-space: nowrap;
-    display: inline-block;
-  }
-
-  .nav-link:hover, 
-  .nav-link:focus-visible {
-    background-color: var(--glass-hover);
-    color: var(--brand-navy);
-    transform: translateY(-2px);
-    outline: none;
-  }
-
-  .nav-link.active-page {
-    background-color: rgba(21, 47, 78, 0.12);
-    color: var(--brand-navy);
-  }
-
-  .nav-link.highlight {
-    background-color: var(--brand-red);
-    color: #FFFFFF;
-    box-shadow: 0 4px 15px rgba(229, 35, 48, 0.3);
-    transition: all var(--transition-speed) ease;
-  }
-
-  .nav-link.highlight:hover {
-    background-color: var(--brand-red-hover);
-    color: #FFFFFF;
-    transform: translateY(-2px) scale(1.03);
-    box-shadow: 0 6px 20px rgba(229, 35, 48, 0.45);
-  }
-
-  /* Mobile Toggle Bar Transitions */
-  .mobile-toggle {
-    display: none;
-    flex-direction: column;
-    justify-content: space-between;
-    width: 26px;
-    height: 18px;
-    background: transparent;
-    border: none;
-    cursor: pointer;
-    padding: 0;
-    margin-left: auto;
-    z-index: 101;
-  }
-
-  .mobile-toggle .bar {
-    height: 2px;
-    width: 100%;
-    background-color: var(--text-color);
-    border-radius: 2px;
-    transition: transform var(--transition-speed) var(--ease-spring), 
-                opacity var(--transition-speed) ease;
-  }
-
-  .mobile-toggle.active .bar:nth-child(1) {
-    transform: translateY(8px) rotate(45deg);
-  }
-  .mobile-toggle.active .bar:nth-child(2) {
-    opacity: 0;
-    transform: translateX(-10px);
-  }
-  .mobile-toggle.active .bar:nth-child(3) {
-    transform: translateY(-8px) rotate(-45deg);
-  }
-
-  /* Responsive Mobile Menu Dropdown */
-  @media (max-width: 900px) {
-    .mobile-toggle {
-      display: flex;
-    }
-
-    .nav-menu {
-      position: absolute;
-      top: calc(100% + 12px);
-      right: 0;
-      width: 100%;
-      max-width: 280px;
-      background: rgba(255, 255, 255, 0.95);
-      backdrop-filter: blur(20px);
-      -webkit-backdrop-filter: blur(20px);
-      flex-direction: column;
-      align-items: stretch;
-      opacity: 0;
-      visibility: hidden;
-      transform: translateY(-15px) scale(0.95);
-      transition: opacity var(--transition-speed) ease,
-                  transform var(--transition-speed) var(--ease-spring),
-                  visibility var(--transition-speed) ease;
-      box-shadow: 0 16px 32px rgba(0, 0, 0, 0.15);
-      border-radius: 20px;
-      border: 1px solid var(--glass-border);
-      padding: 0.5rem 0;
-      overflow: hidden;
-    }
-
-    .nav-menu.active {
-      opacity: 1;
-      visibility: visible;
-      transform: translateY(0) scale(1);
-    }
-
-    .nav-item {
-      animation: none;
-      opacity: 0;
-      transform: translateX(15px);
-      transition: opacity 0.3s ease, transform 0.3s ease;
-    }
-
-    .nav-menu.active .nav-item {
-      opacity: 1;
-      transform: translateX(0);
-    }
-
-    .nav-menu.active .nav-item:nth-child(1) { transition-delay: 0.05s; }
-    .nav-menu.active .nav-item:nth-child(2) { transition-delay: 0.10s; }
-    .nav-menu.active .nav-item:nth-child(3) { transition-delay: 0.15s; }
-    .nav-menu.active .nav-item:nth-child(4) { transition-delay: 0.20s; }
-    .nav-menu.active .nav-item:nth-child(5) { transition-delay: 0.25s; }
-    .nav-menu.active .nav-item:nth-child(6) { transition-delay: 0.30s; }
-
-    .nav-link {
-      display: block;
-      color: var(--text-color);
-      padding: 0.85rem 1.4rem;
-      border-radius: 0;
-      text-align: left;
-      transform: none !important;
-    }
-
-    .nav-link.highlight {
-      text-align: center;
-      margin: 0.5rem 1rem;
-      border-radius: 50px;
-    }
-  }
-</style>
-
-<script>
-  document.addEventListener("DOMContentLoaded", function () {
-    const header = document.getElementById('makkari-auto-header');
-    const mobileToggle = document.getElementById('mobile-toggle');
-    const navMenu = document.getElementById('nav-menu');
-
-    const handleScroll = () => {
-      if (window.scrollY > 20) {
-        header.classList.add('scrolled');
-      } else {
-        header.classList.remove('scrolled');
-      }
-    };
-
-    window.addEventListener('scroll', handleScroll);
-    handleScroll();
-
-    const currentPath = window.location.pathname.toLowerCase();
-    const navLinks = document.querySelectorAll('.nav-link');
-
-    navLinks.forEach(link => {
-      const hrefValue = link.getAttribute('href').toLowerCase();
-      const isHome = (hrefValue === 'index.html' && (currentPath === '/' || currentPath.endsWith('index.html')));
-      const isExactMatch = currentPath.includes(hrefValue.replace('.html', ''));
-
-      if (isHome || (hrefValue !== 'index.html' && isExactMatch)) {
-        link.classList.add('active-page');
-        link.setAttribute('aria-current', 'page');
-      }
-    });
-
-    if (mobileToggle && navMenu) {
-      const toggleMenu = (forceClose = false) => {
-        const isClosing = forceClose || navMenu.classList.contains('active');
-        if (isClosing) {
-          navMenu.classList.remove('active');
-          mobileToggle.classList.remove('active');
-          mobileToggle.setAttribute('aria-expanded', 'false');
-        } else {
-          navMenu.classList.add('active');
-          mobileToggle.classList.add('active');
-          mobileToggle.setAttribute('aria-expanded', 'true');
-        }
-      };
-
-      mobileToggle.addEventListener('click', (e) => {
-        e.stopPropagation();
-        toggleMenu();
-      });
-
-      document.addEventListener('click', (e) => {
-        if (!header.contains(e.target)) {
-          toggleMenu(true);
-        }
-      });
-    }
-  });
-</script>
-
-<!----------------------------------------->
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>About Us | Makkari Constructions & Developers</title>
+<link rel="icon" type="image/png" href="https://raw.githubusercontent.com/makkarigroup/makkari-constructions-website-/refs/heads/main/Fevicon.png">
     <!-- Google Fonts: Archivo -->
-    <link href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Archivo:ital,wght@0,400..800;1,400..800&display=swap" rel="stylesheet">
+    
     <!-- Font Awesome Icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    
+
     <style>
         :root {
+            --brand-navy: #152F4E;
+            --brand-red: #E52330;
+            --brand-red-hover: #c41c27;
+            --glass-bg: rgba(255, 255, 255, 0.75);
+            --glass-bg-scrolled: rgba(255, 255, 255, 0.9);
+            --glass-border: rgba(255, 255, 255, 0.5);
+            --glass-hover: rgba(21, 47, 78, 0.08);
+            --text-color: #152F4E;
+            --header-height: clamp(60px, 7vh, 75px);
+            --shadow-glass: 0 8px 32px 0 rgba(0, 0, 0, 0.12);
+            --transition-speed: 0.35s;
+            --ease-spring: cubic-bezier(0.175, 0.885, 0.32, 1.275);
+
             --primary-color: #152f4e;   /* Brand Blue */
             --accent-color: #e52330;    /* Brand Red */
             --white: #ffffff;           /* Pure White */
@@ -392,6 +37,13 @@
             --text-muted: #475569;
             --card-shadow: 0 10px 30px rgba(21, 47, 78, 0.05);
             --card-shadow-hover: 0 20px 40px rgba(21, 47, 78, 0.12);
+
+            --brand-primary: #152f4e;   /* Deep Navy */
+            --brand-accent: #e52330;    /* Vibrant Red */
+            --brand-light: #f9f9f9;     /* Light Gray Background */
+            --brand-white: #ffffff;     /* Pure White */
+            --font-heading: 'Archivo', sans-serif;
+            --font-body: 'Archivo', sans-serif;
         }
 
         * {
@@ -406,7 +58,7 @@
             line-height: 1.6;
             background-color: var(--white);
             -webkit-font-smoothing: antialiased;
-            padding-top: 30px;
+            padding-top: 90px;
         }
 
         h1, h2, h3, h4, h5 {
@@ -415,13 +67,266 @@
             font-weight: 700;
         }
 
+        /* -------------------------------------------------------------
+           HEADER & NAVIGATION
+        ------------------------------------------------------------- */
+        .site-header {
+            position: fixed;
+            top: 8px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: min(92%, 1150px);
+            height: var(--header-height);
+            z-index: 1000;
+            border-radius: 100px;
+            
+            background: var(--glass-bg);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border: 1px solid var(--glass-border);
+            box-shadow: var(--shadow-glass);
+            
+            opacity: 0;
+            animation: headerEntrance 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+            transition: top var(--transition-speed) ease, 
+                        background var(--transition-speed) ease, 
+                        box-shadow var(--transition-speed) ease,
+                        border-color var(--transition-speed) ease;
+        }
+
+        @keyframes headerEntrance {
+            0% {
+                opacity: 0;
+                transform: translate(-50%, -25px);
+            }
+            100% {
+                opacity: 1;
+                transform: translate(-50%, 0);
+            }
+        }
+
+        .site-header.scrolled {
+            background: var(--glass-bg-scrolled);
+            border-color: rgba(255, 255, 255, 0.8);
+            box-shadow: 0 12px 35px 0 rgba(0, 0, 0, 0.18);
+            top: 12px;
+        }
+
+        .nav-container {
+            width: 100%;
+            height: 100%;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 clamp(1.2rem, 3vw, 2rem);
+            position: relative;
+        }
+
+        .brand-container {
+            display: flex;
+            align-items: center;
+            text-decoration: none;
+            height: 100%;
+            border-radius: 50px;
+        }
+
+        .brand-logo-img {
+            height: clamp(32px, 4.5vh, 42px);
+            width: auto;
+            object-fit: contain;
+            transition: transform 0.3s var(--ease-spring);
+        }
+
+        .brand-container:hover .brand-logo-img {
+            transform: scale(1.08) rotate(-1.5deg);
+        }
+
+        .nav-menu {
+            display: flex;
+            list-style: none;
+            gap: clamp(0.3rem, 1vw, 0.8rem);
+            align-items: center;
+        }
+
+        .nav-item {
+            opacity: 0;
+            animation: navItemFade 0.5s ease forwards;
+        }
+
+        .nav-item:nth-child(1) { animation-delay: 0.2s; }
+        .nav-item:nth-child(2) { animation-delay: 0.27s; }
+        .nav-item:nth-child(3) { animation-delay: 0.34s; }
+        .nav-item:nth-child(4) { animation-delay: 0.41s; }
+        .nav-item:nth-child(5) { animation-delay: 0.48s; }
+        .nav-item:nth-child(6) { animation-delay: 0.55s; }
+
+        @keyframes navItemFade {
+            from {
+                opacity: 0;
+                transform: translateY(-8px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .nav-link {
+            position: relative;
+            color: var(--text-color);
+            text-decoration: none;
+            font-size: clamp(0.85rem, 0.95vw, 0.95rem);
+            font-weight: 600;
+            padding: 0.55rem 1.1rem;
+            border-radius: 50px;
+            transition: color var(--transition-speed) ease, 
+                        background-color var(--transition-speed) ease, 
+                        transform var(--transition-speed) var(--ease-spring);
+            white-space: nowrap;
+            display: inline-block;
+        }
+
+        .nav-link:hover, 
+        .nav-link:focus-visible {
+            background-color: var(--glass-hover);
+            color: var(--brand-navy);
+            transform: translateY(-2px);
+            outline: none;
+        }
+
+        .nav-link.active-page {
+            background-color: rgba(21, 47, 78, 0.12);
+            color: var(--brand-navy);
+        }
+
+        .nav-link.highlight {
+            background-color: var(--brand-red);
+            color: #FFFFFF;
+            box-shadow: 0 4px 15px rgba(229, 35, 48, 0.3);
+            transition: all var(--transition-speed) ease;
+        }
+
+        .nav-link.highlight:hover {
+            background-color: var(--brand-red-hover);
+            color: #FFFFFF;
+            transform: translateY(-2px) scale(1.03);
+            box-shadow: 0 6px 20px rgba(229, 35, 48, 0.45);
+        }
+
+        .mobile-toggle {
+            display: none;
+            flex-direction: column;
+            justify-content: space-between;
+            width: 26px;
+            height: 18px;
+            background: transparent;
+            border: none;
+            cursor: pointer;
+            padding: 0;
+            margin-left: auto;
+            z-index: 101;
+        }
+
+        .mobile-toggle .bar {
+            height: 2px;
+            width: 100%;
+            background-color: var(--text-color);
+            border-radius: 2px;
+            transition: transform var(--transition-speed) var(--ease-spring), 
+                        opacity var(--transition-speed) ease;
+        }
+
+        .mobile-toggle.active .bar:nth-child(1) {
+            transform: translateY(8px) rotate(45deg);
+        }
+        .mobile-toggle.active .bar:nth-child(2) {
+            opacity: 0;
+            transform: translateX(-10px);
+        }
+        .mobile-toggle.active .bar:nth-child(3) {
+            transform: translateY(-8px) rotate(-45deg);
+        }
+
+        @media (max-width: 900px) {
+            .mobile-toggle {
+                display: flex;
+            }
+
+            .nav-menu {
+                position: absolute;
+                top: calc(100% + 12px);
+                right: 0;
+                width: 100%;
+                max-width: 280px;
+                background: rgba(255, 255, 255, 0.95);
+                backdrop-filter: blur(20px);
+                -webkit-backdrop-filter: blur(20px);
+                flex-direction: column;
+                align-items: stretch;
+                opacity: 0;
+                visibility: hidden;
+                transform: translateY(-15px) scale(0.95);
+                transition: opacity var(--transition-speed) ease,
+                            transform var(--transition-speed) var(--ease-spring),
+                            visibility var(--transition-speed) ease;
+                box-shadow: 0 16px 32px rgba(0, 0, 0, 0.15);
+                border-radius: 20px;
+                border: 1px solid var(--glass-border);
+                padding: 0.5rem 0;
+                overflow: hidden;
+            }
+
+            .nav-menu.active {
+                opacity: 1;
+                visibility: visible;
+                transform: translateY(0) scale(1);
+            }
+
+            .nav-item {
+                animation: none;
+                opacity: 0;
+                transform: translateX(15px);
+                transition: opacity 0.3s ease, transform 0.3s ease;
+            }
+
+            .nav-menu.active .nav-item {
+                opacity: 1;
+                transform: translateX(0);
+            }
+
+            .nav-menu.active .nav-item:nth-child(1) { transition-delay: 0.05s; }
+            .nav-menu.active .nav-item:nth-child(2) { transition-delay: 0.10s; }
+            .nav-menu.active .nav-item:nth-child(3) { transition-delay: 0.15s; }
+            .nav-menu.active .nav-item:nth-child(4) { transition-delay: 0.20s; }
+            .nav-menu.active .nav-item:nth-child(5) { transition-delay: 0.25s; }
+            .nav-menu.active .nav-item:nth-child(6) { transition-delay: 0.30s; }
+
+            .nav-link {
+                display: block;
+                color: var(--text-color);
+                padding: 0.85rem 1.4rem;
+                border-radius: 0;
+                text-align: left;
+                transform: none !important;
+            }
+
+            .nav-link.highlight {
+                text-align: center;
+                margin: 0.5rem 1rem;
+                border-radius: 50px;
+            }
+        }
+
+        /* -------------------------------------------------------------
+           PAGE LAYOUT & SECTIONS
+        ------------------------------------------------------------- */
         .container {
             max-width: 1280px;
             margin: 0 auto;
             padding: 0 24px;
         }
 
-        /* Section Title Setup */
         .section-title {
             text-align: center;
             margin-bottom: 35px;
@@ -450,9 +355,7 @@
             border-radius: 2px;
         }
 
-        /* -------------------------------------------------------------
-           1. ENGINEERING EXPERIENCE & CREDENTIALS (TOP BANNER POSITION)
-        ------------------------------------------------------------- */
+        /* 1. Credentials */
         .credentials-section {
             background-color: var(--light-bg);
             border-radius: 20px;
@@ -522,7 +425,6 @@
             line-height: 1.5;
         }
 
-        /* Value Banner */
         .value-banner {
             background: var(--primary-color);
             color: var(--white);
@@ -546,9 +448,7 @@
             line-height: 1.7;
         }
 
-        /* -------------------------------------------------------------
-           2. ABOUT US SECTION
-        ------------------------------------------------------------- */
+        /* 2. About Us */
         .about-section {
             margin-bottom: 60px;
         }
@@ -566,7 +466,6 @@
             margin-bottom: 16px;
         }
 
-        /* Mission, Vision, Values Grid */
         .mvv-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
@@ -604,9 +503,7 @@
             font-size: 0.94rem;
         }
 
-        /* -------------------------------------------------------------
-           3. OUR EXPERTISE (MODERN ATTRACTIVE TILES)
-        ------------------------------------------------------------- */
+        /* 3. Expertise */
         .expertise-section {
             margin-bottom: 60px;
         }
@@ -681,9 +578,7 @@
             color: var(--white);
         }
 
-        /* -------------------------------------------------------------
-           4. LEADERSHIP & TEAM
-        ------------------------------------------------------------- */
+        /* 4. Leadership & Team */
         .split-team-wrapper {
             display: grid;
             grid-template-columns: 1fr 1fr;
@@ -727,7 +622,6 @@
             line-height: 1.65;
         }
 
-        /* Key Members Borderless Grid */
         .key-members-block {
             margin-top: 35px;
             padding-top: 30px;
@@ -760,11 +654,193 @@
             filter: drop-shadow(0 6px 12px rgba(21, 47, 78, 0.1));
         }
 
-        /* Responsive Design */
+        .member-details {
+            grid-column: 1 / -1;
+            margin-top: 10px;
+        }
+
+        .member-name {
+            font-size: 1.1rem;
+            color: var(--primary-color);
+            margin-bottom: 4px;
+        }
+
+        .member-title {
+            font-weight: 600;
+            color: var(--accent-color);
+            font-size: 0.95rem;
+            margin-bottom: 2px;
+        }
+
+        .member-subtitle {
+            font-size: 0.9rem;
+            color: var(--text-muted);
+            margin-bottom: 6px;
+        }
+
+        .member-role {
+            font-size: 0.9rem;
+            color: var(--text-dark);
+        }
+
+        /* -------------------------------------------------------------
+           FLOATING CONTACT BUTTONS
+        ------------------------------------------------------------- */
+        .floating-contact-container {
+            position: fixed;
+            top: 80%;
+            right: 12px;
+            transform: translateY(-50%);
+            display: none;
+            flex-direction: column;
+            gap: 10px;
+            z-index: 9999;
+        }
+
+        @media screen and (max-width: 768px) {
+            .floating-contact-container {
+                display: flex !important;
+            }
+        }
+
+        /* -------------------------------------------------------------
+           FOOTER
+        ------------------------------------------------------------- */
+        footer, 
+        .site-footer {
+            width: min(100%, 1400px);
+            margin: 40px auto 0 auto;
+            padding: 60px 40px 20px;
+            background-color: var(--brand-primary);
+            color: var(--brand-white);
+            border-radius: 0px;
+            box-sizing: border-box;
+            position: relative;
+            font-size: 15px;
+            line-height: 1.6;
+        }
+
+        .footer-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 40px;
+        }
+
+        .footer-brand {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+
+        .footer-logo {
+            max-width: 220px;
+            height: auto;
+            display: block;
+        }
+
+        .brand-description {
+            color: rgba(255, 255, 255, 0.85);
+            font-size: 14px;
+        }
+
+        .footer-heading {
+            font-family: var(--font-heading);
+            font-size: 18px;
+            font-weight: 700;
+            margin-bottom: 20px;
+            position: relative;
+            padding-bottom: 8px;
+            color: var(--brand-white);
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .footer-heading::after {
+            content: '';
+            position: absolute;
+            left: 0;
+            bottom: 0;
+            width: 40px;
+            height: 3px;
+            background-color: var(--brand-accent);
+            border-radius: 2px;
+        }
+
+        .footer-links ul,
+        .contact-info {
+            list-style: none;
+        }
+
+        .footer-links li {
+            margin-bottom: 12px;
+        }
+
+        .footer-links a {
+            color: rgba(255, 255, 255, 0.85);
+            text-decoration: none;
+            transition: all 0.3s ease;
+            display: inline-block;
+        }
+
+        .footer-links a:hover {
+            color: var(--brand-accent);
+            transform: translateX(5px);
+        }
+
+        .contact-info li {
+            margin-bottom: 15px;
+            color: rgba(255, 255, 255, 0.85);
+            display: flex;
+            align-items: flex-start;
+            gap: 10px;
+        }
+
+        .contact-info a {
+            color: rgba(255, 255, 255, 0.85);
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        .contact-info a:hover {
+            color: var(--brand-accent);
+        }
+
+        .footer-contact .icon {
+            color: var(--brand-accent);
+            font-weight: bold;
+            flex-shrink: 0;
+        }
+
+        .footer-bottom {
+            max-width: 1200px;
+            margin: 40px auto 0;
+            padding-top: 20px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            text-align: center;
+            font-size: 13px;
+            color: rgba(255, 255, 255, 0.6);
+        }
+
+        /* -------------------------------------------------------------
+           RESPONSIVE DESIGN ADJUSTMENTS
+        ------------------------------------------------------------- */
         @media (max-width: 992px) {
             .split-team-wrapper {
                 grid-template-columns: 1fr;
                 gap: 25px;
+            }
+        }
+
+        @media (max-width: 768px) {
+            footer, 
+            .site-footer {
+                width: 100%;
+                padding: 40px 20px 30px !important;
+            }
+            .footer-container {
+                gap: 30px;
             }
         }
 
@@ -785,13 +861,39 @@
 </head>
 <body>
 
-   
-    <div class="container">
+    <!-- HEADER / NAVIGATION -->
+    <header class="site-header" id="makkari-auto-header" role="banner">
+        <div class="nav-container">
+            <a href="index.html" class="brand-container" aria-label="Go to Homepage">
+                <img src="https://lh3.googleusercontent.com/d/1RjhoHvjH6DbnNqLOpCNQUOySmpLD2EPv" alt="Company Logo" class="brand-logo-img">
+            </a>
+
+            <button class="mobile-toggle" id="mobile-toggle" aria-expanded="false" aria-controls="nav-menu" aria-label="Open navigation menu">
+                <span class="bar"></span>
+                <span class="bar"></span>
+                <span class="bar"></span>
+            </button>
+
+            <nav aria-label="Main navigation">
+                <ul class="nav-menu" id="nav-menu">
+                    <li class="nav-item"><a href="index.html" class="nav-link">Home</a></li>
+                    <li class="nav-item"><a href="about.html" class="nav-link">About Us</a></li>
+                    <li class="nav-item"><a href="services.html" class="nav-link">Services</a></li>
+                    <li class="nav-item"><a href="projects.html" class="nav-link">Projects</a></li>
+                    <li class="nav-item"><a href="estimator.html" class="nav-link">Estimator Modules</a></li>
+                    <li class="nav-item"><a href="contact.html" class="nav-link highlight">Contact Us</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <!-- MAIN PAGE CONTENT -->
+    <main class="container">
         
-        <!-- SECTION 1: ENGINEERING EXPERIENCE & CREDENTIALS (PLACED FIRST ABOVE ABOUT US) -->
+        <!-- SECTION 1: ENGINEERING EXPERIENCE & CREDENTIALS -->
         <section class="credentials-section">
             <div class="section-title">
-                <h2>Engineering Experience & Credentials</h2>
+                <h2>Engineering Experience &amp; Credentials</h2>
             </div>
 
             <div class="credentials-grid">
@@ -835,7 +937,7 @@
             <!-- Integrated Value Banner -->
             <div class="value-banner">
                 <h3>Engineering Expertise. Construction Excellence.</h3>
-                <p>Makkari Constructions & Developers brings together engineering expertise, construction capability, and professional consultancy to deliver reliable solutions across residential, commercial, institutional, and infrastructure projects.</p>
+                <p>Makkari Constructions &amp; Developers brings together engineering expertise, construction capability, and professional consultancy to deliver reliable solutions across residential, commercial, institutional, and infrastructure projects.</p>
             </div>
         </section>
 
@@ -877,7 +979,7 @@
 
             <!-- Category 1 -->
             <div class="expertise-category-title">
-                <i class="fas fa-city"></i> Building & Sector Developments
+                <i class="fas fa-city"></i> Building &amp; Sector Developments
             </div>
             <div class="expertise-grid-modern">
                 <div class="expertise-tile">
@@ -904,12 +1006,12 @@
 
             <!-- Category 2 -->
             <div class="expertise-category-title" style="margin-top: 35px;">
-                <i class="fas fa-gears"></i> Technical & Consultancy Services
+                <i class="fas fa-gears"></i> Technical &amp; Consultancy Services
             </div>
             <div class="expertise-grid-modern">
                 <div class="expertise-tile">
                     <div class="tile-icon"><i class="fas fa-file-shield"></i></div>
-                    <span>Building Permit & Ksmart Approvals</span>
+                    <span>Building Permit &amp; Ksmart Approvals</span>
                 </div>
                 <div class="expertise-tile">
                     <div class="tile-icon"><i class="fas fa-list-check"></i></div>
@@ -921,7 +1023,7 @@
                 </div>
                 <div class="expertise-tile">
                     <div class="tile-icon"><i class="fas fa-paint-roller"></i></div>
-                    <span>Renovation & Interior Works</span>
+                    <span>Renovation &amp; Interior Works</span>
                 </div>
                 <div class="expertise-tile">
                     <div class="tile-icon"><i class="fas fa-landmark"></i></div>
@@ -933,7 +1035,7 @@
         <!-- SECTION 4: LEADERSHIP & TEAM -->
         <section class="team-section">
             <div class="section-title">
-                <h2>Our Leadership & Team</h2>
+                <h2>Our Leadership &amp; Team</h2>
             </div>
 
             <div class="split-team-wrapper">
@@ -943,12 +1045,12 @@
                     <div class="founder-img-wrapper">
                         <img src="https://lh3.googleusercontent.com/d/1KNuXxnHiakGrTNp900LP3ICdVuoPFTfO=w800" alt="Founder and CEO">
                     </div>
-                    <p>My journey in construction began after completing my Bachelor of Engineering in Civil Engineering. From the beginning, my vision was not just to complete projects, but to deliver developments that create lasting value for people and communities.</p>
-                    <p>I first worked with ICICI Bank, where I was introduced to the financial and technical aspects of construction projects. Soon after, I moved to Qatar to join Hamton International as an Assistant Project Engineer. There, I gained hands-on experience from the ground up, managing major works including a 100-villa residential development and the Al Andalus School project. These responsibilities shaped my ability to handle large-scale projects with precision and accountability.</p>
-                    <p>On returning to India, I joined Malabar Medical College as a Project Engineer, handling significant institutional developments. Since then, they have continued with me as a valued client, reflecting the strong, trust-based partnerships that guide my career.</p>
-                    <p>A major turning point came when I obtained my PWD Contractor License, establishing Makkari Constructions and Developers with a focus on premium residential, commercial, and institutional projects.</p>
-                    <p>Over time, I strengthened my professional standing by becoming a Chartered Engineer (C.Eng, IEI) and completing my Master of Engineering in Structural Engineering, qualifications that reinforced both my technical expertise and leadership in the field.</p>
-                    <p>Today, through Makkari Constructions and Developers, I remain committed to one vision: to create sustainable, innovative, and trusted developments that stand the test of time.</p>
+                    <p>His journey in construction began after completing his Bachelor of Engineering in Civil Engineering. From the start, his vision was to go beyond simply completing projects—he set out to deliver developments that create lasting value for people and communities.</p>
+                    <p>He began his career with ICICI Bank, gaining critical insight into the financial and technical aspects of project execution. Shortly after, he relocated to Qatar as an Assistant Project Engineer with Hamton International, gaining hands-on experience on large-scale developments, including a 100-villa residential project and the Al Andalus School. These site responsibilities honed his ability to manage complex operations with precision, accountability, and technical rigor.</p>
+                    <p>Upon returning to India, he joined Malabar Medical College as a Project Engineer to oversee major institutional developments. They continue to be a valued client today—a testament to the long-term, trust-based partnerships that define his professional approach.</p>
+                    <p>A major milestone came in 2019 when he secured his PWD Contractor License and founded Makkari Constructions &amp; Developers, specializing in premium residential, commercial, and institutional projects across Kerala.</p>
+                    <p>To further reinforce his commitment to engineering standards, he earned his credentials as a Chartered Engineer (C.Eng, IEI) and completed his Master’s degree in Structural Engineering, holding a Structural Engineering License for statutory verification, stability certificates, and structural compliance. This technical foundation ensures that every project directed by his firm meets rigorous safety and performance benchmarks.</p>
+                    <p>Today, through Makkari Constructions &amp; Developers, he remains dedicated to delivering sustainable, innovative, and trusted engineering solutions built to stand the test of time.</p>
                 </div>
 
                 <!-- RIGHT COLUMN: Co-Founder & Key Team Members -->
@@ -958,9 +1060,9 @@
                         <img src="https://lh3.googleusercontent.com/d/1uKc4N9B_K8d6IY-tJqyuvbYPTH5jcKca=w800" alt="Co Founder Babeesh MC">
                     </div>
                     <p>He is a PWD Licensed Contractor with extensive experience in the construction industry. In the past, he has worked with several major construction companies, gaining deep technical knowledge and hands-on expertise in both public and private sector projects.</p>
-                    <p>Currently, he is independently managing contracting works with Malabar Medical College Hospital, leading projects with a focus on quality, precision, and timely execution. His professional dedication and practical approach continue to strengthen Makkari Constructions’ reputation for excellence in construction and development.</p>
+                    <p>Currently, he is independently managing contracting works for major institutional developments, leading projects with a focus on quality, precision, and timely execution. His professional dedication and practical approach continue to strengthen Makkari Constructions’ reputation for excellence in construction and development.</p>
 
-                    <!-- Key Team Members (Borderless, Scaled Photos) -->
+                    <!-- Key Team Members -->
                     <div class="key-members-block">
                         <div class="staff-grid-compact">
                             <!-- Sruthi -->
@@ -971,6 +1073,18 @@
                             <div class="borderless-photo-wrapper">
                                 <img src="https://lh3.googleusercontent.com/d/1X8lQRGiyKPcW1g4tvYk5p8spJDnLvgep=w500" alt="Team Member">
                             </div>
+                 <div class="key-members-block">
+                               
+                            <!-- Er. Shafeeh -->
+                            <div class="borderless-photo-wrapper">
+                                <img src="https://cdn.jsdelivr.net/gh/makkarigroup/makkari-constructions-website-@43c5f4ae6a3a92ce70dc735cf337e3c2e4075b39/Shafeeh" alt="Er. Shafeeh">
+                            </div>
+                            <div class="member-details">
+                                <h4 class="member-name">Er. Shafeeh</h4>
+                                <p class="member-title">Associate Engineer</p>
+                                <p class="member-subtitle">Lead Engineer — Jeevana Builders</p>
+                                <p class="member-role"><strong>Role:</strong> External Structural Consultation, Technical Reviews &amp; Engineering Support</p>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -978,320 +1092,30 @@
             </div>
         </section>
 
+    </main>
+
+    <!-- RIGHT FLOATING CONTACT BUTTONS (Mobile View) -->
+    <div class="floating-contact-container">
+        <!-- WhatsApp -->
+        <a href="https://wa.me/918281228549" target="_blank" rel="noopener noreferrer" aria-label="Contact on WhatsApp" style="width: 48px; height: 48px; background-color: #25D366; border-radius: 8px; display: flex; align-items: center; justify-content: center; box-shadow: 0 4px 12px rgba(0,0,0,0.25);">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="#ffffff" style="width: 24px; height: 24px;">
+                <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.521.151-.172.2-.296.3-.495.099-.198.05-.372-.025-.521-.075-.148-.669-1.611-.916-2.206-.242-.579-.487-.501-.669-.51l-.57-.01c-.198 0-.52.074-.792.372s-1.04 1.016-1.04 2.479 1.065 2.876 1.213 3.074c.149.198 2.096 3.2 5.077 4.487.709.306 1.263.489 1.694.626.712.226 1.36.194 1.872.118.572-.085 1.787-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.99c-.002 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/>
+            </svg>
+        </a>
+        <!-- Call -->
+        <a href="tel:+918281228549" aria-label="Call Us" style="width: 48px; height: 48px; background-color: #152f4e; border-radius: 8px; display: flex; align-items: center; justify-content: center; box-shadow: 0 4px 12px rgba(0,0,0,0.25);">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="#ffffff" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" style="width: 22px; height: 22px;">
+                <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path>
+            </svg>
+        </a>
     </div>
 
-    <!-- Mobile & Android WebView Safe Counter Script -->
-    <script>
-        document.addEventListener("DOMContentLoaded", () => {
-            const counters = document.querySelectorAll(".counter");
-            
-            const animateCounter = (counter) => {
-                const target = parseInt(counter.getAttribute("data-target"), 10);
-                if (isNaN(target)) return;
-                
-                const duration = 1500;
-                const startTime = performance.now();
-                
-                const update = (currentTime) => {
-                    const elapsed = currentTime - startTime;
-                    const progress = Math.min(elapsed / duration, 1);
-                    
-                    const easeOut = 1 - Math.pow(1 - progress, 3);
-                    const currentCount = Math.floor(easeOut * target);
-                    
-                    counter.textContent = currentCount;
-                    
-                    if (progress < 1) {
-                        requestAnimationFrame(update);
-                    } else {
-                        counter.textContent = target;
-                    }
-                };
-                
-                requestAnimationFrame(update);
-            };
-
-            if ('IntersectionObserver' in window) {
-                const observer = new IntersectionObserver((entries, obs) => {
-                    entries.forEach(entry => {
-                        if (entry.isIntersecting) {
-                            const targetCounters = entry.target.querySelectorAll('.counter');
-                            targetCounters.forEach(c => animateCounter(c));
-                            obs.unobserve(entry.target);
-                        }
-                    });
-                }, { threshold: 0.1 });
-
-                const targetSection = document.querySelector(".credentials-section");
-                if (targetSection) observer.observe(targetSection);
-            } else {
-                counters.forEach(c => animateCounter(c));
-            }
-        });
-    </script>
-<script type="application/ld+json">
-{
-  "@context": "https://schema.org",
-  "@type": "GeneralContractor",
-  "name": "Makkari Constructions & Developers",
-  "url": "https://www.makkariconstructions.com/",
-  "logo": "https://lh3.googleusercontent.com/d/1Yx22rsiW7IBqtROqXqjXs8rGScuLonVR",
-  "image": "https://lh3.googleusercontent.com/d/1Yx22rsiW7IBqtROqXqjXs8rGScuLonVR",
-  "description": "Turnkey residential and commercial construction, architectural design consultation, PWD contracting, structural verification sign-offs, and K-SMART building permit approval services in Kozhikode, Kerala.",
-  "address": {
-    "@type": "PostalAddress",
-    "addressLocality": "Kozhikode",
-    "addressRegion": "Kerala",
-    "addressCountry": "IN"
-  },
-  "areaServed": {
-    "@type": "State",
-    "name": "Kerala"
-  },
-  "knowsAbout": [
-    "Turnkey Residential Construction",
-    "Commercial Complex Execution",
-    "Architectural Planning & Spatial Design",
-    "K-SMART Building Permit Approvals",
-    "Structural Engineering Verification",
-    "PWD Civil Contracting",
-    "Industrial Storage & Master Planning"
-  ]
-}
-</script>
-</body>
-</html>
-
-<!-- Right Floating Contact Buttons -->
-<div class="floating-contact-container" style="position: fixed; top: 80%; right: 12px; transform: translateY(-50%); flex-direction: column; gap: 10px; z-index: 9999;">
-  <!-- WhatsApp -->
-  <a href="https://wa.me/918281228549" target="_blank" rel="noopener noreferrer" style="width: 48px; height: 48px; background-color: #25D366; border-radius: 8px; display: flex; align-items: center; justify-content: center; box-shadow: 0 4px 12px rgba(0,0,0,0.25);">
-    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="#ffffff" style="width: 24px; height: 24px;">
-      <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.521.151-.172.2-.296.3-.495.099-.198.05-.372-.025-.521-.075-.148-.669-1.611-.916-2.206-.242-.579-.487-.501-.669-.51l-.57-.01c-.198 0-.52.074-.792.372s-1.04 1.016-1.04 2.479 1.065 2.876 1.213 3.074c.149.198 2.096 3.2 5.077 4.487.709.306 1.263.489 1.694.626.712.226 1.36.194 1.872.118.572-.085 1.787-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.99c-.002 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/>
-    </svg>
-  </a>
-  <!-- Call -->
-  <a href="tel:+918281228549" style="width: 48px; height: 48px; background-color: #152f4e; border-radius: 8px; display: flex; align-items: center; justify-content: center; box-shadow: 0 4px 12px rgba(0,0,0,0.25);">
-    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="#ffffff" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" style="width: 22px; height: 22px;">
-      <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path>
-    </svg>
-  </a>
-</div>
-
-<style>
-  /* Hidden by default on large screens/desktops */
-  .floating-contact-container {
-    display: none !important;
-  }
-
-  /* Display only on mobile and small screens (768px wide or smaller) */
-  @media screen and (max-width: 768px) {
-    .floating-contact-container {
-      display: flex !important;
-    }
-  }
-</style>
-
-
- <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Footer Component - Makkari Constructions</title>
-    <!-- Google Fonts: Archivo -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Archivo:ital,wght@0,400..700;1,400..700&display=swap" rel="stylesheet">
-    
-    <style>
-        :root {
-            --brand-primary: #152f4e;   /* Deep Navy */
-            --brand-accent: #e52330;    /* Vibrant Red */
-            --brand-light: #f9f9f9;     /* Light Gray Background */
-            --brand-white: #ffffff;     /* Pure White */
-            --font-heading: 'Archivo', sans-serif;
-            --font-body: 'Archivo', sans-serif;
-        }
-        /* Container wrapping the footer area */
-footer, 
-.site-footer {
-  width: min(100%, 1400px);     /* Creates left & right gap/blank space */
-  margin: 40px auto 0 auto;     /* Auto-centers the card box */
-  padding: 40px;                 /* Inner spacing for content */
-  background-color: #152F4E;    /* Matching brand dark navy background */
-  border-radius: 0px;           /* Gives it a clean box appearance */
-  box-sizing: border-box;
-  position: relative;
-}
-
-/* Dark bottom space element */
-footer::after, 
-.site-footer::after {
-  content: '';
-  display: block;
-  position: auto;
-  left: -50vw;
-  right: -50vw;
-  bottom: -70px;
-   background-color: 
-  z-index: -1;
-}
-/* Mobile viewport adjustments */
-@media (max-width: 768px) {
-  footer, 
-  .site-footer {
-    width: 100%;
-    padding: 24px 20px;
-      padding-bottom: 30px !important;
-  }
-}
-        * {
-            box-sizing: border-box;
-            margin: 0;
-            padding: 0;
-        }
-
-        body {
-            font-family: var(--font-body);
-            background-color: var(--brand-light);
-        }
-
-        .site-footer {
-            background-color: var(--brand-primary);
-            color: var(--brand-white);
-            padding: 60px 20px 20px;
-            font-size: 15px;
-            line-height: 1.6;
-        }
-
-        .footer-container {
-            max-width: 1200px;
-            margin: 0 auto;
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 40px;
-        }
-
-        /* Company Info Section */
-        .footer-brand {
-            display: flex;
-            flex-direction: column;
-            gap: 15px;
-        }
-
-        .footer-logo {
-            max-width: 220px;
-            height: auto;
-            display: block;
-        }
-
-        .brand-description {
-            color: rgba(255, 255, 255, 0.85);
-            font-size: 14px;
-        }
-
-        /* Titles */
-        .footer-heading {
-            font-family: var(--font-heading);
-            font-size: 18px;
-            font-weight: 700;
-            margin-bottom: 20px;
-            position: relative;
-            padding-bottom: 8px;
-            color: var(--brand-white);
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
-        }
-
-        .footer-heading::after {
-            content: '';
-            position: absolute;
-            left: 0;
-            bottom: 0;
-            width: 40px;
-            height: 3px;
-            background-color: var(--brand-accent);
-            border-radius: 2px;
-        }
-
-        /* Quick Links */
-        .footer-links ul {
-            list-style: none;
-        }
-
-        .footer-links li {
-            margin-bottom: 12px;
-        }
-
-        .footer-links a {
-            color: rgba(255, 255, 255, 0.85);
-            text-decoration: none;
-            transition: all 0.3s ease;
-            display: inline-block;
-        }
-
-        .footer-links a:hover {
-            color: var(--brand-accent);
-            transform: translateX(5px);
-        }
-
-        /* Contact Details */
-        .contact-info {
-            list-style: none;
-        }
-
-        .contact-info li {
-            margin-bottom: 15px;
-            color: rgba(255, 255, 255, 0.85);
-            display: flex;
-            align-items: flex-start;
-            gap: 10px;
-        }
-
-        .contact-info a {
-            color: rgba(255, 255, 255, 0.85);
-            text-decoration: none;
-            transition: color 0.3s ease;
-        }
-
-        .contact-info a:hover {
-            color: var(--brand-accent);
-        }
-
-        .icon {
-            color: var(--brand-accent);
-            font-weight: bold;
-            flex-shrink: 0;
-        }
-
-        /* Bottom Bar */
-        .footer-bottom {
-            max-width: 1200px;
-            margin: 40px auto 0;
-            padding-top: 20px;
-            border-top: 1px solid rgba(255, 255, 255, 0.1);
-            text-align: center;
-            font-size: 13px;
-            color: rgba(255, 255, 255, 0.6);
-        }
-
-        /* Responsive Design */
-        @media (max-width: 768px) {
-            .site-footer {
-                padding: 40px 20px 20px;
-            }
-            .footer-container {
-                gap: 30px;
-            }
-        }
-    </style>
-</head>
-<body>
-
+    <!-- FOOTER COMPONENT -->
     <footer class="site-footer">
         <div class="footer-container">
             
             <!-- Branding & Logo Column -->
             <div class="footer-brand">
-                <!-- Updated Google Drive Direct Image Link -->
                 <a href="https://www.makkariconstructions.com/">
                     <img class="footer-logo" src="https://lh3.googleusercontent.com/d/17two9sD2_HX7rojcUk6QjUEVTKM-0sgm" alt="Makkari Constructions and Developers Logo">
                 </a>
@@ -1325,7 +1149,7 @@ footer::after,
                     </li>
                     <li>
                         <span class="icon">&#9993;</span>
-                        <span>Email: <a href="/cdn-cgi/l/email-protection#d5bcbbb3bafbb8b4bebeb4a7bcb2a7baa0a595b2b8b4bcb9fbb6bab8" data-cfasync="false"><span class="__cf_email__" data-cfemail="70191e161f5e1d111b1b11021917021f050030171d11191c5e131f1d">[email&#160;protected]</span></a></span>
+                        <span>Email: <a href="mailto:info.makkarigroup@gmail.com">info.makkarigroup@gmail.com</a></span>
                     </li>
                 </ul>
             </div>
@@ -1334,7 +1158,148 @@ footer::after,
 
         <!-- Copyright Bar -->
         <div class="footer-bottom">
-            <p>&copy; 2026 Makkari Constructions and Developers.</p><p>All rights reserved. | Developed In-House.</p>
+            <p>&copy; 2026 Makkari Constructions and Developers. <p>All rights reserved. | Developed In-House.</p>
         </div>
     </footer>
-<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script>
+
+    <!-- JAVASCRIPTS -->
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            // Header Scroll Effect
+            const header = document.getElementById('makkari-auto-header');
+            const mobileToggle = document.getElementById('mobile-toggle');
+            const navMenu = document.getElementById('nav-menu');
+
+            const handleScroll = () => {
+                if (window.scrollY > 20) {
+                    header.classList.add('scrolled');
+                } else {
+                    header.classList.remove('scrolled');
+                }
+            };
+
+            window.addEventListener('scroll', handleScroll);
+            handleScroll();
+
+            // Active Page Link State
+            const currentPath = window.location.pathname.toLowerCase();
+            const navLinks = document.querySelectorAll('.nav-link');
+
+            navLinks.forEach(link => {
+                const hrefValue = link.getAttribute('href').toLowerCase();
+                const isHome = (hrefValue === 'index.html' && (currentPath === '/' || currentPath.endsWith('index.html')));
+                const isExactMatch = currentPath.includes(hrefValue.replace('.html', ''));
+
+                if (isHome || (hrefValue !== 'index.html' && isExactMatch)) {
+                    link.classList.add('active-page');
+                    link.setAttribute('aria-current', 'page');
+                }
+            });
+
+            // Mobile Menu Toggle
+            if (mobileToggle && navMenu) {
+                const toggleMenu = (forceClose = false) => {
+                    const isClosing = forceClose || navMenu.classList.contains('active');
+                    if (isClosing) {
+                        navMenu.classList.remove('active');
+                        mobileToggle.classList.remove('active');
+                        mobileToggle.setAttribute('aria-expanded', 'false');
+                    } else {
+                        navMenu.classList.add('active');
+                        mobileToggle.classList.add('active');
+                        mobileToggle.setAttribute('aria-expanded', 'true');
+                    }
+                };
+
+                mobileToggle.addEventListener('click', (e) => {
+                    e.stopPropagation();
+                    toggleMenu();
+                });
+
+                document.addEventListener('click', (e) => {
+                    if (!header.contains(e.target)) {
+                        toggleMenu(true);
+                    }
+                });
+            }
+
+            // Counter Animation
+            const counters = document.querySelectorAll(".counter");
+            const animateCounter = (counter) => {
+                const target = parseInt(counter.getAttribute("data-target"), 10);
+                if (isNaN(target)) return;
+                
+                const duration = 1500;
+                const startTime = performance.now();
+                
+                const update = (currentTime) => {
+                    const elapsed = currentTime - startTime;
+                    const progress = Math.min(elapsed / duration, 1);
+                    const easeOut = 1 - Math.pow(1 - progress, 3);
+                    const currentCount = Math.floor(easeOut * target);
+                    
+                    counter.textContent = currentCount;
+                    
+                    if (progress < 1) {
+                        requestAnimationFrame(update);
+                    } else {
+                        counter.textContent = target;
+                    }
+                };
+                
+                requestAnimationFrame(update);
+            };
+
+            if ('IntersectionObserver' in window) {
+                const observer = new IntersectionObserver((entries, obs) => {
+                    entries.forEach(entry => {
+                        if (entry.isIntersecting) {
+                            const targetCounters = entry.target.querySelectorAll('.counter');
+                            targetCounters.forEach(c => animateCounter(c));
+                            obs.unobserve(entry.target);
+                        }
+                    });
+                }, { threshold: 0.1 });
+
+                const targetSection = document.querySelector(".credentials-section");
+                if (targetSection) observer.observe(targetSection);
+            } else {
+                counters.forEach(c => animateCounter(c));
+            }
+        });
+    </script>
+
+    <!-- Structured Data (JSON-LD) -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "GeneralContractor",
+      "name": "Makkari Constructions & Developers",
+      "url": "https://www.makkariconstructions.com/",
+      "logo": "https://lh3.googleusercontent.com/d/1Yx22rsiW7IBqtROqXqjXs8rGScuLonVR",
+      "image": "https://lh3.googleusercontent.com/d/1Yx22rsiW7IBqtROqXqjXs8rGScuLonVR",
+      "description": "Turnkey residential and commercial construction, architectural design consultation, PWD contracting, structural verification sign-offs, and K-SMART building permit approval services in Kozhikode, Kerala.",
+      "address": {
+        "@type": "PostalAddress",
+        "addressLocality": "Kozhikode",
+        "addressRegion": "Kerala",
+        "addressCountry": "IN"
+      },
+      "areaServed": {
+        "@type": "State",
+        "name": "Kerala"
+      },
+      "knowsAbout": [
+        "Turnkey Residential Construction",
+        "Commercial Complex Execution",
+        "Architectural Planning & Spatial Design",
+        "K-SMART Building Permit Approvals",
+        "Structural Engineering Verification",
+        "PWD Civil Contracting",
+        "Industrial Storage & Master Planning"
+      ]
+    }
+    </script>
+</body>
+</html>
+```
