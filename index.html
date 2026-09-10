@@ -1,5 +1,5 @@
+
 <!DOCTYPE html>
-,
 <html lang="en">
 <head>
 <meta charset="UTF-8">
@@ -103,7 +103,7 @@ max-width: 100vw;
 min-height: 100%;
 font-family: var(--font-body);
 color: #ffffff;
-overflow-x: clip; /* Modern clean boundary, prevents horizontal spill while keeping position: sticky functional */
+overflow-x: clip;
 background-color: #101927;
 -webkit-text-size-adjust: 100%;
 }
@@ -557,7 +557,6 @@ text-shadow: 0 1px 5px rgba(0, 0, 0, 0.9);
 position: -webkit-sticky;
 position: sticky;
 z-index: 2;
-/* Dynamic sticky offset is computed in JS: top = windowHeight - whyUsHeight */
 top: 0;
 background: linear-gradient(
 180deg,
@@ -570,7 +569,6 @@ border: none !important;
 color: #ffffff;
 padding: 95px 4% 110px 4%;
 font-family: 'Archivo', sans-serif;
-/* Extended scroll buffer: reduces scrolling speed so section stays sticky comfortably before services glides over */
 margin-bottom: clamp(120px, 25vh, 260px);
 }
 .why-us-header {
@@ -665,7 +663,6 @@ text-shadow: 0 1px 4px rgba(0, 0, 0, 0.7);
 .services-section {
 position: relative;
 z-index: 10;
-/* Starts with frosted glassmorphism, transitions to pure white as it scrolls over */
 background-color: rgba(255, 255, 255, 0.72);
 backdrop-filter: blur(20px);
 -webkit-backdrop-filter: blur(20px);
@@ -673,7 +670,6 @@ border-top: 1px solid rgba(255, 255, 255, 0.85);
 color: #152f4e;
 padding: 85px 4% 95px 4%;
 font-family: 'Archivo', sans-serif;
-/* Page corners are strictly NOT curved */
 border-radius: 0 !important;
 border-top-left-radius: 0 !important;
 border-top-right-radius: 0 !important;
@@ -716,7 +712,7 @@ border: 1px solid #e2e8f0;
 border-radius: 12px;
 overflow: hidden;
 box-shadow: 0 4px 15px rgba(0, 0, 0, 0.03);
-transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
+transition: transform 0.35s ease, box-shadow 0.35s ease, border-color 0.35s ease, opacity 0.75s cubic-bezier(0.16, 1, 0.3, 1);
 display: flex;
 flex-direction: column;
 }
@@ -756,75 +752,162 @@ color: #152f4e;
 line-height: 1.35;
 margin: 0;
 }
+
 /* =========================================================
-6. FEATURED PROJECTS CAROUSEL SECTION
+SCROLL TRANSITIONS / FADE IN FOR SECTIONS
+========================================================= */
+.scroll-fade-up {
+opacity: 0;
+transform: translateY(30px);
+transition: opacity 0.75s cubic-bezier(0.16, 1, 0.3, 1), transform 0.75s cubic-bezier(0.16, 1, 0.3, 1);
+will-change: opacity, transform;
+}
+.scroll-fade-up.in-view {
+opacity: 1;
+transform: translateY(0);
+}
+.service-card.scroll-fade-up {
+opacity: 0;
+transform: translateY(35px) scale(0.97);
+transition: opacity 0.7s cubic-bezier(0.16, 1, 0.3, 1), transform 0.7s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.35s ease, border-color 0.35s ease;
+}
+.service-card.scroll-fade-up.in-view {
+opacity: 1;
+transform: translateY(0) scale(1);
+}
+.service-card.scroll-fade-up.in-view:hover {
+transform: translateY(-6px) scale(1.01);
+box-shadow: 0 12px 24px rgba(21, 47, 78, 0.12);
+border-color: #e52330;
+}
+
+.delay-1 { transition-delay: 0.05s; }
+.delay-2 { transition-delay: 0.10s; }
+.delay-3 { transition-delay: 0.15s; }
+.delay-4 { transition-delay: 0.20s; }
+.delay-5 { transition-delay: 0.25s; }
+.delay-6 { transition-delay: 0.30s; }
+
+/* =========================================================
+6. RECENT WORKS — ARCHITECTURAL EDITORIAL AESTHETIC
 ========================================================= */
 .projects-section {
 position: relative;
 z-index: 10;
 width: 100%;
 max-width: 100%;
-background-color: #f8f9fa;
+background-color: #f7f9fb;
 color: #152f4e;
-padding: 60px 0 80px 0;
+padding: 95px 0 110px 0;
 font-family: 'Archivo', sans-serif;
 overflow: hidden;
+border-top: 1px solid #e9edf2;
 }
-.projects-header {
-text-align: center;
-max-width: 800px;
-margin: 0 auto 30px auto;
-padding: 0 4%;
+
+/* Minimalist Editorial Header */
+.arch-header-container {
+max-width: 1400px;
+margin: 0 auto 40px auto;
+padding: 0 clamp(1.5rem, 5vw, 4rem);
+display: flex;
+align-items: flex-end;
+justify-content: space-between;
+gap: 30px;
 }
-.projects-subtitle {
-font-size: 13px;
+.arch-header-left {
+max-width: 650px;
+}
+.arch-pretitle {
+font-size: 11.5px;
 font-weight: 700;
 color: #e52330;
 text-transform: uppercase;
-letter-spacing: 2px;
-margin-bottom: 8px;
-display: block;
+letter-spacing: 3px;
+margin-bottom: 12px;
+display: flex;
+align-items: center;
+gap: 10px;
 }
-.projects-title {
-font-size: 32px;
+.arch-pretitle::before {
+content: '';
+display: inline-block;
+width: 24px;
+height: 1.5px;
+background-color: #e52330;
+}
+.arch-title {
+font-size: clamp(28px, 3.4vw, 40px);
 font-weight: 800;
 color: #152f4e;
 letter-spacing: 0.5px;
 text-transform: uppercase;
+line-height: 1.15;
+margin-bottom: 10px;
 }
-.projects-controls {
+.arch-lead {
+font-size: 14px;
+color: #64748b;
+line-height: 1.6;
+letter-spacing: 0.2px;
+}
+
+/* Minimal Hairline Navigation Controls in Header */
+.arch-nav-group {
 display: flex;
 align-items: center;
-justify-content: center;
-gap: 12px;
-margin-top: 18px;
+gap: 20px;
+flex-shrink: 0;
 }
-.carousel-arrow-btn {
+.arch-counter {
+font-size: 13px;
+font-weight: 700;
+letter-spacing: 2px;
+color: #94a3b8;
+font-feature-settings: "tnum";
+}
+.arch-counter .current {
+color: #152f4e;
+}
+.arch-arrow-btns {
+display: flex;
+gap: 10px;
+}
+.arch-nav-arrow {
 width: 44px;
 height: 44px;
 border-radius: 50%;
-background: #ffffff;
-border: 1.5px solid #cbd5e1;
+border: 1px solid #cbd5e1;
+background: transparent;
 color: #152f4e;
 display: inline-flex;
 align-items: center;
 justify-content: center;
 cursor: pointer;
-box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
-transition: all 0.25s ease;
+transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+outline: none;
 }
-.carousel-arrow-btn:hover {
-background: #e52330;
+.arch-nav-arrow:hover {
+background: #152f4e;
+border-color: #152f4e;
 color: #ffffff;
-border-color: #e52330;
-transform: translateY(-2px);
-box-shadow: 0 6px 16px rgba(229, 35, 48, 0.35);
+transform: scale(1.06);
 }
+.arch-nav-arrow svg {
+transition: transform 0.2s ease;
+}
+.arch-nav-arrow:hover svg {
+transform: translateX(var(--arrow-shift, 2px));
+}
+#archPrev:hover svg {
+--arrow-shift: -2px;
+}
+
+/* Carousel Scroll Track */
 .projects-carousel-wrapper {
 width: 100%;
 overflow-x: auto;
 overflow-y: hidden;
-padding: 10px 4% 25px 4%;
+padding: 10px clamp(1.5rem, 5vw, 4rem) 25px clamp(1.5rem, 5vw, 4rem);
 cursor: grab;
 scroll-behavior: smooth !important;
 -webkit-overflow-scrolling: touch;
@@ -838,77 +921,162 @@ display: none;
 }
 .projects-track {
 display: flex;
-gap: 24px;
+gap: 32px;
 width: max-content;
 -webkit-backface-visibility: hidden;
 backface-visibility: hidden;
--webkit-transform: translateZ(0);
-transform: translateZ(0);
 }
-.project-card {
+
+/* Monolithic Architectural Card */
+.arch-card {
 flex: 0 0 320px;
 width: 320px;
-background: #ffffff;
-border: 1px solid #e2e8f0;
-border-radius: 12px;
-overflow: hidden;
-box-shadow: 0 6px 20px rgba(0, 0, 0, 0.05);
+background: transparent;
 scroll-snap-align: start;
--webkit-transform: translate3d(0,0,0);
-transform: translate3d(0,0,0);
-transition: transform 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
 display: flex;
 flex-direction: column;
+cursor: pointer;
+transition: transform 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+position: relative;
+text-decoration: none;
+color: inherit;
 }
 @media (min-width: 768px) {
-.project-card {
-flex: 0 0 380px;
-width: 380px;
+.arch-card {
+flex: 0 0 410px;
+width: 410px;
 }
 }
-.project-card:hover {
-transform: translateY(-6px);
-border-color: #e52330;
-box-shadow: 0 12px 30px rgba(229, 35, 48, 0.12);
-}
-.project-image-wrap {
-width: 100%;
-aspect-ratio: 16 / 9;
-overflow: hidden;
+
+/* Image Framing */
+.arch-card-frame {
 position: relative;
+width: 100%;
+aspect-ratio: 16 / 11;
+overflow: hidden;
+border-radius: 4px;
 background-color: #e2e8f0;
+box-shadow: 0 12px 35px rgba(21, 47, 78, 0.08);
+margin-bottom: 20px;
 }
-.project-image-wrap img {
+.arch-card-frame img {
 width: 100%;
 height: 100%;
 object-fit: cover;
 display: block;
-transition: transform 0.5s ease;
+transition: transform 0.75s cubic-bezier(0.16, 1, 0.3, 1), filter 0.5s ease;
 -webkit-user-drag: none;
 user-select: none;
 }
-.project-card:hover .project-image-wrap img {
-transform: scale(1.06);
+.arch-card:hover .arch-card-frame img {
+transform: scale(1.05);
 }
-.project-content {
-padding: 20px;
+
+/* Subtle corner index on image */
+.arch-card-index {
+position: absolute;
+top: 16px;
+left: 16px;
+font-size: 11px;
+font-weight: 800;
+letter-spacing: 2px;
+color: #ffffff;
+background: rgba(16, 25, 39, 0.6);
+backdrop-filter: blur(10px);
+-webkit-backdrop-filter: blur(10px);
+padding: 4px 10px;
+border-radius: 2px;
+border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+/* Minimalist Editorial Typography */
+.arch-card-details {
 display: flex;
 flex-direction: column;
 gap: 6px;
+border-top: 1px solid rgba(21, 47, 78, 0.12);
+padding-top: 16px;
+transition: border-color 0.3s ease;
 }
-.project-card-title {
-font-size: 15px;
+.arch-card:hover .arch-card-details {
+border-top-color: #e52330;
+}
+.arch-card-subline {
+display: flex;
+align-items: center;
+justify-content: space-between;
+font-size: 11px;
+font-weight: 700;
+letter-spacing: 1.8px;
+text-transform: uppercase;
+color: #e52330;
+}
+.arch-card-category {
+color: #64748b;
+font-weight: 600;
+}
+.arch-card-heading {
+font-size: 19px;
 font-weight: 800;
 color: #152f4e;
+line-height: 1.3;
+letter-spacing: 0.2px;
 text-transform: uppercase;
-letter-spacing: 0.5px;
-line-height: 1.35;
+transition: color 0.25s ease;
 }
-.project-card-desc {
+.arch-card:hover .arch-card-heading {
+color: #e52330;
+}
+.arch-card-spec {
 font-size: 13px;
 color: #64748b;
 font-weight: 500;
+letter-spacing: 0.2px;
+display: flex;
+align-items: center;
+gap: 8px;
 }
+.arch-bullet {
+display: inline-block;
+width: 3px;
+height: 3px;
+border-radius: 50%;
+background: #cbd5e1;
+}
+
+/* Architectural Minimal Line Progress */
+.arch-bottom-tracker {
+max-width: 1400px;
+margin: 25px auto 0 auto;
+padding: 0 clamp(1.5rem, 5vw, 4rem);
+display: flex;
+align-items: center;
+justify-content: space-between;
+gap: 20px;
+}
+.arch-line-track {
+flex: 1;
+height: 1.5px;
+background: #e2e8f0;
+position: relative;
+}
+.arch-line-progress {
+position: absolute;
+top: 0;
+left: 0;
+height: 100%;
+width: 16.66%;
+background: #152f4e;
+transition: width 0.15s ease-out, left 0.15s ease-out;
+}
+.arch-drag-note {
+font-size: 11px;
+font-weight: 600;
+letter-spacing: 1.5px;
+text-transform: uppercase;
+color: #94a3b8;
+}
+
 /* =========================================================
 7. SCHEDULE CONSULTATION BUTTON & MODAL
 ========================================================= */
@@ -963,7 +1131,6 @@ transition: opacity 0.25s ease, visibility 0.25s ease;
 padding: 12px;
 box-sizing: border-box;
 }
-/* --- FIXED: Added is-open state for modal overlay --- */
 .modal-overlay.is-open {
 opacity: 1;
 visibility: visible;
@@ -1261,6 +1428,14 @@ font-size: 24px;
 .stat-label {
 font-size: 10.5px;
 }
+.arch-header-container {
+flex-direction: column;
+align-items: flex-start;
+gap: 20px;
+}
+.arch-nav-group {
+align-self: flex-end;
+}
 }
 @media (max-width: 768px) {
 .services-grid, .why-us-grid {
@@ -1276,7 +1451,7 @@ padding: 60px 16px 70px 16px;
 margin-bottom: clamp(90px, 20vh, 180px);
 }
 .projects-section {
-padding: 60px 0 70px 0;
+padding: 70px 0 80px 0;
 }
 .floating-contact-container {
 display: flex !important;
@@ -1320,7 +1495,7 @@ padding: 0 4px;
 .stat-number {
 font-size: 22px;
 }
-.project-card {
+.arch-card {
 flex: 0 0 280px;
 width: 280px;
 }
@@ -1499,15 +1674,15 @@ We deliver a full spectrum of engineering and construction services with a focus
 </div>
 </section>
 <!-- ==========================================
-3. SERVICES SECTION (STARTS GLASSMORHPIC -> BLENDS TO WHITE)
+3. SERVICES SECTION (STARTS GLASSMORHPIC -> BLENDS TO WHITE + SCROLL REVEAL)
 ========================================== -->
 <section class="services-section" id="servicesSection">
-<div class="services-header">
+<div class="services-header scroll-fade-up">
 <span class="services-subtitle">What We Do</span>
 <h2 class="services-title">Our Services</h2>
 </div>
 <div class="services-grid">
-<div class="service-card">
+<div class="service-card scroll-fade-up delay-1">
 <div class="service-image-wrap">
 <img src="https://cdn.jsdelivr.net/gh/makkarigroup/makkari-constructions-website-@makkarigroup-patch-1-images/kozhikode_home.jpg" loading="lazy" alt="Residential Design and Construction" />
 </div>
@@ -1515,7 +1690,7 @@ We deliver a full spectrum of engineering and construction services with a focus
 <h3 class="service-card-title">Residential Design &amp; Construction</h3>
 </div>
 </div>
-<div class="service-card">
+<div class="service-card scroll-fade-up delay-2">
 <div class="service-image-wrap">
 <img src="https://cdn.jsdelivr.net/gh/makkarigroup/makkari-constructions-website-@makkarigroup-patch-1-images/Minu%20city%20centre%20(1).webp" loading="lazy" alt="Commercial Buildings" />
 </div>
@@ -1523,7 +1698,7 @@ We deliver a full spectrum of engineering and construction services with a focus
 <h3 class="service-card-title">Commercial Buildings</h3>
 </div>
 </div>
-<div class="service-card">
+<div class="service-card scroll-fade-up delay-3">
 <div class="service-image-wrap">
 <img src="https://cdn.jsdelivr.net/gh/makkarigroup/makkari-constructions-website-@makkarigroup-patch-1-images/Institutional%20Projects.webp" width="600" height="400" alt="Institutional Building Project Overview" loading="lazy">
 </div>
@@ -1531,7 +1706,7 @@ We deliver a full spectrum of engineering and construction services with a focus
 <h3 class="service-card-title">Institutional Projects</h3>
 </div>
 </div>
-<div class="service-card">
+<div class="service-card scroll-fade-up delay-4">
 <div class="service-image-wrap">
 <img src="https://images.unsplash.com/photo-1503387762-592deb58ef4e?auto=format&amp;fit=crop&amp;w=600&amp;q=80" loading="lazy" alt="Structural Licensing and Verification" />
 </div>
@@ -1539,7 +1714,7 @@ We deliver a full spectrum of engineering and construction services with a focus
 <h3 class="service-card-title">Structural Licensing &amp; Sign-Offs</h3>
 </div>
 </div>
-<div class="service-card">
+<div class="service-card scroll-fade-up delay-5">
 <div class="service-image-wrap">
 <img src="https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?auto=format&amp;fit=crop&amp;w=600&amp;q=80" loading="lazy" alt="Building Permits and Ksmart Approvals" />
 </div>
@@ -1547,7 +1722,7 @@ We deliver a full spectrum of engineering and construction services with a focus
 <h3 class="service-card-title">Building Permits &amp; KSMART Approvals</h3>
 </div>
 </div>
-<div class="service-card">
+<div class="service-card scroll-fade-up delay-6">
 <div class="service-image-wrap">
 <img src="https://cdn.jsdelivr.net/gh/makkarigroup/makkari-constructions-website-@makkarigroup-patch-1-images/Constructuin%20Managements.webp" loading="lazy" alt="Project Management" />
 </div>
@@ -1558,84 +1733,155 @@ We deliver a full spectrum of engineering and construction services with a focus
 </div>
 </section>
 <!-- ==========================================
-4. FEATURED PROJECTS CAROUSEL SECTION
+4. RECENT WORKS — ARCHITECTURAL EDITORIAL AESTHETIC
 ========================================== -->
 <section class="projects-section" id="projectsSection">
-<div class="projects-header">
-<span class="projects-subtitle">FEATURED PROJECTS</span>
-<h2 class="projects-title">Our Recent Works</h2>
-<div class="projects-controls">
-<button class="carousel-arrow-btn" id="carouselPrev" aria-label="Previous Projects">
-<svg viewBox="0 0 24 24" width="22" height="22" fill="currentColor"><path d="M15.41 7.41L14 6l-6 6 6 6 1.41-1.41L10.83 12z"/></svg>
+<!-- Editorial Architectural Header -->
+<div class="arch-header-container scroll-fade-up">
+<div class="arch-header-left">
+<span class="arch-pretitle">Selected Portfolio &bull; 2019 &mdash; 2026</span>
+<h2 class="arch-title">Recent Works</h2>
+<p class="arch-lead">A curation of turnkey residential estates, landmark commercial spaces, and heavy civil logistics facilities executed across Kerala.</p>
+</div>
+<div class="arch-nav-group">
+<div class="arch-counter">
+<span class="current" id="archCurrentNum">01</span> / <span>06</span>
+</div>
+<div class="arch-arrow-btns">
+<button class="arch-nav-arrow" id="archPrev" aria-label="Previous Project">
+<svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="19" y1="12" x2="5" y2="12"></line><polyline points="12 19 5 12 12 5"></polyline></svg>
 </button>
-<button class="carousel-arrow-btn" id="carouselNext" aria-label="Next Projects">
-<svg viewBox="0 0 24 24" width="22" height="22" fill="currentColor"><path d="M10 6L8.59 7.41 13.17 12l-4.58 4.59L10 18l6-6z"/></svg>
+<button class="arch-nav-arrow" id="archNext" aria-label="Next Project">
+<svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
 </button>
 </div>
 </div>
+</div>
+<!-- Horizontal Architectural Slides -->
 <div class="projects-carousel-wrapper" id="projectsWrapper">
 <div class="projects-track">
-<!-- Project 1 -->
-<div class="project-card">
-<div class="project-image-wrap">
+<!-- Project 01 -->
+<a href="projects.html" class="arch-card scroll-fade-up delay-1">
+<div class="arch-card-frame">
 <img src="https://cdn.jsdelivr.net/gh/makkarigroup/makkari-constructions-website-@makkarigroup-patch-1-images/House-Nusaiba.webp" alt="Residential Building at Poonath-Kozhikode" loading="lazy" />
+<div class="arch-card-index">01</div>
 </div>
-<div class="project-content">
-<h3 class="project-card-title">Residential Building</h3>
-<p class="project-card-desc">Poonath-Kozhikode</p>
+<div class="arch-card-details">
+<div class="arch-card-subline">
+<span>Residential Estate</span>
+<span class="arch-card-category">Turnkey Planning</span>
+</div>
+<h3 class="arch-card-heading">House Nusaiba</h3>
+<div class="arch-card-spec">
+<span>Poonath, Kozhikode</span>
+<span class="arch-bullet"></span>
+<span>Custom Private Villa</span>
 </div>
 </div>
-<!-- Project 2 -->
-<div class="project-card">
-<div class="project-image-wrap">
+</a>
+<!-- Project 02 -->
+<a href="projects.html" class="arch-card scroll-fade-up delay-2">
+<div class="arch-card-frame">
 <img src="https://cdn.jsdelivr.net/gh/makkarigroup/makkari-constructions-website-@f889186fa0e6c774c7b9140c45642198bacad422/Minu%20city%20centre%20(1).webp" alt="Minu Commercial Centre Kozhikode" loading="lazy" />
+<div class="arch-card-index">02</div>
 </div>
-<div class="project-content">
-<h3 class="project-card-title">Minu Commercial Centre</h3>
-<p class="project-card-desc">8,000 SQFT Building Naduvannur Kozhikode</p>
+<div class="arch-card-details">
+<div class="arch-card-subline">
+<span>Commercial Complex</span>
+<span class="arch-card-category">8,000 SQ. FT.</span>
+</div>
+<h3 class="arch-card-heading">Minu Commercial Centre</h3>
+<div class="arch-card-spec">
+<span>Naduvannur, Kozhikode</span>
+<span class="arch-bullet"></span>
+<span>Multi-Storey Complex</span>
 </div>
 </div>
-<!-- Project 3 -->
-<div class="project-card">
-<div class="project-image-wrap">
+</a>
+<!-- Project 03 -->
+<a href="projects.html" class="arch-card scroll-fade-up delay-3">
+<div class="arch-card-frame">
 <img src="https://cdn.jsdelivr.net/gh/makkarigroup/makkari-constructions-website-@f889186fa0e6c774c7b9140c45642198bacad422/Institutional%20Projects.webp" alt="Markaz Academy of Women Cheruvannur" loading="lazy" width="600" height="400"/>
+<div class="arch-card-index">03</div>
 </div>
-<div class="project-content">
-<h3 class="project-card-title">Markaz Academy of Women</h3>
-<p class="project-card-desc">Cheruvannur - Institutional</p>
+<div class="arch-card-details">
+<div class="arch-card-subline">
+<span>Institutional</span>
+<span class="arch-card-category">Academic Campus</span>
+</div>
+<h3 class="arch-card-heading">Markaz Academy of Women</h3>
+<div class="arch-card-spec">
+<span>Cheruvannur</span>
+<span class="arch-bullet"></span>
+<span>Educational Infrastructure</span>
 </div>
 </div>
-<!-- Project 4 -->
-<div class="project-card">
-<div class="project-image-wrap">
+</a>
+<!-- Project 04 -->
+<a href="projects.html" class="arch-card scroll-fade-up delay-4">
+<div class="arch-card-frame">
 <img src="https://cdn.jsdelivr.net/gh/makkarigroup/makkari-constructions-website-@1f377a3997e41a9b5c4455ca30d4b1c53445b1e4/Storage%20Building.jpg" alt="Storage Building Industrial Hub Atholi" loading="lazy" />
+<div class="arch-card-index">04</div>
 </div>
-<div class="project-content">
-<h3 class="project-card-title">Storage Building</h3>
-<p class="project-card-desc">Industrial Storage &amp; Logistics Hub Atholi, Kozhikode 60,000 Sq. Ft.</p>
+<div class="arch-card-details">
+<div class="arch-card-subline">
+<span>Industrial Logistics</span>
+<span class="arch-card-category">60,000 SQ. FT.</span>
+</div>
+<h3 class="arch-card-heading">Atholi Storage &amp; Hub</h3>
+<div class="arch-card-spec">
+<span>Atholi, Kozhikode</span>
+<span class="arch-bullet"></span>
+<span>Heavy Logistics Terminal</span>
 </div>
 </div>
-<!-- Project 5 -->
-<div class="project-card">
-<div class="project-image-wrap">
+</a>
+<!-- Project 05 -->
+<a href="projects.html" class="arch-card scroll-fade-up delay-5">
+<div class="arch-card-frame">
 <img src="https://cdn.jsdelivr.net/gh/makkarigroup/makkari-constructions-website-@f889186fa0e6c774c7b9140c45642198bacad422/Thinner%20Storage.webp" alt="Thinner Industrial Storage Facility" loading="lazy" />
+<div class="arch-card-index">05</div>
 </div>
-<div class="project-content">
-<h3 class="project-card-title">Thinner Storage</h3>
-<p class="project-card-desc">30,000 SQFT Industrial Facility</p>
+<div class="arch-card-details">
+<div class="arch-card-subline">
+<span>Specialized Industrial</span>
+<span class="arch-card-category">30,000 SQ. FT.</span>
+</div>
+<h3 class="arch-card-heading">Thinner Storage Facility</h3>
+<div class="arch-card-spec">
+<span>Kozhikode</span>
+<span class="arch-bullet"></span>
+<span>Statutory Hazard Compliant</span>
 </div>
 </div>
-<!-- Project 6 -->
-<div class="project-card">
-<div class="project-image-wrap">
+</a>
+<!-- Project 06 -->
+<a href="projects.html" class="arch-card scroll-fade-up delay-6">
+<div class="arch-card-frame">
 <img src="https://cdn.jsdelivr.net/gh/makkarigroup/makkari-constructions-website-@1f377a3997e41a9b5c4455ca30d4b1c53445b1e4/Poonur%20House.jpeg" alt="Residential Building Poonoor-Kozhikode" loading="lazy" />
+<div class="arch-card-index">06</div>
 </div>
-<div class="project-content">
-<h3 class="project-card-title">Residential Building</h3>
-<p class="project-card-desc">2,850 SQFT Poonoor-Kozhikode</p>
+<div class="arch-card-details">
+<div class="arch-card-subline">
+<span>Residential Villa</span>
+<span class="arch-card-category">2,850 SQ. FT.</span>
+</div>
+<h3 class="arch-card-heading">Poonoor Modern Residence</h3>
+<div class="arch-card-spec">
+<span>Poonoor, Kozhikode</span>
+<span class="arch-bullet"></span>
+<span>Contemporary Spatial Architecture</span>
 </div>
 </div>
+</a>
 </div>
+</div>
+<!-- Minimal Hairline Progress Tracker -->
+<div class="arch-bottom-tracker">
+<div class="arch-line-track">
+<div class="arch-line-progress" id="archLineProgress"></div>
+</div>
+<span class="arch-drag-note">Swipe or Drag to Explore</span>
 </div>
 </section>
 <!-- ==========================================
@@ -1685,7 +1931,7 @@ Schedule Consultation
 <div class="footer-container">
 <!-- Branding & Logo Column -->
 <div class="footer-brand">
-<a href="https://www.makkariconstructions.com/index.html">
+<a href="index.html">
 <img class="footer-logo" src="https://cdn.jsdelivr.net/gh/makkarigroup/makkari-constructions-website-@makkarigroup-patch-1-images/MAKKARI%20LOGO%20INVERSE.webp" loading="lazy" alt="Makkari Constructions and Developers Logo">
 </a>
 <p class="brand-description">
@@ -1696,10 +1942,10 @@ Building quality spaces and creating value through innovative design and high-st
 <div class="footer-links">
 <h3 class="footer-heading">Quick Links</h3>
 <ul>
-<li><a href="https://www.makkariconstructions.com/about.html">About Us</a></li>
-<li><a href="https://www.makkariconstructions.com/services.html">Services</a></li>
-<li><a href="https://www.makkariconstructions.com/projects.html">Projects</a></li>
-<li><a href="https://www.makkariconstructions.com/contact.html">Contact Us</a></li>
+<li><a href="about.html">About Us</a></li>
+<li><a href="services.html">Services</a></li>
+<li><a href="projects.html">Projects</a></li>
+<li><a href="contact.html">Contact Us</a></li>
 </ul>
 </div>
 <!-- Contact Information Column -->
@@ -1716,7 +1962,7 @@ Building quality spaces and creating value through innovative design and high-st
 </li>
 <li>
 <span class="icon">&#9993;</span>
-<span>Email: <a href="/cdn-cgi/l/email-protection#71181f171e5f1c101a1a10031816031e040131161c10181d5f121e1c"><span class="__cf_email__" data-cfemail="650c0b030a4b08040e0e04170c02170a1015250208040c094b060a08">[email&#160;protected]</span></a></span>
+<span>Email: <a href="mailto:info.makkarigroup@gmail.com">info.makkarigroup@gmail.com</a></span>
 </li>
 </ul>
 </div>
@@ -1729,7 +1975,6 @@ Building quality spaces and creating value through innovative design and high-st
 <!-- ==========================================
 8. JAVASCRIPT CONTROLLERS
 ========================================== -->
-<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script>
 <script>
 document.addEventListener("DOMContentLoaded", function () {
 const fixedHeroBg = document.getElementById('fixedHeroBg');
@@ -1739,12 +1984,12 @@ const statsBar = document.querySelector('.stats-bar-container');
 const whyUsSection = document.getElementById('whyUsSection');
 const servicesSection = document.getElementById('servicesSection');
 let isTicking = false;
+
 /* Sticky Controller: Pins Why Choose Us exactly when its bottom appears in the viewport */
 const updateWhyUsStickyPosition = () => {
 if (!whyUsSection) return;
 const windowHeight = window.innerHeight || document.documentElement.clientHeight || 800;
 const whyUsHeight = whyUsSection.offsetHeight;
-// When top reaches (windowHeight - whyUsHeight), the bottom touches the bottom edge of viewport
 const stickyTop = windowHeight - whyUsHeight;
 whyUsSection.style.top = `${stickyTop}px`;
 };
@@ -1752,10 +1997,12 @@ window.addEventListener('resize', updateWhyUsStickyPosition, { passive: true });
 window.addEventListener('orientationchange', updateWhyUsStickyPosition, { passive: true });
 window.addEventListener('load', updateWhyUsStickyPosition, { passive: true });
 updateWhyUsStickyPosition();
+
 /* Scroll Progress Controller: Hero Blur & Services Glassmorphism -> Solid White Transition */
 const onScrollProgress = () => {
 const scrollY = window.pageYOffset || document.documentElement.scrollTop || 0;
 const windowHeight = window.innerHeight || 800;
+
 // 1. Hero scroll blur & fade
 const heroProgress = Math.min(Math.max(scrollY / (windowHeight * 0.75), 0), 1);
 if (fixedHeroBg) {
@@ -1778,31 +2025,26 @@ glassTile.style.transform = `translateY(${heroTranslate}px)`;
 if (statsBar) {
 statsBar.style.opacity = heroOpacity;
 }
+
 // 2. Dynamic Glassmorphism -> Solid White Transition on Services Overlap
 if (servicesSection && whyUsSection) {
 const servicesRect = servicesSection.getBoundingClientRect();
-// When services enters the viewport from below
 if (servicesRect.top <= windowHeight) {
-// Overlap progress from 0 (just touching bottom) to 1 (when covered 65% of viewport)
 const overlapProgress = Math.min(Math.max((windowHeight - servicesRect.top) / (windowHeight * 0.65), 0), 1);
-// Smooth alpha ramp from 0.72 (glassmorphism) to 1.0 (pure solid white)
 const alpha = (0.72 + (overlapProgress * 0.28)).toFixed(3);
 const blurVal = Math.max(20 - (overlapProgress * 20), 0).toFixed(1);
 if (overlapProgress >= 0.96) {
-// Fully solid white background
 servicesSection.style.backgroundColor = '#ffffff';
 servicesSection.style.backdropFilter = 'none';
 servicesSection.style.webkitBackdropFilter = 'none';
 servicesSection.style.borderTopColor = 'transparent';
 } else {
-// Frosted glassmorphism during overlapping
 servicesSection.style.backgroundColor = `rgba(255, 255, 255, ${alpha})`;
 servicesSection.style.backdropFilter = `blur(${blurVal}px)`;
 servicesSection.style.webkitBackdropFilter = `blur(${blurVal}px)`;
 servicesSection.style.borderTopColor = `rgba(255, 255, 255, ${(0.85 * (1 - overlapProgress)).toFixed(2)})`;
 }
 } else {
-// Normal state when services is still below view
 servicesSection.style.backgroundColor = 'rgba(255, 255, 255, 0.72)';
 servicesSection.style.backdropFilter = 'blur(20px)';
 servicesSection.style.webkitBackdropFilter = 'blur(20px)';
@@ -1811,6 +2053,7 @@ servicesSection.style.borderTopColor = 'rgba(255, 255, 255, 0.85)';
 }
 isTicking = false;
 };
+
 window.addEventListener('scroll', () => {
 if (!isTicking) {
 window.requestAnimationFrame(onScrollProgress);
@@ -1818,6 +2061,29 @@ isTicking = true;
 }
 }, { passive: true });
 onScrollProgress();
+
+/* =========================================================
+SCROLL REVEAL / TRANSITIONS FOR SERVICES & RECENT WORKS
+========================================================= */
+const scrollElements = document.querySelectorAll('#servicesSection .scroll-fade-up, #projectsSection .scroll-fade-up');
+if ('IntersectionObserver' in window && scrollElements.length > 0) {
+const scrollObserver = new IntersectionObserver((entries, observer) => {
+entries.forEach(entry => {
+if (entry.isIntersecting) {
+entry.target.classList.add('in-view');
+observer.unobserve(entry.target);
+}
+});
+}, {
+root: null,
+threshold: 0.12,
+rootMargin: '0px 0px -40px 0px'
+});
+scrollElements.forEach(el => scrollObserver.observe(el));
+} else {
+scrollElements.forEach(el => el.classList.add('in-view'));
+}
+
 /* 1. Header Scroll Effect & Navigation Handler */
 const header = document.getElementById('makkari-auto-header');
 const mobileToggle = document.getElementById('mobile-toggle');
@@ -1831,6 +2097,7 @@ header.classList.remove('scrolled');
 };
 window.addEventListener('scroll', handleScroll, { passive: true });
 handleScroll();
+
 const currentPath = window.location.pathname.toLowerCase();
 const navLinks = document.querySelectorAll('.nav-link');
 navLinks.forEach(link => {
@@ -1842,6 +2109,7 @@ link.classList.add('active-page');
 link.setAttribute('aria-current', 'page');
 }
 });
+
 if (mobileToggle && navMenu) {
 const toggleMenu = (forceClose = false) => {
 const isClosing = forceClose || navMenu.classList.contains('active');
@@ -1865,11 +2133,13 @@ toggleMenu(true);
 }
 });
 }
+
 /* 2. Modal Overlay & Formspree Submission */
 const openModalBtn = document.getElementById("openModalBtn");
 const closeModalBtn = document.getElementById("closeModalBtn");
 const modalOverlay = document.getElementById("consultationModal");
 const modalContainer = document.getElementById("modalContainer");
+
 if (openModalBtn && modalOverlay) {
 openModalBtn.addEventListener("click", () => {
 modalOverlay.classList.add("is-open");
@@ -1892,9 +2162,11 @@ closeModal();
 }
 });
 }
+
 const form = document.getElementById("my-form");
 const formStatus = document.getElementById("form-status");
 const submitBtn = document.getElementById("submit-btn");
+
 if (form) {
 form.addEventListener("submit", async function (event) {
 event.preventDefault();
@@ -1935,6 +2207,7 @@ submitBtn.innerText = "Send";
 });
 });
 }
+
 /* 3. Synchronized Animated Number Counter */
 const statsSection = document.querySelector('.stats-bar-container');
 const counters = document.querySelectorAll('.counter');
@@ -1984,21 +2257,50 @@ triggerAnimation();
 }
 }, 300);
 }
-/* 4. Smooth Carousel Controls & Drag Logic */
+
+/* 4. Minimal Architectural Carousel Controller */
 const projectsWrapper = document.getElementById('projectsWrapper');
-const prevBtn = document.getElementById('carouselPrev');
-const nextBtn = document.getElementById('carouselNext');
+const prevBtn = document.getElementById('archPrev');
+const nextBtn = document.getElementById('archNext');
+const lineProgress = document.getElementById('archLineProgress');
+const currentNumEl = document.getElementById('archCurrentNum');
+const totalCards = 6;
+
+const updateArchCarousel = () => {
+if (!projectsWrapper) return;
+const maxScroll = projectsWrapper.scrollWidth - projectsWrapper.clientWidth;
+if (maxScroll <= 0) {
+if (lineProgress) lineProgress.style.width = '100%';
+return;
+}
+const scrollPercent = Math.min(Math.max(projectsWrapper.scrollLeft / maxScroll, 0), 1);
+if (lineProgress) {
+const cardFraction = 100 / totalCards;
+const width = cardFraction + (scrollPercent * (100 - cardFraction));
+lineProgress.style.width = `${width}%`;
+}
+if (currentNumEl) {
+const activeIdx = Math.min(Math.floor(scrollPercent * totalCards) + 1, totalCards);
+currentNumEl.innerText = activeIdx < 10 ? `0${activeIdx}` : activeIdx;
+}
+};
+
 if (projectsWrapper) {
+projectsWrapper.addEventListener('scroll', updateArchCarousel, { passive: true });
+window.addEventListener('resize', updateArchCarousel, { passive: true });
+updateArchCarousel();
+
 if (prevBtn) {
 prevBtn.addEventListener('click', () => {
-projectsWrapper.scrollBy({ left: -380, behavior: 'smooth' });
+projectsWrapper.scrollBy({ left: -420, behavior: 'smooth' });
 });
 }
 if (nextBtn) {
 nextBtn.addEventListener('click', () => {
-projectsWrapper.scrollBy({ left: 380, behavior: 'smooth' });
+projectsWrapper.scrollBy({ left: 420, behavior: 'smooth' });
 });
 }
+
 let isDown = false;
 let startX;
 let scrollLeft;
@@ -2024,6 +2326,7 @@ const walk = (x - startX) * 1.5;
 projectsWrapper.scrollLeft = scrollLeft - walk;
 });
 }
+
 /* 5. Fade Out Schedule Consultation Button on Footer Intersection */
 const footer = document.querySelector('.site-footer');
 const consultationBtn = document.getElementById('openModalBtn');
@@ -2041,7 +2344,6 @@ footerObserver.observe(footer);
 }
 });
 </script>
-<script>(function(){function c(){var b=a.contentDocument||(a.contentWindow&&a.contentWindow.document);if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'a38dab652b689a58',t:'MTc4OTAzNTMwNQ=='};var a=document.createElement('script');a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script><script type="module" src="https://static.cloudflareinsights.com/beacon.min.js/v31edd6df95cf4e85bb4c19e7a9bdbcba1788362987495" integrity="sha512-iIg7k2xntmwu6/uSb5tpc/hySgZc4eoL31yB29W6tJFo2akwjPWcEqnCEdJvGexCL0KEQwVYv5BlowfhVz26hg==" data-cf-beacon='{"version":"2024.11.0","token":"d0e741cca14c4cdba23f71abbff76953","r":1,"spa":2}' crossorigin="anonymous"></script>
 </body>
 </html>
 ```
