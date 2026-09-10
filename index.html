@@ -1,5 +1,5 @@
-
 <!DOCTYPE html>
+,
 <html lang="en">
 <head>
 <meta charset="UTF-8">
@@ -550,7 +550,6 @@ letter-spacing: 0.8px;
 line-height: 1.3;
 text-shadow: 0 1px 5px rgba(0, 0, 0, 0.9);
 }
-
 /* =========================================================
 4. WHY CHOOSE US SECTION (STICKS WHEN BOTTOM APPEARS)
 ========================================================= */
@@ -660,7 +659,6 @@ text-transform: uppercase;
 letter-spacing: 0.5px;
 text-shadow: 0 1px 4px rgba(0, 0, 0, 0.7);
 }
-
 /* =========================================================
 5. SERVICES SECTION (GLASSMORHPISM ON OVERLAP -> SOLID WHITE)
 ========================================================= */
@@ -758,7 +756,6 @@ color: #152f4e;
 line-height: 1.35;
 margin: 0;
 }
-
 /* =========================================================
 6. FEATURED PROJECTS CAROUSEL SECTION
 ========================================================= */
@@ -912,7 +909,6 @@ font-size: 13px;
 color: #64748b;
 font-weight: 500;
 }
-
 /* =========================================================
 7. SCHEDULE CONSULTATION BUTTON & MODAL
 ========================================================= */
@@ -966,6 +962,11 @@ visibility: hidden;
 transition: opacity 0.25s ease, visibility 0.25s ease;
 padding: 12px;
 box-sizing: border-box;
+}
+/* --- FIXED: Added is-open state for modal overlay --- */
+.modal-overlay.is-open {
+opacity: 1;
+visibility: visible;
 }
 .modal-overlay.is-open .modal-container {
 transform: scale(1);
@@ -1078,7 +1079,6 @@ color: #ff6b6b;
 font-size: 13px;
 margin: 0;
 }
-
 /* =========================================================
 8. FLOATING CONTACT BUTTONS (MOBILE)
 ========================================================= */
@@ -1111,7 +1111,6 @@ background-color: #25D366;
 .floating-contact-btn.phone {
 background-color: #152f4e;
 }
-
 /* =========================================================
 9. FOOTER SECTION
 ========================================================= */
@@ -1214,7 +1213,6 @@ text-align: center;
 font-size: 13px;
 color: rgba(255, 255, 255, 0.6);
 }
-
 /* =========================================================
 10. RESPONSIVE BREAKPOINTS
 ========================================================= */
@@ -1332,7 +1330,6 @@ width: 280px;
 <body>
 <!-- FIXED HERO BACKGROUND (GRADUALLY BLURS ON SCROLL) -->
 <div class="fixed-hero-bg" id="fixedHeroBg" aria-hidden="true"></div>
-
 <!-- HEADER / NAVIGATION -->
 <header class="site-header" id="makkari-auto-header" role="banner">
 <div class="nav-container">
@@ -1356,7 +1353,6 @@ width: 280px;
 </nav>
 </div>
 </header>
-
 <!-- ==========================================
 1. HERO SECTION (SCROLLS NATURALLY OVER FIXED BACKGROUND)
 ========================================== -->
@@ -1440,70 +1436,68 @@ Established Experience
 </div>
 </div>
 </section>
-
 <!-- ==========================================
 2. WHY CHOOSE US SECTION (STICKS WHEN BOTTOM ENTERS VIEW - EXTENDED RUNWAY)
 ========================================== -->
 <section class="why-us-section" id="whyUsSection">
-  <div class="why-us-header">
-  <span class="why-us-subtitle">Why Choose Us</span>
-  <h2 class="why-us-title">Why Makkari</h2>
-  <p class="why-us-description">
-  We deliver a full spectrum of engineering and construction services with a focus on quality, precision, and reliability. As Chartered Engineers, Structural Engineers, and PWD Licensed Contractors, we are equipped to handle projects of all scales - from private developments to large public infrastructure works.
-  </p>
-  </div>
-  <div class="why-us-grid">
-  <div class="why-us-card">
-  <div class="why-us-icon-wrap">
-  <svg viewBox="0 0 24 24" fill="currentColor">
-  <path d="M19.43 12.98c.04-.32.07-.64.07-.98 0-.34-.03-.66-.07-.98l2.11-1.65c.19-.15.24-.42.12-.64l-2-3.46c-.12-.22-.39-.3-.61-.22l-2.49 1c-.52-.4-1.08-.73-1.69-.98l-.38-2.65C14.46 2.18 14.25 2 14 2h-4c-.25 0-.46.18-.49.42l-.38 2.65c-.61.25-1.17.59-1.69.98l-2.49-1c-.23-.09-.49 0-.61.22l-2 3.46c-.13.22-.07.49.12.64l2.11 1.65c-.04.32-.07.65-.07.98 0 .33.03.66.07.98l-2.11 1.65c-.19.15-.24.42-.12.64l2 3.46c.12.22.39.3.61.22l2.49-1c.52.4 1.08.73 1.69.98l.38 2.65c.03.24.24.42.49.42h4c.25 0 .46-.18.49-.42l.38-2.65c.61-.25 1.17-.59 1.69-.98l2.49 1c.23.09.49 0 .61-.22l2-3.46c.12-.22.07-.49-.12-.64l-2.11-1.65zM12 15.5c-1.93 0-3.5-1.57-3.5-3.5s1.57-3.5 3.5-3.5 3.5 1.57 3.5 3.5-1.57 3.5-3.5 3.5z"/>
-  </svg>
-  </div>
-  <h3 class="why-us-card-title">Premium Engineering</h3>
-  </div>
-  <div class="why-us-card">
-  <div class="why-us-icon-wrap">
-  <svg viewBox="0 0 24 24" fill="currentColor">
-  <path d="M3 17.25V21h3.75L17.81 9.94l-3.75-3.75L3 17.25zM20.71 7.04c.39-.39.39-1.02 0-1.41l-2.34-2.34c-.39-.39-1.02-.39-1.41 0l-1.83 1.83 3.75 3.75 1.83-1.83z"/>
-  </svg>
-  </div>
-  <h3 class="why-us-card-title">Premium Design</h3>
-  </div>
-  <div class="why-us-card">
-  <div class="why-us-icon-wrap">
-  <svg viewBox="0 0 24 24" fill="currentColor">
-  <path d="M12 4.5C7 4.5 2.73 7.61 1 12c1.73 4.39 6 7.5 11 7.5s9.27-3.11 11-7.5c-1.73-4.39-6-7.5-11-7.5zM12 17c-2.76 0-5-2.24-5-5s2.24-5 5-5 5 2.24 5 5-2.24 5-5 5zm0-8c-1.66 0-3 1.34-3 3s1.34 3 3 3 3-1.34 3-3-1.34-3-3-3z"/>
-  </svg>
-  </div>
-  <h3 class="why-us-card-title">Transparent Process</h3>
-  </div>
-  <div class="why-us-card">
-  <div class="why-us-icon-wrap">
-  <svg viewBox="0 0 24 24" fill="currentColor">
-  <path d="M11.99 2C6.47 2 2 6.48 2 12s4.47 10 9.99 10C17.52 22 22 17.52 22 12S17.52 2 11.99 2zM12 20c-4.42 0-8-3.58-8-8s3.58-8 8-8 8 3.58 8 8-3.58 8-8 8zm.5-13H11v6l5.25 3.15.75-1.23-4.5-2.67z"/>
-  </svg>
-  </div>
-  <h3 class="why-us-card-title">On-Time Delivery</h3>
-  </div>
-  <div class="why-us-card">
-  <div class="why-us-icon-wrap">
-  <svg viewBox="0 0 24 24" fill="currentColor">
-  <path d="M12 1L3 5v6c0 5.55 3.84 10.74 9 12 5.16-1.26 9-5.45 9-12V5l-9-4zm-2 16l-4-4 1.41-1.41L10 14.17l6.59-6.59L18 9l-8 8z"/>
-  </svg>
-  </div>
-  <h3 class="why-us-card-title">Structural Safety</h3>
-  </div>
-  <div class="why-us-card">
-  <div class="why-us-icon-wrap">
-  <svg viewBox="0 0 24 24" fill="currentColor">
-  <path d="M20 2H4c-1.1 0-1.99.9-1.99 2L2 22l4-4h14c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zM6 9h12v2H6V9zm8 5H6v-2h8v2zm4-6H6V6h12v2z"/>
-  </svg>
-  </div>
-  <h3 class="why-us-card-title">Professional Consultation</h3>
-  </div>
-  </div>
+<div class="why-us-header">
+<span class="why-us-subtitle">Why Choose Us</span>
+<h2 class="why-us-title">Why Makkari</h2>
+<p class="why-us-description">
+We deliver a full spectrum of engineering and construction services with a focus on quality, precision, and reliability. As Chartered Engineers, Structural Engineers, and PWD Licensed Contractors, we are equipped to handle projects of all scales - from private developments to large public infrastructure works.
+</p>
+</div>
+<div class="why-us-grid">
+<div class="why-us-card">
+<div class="why-us-icon-wrap">
+<svg viewBox="0 0 24 24" fill="currentColor">
+<path d="M19.43 12.98c.04-.32.07-.64.07-.98 0-.34-.03-.66-.07-.98l2.11-1.65c.19-.15.24-.42.12-.64l-2-3.46c-.12-.22-.39-.3-.61-.22l-2.49 1c-.52-.4-1.08-.73-1.69-.98l-.38-2.65C14.46 2.18 14.25 2 14 2h-4c-.25 0-.46.18-.49.42l-.38 2.65c-.61.25-1.17.59-1.69.98l-2.49-1c-.23-.09-.49 0-.61.22l-2 3.46c-.13.22-.07.49.12.64l2.11 1.65c-.04.32-.07.65-.07.98 0 .33.03.66.07.98l-2.11 1.65c-.19.15-.24.42-.12.64l2 3.46c.12.22.39.3.61.22l2.49-1c.52.4 1.08.73 1.69.98l.38 2.65c.03.24.24.42.49.42h4c.25 0 .46-.18.49-.42l.38-2.65c.61-.25 1.17-.59 1.69-.98l2.49 1c.23.09.49 0 .61-.22l2-3.46c.12-.22.07-.49-.12-.64l-2.11-1.65zM12 15.5c-1.93 0-3.5-1.57-3.5-3.5s1.57-3.5 3.5-3.5 3.5 1.57 3.5 3.5-1.57 3.5-3.5 3.5z"/>
+</svg>
+</div>
+<h3 class="why-us-card-title">Premium Engineering</h3>
+</div>
+<div class="why-us-card">
+<div class="why-us-icon-wrap">
+<svg viewBox="0 0 24 24" fill="currentColor">
+<path d="M3 17.25V21h3.75L17.81 9.94l-3.75-3.75L3 17.25zM20.71 7.04c.39-.39.39-1.02 0-1.41l-2.34-2.34c-.39-.39-1.02-.39-1.41 0l-1.83 1.83 3.75 3.75 1.83-1.83z"/>
+</svg>
+</div>
+<h3 class="why-us-card-title">Premium Design</h3>
+</div>
+<div class="why-us-card">
+<div class="why-us-icon-wrap">
+<svg viewBox="0 0 24 24" fill="currentColor">
+<path d="M12 4.5C7 4.5 2.73 7.61 1 12c1.73 4.39 6 7.5 11 7.5s9.27-3.11 11-7.5c-1.73-4.39-6-7.5-11-7.5zM12 17c-2.76 0-5-2.24-5-5s2.24-5 5-5 5 2.24 5 5-2.24 5-5 5zm0-8c-1.66 0-3 1.34-3 3s1.34 3 3 3 3-1.34 3-3-1.34-3-3-3z"/>
+</svg>
+</div>
+<h3 class="why-us-card-title">Transparent Process</h3>
+</div>
+<div class="why-us-card">
+<div class="why-us-icon-wrap">
+<svg viewBox="0 0 24 24" fill="currentColor">
+<path d="M11.99 2C6.47 2 2 6.48 2 12s4.47 10 9.99 10C17.52 22 22 17.52 22 12S17.52 2 11.99 2zM12 20c-4.42 0-8-3.58-8-8s3.58-8 8-8 8 3.58 8 8-3.58 8-8 8zm.5-13H11v6l5.25 3.15.75-1.23-4.5-2.67z"/>
+</svg>
+</div>
+<h3 class="why-us-card-title">On-Time Delivery</h3>
+</div>
+<div class="why-us-card">
+<div class="why-us-icon-wrap">
+<svg viewBox="0 0 24 24" fill="currentColor">
+<path d="M12 1L3 5v6c0 5.55 3.84 10.74 9 12 5.16-1.26 9-5.45 9-12V5l-9-4zm-2 16l-4-4 1.41-1.41L10 14.17l6.59-6.59L18 9l-8 8z"/>
+</svg>
+</div>
+<h3 class="why-us-card-title">Structural Safety</h3>
+</div>
+<div class="why-us-card">
+<div class="why-us-icon-wrap">
+<svg viewBox="0 0 24 24" fill="currentColor">
+<path d="M20 2H4c-1.1 0-1.99.9-1.99 2L2 22l4-4h14c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zM6 9h12v2H6V9zm8 5H6v-2h8v2zm4-6H6V6h12v2z"/>
+</svg>
+</div>
+<h3 class="why-us-card-title">Professional Consultation</h3>
+</div>
+</div>
 </section>
-
 <!-- ==========================================
 3. SERVICES SECTION (STARTS GLASSMORHPIC -> BLENDS TO WHITE)
 ========================================== -->
@@ -1563,7 +1557,6 @@ Established Experience
 </div>
 </div>
 </section>
-
 <!-- ==========================================
 4. FEATURED PROJECTS CAROUSEL SECTION
 ========================================== -->
@@ -1645,19 +1638,18 @@ Established Experience
 </div>
 </div>
 </section>
-
 <!-- ==========================================
 5. CONSULTATION TRIGGER & MODAL
 ========================================== -->
 <!-- Left Side Schedule Button -->
-<button class="consultation-trigger-btn" id="openModalBtn">
+<button class="consultation-trigger-btn" id="openModalBtn" type="button">
 Schedule Consultation
 </button>
 <!-- Consultation Modal -->
 <div class="modal-overlay" id="consultationModal">
 <div class="modal-container" id="modalContainer">
 <div class="form-wrapper">
-<button class="modal-close-btn" id="closeModalBtn" aria-label="Close modal">&times;</button>
+<button class="modal-close-btn" id="closeModalBtn" type="button" aria-label="Close modal">&times;</button>
 <div id="form-status" class="form-status" style="display: none;"></div>
 <form id="my-form" action="https://formspree.io/f/xlgqpwnb" method="POST">
 <div class="form-single-line">
@@ -1669,7 +1661,6 @@ Schedule Consultation
 </div>
 </div>
 </div>
-
 <!-- ==========================================
 6. FLOATING QUICK CONTACT BUTTONS (MOBILE)
 ========================================== -->
@@ -1687,7 +1678,6 @@ Schedule Consultation
 </svg>
 </a>
 </div>
-
 <!-- ==========================================
 7. FOOTER SECTION
 ========================================== -->
@@ -1736,7 +1726,6 @@ Building quality spaces and creating value through innovative design and high-st
 <p>&copy; 2026 Makkari Constructions and Developers.</p><p>All rights reserved. | Developed In-House.</p>
 </div>
 </footer>
-
 <!-- ==========================================
 8. JAVASCRIPT CONTROLLERS
 ========================================== -->
@@ -1750,96 +1739,85 @@ const statsBar = document.querySelector('.stats-bar-container');
 const whyUsSection = document.getElementById('whyUsSection');
 const servicesSection = document.getElementById('servicesSection');
 let isTicking = false;
-
 /* Sticky Controller: Pins Why Choose Us exactly when its bottom appears in the viewport */
 const updateWhyUsStickyPosition = () => {
-  if (!whyUsSection) return;
-  const windowHeight = window.innerHeight || document.documentElement.clientHeight || 800;
-  const whyUsHeight = whyUsSection.offsetHeight;
-  // When top reaches (windowHeight - whyUsHeight), the bottom touches the bottom edge of viewport
-  const stickyTop = windowHeight - whyUsHeight;
-  whyUsSection.style.top = `${stickyTop}px`;
+if (!whyUsSection) return;
+const windowHeight = window.innerHeight || document.documentElement.clientHeight || 800;
+const whyUsHeight = whyUsSection.offsetHeight;
+// When top reaches (windowHeight - whyUsHeight), the bottom touches the bottom edge of viewport
+const stickyTop = windowHeight - whyUsHeight;
+whyUsSection.style.top = `${stickyTop}px`;
 };
-
 window.addEventListener('resize', updateWhyUsStickyPosition, { passive: true });
 window.addEventListener('orientationchange', updateWhyUsStickyPosition, { passive: true });
 window.addEventListener('load', updateWhyUsStickyPosition, { passive: true });
 updateWhyUsStickyPosition();
-
 /* Scroll Progress Controller: Hero Blur & Services Glassmorphism -> Solid White Transition */
 const onScrollProgress = () => {
-  const scrollY = window.pageYOffset || document.documentElement.scrollTop || 0;
-  const windowHeight = window.innerHeight || 800;
-
-  // 1. Hero scroll blur & fade
-  const heroProgress = Math.min(Math.max(scrollY / (windowHeight * 0.75), 0), 1);
-  if (fixedHeroBg) {
-    const blurAmount = (heroProgress * 16).toFixed(1);
-    const brightness = (1 - (heroProgress * 0.18)).toFixed(2);
-    const scale = (1.02 + (heroProgress * 0.03)).toFixed(3);
-    fixedHeroBg.style.filter = `blur(${blurAmount}px) brightness(${brightness})`;
-    fixedHeroBg.style.transform = `scale(${scale})`;
-  }
-  const heroOpacity = Math.max(1 - (heroProgress * 0.95), 0).toFixed(2);
-  const heroTranslate = (heroProgress * -35).toFixed(1);
-  if (heroContent) {
-    heroContent.style.opacity = heroOpacity;
-    heroContent.style.transform = `translateY(${heroTranslate}px)`;
-  }
-  if (glassTile) {
-    glassTile.style.opacity = heroOpacity;
-    glassTile.style.transform = `translateY(${heroTranslate}px)`;
-  }
-  if (statsBar) {
-    statsBar.style.opacity = heroOpacity;
-  }
-
-  // 2. Dynamic Glassmorphism -> Solid White Transition on Services Overlap
-  if (servicesSection && whyUsSection) {
-    const servicesRect = servicesSection.getBoundingClientRect();
-
-    // When services enters the viewport from below
-    if (servicesRect.top <= windowHeight) {
-      // Overlap progress from 0 (just touching bottom) to 1 (when covered 65% of viewport)
-      const overlapProgress = Math.min(Math.max((windowHeight - servicesRect.top) / (windowHeight * 0.65), 0), 1);
-
-      // Smooth alpha ramp from 0.72 (glassmorphism) to 1.0 (pure solid white)
-      const alpha = (0.72 + (overlapProgress * 0.28)).toFixed(3);
-      const blurVal = Math.max(20 - (overlapProgress * 20), 0).toFixed(1);
-
-      if (overlapProgress >= 0.96) {
-        // Fully solid white background
-        servicesSection.style.backgroundColor = '#ffffff';
-        servicesSection.style.backdropFilter = 'none';
-        servicesSection.style.webkitBackdropFilter = 'none';
-        servicesSection.style.borderTopColor = 'transparent';
-      } else {
-        // Frosted glassmorphism during overlapping
-        servicesSection.style.backgroundColor = `rgba(255, 255, 255, ${alpha})`;
-        servicesSection.style.backdropFilter = `blur(${blurVal}px)`;
-        servicesSection.style.webkitBackdropFilter = `blur(${blurVal}px)`;
-        servicesSection.style.borderTopColor = `rgba(255, 255, 255, ${(0.85 * (1 - overlapProgress)).toFixed(2)})`;
-      }
-    } else {
-      // Normal state when services is still below view
-      servicesSection.style.backgroundColor = 'rgba(255, 255, 255, 0.72)';
-      servicesSection.style.backdropFilter = 'blur(20px)';
-      servicesSection.style.webkitBackdropFilter = 'blur(20px)';
-      servicesSection.style.borderTopColor = 'rgba(255, 255, 255, 0.85)';
-    }
-  }
-
-  isTicking = false;
+const scrollY = window.pageYOffset || document.documentElement.scrollTop || 0;
+const windowHeight = window.innerHeight || 800;
+// 1. Hero scroll blur & fade
+const heroProgress = Math.min(Math.max(scrollY / (windowHeight * 0.75), 0), 1);
+if (fixedHeroBg) {
+const blurAmount = (heroProgress * 16).toFixed(1);
+const brightness = (1 - (heroProgress * 0.18)).toFixed(2);
+const scale = (1.02 + (heroProgress * 0.03)).toFixed(3);
+fixedHeroBg.style.filter = `blur(${blurAmount}px) brightness(${brightness})`;
+fixedHeroBg.style.transform = `scale(${scale})`;
+}
+const heroOpacity = Math.max(1 - (heroProgress * 0.95), 0).toFixed(2);
+const heroTranslate = (heroProgress * -35).toFixed(1);
+if (heroContent) {
+heroContent.style.opacity = heroOpacity;
+heroContent.style.transform = `translateY(${heroTranslate}px)`;
+}
+if (glassTile) {
+glassTile.style.opacity = heroOpacity;
+glassTile.style.transform = `translateY(${heroTranslate}px)`;
+}
+if (statsBar) {
+statsBar.style.opacity = heroOpacity;
+}
+// 2. Dynamic Glassmorphism -> Solid White Transition on Services Overlap
+if (servicesSection && whyUsSection) {
+const servicesRect = servicesSection.getBoundingClientRect();
+// When services enters the viewport from below
+if (servicesRect.top <= windowHeight) {
+// Overlap progress from 0 (just touching bottom) to 1 (when covered 65% of viewport)
+const overlapProgress = Math.min(Math.max((windowHeight - servicesRect.top) / (windowHeight * 0.65), 0), 1);
+// Smooth alpha ramp from 0.72 (glassmorphism) to 1.0 (pure solid white)
+const alpha = (0.72 + (overlapProgress * 0.28)).toFixed(3);
+const blurVal = Math.max(20 - (overlapProgress * 20), 0).toFixed(1);
+if (overlapProgress >= 0.96) {
+// Fully solid white background
+servicesSection.style.backgroundColor = '#ffffff';
+servicesSection.style.backdropFilter = 'none';
+servicesSection.style.webkitBackdropFilter = 'none';
+servicesSection.style.borderTopColor = 'transparent';
+} else {
+// Frosted glassmorphism during overlapping
+servicesSection.style.backgroundColor = `rgba(255, 255, 255, ${alpha})`;
+servicesSection.style.backdropFilter = `blur(${blurVal}px)`;
+servicesSection.style.webkitBackdropFilter = `blur(${blurVal}px)`;
+servicesSection.style.borderTopColor = `rgba(255, 255, 255, ${(0.85 * (1 - overlapProgress)).toFixed(2)})`;
+}
+} else {
+// Normal state when services is still below view
+servicesSection.style.backgroundColor = 'rgba(255, 255, 255, 0.72)';
+servicesSection.style.backdropFilter = 'blur(20px)';
+servicesSection.style.webkitBackdropFilter = 'blur(20px)';
+servicesSection.style.borderTopColor = 'rgba(255, 255, 255, 0.85)';
+}
+}
+isTicking = false;
 };
-
 window.addEventListener('scroll', () => {
-  if (!isTicking) {
-    window.requestAnimationFrame(onScrollProgress);
-    isTicking = true;
-  }
+if (!isTicking) {
+window.requestAnimationFrame(onScrollProgress);
+isTicking = true;
+}
 }, { passive: true });
 onScrollProgress();
-
 /* 1. Header Scroll Effect & Navigation Handler */
 const header = document.getElementById('makkari-auto-header');
 const mobileToggle = document.getElementById('mobile-toggle');
@@ -1887,7 +1865,6 @@ toggleMenu(true);
 }
 });
 }
-
 /* 2. Modal Overlay & Formspree Submission */
 const openModalBtn = document.getElementById("openModalBtn");
 const closeModalBtn = document.getElementById("closeModalBtn");
@@ -1958,7 +1935,6 @@ submitBtn.innerText = "Send";
 });
 });
 }
-
 /* 3. Synchronized Animated Number Counter */
 const statsSection = document.querySelector('.stats-bar-container');
 const counters = document.querySelectorAll('.counter');
@@ -2008,7 +1984,6 @@ triggerAnimation();
 }
 }, 300);
 }
-
 /* 4. Smooth Carousel Controls & Drag Logic */
 const projectsWrapper = document.getElementById('projectsWrapper');
 const prevBtn = document.getElementById('carouselPrev');
@@ -2049,7 +2024,6 @@ const walk = (x - startX) * 1.5;
 projectsWrapper.scrollLeft = scrollLeft - walk;
 });
 }
-
 /* 5. Fade Out Schedule Consultation Button on Footer Intersection */
 const footer = document.querySelector('.site-footer');
 const consultationBtn = document.getElementById('openModalBtn');
@@ -2067,5 +2041,7 @@ footerObserver.observe(footer);
 }
 });
 </script>
+<script>(function(){function c(){var b=a.contentDocument||(a.contentWindow&&a.contentWindow.document);if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'a38dab652b689a58',t:'MTc4OTAzNTMwNQ=='};var a=document.createElement('script');a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script><script type="module" src="https://static.cloudflareinsights.com/beacon.min.js/v31edd6df95cf4e85bb4c19e7a9bdbcba1788362987495" integrity="sha512-iIg7k2xntmwu6/uSb5tpc/hySgZc4eoL31yB29W6tJFo2akwjPWcEqnCEdJvGexCL0KEQwVYv5BlowfhVz26hg==" data-cf-beacon='{"version":"2024.11.0","token":"d0e741cca14c4cdba23f71abbff76953","r":1,"spa":2}' crossorigin="anonymous"></script>
 </body>
 </html>
+```
