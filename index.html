@@ -1,9 +1,9 @@
 ,,
 <!DOCTYPE html>
+<head>
 <!-- Favicon -->
 <link rel="icon" type="image/png" href="https://raw.githubusercontent.com/makkarigroup/makkari-constructions-website-/refs/heads/main/Fevicon.png">
 <html lang="en">
-<head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <!-- Primary Page Metadata -->
@@ -1752,7 +1752,7 @@ fixedHeroBg.style.transform = `scale(${scale})`;
 }
 
 // Fade hero content gracefully as user enters Why Choose Us
-const heroOpacity = Math.max(1 - (progress * 1.3), 0).toFixed(2);
+const heroOpacity = Math.max(1 - (progress * 0.95), 0).toFixed(2);
 const heroTranslate = (progress * -35).toFixed(1);
 
 if (heroContent) {
