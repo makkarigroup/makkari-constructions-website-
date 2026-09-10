@@ -1,1324 +1,1372 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Our Services & Portfolio | Makkari</title>
-  
-  <link rel="icon" type="image/png" href="https://raw.githubusercontent.com/makkarigroup/makkari-constructions-website-/refs/heads/main/Fevicon.png">
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;600;700;800;900&family=Montserrat:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-
-  <style>
-    /* Reset implicit body spacing */
-    html, body {
-      margin: 0;
-      padding: 0;
-      width: 100%;
-    }
-
-    :root {
-      --brand-navy: #152F4E;
-      --brand-red: #E52330;
-      --brand-red-hover: #c41c27;
-      --glass-bg: rgba(255, 255, 255, 0.75);
-      --glass-bg-scrolled: rgba(255, 255, 255, 0.9);
-      --glass-border: rgba(255, 255, 255, 0.5);
-      --glass-hover: rgba(21, 47, 78, 0.08);
-      --text-color: #152F4E;
-      --header-height: clamp(60px, 7vh, 75px);
-      --shadow-glass: 0 8px 32px 0 rgba(0, 0, 0, 0.12);
-      --transition-speed: 0.35s;
-      --ease-spring: cubic-bezier(0.175, 0.885, 0.32, 1.275);
-      
-      --primary-navy: #152F4E;
-      --accent-red: #E52330;
-      --bg-light: #F4F6F9;
-      --card-white: #FFFFFF;
-      --text-main: #152F4E;
-      --text-muted: #5A6E85;
-      --border-color: #E2E8F0;
-      --border-hover: #CBD5E1;
-      
-      --radius-sm: 8px;
-      --radius-md: 12px;
-      --radius-lg: 16px;
-      
-      --shadow-sm: 0 2px 8px rgba(21, 47, 78, 0.04);
-      --shadow-md: 0 8px 24px rgba(21, 47, 78, 0.06);
-      --shadow-hover: 0 16px 32px rgba(21, 47, 78, 0.1);
-      
-      --transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
-
-      --navy-core: #152F4E;
-      --red-core: #E52330;
-      --glass-tile-bg: rgba(255, 255, 255, 0.45);
-      --glass-tile-hover: rgba(255, 255, 255, 0.68);
-      --glass-tile-border: rgba(255, 255, 255, 0.85);
-    }
-
-    * {
-      box-sizing: border-box;
-      margin: 0;
-      padding: 0;
-    }
-
-    body {
-      font-family: 'Archivo', sans-serif;
-      background-color: var(--bg-light);
-      color: var(--text-main);
-      line-height: 1.5;
-      -webkit-font-smoothing: antialiased;
-    }
-
-    /* Floating Glass Header */
-    .site-header {
-      position: fixed;
-      top: 8px;
-      left: 50%;
-      transform: translateX(-50%);
-      width: min(92%, 1150px);
-      height: var(--header-height);
-      z-index: 1000;
-      border-radius: 100px;
-      background: var(--glass-bg);
-      backdrop-filter: blur(16px);
-      -webkit-backdrop-filter: blur(16px);
-      border: 1px solid var(--glass-border);
-      box-shadow: var(--shadow-glass);
-      opacity: 0;
-      animation: headerEntrance 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
-      transition: top var(--transition-speed) ease, 
-                  background var(--transition-speed) ease, 
-                  box-shadow var(--transition-speed) ease,
-                  border-color var(--transition-speed) ease;
-    }
-
-    @keyframes headerEntrance {
-      0% { opacity: 0; transform: translate(-50%, -25px); }
-      100% { opacity: 1; transform: translate(-50%, 0); }
-    }
-
-    .site-header.scrolled {
-      background: var(--glass-bg-scrolled);
-      border-color: rgba(255, 255, 255, 0.8);
-      box-shadow: 0 12px 35px 0 rgba(0, 0, 0, 0.18);
-      top: 12px;
-    }
-
-    .nav-container {
-      width: 100%;
-      height: 100%;
-      margin: 0 auto;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      padding: 0 clamp(1.2rem, 3vw, 2rem);
-      position: relative;
-    }
-
-    .brand-container {
-      display: flex;
-      align-items: center;
-      text-decoration: none;
-      height: 100%;
-      border-radius: 50px;
-    }
-
-    .brand-logo-img {
-      height: clamp(32px, 4.5vh, 42px);
-      width: auto;
-      object-fit: contain;
-      transition: transform 0.3s var(--ease-spring);
-    }
-
-    .brand-container:hover .brand-logo-img {
-      transform: scale(1.08) rotate(-1.5deg);
-    }
-
-    .nav-menu {
-      display: flex;
-      list-style: none;
-      gap: clamp(0.3rem, 1vw, 0.8rem);
-      align-items: center;
-    }
-
-    .nav-item {
-      opacity: 0;
-      animation: navItemFade 0.5s ease forwards;
-    }
-
-    .nav-item:nth-child(1) { animation-delay: 0.2s; }
-    .nav-item:nth-child(2) { animation-delay: 0.27s; }
-    .nav-item:nth-child(3) { animation-delay: 0.34s; }
-    .nav-item:nth-child(4) { animation-delay: 0.41s; }
-    .nav-item:nth-child(5) { animation-delay: 0.48s; }
-    .nav-item:nth-child(6) { animation-delay: 0.55s; }
-
-    @keyframes navItemFade {
-      from { opacity: 0; transform: translateY(-8px); }
-      to { opacity: 1; transform: translateY(0); }
-    }
-
-    .nav-link {
-      position: relative;
-      color: var(--text-color);
-      text-decoration: none;
-      font-size: clamp(0.85rem, 0.95vw, 0.95rem);
-      font-weight: 600;
-      padding: 0.55rem 1.1rem;
-      border-radius: 50px;
-      transition: color var(--transition-speed) ease, 
-                  background-color var(--transition-speed) ease, 
-                  transform var(--transition-speed) var(--ease-spring);
-      white-space: nowrap;
-      display: inline-block;
-    }
-
-    .nav-link:hover, .nav-link:focus-visible {
-      background-color: var(--glass-hover);
-      color: var(--brand-navy);
-      transform: translateY(-2px);
-      outline: none;
-    }
-
-    .nav-link.active-page {
-      background-color: rgba(21, 47, 78, 0.12);
-      color: var(--brand-navy);
-    }
-
-    .nav-link.highlight {
-      background-color: var(--brand-red);
-      color: #FFFFFF;
-      box-shadow: 0 4px 15px rgba(229, 35, 48, 0.3);
-      transition: all var(--transition-speed) ease;
-    }
-
-    .nav-link.highlight:hover {
-      background-color: var(--brand-red-hover);
-      color: #FFFFFF;
-      transform: translateY(-2px) scale(1.03);
-      box-shadow: 0 6px 20px rgba(229, 35, 48, 0.45);
-    }
-
-    .mobile-toggle {
-      display: none;
-      flex-direction: column;
-      justify-content: space-between;
-      width: 26px;
-      height: 18px;
-      background: transparent;
-      border: none;
-      cursor: pointer;
-      padding: 0;
-      margin-left: auto;
-      z-index: 101;
-    }
-
-    .mobile-toggle .bar {
-      height: 2px;
-      width: 100%;
-      background-color: var(--text-color);
-      border-radius: 2px;
-      transition: transform var(--transition-speed) var(--ease-spring), opacity var(--transition-speed) ease;
-    }
-
-    .mobile-toggle.active .bar:nth-child(1) { transform: translateY(8px) rotate(45deg); }
-    .mobile-toggle.active .bar:nth-child(2) { opacity: 0; transform: translateX(-10px); }
-    .mobile-toggle.active .bar:nth-child(3) { transform: translateY(-8px) rotate(-45deg); }
-
-    .wrapper {
-      max-width: 1200px;
-      margin: 0 auto;
-      padding: clamp(100px, 8vw, 120px) clamp(16px, 3vw, 24px) 0 clamp(16px, 3vw, 24px);
-    }
-
-    .section-header {
-      text-align: center;
-      margin-bottom: clamp(32px, 4vw, 48px);
-    }
-
-    .header-tag {
-      display: inline-block;
-      font-size: 0.8rem;
-      font-weight: 800;
-      color: var(--accent-red);
-      text-transform: uppercase;
-      letter-spacing: 1.5px;
-      margin-bottom: 8px;
-    }
-
-    .section-title {
-      font-size: clamp(1.8rem, 3.5vw, 2.5rem);
-      font-weight: 800;
-      color: var(--primary-navy);
-      letter-spacing: -0.5px;
-    }
-
-    .services-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-      gap: 24px;
-      margin-bottom: clamp(50px, 7vw, 90px);
-    }
-
-    .service-card {
-      background: var(--card-white);
-      border: 1px solid var(--border-color);
-      border-radius: var(--radius-md);
-      padding: 32px 28px;
-      box-shadow: var(--shadow-sm);
-      transition: var(--transition);
-      display: flex;
-      flex-direction: column;
-      justify-content: flex-start;
-    }
-
-    .service-card:hover {
-      transform: translateY(-4px);
-      box-shadow: var(--shadow-hover);
-      border-color: var(--border-hover);
-    }
-
-    .card-top {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      margin-bottom: 20px;
-    }
-
-    .card-number {
-      font-size: 0.85rem;
-      font-weight: 800;
-      color: var(--accent-red);
-      background-color: rgba(229, 35, 48, 0.08);
-      padding: 4px 12px;
-      border-radius: 20px;
-    }
-
-    .service-card h3 {
-      font-size: 1.2rem;
-      font-weight: 700;
-      color: var(--primary-navy);
-      margin-bottom: 10px;
-      line-height: 1.3;
-    }
-
-    .service-card p {
-      font-size: 0.925rem;
-      color: var(--text-muted);
-      line-height: 1.6;
-    }
-
-    .stats-section {
-      background: var(--card-white);
-      border: 1px solid var(--border-color);
-      border-radius: var(--radius-lg);
-      padding: clamp(28px, 4vw, 40px) clamp(16px, 3vw, 24px);
-      margin-bottom: clamp(50px, 7vw, 90px);
-      box-shadow: var(--shadow-sm);
-    }
-
-    .stats-grid {
-      display: grid;
-      grid-template-columns: repeat(4, 1fr);
-      gap: 16px;
-      text-align: center;
-    }
-
-    .stat-item {
-      position: relative;
-      padding: 8px 16px;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-    }
-
-    .stat-item:not(:last-child)::after {
-      content: '';
-      position: absolute;
-      right: 0;
-      top: 15%;
-      height: 70%;
-      width: 1px;
-      background-color: var(--border-color);
-    }
-
-    .stat-number-box {
-      font-size: clamp(1.8rem, 3.2vw, 2.5rem);
-      font-weight: 800;
-      color: var(--accent-red);
-      line-height: 1.1;
-      margin-bottom: 6px;
-      letter-spacing: -0.5px;
-    }
-
-    .stat-label {
-      font-size: 0.8rem;
-      font-weight: 700;
-      color: var(--primary-navy);
-      text-transform: uppercase;
-      letter-spacing: 0.5px;
-    }
-
-    .why-section {
-      margin-bottom: clamp(50px, 7vw, 90px);
-    }
-
-    .why-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(210px, 1fr));
-      gap: 20px;
-    }
-
-    .why-card {
-      background: var(--card-white);
-      border: 1px solid var(--border-color);
-      border-radius: var(--radius-md);
-      padding: 28px 22px;
-      box-shadow: var(--shadow-sm);
-      transition: var(--transition);
-      position: relative;
-      overflow: hidden;
-      display: flex;
-      flex-direction: column;
-    }
-
-    .why-card::before {
-      content: '';
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 3px;
-      background-color: transparent;
-      transition: var(--transition);
-    }
-
-    .why-card:hover {
-      transform: translateY(-4px);
-      box-shadow: var(--shadow-hover);
-      border-color: var(--border-hover);
-    }
-
-    .why-card:hover::before {
-      background-color: var(--accent-red);
-    }
-
-    .why-number {
-      font-size: 1.1rem;
-      font-weight: 900;
-      color: var(--accent-red);
-      margin-bottom: 12px;
-    }
-
-    .why-card h3 {
-      font-size: 1.05rem;
-      font-weight: 700;
-      color: var(--primary-navy);
-      margin-bottom: 8px;
-      line-height: 1.3;
-    }
-
-    .why-card p {
-      font-size: 0.875rem;
-      color: var(--text-muted);
-      line-height: 1.5;
-    }
-
-    .portfolio-section {
-      margin-bottom: clamp(50px, 7vw, 90px);
-    }
-
-    .portfolio-grid {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 24px;
-    }
-
-    .portfolio-card {
-      background: var(--card-white);
-      border: 1px solid var(--border-color);
-      border-radius: var(--radius-md);
-      overflow: hidden;
-      box-shadow: var(--shadow-sm);
-      transition: var(--transition);
-      display: flex;
-      flex-direction: column;
-      height: 100%;
-    }
-
-    .portfolio-card:hover {
-      transform: translateY(-5px);
-      box-shadow: var(--shadow-hover);
-      border-color: var(--border-hover);
-    }
-
-    .portfolio-image-wrapper {
-      position: relative;
-      width: 100%;
-      aspect-ratio: 16 / 10;
-      overflow: hidden;
-      background-color: #EBF0F5;
-    }
-
-    .portfolio-image-wrapper img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      transition: transform 0.4s ease;
-    }
-
-    .portfolio-card:hover .portfolio-image-wrapper img {
-      transform: scale(1.04);
-    }
-
-    .portfolio-badge {
-      position: absolute;
-      top: 14px;
-      left: 14px;
-      font-size: 0.68rem;
-      font-weight: 800;
-      text-transform: uppercase;
-      letter-spacing: 1px;
-      color: #FFFFFF;
-      background-color: var(--primary-navy);
-      padding: 4px 10px;
-      border-radius: 4px;
-    }
-
-    .portfolio-body {
-      padding: 24px;
-      display: flex;
-      flex-direction: column;
-      flex-grow: 1;
-      justify-content: space-between;
-    }
-
-    .portfolio-header h3 {
-      font-size: 1.15rem;
-      font-weight: 700;
-      color: var(--primary-navy);
-      margin-bottom: 4px;
-      line-height: 1.3;
-    }
-
-    .portfolio-location {
-      font-size: 0.85rem;
-      color: var(--text-muted);
-      font-weight: 500;
-      margin-bottom: 20px;
-    }
-
-    .portfolio-footer {
-      border-top: 1px solid var(--border-color);
-      padding-top: 14px;
-      font-size: 0.72rem;
-      font-weight: 800;
-      color: var(--accent-red);
-      text-transform: uppercase;
-      letter-spacing: 0.8px;
-    }
-
-    .clients-section {
-      margin-bottom: clamp(50px, 7vw, 90px);
-    }
-
-    .logo-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
-      gap: 16px;
-      align-items: center;
-    }
-
-    .logo-card {
-      background: var(--card-white);
-      border: 1px solid var(--border-color);
-      border-radius: var(--radius-sm);
-      padding: 20px;
-      height: 90px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      text-align: center;
-      transition: var(--transition);
-    }
-
-    .logo-card:hover {
-      border-color: var(--border-hover);
-      box-shadow: var(--shadow-sm);
-    }
-
-    .logo-card img {
-      max-width: 100%;
-      max-height: 48px;
-      object-fit: contain;
-    }
-
-    .logo-text-title {
-      font-size: 0.85rem;
-      font-weight: 700;
-      color: var(--primary-navy);
-      line-height: 1.2;
-    }
-
-    .logo-text-sub {
-      font-size: 0.75rem;
-      color: var(--text-muted);
-      margin-top: 2px;
-    }
-
-    .portfolio-glass-tile {
-      width: 100%;
-      max-width: 1200px;
-      margin: 0 auto 0 auto;
-      font-family: 'Montserrat', sans-serif;
-      position: relative;
-      box-sizing: border-box;
-    }
-
-    .glass-tile-card {
-      background: var(--glass-tile-bg) !important;
-      backdrop-filter: blur(35px) saturate(200%);
-      -webkit-backdrop-filter: blur(35px) saturate(200%);
-      border: 1.5px solid var(--glass-tile-border);
-      border-radius: 24px;
-      padding: clamp(24px, 4vw, 36px);
-      box-shadow: 
-        0 20px 50px -10px rgba(21, 47, 78, 0.1),
-        0 0 30px rgba(255, 255, 255, 0.5),
-        inset 0 2px 3px 0 rgba(255, 255, 255, 0.95),
-        inset 0 -2px 3px 0 rgba(21, 47, 78, 0.03);
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 24px;
-      position: relative;
-      overflow: hidden;
-      transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
-    }
-
-    .glass-tile-card:hover {
-      background: var(--glass-tile-hover) !important;
-      transform: translateY(-3px);
-      box-shadow: 0 25px 60px -10px rgba(21, 47, 78, 0.15);
-    }
-
-    .glass-tile-card::after {
-      content: '';
-      position: absolute;
-      top: -50%;
-      left: -150%;
-      width: 100%;
-      height: 200%;
-      background: linear-gradient(60deg, transparent, rgba(255, 255, 255, 0.4), transparent);
-      transition: all 0.8s ease;
-    }
-
-    .glass-tile-card:hover::after {
-      left: 150%;
-    }
-
-    @media (max-width: 1024px) {
-      .portfolio-grid { grid-template-columns: repeat(2, 1fr); }
-    }
-
-    @media (max-width: 900px) {
-      .mobile-toggle { display: flex; }
-      .nav-menu {
-        position: absolute;
-        top: calc(100% + 12px);
-        right: 0;
-        width: 100%;
-        max-width: 280px;
-        background: rgba(255, 255, 255, 0.95);
-        backdrop-filter: blur(20px);
-        -webkit-backdrop-filter: blur(20px);
-        flex-direction: column;
-        align-items: stretch;
-        opacity: 0;
-        visibility: hidden;
-        transform: translateY(-15px) scale(0.95);
-        transition: opacity var(--transition-speed) ease,
-                    transform var(--transition-speed) var(--ease-spring),
-                    visibility var(--transition-speed) ease;
-        box-shadow: 0 16px 32px rgba(0, 0, 0, 0.15);
-        border-radius: 20px;
-        border: 1px solid var(--glass-border);
-        padding: 0.5rem 0;
-        overflow: hidden;
-      }
-      .nav-menu.active {
-        opacity: 1;
-        visibility: visible;
-        transform: translateY(0) scale(1);
-      }
-      .nav-item {
-        animation: none;
-        opacity: 0;
-        transform: translateX(15px);
-        transition: opacity 0.3s ease, transform 0.3s ease;
-      }
-      .nav-menu.active .nav-item { opacity: 1; transform: translateX(0); }
-      .nav-link {
-        display: block;
-        color: var(--text-color);
-        padding: 0.85rem 1.4rem;
-        border-radius: 0;
-        text-align: left;
-        transform: none !important;
-      }
-      .nav-link.highlight {
-        text-align: center;
-        margin: 0.5rem 1rem;
-        border-radius: 50px;
-      }
-    }
-
-    @media (max-width: 768px) {
-      .stats-grid {
-        grid-template-columns: repeat(2, 1fr);
-        gap: 24px 16px;
-      }
-      .stat-item:nth-child(2)::after { display: none; }
-      .portfolio-grid { grid-template-columns: 1fr; }
-    }
-
-    @media (max-width: 550px) {
-      .stats-grid { grid-template-columns: 1fr; }
-      .stat-item:not(:last-child)::after { display: none; }
-    }
-  </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Our Services &amp; Portfolio | Makkari</title>
+<link rel="icon" type="image/png" href="https://raw.githubusercontent.com/makkarigroup/makkari-constructions-website-/refs/heads/main/Fevicon.png">
+
+<!-- Google Fonts: Archivo & Montserrat -->
+<style type="text/css">
+@font-face {font-family:'Archivo';font-style:normal;font-weight:400 900;src:url(/cf-fonts/v/archivo/5.2.8/latin/wght/normal.woff2);unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD;font-display:swap;}
+@font-face {font-family:'Montserrat';font-style:normal;font-weight:400 800;src:url(/cf-fonts/v/montserrat/5.2.8/latin/wght/normal.woff2);unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD;font-display:swap;}
+</style>
+
+<!-- Fallback Google Fonts CDN -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;600;700;800;900&family=Montserrat:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+<style>
+/* Reset implicit body spacing */
+html, body {
+  margin: 0;
+  padding: 0;
+  width: 100%;
+}
+
+:root {
+  --brand-navy: #152F4E;
+  --brand-red: #E52330;
+  --brand-red-hover: #c41c27;
+  --glass-bg: rgba(255, 255, 255, 0.75);
+  --glass-bg-scrolled: rgba(255, 255, 255, 0.9);
+  --glass-border: rgba(255, 255, 255, 0.5);
+  --glass-hover: rgba(21, 47, 78, 0.08);
+  --text-color: #152F4E;
+  --header-height: clamp(60px, 7vh, 75px);
+  --shadow-glass: 0 8px 32px 0 rgba(0, 0, 0, 0.12);
+  --transition-speed: 0.35s;
+  --ease-spring: cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  --primary-navy: #152F4E;
+  --accent-red: #E52330;
+  --bg-light: #F4F6F9;
+  --card-white: #FFFFFF;
+  --text-main: #152F4E;
+  --text-muted: #5A6E85;
+  --border-color: #E2E8F0;
+  --border-hover: #CBD5E1;
+  --radius-sm: 8px;
+  --radius-md: 12px;
+  --radius-lg: 16px;
+  --shadow-sm: 0 2px 8px rgba(21, 47, 78, 0.04);
+  --shadow-md: 0 8px 24px rgba(21, 47, 78, 0.06);
+  --shadow-hover: 0 16px 32px rgba(21, 47, 78, 0.1);
+  --transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+  --navy-core: #152F4E;
+  --red-core: #E52330;
+  --glass-tile-bg: rgba(255, 255, 255, 0.45);
+  --glass-tile-hover: rgba(255, 255, 255, 0.68);
+  --glass-tile-border: rgba(255, 255, 255, 0.85);
+  --brand-primary: #152f4e;
+  --brand-accent: #e52330;
+  --brand-light: #f9f9f9;
+  --brand-white: #ffffff;
+  --font-heading: 'Archivo', sans-serif;
+  --font-body: 'Archivo', sans-serif;
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: 'Archivo', sans-serif;
+  background-color: var(--bg-light);
+  color: var(--text-main);
+  line-height: 1.5;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* Floating Glass Header (Preserved) */
+.site-header {
+  position: fixed;
+  top: 8px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: min(92%, 1150px);
+  height: var(--header-height);
+  z-index: 1000;
+  border-radius: 100px;
+  background: var(--glass-bg);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid var(--glass-border);
+  box-shadow: var(--shadow-glass);
+  opacity: 0;
+  animation: headerEntrance 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  transition: top var(--transition-speed) ease,
+              background var(--transition-speed) ease,
+              box-shadow var(--transition-speed) ease,
+              border-color var(--transition-speed) ease;
+}
+
+@keyframes headerEntrance {
+  0% { opacity: 0; transform: translate(-50%, -25px); }
+  100% { opacity: 1; transform: translate(-50%, 0); }
+}
+
+.site-header.scrolled {
+  background: var(--glass-bg-scrolled);
+  border-color: rgba(255, 255, 255, 0.8);
+  box-shadow: 0 12px 35px 0 rgba(0, 0, 0, 0.18);
+  top: 12px;
+}
+
+.nav-container {
+  width: 100%;
+  height: 100%;
+  margin: 0 auto;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 clamp(1.2rem, 3vw, 2rem);
+  position: relative;
+}
+
+.brand-container {
+  display: flex;
+  align-items: center;
+  text-decoration: none;
+  height: 100%;
+  border-radius: 50px;
+}
+
+.brand-logo-img {
+  height: clamp(32px, 4.5vh, 42px);
+  width: auto;
+  object-fit: contain;
+  transition: transform 0.3s var(--ease-spring);
+}
+
+.brand-container:hover .brand-logo-img {
+  transform: scale(1.08) rotate(-1.5deg);
+}
+
+.nav-menu {
+  display: flex;
+  list-style: none;
+  gap: clamp(0.3rem, 1vw, 0.8rem);
+  align-items: center;
+}
+
+.nav-item {
+  opacity: 0;
+  animation: navItemFade 0.5s ease forwards;
+}
+
+.nav-item:nth-child(1) { animation-delay: 0.2s; }
+.nav-item:nth-child(2) { animation-delay: 0.27s; }
+.nav-item:nth-child(3) { animation-delay: 0.34s; }
+.nav-item:nth-child(4) { animation-delay: 0.41s; }
+.nav-item:nth-child(5) { animation-delay: 0.48s; }
+.nav-item:nth-child(6) { animation-delay: 0.55s; }
+
+@keyframes navItemFade {
+  from { opacity: 0; transform: translateY(-8px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.nav-link {
+  position: relative;
+  color: var(--text-color);
+  text-decoration: none;
+  font-size: clamp(0.85rem, 0.95vw, 0.95rem);
+  font-weight: 600;
+  padding: 0.55rem 1.1rem;
+  border-radius: 50px;
+  transition: color var(--transition-speed) ease,
+              background-color var(--transition-speed) ease,
+              transform var(--transition-speed) var(--ease-spring);
+  white-space: nowrap;
+  display: inline-block;
+}
+
+.nav-link:hover, .nav-link:focus-visible {
+  background-color: var(--glass-hover);
+  color: var(--brand-navy);
+  transform: translateY(-2px);
+  outline: none;
+}
+
+.nav-link.active-page {
+  background-color: rgba(21, 47, 78, 0.12);
+  color: var(--brand-navy);
+}
+
+.nav-link.highlight {
+  background-color: var(--brand-red);
+  color: #FFFFFF;
+  box-shadow: 0 4px 15px rgba(229, 35, 48, 0.3);
+  transition: all var(--transition-speed) ease;
+}
+
+.nav-link.highlight:hover {
+  background-color: var(--brand-red-hover);
+  color: #FFFFFF;
+  transform: translateY(-2px) scale(1.03);
+  box-shadow: 0 6px 20px rgba(229, 35, 48, 0.45);
+}
+
+.mobile-toggle {
+  display: none;
+  flex-direction: column;
+  justify-content: space-between;
+  width: 26px;
+  height: 18px;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  padding: 0;
+  margin-left: auto;
+  z-index: 101;
+}
+
+.mobile-toggle .bar {
+  height: 2px;
+  width: 100%;
+  background-color: var(--text-color);
+  border-radius: 2px;
+  transition: transform var(--transition-speed) var(--ease-spring), opacity var(--transition-speed) ease;
+}
+
+.mobile-toggle.active .bar:nth-child(1) { transform: translateY(8px) rotate(45deg); }
+.mobile-toggle.active .bar:nth-child(2) { opacity: 0; transform: translateX(-10px); }
+.mobile-toggle.active .bar:nth-child(3) { transform: translateY(-8px) rotate(-45deg); }
+
+.wrapper {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: clamp(100px, 8vw, 120px) clamp(16px, 3vw, 24px) 0 clamp(16px, 3vw, 24px);
+}
+
+.section-header {
+  text-align: center;
+  margin-bottom: clamp(32px, 4vw, 48px);
+}
+
+.header-tag {
+  display: inline-block;
+  font-size: 0.8rem;
+  font-weight: 800;
+  color: var(--accent-red);
+  text-transform: uppercase;
+  letter-spacing: 1.5px;
+  margin-bottom: 8px;
+}
+
+.section-title {
+  font-size: clamp(1.8rem, 3.5vw, 2.5rem);
+  font-weight: 800;
+  color: var(--primary-navy);
+  letter-spacing: -0.5px;
+}
+
+/* -------------------------------------------------------------
+   SERVICES SECTION (PARALLAX ENABLED ON TILES)
+------------------------------------------------------------- */
+.services-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+  gap: 24px;
+  margin-bottom: clamp(50px, 7vw, 90px);
+}
+
+.service-card {
+  background: var(--card-white);
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-md);
+  padding: 32px 28px;
+  box-shadow: var(--shadow-sm);
+  transition: box-shadow 0.3s ease, border-color 0.3s ease;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  will-change: transform;
+  transform: translate3d(0, 0, 0);
+  position: relative;
+}
+
+.service-card:hover {
+  box-shadow: var(--shadow-hover);
+  border-color: var(--border-hover);
+}
+
+.card-top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 20px;
+}
+
+.card-number {
+  font-size: 0.85rem;
+  font-weight: 800;
+  color: var(--accent-red);
+  background-color: rgba(229, 35, 48, 0.08);
+  padding: 4px 12px;
+  border-radius: 20px;
+}
+
+.service-card h3 {
+  font-size: 1.2rem;
+  font-weight: 700;
+  color: var(--primary-navy);
+  margin-bottom: 10px;
+  line-height: 1.3;
+}
+
+.service-card p {
+  font-size: 0.925rem;
+  color: var(--text-muted);
+  line-height: 1.6;
+}
+
+/* -------------------------------------------------------------
+   STATS SECTION (PRESERVED - NO PARALLAX)
+------------------------------------------------------------- */
+.stats-section {
+  background: var(--card-white);
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-lg);
+  padding: clamp(28px, 4vw, 40px) clamp(16px, 3vw, 24px);
+  margin-bottom: clamp(50px, 7vw, 90px);
+  box-shadow: var(--shadow-sm);
+}
+
+.stats-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 16px;
+  text-align: center;
+}
+
+.stat-item {
+  position: relative;
+  padding: 8px 16px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.stat-item:not(:last-child)::after {
+  content: '';
+  position: absolute;
+  right: 0;
+  top: 15%;
+  height: 70%;
+  width: 1px;
+  background-color: var(--border-color);
+}
+
+.stat-number-box {
+  font-size: clamp(1.8rem, 3.2vw, 2.5rem);
+  font-weight: 800;
+  color: var(--accent-red);
+  line-height: 1.1;
+  margin-bottom: 6px;
+  letter-spacing: -0.5px;
+}
+
+.stat-label {
+  font-size: 0.8rem;
+  font-weight: 700;
+  color: var(--primary-navy);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+/* -------------------------------------------------------------
+   WHY MAKKARI SECTION (PARALLAX ENABLED ON TILES)
+------------------------------------------------------------- */
+.why-section {
+  margin-bottom: clamp(50px, 7vw, 90px);
+}
+
+.why-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(210px, 1fr));
+  gap: 20px;
+}
+
+.why-card {
+  background: var(--card-white);
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-md);
+  padding: 28px 22px;
+  box-shadow: var(--shadow-sm);
+  transition: box-shadow 0.3s ease, border-color 0.3s ease;
+  position: relative;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  will-change: transform;
+  transform: translate3d(0, 0, 0);
+}
+
+.why-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 3px;
+  background-color: transparent;
+  transition: var(--transition);
+}
+
+.why-card:hover {
+  box-shadow: var(--shadow-hover);
+  border-color: var(--border-hover);
+}
+
+.why-card:hover::before {
+  background-color: var(--accent-red);
+}
+
+.why-number {
+  font-size: 1.1rem;
+  font-weight: 900;
+  color: var(--accent-red);
+  margin-bottom: 12px;
+}
+
+.why-card h3 {
+  font-size: 1.05rem;
+  font-weight: 700;
+  color: var(--primary-navy);
+  margin-bottom: 8px;
+  line-height: 1.3;
+}
+
+.why-card p {
+  font-size: 0.875rem;
+  color: var(--text-muted);
+  line-height: 1.5;
+}
+
+/* -------------------------------------------------------------
+   PORTFOLIO SECTION (PRESERVED - NO PARALLAX)
+------------------------------------------------------------- */
+.portfolio-section {
+  margin-bottom: clamp(50px, 7vw, 90px);
+}
+
+.portfolio-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 24px;
+}
+
+.portfolio-card {
+  background: var(--card-white);
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-md);
+  overflow: hidden;
+  box-shadow: var(--shadow-sm);
+  transition: var(--transition);
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+
+.portfolio-card:hover {
+  transform: translateY(-5px);
+  box-shadow: var(--shadow-hover);
+  border-color: var(--border-hover);
+}
+
+.portfolio-image-wrapper {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 16 / 10;
+  overflow: hidden;
+  background-color: #EBF0F5;
+}
+
+.portfolio-image-wrapper img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.4s ease;
+}
+
+.portfolio-card:hover .portfolio-image-wrapper img {
+  transform: scale(1.04);
+}
+
+.portfolio-badge {
+  position: absolute;
+  top: 14px;
+  left: 14px;
+  font-size: 0.68rem;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  color: #FFFFFF;
+  background-color: var(--primary-navy);
+  padding: 4px 10px;
+  border-radius: 4px;
+}
+
+.portfolio-body {
+  padding: 24px;
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+  justify-content: space-between;
+}
+
+.portfolio-header h3 {
+  font-size: 1.15rem;
+  font-weight: 700;
+  color: var(--primary-navy);
+  margin-bottom: 4px;
+  line-height: 1.3;
+}
+
+.portfolio-location {
+  font-size: 0.85rem;
+  color: var(--text-muted);
+  font-weight: 500;
+  margin-bottom: 20px;
+}
+
+.portfolio-footer {
+  border-top: 1px solid var(--border-color);
+  padding-top: 14px;
+  font-size: 0.72rem;
+  font-weight: 800;
+  color: var(--accent-red);
+  text-transform: uppercase;
+  letter-spacing: 0.8px;
+}
+
+/* -------------------------------------------------------------
+   CLIENTS SECTION (PRESERVED - NO PARALLAX)
+------------------------------------------------------------- */
+.clients-section {
+  margin-bottom: clamp(50px, 7vw, 90px);
+}
+
+.logo-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  gap: 16px;
+  align-items: center;
+}
+
+.logo-card {
+  background: var(--card-white);
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-sm);
+  padding: 20px;
+  height: 90px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  transition: var(--transition);
+}
+
+.logo-card:hover {
+  border-color: var(--border-hover);
+  box-shadow: var(--shadow-sm);
+}
+
+.logo-card img {
+  max-width: 100%;
+  max-height: 48px;
+  object-fit: contain;
+}
+
+.logo-text-title {
+  font-size: 0.85rem;
+  font-weight: 700;
+  color: var(--primary-navy);
+  line-height: 1.2;
+}
+
+.logo-text-sub {
+  font-size: 0.75rem;
+  color: var(--text-muted);
+  margin-top: 2px;
+}
+
+/* -------------------------------------------------------------
+   GLASS TILE & MODAL (PRESERVED)
+------------------------------------------------------------- */
+.portfolio-glass-tile {
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto 60px auto;
+  font-family: 'Montserrat', sans-serif;
+  position: relative;
+  box-sizing: border-box;
+}
+
+.glass-tile-card {
+  background: var(--glass-tile-bg) !important;
+  backdrop-filter: blur(35px) saturate(200%);
+  -webkit-backdrop-filter: blur(35px) saturate(200%);
+  border: 1.5px solid var(--glass-tile-border);
+  border-radius: 24px;
+  padding: clamp(24px, 4vw, 36px);
+  box-shadow:
+    0 20px 50px -10px rgba(21, 47, 78, 0.1),
+    0 0 30px rgba(255, 255, 255, 0.5),
+    inset 0 2px 3px 0 rgba(255, 255, 255, 0.95),
+    inset 0 -2px 3px 0 rgba(21, 47, 78, 0.03);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 24px;
+  position: relative;
+  overflow: hidden;
+  transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.glass-tile-card:hover {
+  background: var(--glass-tile-hover) !important;
+  transform: translateY(-3px);
+  box-shadow: 0 25px 60px -10px rgba(21, 47, 78, 0.15);
+}
+
+.glass-tile-card::after {
+  content: '';
+  position: absolute;
+  top: -50%;
+  left: -150%;
+  width: 100%;
+  height: 200%;
+  background: linear-gradient(
+    60deg,
+    rgba(255, 255, 255, 0) 20%,
+    rgba(255, 255, 255, 0.6) 50%,
+    rgba(255, 255, 255, 0) 80%
+  );
+  transform: rotate(25deg);
+  animation: glassShimmer 6s infinite ease-in-out;
+  pointer-events: none;
+}
+
+@keyframes glassShimmer {
+  0% { left: -150%; }
+  100% { left: 150%; }
+}
+
+.glass-tile-content {
+  max-width: 600px;
+  z-index: 2;
+}
+
+.glass-tile-tag {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 0.75rem;
+  font-weight: 800;
+  color: var(--navy-core);
+  background: rgba(255, 255, 255, 0.65);
+  border: 1px solid rgba(21, 47, 78, 0.12);
+  padding: 6px 14px;
+  border-radius: 50px;
+  text-transform: uppercase;
+  letter-spacing: 1.2px;
+  margin-bottom: 12px;
+  box-shadow: 0 4px 12px rgba(21, 47, 78, 0.04);
+}
+
+.pulse-dot {
+  width: 8px;
+  height: 8px;
+  background-color: var(--red-core);
+  border-radius: 50%;
+  box-shadow: 0 0 0 rgba(229, 35, 48, 0.4);
+  animation: pulseDot 2s infinite;
+}
+
+@keyframes pulseDot {
+  0% { box-shadow: 0 0 0 0 rgba(229, 35, 48, 0.8); }
+  70% { box-shadow: 0 0 0 8px rgba(229, 35, 48, 0); }
+  100% { box-shadow: 0 0 0 0 rgba(229, 35, 48, 0); }
+}
+
+.glass-tile-title {
+  font-family: 'Archivo', sans-serif;
+  font-size: clamp(1.4rem, 2.5vw, 2rem);
+  font-weight: 800;
+  color: var(--navy-core);
+  line-height: 1.2;
+  margin: 0 0 8px 0;
+  letter-spacing: -0.4px;
+}
+
+.glass-tile-desc {
+  font-size: 0.92rem;
+  color: #4A5B73;
+  line-height: 1.5;
+  margin: 0;
+  font-weight: 500;
+}
+
+.glass-tile-actions {
+  z-index: 2;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  flex-shrink: 0;
+}
+
+.btn-glass-primary {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  background: linear-gradient(135deg, #E52330 0%, #C41C27 100%);
+  color: #FFFFFF !important;
+  font-size: 0.88rem;
+  font-weight: 700;
+  padding: 14px 24px;
+  border-radius: 50px;
+  text-decoration: none;
+  box-shadow: 0 8px 25px rgba(229, 35, 48, 0.35);
+  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+  white-space: nowrap;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  cursor: pointer;
+}
+
+.btn-glass-primary:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 12px 30px rgba(229, 35, 48, 0.5);
+}
+
+.btn-glass-secondary {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  background: rgba(255, 255, 255, 0.5);
+  backdrop-filter: blur(15px);
+  color: var(--navy-core) !important;
+  font-size: 0.88rem;
+  font-weight: 700;
+  padding: 12px 22px;
+  border-radius: 50px;
+  text-decoration: none;
+  border: 1.5px solid rgba(21, 47, 78, 0.15);
+  transition: all 0.3s ease;
+  white-space: nowrap;
+  cursor: pointer;
+}
+
+.btn-glass-secondary:hover {
+  background: rgba(255, 255, 255, 0.85);
+  border-color: var(--navy-core);
+  transform: translateY(-2px);
+}
+
+.btn-glass-primary svg, .btn-glass-secondary svg {
+  width: 18px;
+  height: 18px;
+  fill: currentColor;
+}
+
+.pdf-viewer-container {
+  display: none;
+  margin-top: 20px;
+  background: rgba(255, 255, 255, 0.55) !important;
+  backdrop-filter: blur(35px) saturate(200%);
+  -webkit-backdrop-filter: blur(35px) saturate(200%);
+  border: 1.5px solid var(--glass-border);
+  border-radius: 24px;
+  padding: 12px;
+  box-shadow: 0 25px 50px -10px rgba(21, 47, 78, 0.12);
+  animation: fadeInSlide 0.4s ease-out;
+}
+
+@keyframes fadeInSlide {
+  from { opacity: 0; transform: translateY(-10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.pdf-viewer-container iframe {
+  width: 100%;
+  height: clamp(550px, 75vh, 850px);
+  border: none;
+  border-radius: 16px;
+  background: #FFFFFF;
+}
+
+.glass-modal-overlay {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: rgba(15, 32, 53, 0.6);
+  backdrop-filter: blur(25px);
+  -webkit-backdrop-filter: blur(25px);
+  z-index: 99999;
+  padding: 20px;
+  box-sizing: border-box;
+  align-items: center;
+  justify-content: center;
+}
+
+.glass-modal-container {
+  width: 100%;
+  max-width: 1400px;
+  height: 92vh;
+  background: rgba(255, 255, 255, 0.85);
+  border: 1.5px solid #FFFFFF;
+  border-radius: 24px;
+  padding: 16px;
+  box-shadow: 0 30px 80px rgba(0, 0, 0, 0.3);
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.glass-modal-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 10px;
+}
+
+.glass-modal-title {
+  font-family: 'Archivo', sans-serif;
+  font-weight: 800;
+  color: var(--navy-core);
+  margin: 0;
+  font-size: 1.2rem;
+}
+
+.btn-close-modal {
+  background: var(--red-core);
+  color: #FFF;
+  border: none;
+  padding: 8px 18px;
+  border-radius: 50px;
+  font-weight: 700;
+  cursor: pointer;
+  font-size: 0.85rem;
+}
+
+.glass-modal-container iframe {
+  width: 100%;
+  height: 100%;
+  border: none;
+  border-radius: 16px;
+}
+
+/* -------------------------------------------------------------
+   FOOTER (PRESERVED)
+------------------------------------------------------------- */
+footer,
+.site-footer {
+  width: min(100%, 1400px);
+  margin: 40px auto 0 auto;
+  padding: 60px 40px 20px;
+  background-color: var(--brand-primary);
+  color: var(--brand-white);
+  border-radius: 0px;
+  box-sizing: border-box;
+  position: relative;
+  font-size: 15px;
+  line-height: 1.6;
+}
+
+.footer-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 40px;
+}
+
+.footer-brand {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.footer-logo {
+  max-width: 220px;
+  height: auto;
+  display: block;
+}
+
+.brand-description {
+  color: rgba(255, 255, 255, 0.85);
+  font-size: 14px;
+}
+
+.footer-heading {
+  font-family: var(--font-heading);
+  font-size: 18px;
+  font-weight: 700;
+  margin-bottom: 20px;
+  position: relative;
+  padding-bottom: 8px;
+  color: var(--brand-white);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.footer-heading::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  width: 40px;
+  height: 3px;
+  background-color: var(--brand-accent);
+  border-radius: 2px;
+}
+
+.footer-links ul {
+  list-style: none;
+}
+
+.footer-links li {
+  margin-bottom: 12px;
+}
+
+.footer-links a {
+  color: rgba(255, 255, 255, 0.85);
+  text-decoration: none;
+  transition: all 0.3s ease;
+  display: inline-block;
+}
+
+.footer-links a:hover {
+  color: var(--brand-accent);
+  transform: translateX(5px);
+}
+
+.contact-info {
+  list-style: none;
+}
+
+.contact-info li {
+  margin-bottom: 15px;
+  color: rgba(255, 255, 255, 0.85);
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+}
+
+.contact-info a {
+  color: rgba(255, 255, 255, 0.85);
+  text-decoration: none;
+  transition: color 0.3s ease;
+}
+
+.contact-info a:hover {
+  color: var(--brand-accent);
+}
+
+.icon {
+  color: var(--brand-accent);
+  font-weight: bold;
+  flex-shrink: 0;
+}
+
+.footer-bottom {
+  max-width: 1200px;
+  margin: 40px auto 0;
+  padding-top: 20px;
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+  text-align: center;
+  font-size: 13px;
+  color: rgba(255, 255, 255, 0.6);
+}
+
+/* Floating Contact Button (Preserved) */
+.floating-contact-container {
+  display: none !important;
+  position: fixed;
+  top: 80%;
+  right: 12px;
+  transform: translateY(-50%);
+  flex-direction: column;
+  gap: 10px;
+  z-index: 9999;
+}
+
+@media screen and (max-width: 768px) {
+  .floating-contact-container {
+    display: flex !important;
+  }
+}
+
+/* Responsive Media Queries */
+@media (max-width: 1024px) {
+  .portfolio-grid { grid-template-columns: repeat(2, 1fr); }
+}
+
+@media (max-width: 900px) {
+  .mobile-toggle { display: flex; }
+  .nav-menu {
+    position: absolute;
+    top: calc(100% + 12px);
+    right: 0;
+    width: 100%;
+    max-width: 280px;
+    background: rgba(255, 255, 255, 0.95);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    flex-direction: column;
+    align-items: stretch;
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(-15px) scale(0.95);
+    transition: opacity var(--transition-speed) ease,
+                transform var(--transition-speed) var(--ease-spring),
+                visibility var(--transition-speed) ease;
+    box-shadow: 0 16px 32px rgba(0, 0, 0, 0.15);
+    border-radius: 20px;
+    border: 1px solid var(--glass-border);
+    padding: 0.5rem 0;
+    overflow: hidden;
+  }
+  .nav-menu.active {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0) scale(1);
+  }
+  .nav-item {
+    animation: none;
+    opacity: 0;
+    transform: translateX(15px);
+    transition: opacity 0.3s ease, transform 0.3s ease;
+  }
+  .nav-menu.active .nav-item { opacity: 1; transform: translateX(0); }
+  .nav-link {
+    display: block;
+    color: var(--text-color);
+    padding: 0.85rem 1.4rem;
+    border-radius: 0;
+    text-align: left;
+    transform: none !important;
+  }
+  .nav-link.highlight {
+    text-align: center;
+    margin: 0.5rem 1rem;
+    border-radius: 50px;
+  }
+}
+
+@media (max-width: 820px) {
+  .glass-tile-card {
+    flex-direction: column;
+    text-align: center;
+    align-items: center;
+    padding: 28px 20px;
+  }
+  .glass-tile-actions {
+    width: 100%;
+    flex-direction: column;
+  }
+  .btn-glass-primary, .btn-glass-secondary {
+    width: 100%;
+  }
+  .pdf-viewer-container iframe {
+    height: 480px;
+  }
+}
+
+@media (max-width: 768px) {
+  .stats-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 24px 16px;
+  }
+  .stat-item:nth-child(2)::after { display: none; }
+  .portfolio-grid { grid-template-columns: 1fr; }
+  footer, .site-footer {
+    width: 100%;
+    padding: 40px 20px 20px;
+  }
+  .footer-container { gap: 30px; }
+}
+
+@media (max-width: 550px) {
+  .stats-grid { grid-template-columns: 1fr; }
+  .stat-item:not(:last-child)::after { display: none; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .service-card, .why-card {
+    transform: none !important;
+  }
+}
+</style>
 </head>
 <body>
 
-  <!-- Site Header -->
-  <header class="site-header" id="makkari-auto-header" role="banner">
-    <div class="nav-container">
-      <a href="index.html" class="brand-container" aria-label="Go to Homepage">
-        <img src="https://raw.githubusercontent.com/makkarigroup/makkari-constructions-website-/refs/heads/main/MAKKARI%20LOGO.png" alt="Company Logo" class="brand-logo-img">
-      </a>
+<!-- Site Header (Preserved) -->
+<header class="site-header" id="makkari-auto-header" role="banner">
+  <div class="nav-container">
+    <a href="https://www.makkariconstructions.com/index.html" class="brand-container" aria-label="Go to Homepage">
+      <img src="https://raw.githubusercontent.com/makkarigroup/makkari-constructions-website-/refs/heads/main/MAKKARI%20LOGO.png" alt="Company Logo" class="brand-logo-img">
+    </a>
+    <button class="mobile-toggle" id="mobile-toggle" aria-expanded="false" aria-controls="nav-menu" aria-label="Open navigation menu">
+      <span class="bar"></span>
+      <span class="bar"></span>
+      <span class="bar"></span>
+    </button>
+    <nav aria-label="Main navigation">
+      <ul class="nav-menu" id="nav-menu">
+        <li class="nav-item"><a href="https://www.makkariconstructions.com/index.html" class="nav-link">Home</a></li>
+        <li class="nav-item"><a href="https://www.makkariconstructions.com/about.html" class="nav-link">About Us</a></li>
+        <li class="nav-item"><a href="https://www.makkariconstructions.com/services.html" class="nav-link">Services</a></li>
+        <li class="nav-item"><a href="https://www.makkariconstructions.com/projects.html" class="nav-link">Projects</a></li>
+        <li class="nav-item"><a href="https://www.makkariconstructions.com/estimator.html" class="nav-link">Estimator Modules</a></li>
+        <li class="nav-item"><a href="https://www.makkariconstructions.com/contact.html" class="nav-link highlight">Contact Us</a></li>
+      </ul>
+    </nav>
+  </div>
+</header>
 
-      <button class="mobile-toggle" id="mobile-toggle" aria-expanded="false" aria-controls="nav-menu" aria-label="Open navigation menu">
-        <span class="bar"></span>
-        <span class="bar"></span>
-        <span class="bar"></span>
-      </button>
+<main class="wrapper">
 
-      <nav aria-label="Main navigation">
-        <ul class="nav-menu" id="nav-menu">
-          <li class="nav-item"><a href="index.html" class="nav-link">Home</a></li>
-          <li class="nav-item"><a href="about.html" class="nav-link">About Us</a></li>
-          <li class="nav-item"><a href="services.html" class="nav-link">Services</a></li>
-          <li class="nav-item"><a href="projects.html" class="nav-link">Projects</a></li>
-          <li class="nav-item"><a href="estimator.html" class="nav-link">Estimator Modules</a></li>
-          <li class="nav-item"><a href="contact.html" class="nav-link highlight">Contact Us</a></li>
-        </ul>
-      </nav>
+  <!-- SERVICES SECTION (PARALLAX TILES, NO FLOATING FONTS) -->
+  <section class="services-section">
+    <div class="section-header">
+      <span class="header-tag">What We Do</span>
+      <h2 class="section-title">Our Services</h2>
     </div>
-  </header>
+    <div class="services-grid">
+      <!-- Service 01 -->
+      <article class="service-card" data-parallax-speed="0.045">
+        <div class="card-top"><span class="card-number">01</span></div>
+        <h3>Residential &amp; Private Project Constructions</h3>
+        <p>Custom modern homes, private villas, and bespoke residential developments built with precision, durability, and contemporary architectural standards.</p>
+      </article>
 
-  <main class="wrapper">
-    <!-- Services Section -->
-    <section class="services-section">
-      <div class="section-header">
-        <span class="header-tag">What We Do</span>
-        <h2 class="section-title">Our Services</h2>
-      </div>
+      <!-- Service 02 -->
+      <article class="service-card" data-parallax-speed="-0.035">
+        <div class="card-top"><span class="card-number">02</span></div>
+        <h3>Commercial &amp; Institutional Projects</h3>
+        <p>End-to-end execution of commercial complexes, office spaces, and institutional facilities focused on modern functional layout and structural efficiency.</p>
+      </article>
 
-      <div class="services-grid">
-        <article class="service-card">
-          <div class="card-top"><span class="card-number">01</span></div>
-          <h3>Residential & Private Project Constructions</h3>
-          <p>Custom modern homes, private villas, and bespoke residential developments built with precision, durability, and contemporary architectural standards.</p>
-        </article>
+      <!-- Service 03 -->
+      <article class="service-card" data-parallax-speed="0.05">
+        <div class="card-top"><span class="card-number">03</span></div>
+        <h3>Infrastructure &amp; Gov. Projects</h3>
+        <p>Reliable execution of public works and government infrastructural developments adhering strictly to quality, timeline, and safety standards.</p>
+      </article>
 
-        <article class="service-card">
-          <div class="card-top"><span class="card-number">02</span></div>
-          <h3>Commercial & Institutional Projects</h3>
-          <p>End-to-end execution of commercial complexes, office spaces, and institutional facilities focused on modern functional layout and structural efficiency.</p>
-        </article>
+      <!-- Service 04 -->
+      <article class="service-card" data-parallax-speed="-0.035">
+        <div class="card-top"><span class="card-number">04</span></div>
+        <h3>Design &amp; Structural Engineering</h3>
+        <p>Complete structural modeling, statutory verification, and technical engineering solutions engineered for safety and architectural harmony.</p>
+      </article>
 
-        <article class="service-card">
-          <div class="card-top"><span class="card-number">03</span></div>
-          <h3>Infrastructure & Gov. Projects</h3>
-          <p>Reliable execution of public works and government infrastructural developments adhering strictly to quality, timeline, and safety standards.</p>
-        </article>
-
-        <article class="service-card">
-          <div class="card-top"><span class="card-number">04</span></div>
-          <h3>Design & Structural Engineering</h3>
-          <p>Complete structural modeling, statutory verification, and technical engineering solutions engineered for safety and architectural harmony.</p>
-        </article>
-
-        <article class="service-card">
-          <div class="card-top"><span class="card-number">05</span></div>
-          <h3>Project Consultation</h3>
-          <p>Expert site evaluation, project feasibility analysis, structural inspections, and strategic technical consultation from start to finish.</p>
-        </article>
-      </div>
-    </section>
-
-    <!-- Key Statistics -->
-    <section class="stats-section">
-      <div class="stats-grid">
-        <div class="stat-item">
-          <div class="stat-number-box"><span class="counter" data-target="350">0</span>+</div>
-          <div class="stat-label">Building Approvals</div>
-        </div>
-        <div class="stat-item">
-          <div class="stat-number-box"><span class="counter" data-target="35">0</span>+</div>
-          <div class="stat-label">Completed Projects</div>
-        </div>
-        <div class="stat-item">
-          <div class="stat-number-box"><span class="counter" data-target="7">0</span>+ Years</div>
-          <div class="stat-label">Professional Experience</div>
-        </div>
-        <div class="stat-item">
-          <div class="stat-number-box"><span class="counter" data-target="35000" data-format="comma">0</span>+</div>
-          <div class="stat-label">sq.ft. Documentation</div>
-        </div>
-      </div>
-    </section>
-
-    <!-- Why Makkari Section -->
-    <section class="why-section">
-      <div class="section-header">
-        <span class="header-tag">The Makkari Difference</span>
-        <h2 class="section-title">Why Makkari</h2>
-      </div>
-
-      <div class="why-grid">
-        <article class="why-card">
-          <div class="why-number">01</div>
-          <h3>Engineering-Led Approach</h3>
-          <p>Every structure is designed and built on rigorous engineering standards and compliance verification.</p>
-        </article>
-        <article class="why-card">
-          <div class="why-number">02</div>
-          <h3>Transparent Project Execution</h3>
-          <p>Clear timelines, honest material specifications, and regular project milestones keep you fully informed.</p>
-        </article>
-        <article class="why-card">
-          <div class="why-number">03</div>
-          <h3>Technical Documentation</h3>
-          <p>Thorough 3D modeling, accurate site documentation, and structural drawings for site compliance.</p>
-        </article>
-        <article class="why-card">
-          <div class="why-number">04</div>
-          <h3>Quality & Compliance</h3>
-          <p>Strict adherence to regional building codes, government approvals, and material benchmarks.</p>
-        </article>
-        <article class="why-card">
-          <div class="why-number">05</div>
-          <h3>End-to-End Support</h3>
-          <p>Comprehensive management from initial site evaluation down to turn-key construction and delivery.</p>
-        </article>
-      </div>
-    </section>
-
-    <!-- Featured Projects -->
-    <section class="portfolio-section">
-      <div class="section-header">
-        <span class="header-tag">Our Work</span>
-        <h2 class="section-title">Featured Projects</h2>
-      </div>
-
-      <div class="portfolio-grid">
-        <article class="portfolio-card">
-          <div class="portfolio-image-wrapper">
-            <span class="portfolio-badge">Residential</span>
-            <img src="https://lh3.googleusercontent.com/d/1K7uZdhhP_TjATdOi07OajLjN7ZMO9iW5" alt="Modern Residence Kottur Kozhikode" loading="lazy">
-          </div>
-          <div class="portfolio-body">
-            <div class="portfolio-header">
-              <h3>Modern Residence</h3>
-              <p class="portfolio-location">Kottur, Kozhikode</p>
-            </div>
-            <div class="portfolio-footer">Design • Engineering • Construction</div>
-          </div>
-        </article>
-
-        <article class="portfolio-card">
-          <div class="portfolio-image-wrapper">
-            <span class="portfolio-badge">Commercial</span>
-            <img src="https://lh3.googleusercontent.com/d/1Ipx99yiQYOeGwIrEJHfgG7KzQAdStuKG" alt="Minu Commercial Centre Naduvannur" loading="lazy">
-          </div>
-          <div class="portfolio-body">
-            <div class="portfolio-header">
-              <h3>Minu Commercial Centre</h3>
-              <p class="portfolio-location">Naduvannur, Kerala</p>
-            </div>
-            <div class="portfolio-footer">Structural Verification • Construction</div>
-          </div>
-        </article>
-
-        <article class="portfolio-card">
-          <div class="portfolio-image-wrapper">
-            <span class="portfolio-badge">Institutional</span>
-            <img src="https://lh3.googleusercontent.com/d/1EexB87E78JO2GcsjiWh-NseXShcsQt5s" alt="Markaz Academy of Women Cheruvannur" loading="lazy">
-          </div>
-          <div class="portfolio-body">
-            <div class="portfolio-header">
-              <h3>Markaz Academy of Women</h3>
-              <p class="portfolio-location">Cheruvannur, Kerala</p>
-            </div>
-            <div class="portfolio-footer">Planning • Approvals • Execution</div>
-          </div>
-        </article>
-      </div>
-    </section>
-
-    <!-- Client Logos -->
-    <section class="clients-section">
-      <div class="section-header">
-        <span class="header-tag">Partnerships</span>
-        <h2 class="section-title">Trusted by Leading Organizations</h2>
-      </div>
-
-      <div class="logo-grid">
-        <div class="logo-card">
-          <img src="https://markaz.in/assets/images/markaz-logo.png" alt="Markaz Logo" loading="lazy">
-        </div>
-        <div class="logo-card">
-          <img src="https://tse4.mm.bing.net/th/id/OIP.W_jpzqT7HsER_mcx3WllHgHaB4?r=0&pid=Api&P=0&h=180" alt="Malabar Medical College Logo" loading="lazy">
-        </div>
-        <div class="logo-card">
-          <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRpYjVUdkL2Pwf-SSH8LBekVlAJLhxKDKEFgZ5da14Tmmbd5vIbzq01bPh3&s=10" alt="EFF Logo" loading="lazy">
-        </div>
-        <div class="logo-card">
-          <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ9ITEA9FiqiJ9mKymd0zod_D9zzLdCH1fturqKqnaKf_YjTtai9Sym9uFD&s=10" alt="LSGD Logo" loading="lazy">
-        </div>
-        <div class="logo-card">
-          <div>
-            <div class="logo-text-title">KOLAKKAD MIXED LPS</div>
-            <div class="logo-text-sub">Muchukunnu</div>
-          </div>
-        </div>
-        <div class="logo-card">
-          <div>
-            <div class="logo-text-title">Athul Agri Warehouse</div>
-            <div class="logo-text-sub">Kongannur, Kozhikode</div>
-          </div>
-        </div>
-        <div class="logo-card">
-          <img src="https://raw.githubusercontent.com/makkarigroup/makkari-constructions-website-/9ee0b020408897c1602eb1358c0dc8a80fcca320/MARKAZ%20SCHOOL%20POOKOD.JPG" alt="LSGD Logo" loading="lazy">
-        </div>
-      </div>
-    </section>
-
-    <!-- Glassmorphic Hub -->
-    <section class="portfolio-glass-tile">
-      
-        </div>
-      </div>
-    </section>
-  </main>
-
-  <script>
-    document.addEventListener("DOMContentLoaded", function () {
-      const header = document.getElementById('makkari-auto-header');
-      const mobileToggle = document.getElementById('mobile-toggle');
-      const navMenu = document.getElementById('nav-menu');
-
-      const handleScroll = () => {
-        if (window.scrollY > 20) {
-          header.classList.add('scrolled');
-        } else {
-          header.classList.remove('scrolled');
-        }
-      };
-
-      window.addEventListener('scroll', handleScroll);
-      handleScroll();
-
-      const currentPath = window.location.pathname.toLowerCase();
-      const navLinks = document.querySelectorAll('.nav-link');
-
-      navLinks.forEach(link => {
-        const hrefValue = link.getAttribute('href').toLowerCase();
-        const isHome = (hrefValue === 'index.html' && (currentPath === '/' || currentPath.endsWith('index.html')));
-        const isExactMatch = currentPath.includes(hrefValue.replace('.html', ''));
-
-        if (isHome || (hrefValue !== 'index.html' && isExactMatch)) {
-          link.classList.add('active-page');
-          link.setAttribute('aria-current', 'page');
-        }
-      });
-
-      if (mobileToggle && navMenu) {
-        const toggleMenu = (forceClose = false) => {
-          const isClosing = forceClose || navMenu.classList.contains('active');
-          if (isClosing) {
-            navMenu.classList.remove('active');
-            mobileToggle.classList.remove('active');
-            mobileToggle.setAttribute('aria-expanded', 'false');
-          } else {
-            navMenu.classList.add('active');
-            mobileToggle.classList.add('active');
-            mobileToggle.setAttribute('aria-expanded', 'true');
-          }
-        };
-
-        mobileToggle.addEventListener('click', (e) => {
-          e.stopPropagation();
-          toggleMenu();
-        });
-
-        document.addEventListener('click', (e) => {
-          if (!header.contains(e.target)) {
-            toggleMenu(true);
-          }
-        });
-      }
-    });
-  </script>
-<script type="module" src="https://static.cloudflareinsights.com/beacon.min.js/v31edd6df95cf4e85bb4c19e7a9bdbcba1788362987495" integrity="sha512-iIg7k2xntmwu6/uSb5tpc/hySgZc4eoL31yB29W6tJFo2akwjPWcEqnCEdJvGexCL0KEQwVYv5BlowfhVz26hg==" data-cf-beacon='{"version":"2024.11.0","token":"d0e741cca14c4cdba23f71abbff76953","r":1,"spa":2}' crossorigin="anonymous"></script>
-</body>
-</html>
-
-    <!-- JotForm Embed -->
- <!----------------------------------------------------------------->
-<!-- ULTRA-GLASSMORPHIC PDF HUB (LARGE SCREEN OPTIMIZED) -->
-<!----------------------------------------------------------------->
-
-<style>
-  :root {
-    --navy-core: #152F4E;
-    --red-core: #E52330;
-    --glass-bg: rgba(255, 255, 255, 0.45);
-    --glass-hover: rgba(255, 255, 255, 0.68);
-    --glass-border: rgba(255, 255, 255, 0.85);
-  }
-
-  .portfolio-glass-tile {
-    width: 100%;
-    max-width: 1200px; /* Expanded for Large Desktop Displays */
-    margin: 0 auto 60px auto;
-    font-family: 'Montserrat', sans-serif;
-    position: relative;
-    box-sizing: border-box;
-  }
-
-  /* Glass Card Interface */
-  .glass-tile-card {
-    background: var(--glass-bg) !important;
-    backdrop-filter: blur(35px) saturate(200%);
-    -webkit-backdrop-filter: blur(35px) saturate(200%);
-    border: 1.5px solid var(--glass-border);
-    border-radius: 24px;
-    padding: clamp(24px, 4vw, 36px);
-    box-shadow: 
-      0 20px 50px -10px rgba(21, 47, 78, 0.1),
-      0 0 30px rgba(255, 255, 255, 0.5),
-      inset 0 2px 3px 0 rgba(255, 255, 255, 0.95),
-      inset 0 -2px 3px 0 rgba(21, 47, 78, 0.03);
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    gap: 24px;
-    position: relative;
-    overflow: hidden;
-    transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
-  }
-
-  .glass-tile-card:hover {
-    background: var(--glass-hover) !important;
-    transform: translateY(-3px);
-    box-shadow: 0 25px 60px -10px rgba(21, 47, 78, 0.15);
-  }
-
-  /* Glass Shimmer Sweep Animation */
-  .glass-tile-card::after {
-    content: '';
-    position: absolute;
-    top: -50%;
-    left: -150%;
-    width: 100%;
-    height: 200%;
-    background: linear-gradient(
-      60deg, 
-      rgba(255, 255, 255, 0) 20%, 
-      rgba(255, 255, 255, 0.6) 50%, 
-      rgba(255, 255, 255, 0) 80%
-    );
-    transform: rotate(25deg);
-    animation: glassShimmer 6s infinite ease-in-out;
-    pointer-events: none;
-  }
-
-  @keyframes glassShimmer {
-    0% { left: -150%; }
-    100% { left: 150%; }
-  }
-
-  .glass-tile-content {
-    max-width: 600px;
-    z-index: 2;
-  }
-
-  .glass-tile-tag {
-    display: inline-flex;
-    align-items: center;
-    gap: 8px;
-    font-size: 0.75rem;
-    font-weight: 800;
-    color: var(--navy-core);
-    background: rgba(255, 255, 255, 0.65);
-    border: 1px solid rgba(21, 47, 78, 0.12);
-    padding: 6px 14px;
-    border-radius: 50px;
-    text-transform: uppercase;
-    letter-spacing: 1.2px;
-    margin-bottom: 12px;
-    box-shadow: 0 4px 12px rgba(21, 47, 78, 0.04);
-  }
-
-  .pulse-dot {
-    width: 8px;
-    height: 8px;
-    background-color: var(--red-core);
-    border-radius: 50%;
-    box-shadow: 0 0 0 rgba(229, 35, 48, 0.4);
-    animation: pulseDot 2s infinite;
-  }
-
-  @keyframes pulseDot {
-    0% { box-shadow: 0 0 0 0 rgba(229, 35, 48, 0.8); }
-    70% { box-shadow: 0 0 0 8px rgba(229, 35, 48, 0); }
-    100% { box-shadow: 0 0 0 0 rgba(229, 35, 48, 0); }
-  }
-
-  .glass-tile-title {
-    font-family: 'Archivo', sans-serif;
-    font-size: clamp(1.4rem, 2.5vw, 2rem);
-    font-weight: 800;
-    color: var(--navy-core);
-    line-height: 1.2;
-    margin: 0 0 8px 0;
-    letter-spacing: -0.4px;
-  }
-
-  .glass-tile-desc {
-    font-size: 0.92rem;
-    color: #4A5B73;
-    line-height: 1.5;
-    margin: 0;
-    font-weight: 500;
-  }
-
-  .glass-tile-actions {
-    z-index: 2;
-    display: flex;
-    flex-wrap: wrap;
-    gap: 10px;
-    flex-shrink: 0;
-  }
-
-  .btn-glass-primary {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    gap: 10px;
-    background: linear-gradient(135deg, #E52330 0%, #C41C27 100%);
-    color: #FFFFFF !important;
-    font-size: 0.88rem;
-    font-weight: 700;
-    padding: 14px 24px;
-    border-radius: 50px;
-    text-decoration: none;
-    box-shadow: 0 8px 25px rgba(229, 35, 48, 0.35);
-    transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
-    white-space: nowrap;
-    border: 1px solid rgba(255, 255, 255, 0.2);
-    cursor: pointer;
-  }
-
-  .btn-glass-primary:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 12px 30px rgba(229, 35, 48, 0.5);
-  }
-
-  .btn-glass-secondary {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    gap: 10px;
-    background: rgba(255, 255, 255, 0.5);
-    backdrop-filter: blur(15px);
-    color: var(--navy-core) !important;
-    font-size: 0.88rem;
-    font-weight: 700;
-    padding: 12px 22px;
-    border-radius: 50px;
-    text-decoration: none;
-    border: 1.5px solid rgba(21, 47, 78, 0.15);
-    transition: all 0.3s ease;
-    white-space: nowrap;
-    cursor: pointer;
-  }
-
-  .btn-glass-secondary:hover {
-    background: rgba(255, 255, 255, 0.85);
-    border-color: var(--navy-core);
-    transform: translateY(-2px);
-  }
-
-  .btn-glass-primary svg, .btn-glass-secondary svg {
-    width: 18px;
-    height: 18px;
-    fill: currentColor;
-  }
-
-  /* Inline High-Efficiency Large Display Container */
-  .pdf-viewer-container {
-    display: none;
-    margin-top: 20px;
-    background: rgba(255, 255, 255, 0.55) !important;
-    backdrop-filter: blur(35px) saturate(200%);
-    -webkit-backdrop-filter: blur(35px) saturate(200%);
-    border: 1.5px solid var(--glass-border);
-    border-radius: 24px;
-    padding: 12px;
-    box-shadow: 0 25px 50px -10px rgba(21, 47, 78, 0.12);
-    animation: fadeInSlide 0.4s ease-out;
-  }
-
-  @keyframes fadeInSlide {
-    from { opacity: 0; transform: translateY(-10px); }
-    to { opacity: 1; transform: translateY(0); }
-  }
-
-  .pdf-viewer-container iframe {
-    width: 100%;
-    /* Viewport-Height Scaling for Ultra-Wide / Large Displays */
-    height: clamp(550px, 75vh, 850px);
-    border: none;
-    border-radius: 16px;
-    background: #FFFFFF;
-  }
-
-  /* Fullscreen Glass Lightbox Mode */
-  .glass-modal-overlay {
-    display: none;
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100vw;
-    height: 100vh;
-    background: rgba(15, 32, 53, 0.6);
-    backdrop-filter: blur(25px);
-    -webkit-backdrop-filter: blur(25px);
-    z-index: 99999;
-    padding: 20px;
-    box-sizing: border-box;
-    align-items: center;
-    justify-content: center;
-  }
-
-  .glass-modal-container {
-    width: 100%;
-    max-width: 1400px;
-    height: 92vh;
-    background: rgba(255, 255, 255, 0.85);
-    border: 1.5px solid #FFFFFF;
-    border-radius: 24px;
-    padding: 16px;
-    box-shadow: 0 30px 80px rgba(0, 0, 0, 0.3);
-    display: flex;
-    flex-direction: column;
-    gap: 12px;
-  }
-
-  .glass-modal-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 0 10px;
-  }
-
-  .glass-modal-title {
-    font-family: 'Archivo', sans-serif;
-    font-weight: 800;
-    color: var(--navy-core);
-    margin: 0;
-    font-size: 1.2rem;
-  }
-
-  .btn-close-modal {
-    background: var(--red-core);
-    color: #FFF;
-    border: none;
-    padding: 8px 18px;
-    border-radius: 50px;
-    font-weight: 700;
-    cursor: pointer;
-    font-size: 0.85rem;
-  }
-
-  .glass-modal-container iframe {
-    width: 100%;
-    height: 100%;
-    border: none;
-    border-radius: 16px;
-  }
-
-  /* Responsive Mobile Fallbacks */
-  @media (max-width: 820px) {
-    .glass-tile-card {
-      flex-direction: column;
-      text-align: center;
-      align-items: center;
-      padding: 28px 20px;
-    }
-    .glass-tile-actions {
-      width: 100%;
-      flex-direction: column;
-    }
-    .btn-glass-primary, .btn-glass-secondary {
-      width: 100%;
-    }
-    .pdf-viewer-container iframe {
-      height: 480px;
-    }
-  }
-</style>
-
-<div class="portfolio-glass-tile">
-  <div class="glass-tile-card">
-    <div class="glass-tile-content">
-      <span class="glass-tile-tag"><span class="pulse-dot"></span>Company Profile</span>
-      <h2 class="glass-tile-title">Official Company Portfolio</h2>
-      <p class="glass-tile-desc">View or download our engineering credentials, project showcases, and compliance records.</p>
+      <!-- Service 05 -->
+      <article class="service-card" data-parallax-speed="0.045">
+        <div class="card-top"><span class="card-number">05</span></div>
+        <h3>Project Consultation</h3>
+        <p>Expert site evaluation, project feasibility analysis, structural inspections, and strategic technical consultation from start to finish.</p>
+      </article>
     </div>
-    <div class="glass-tile-actions">
-      <!-- Direct Engine Viewer Link -->
-      <a href="https://mozilla.github.io/pdf.js/web/viewer.html?file=https://raw.githubusercontent.com/makkarigroup/makkari-constructions-website-/1a47f40f168740470db4d0073f40f8820b2ddde9/MAKKARI%20CONSTRUCTIONS%20PORTFOLIO%20copy.pdf" target="_blank" rel="noopener noreferrer" class="btn-glass-primary">
-        <svg viewBox="0 0 24 24"><path d="M19 9h-4V3H9v6H5l7 7 7-7zM5 18v2h14v-2H5z"/></svg>
-        Download PDF
-      </a>
-      
-      <!-- Inline Preview -->
-      <button onclick="toggleMobilePdf()" class="btn-glass-secondary">
-        <svg viewBox="0 0 24 24"><path d="M12 4.5C7 4.5 2.73 7.61 1 12c1.73 4.39 6 7.5 11 7.5s9.27-3.11 11-7.5c-1.73-4.39-6-7.5-11-7.5zM12 17c-2.76 0-5-2.24-5-5s2.24-5 5-5 5 2.24 5 5-2.24 5-5 5zm0-8c-1.66 0-3 1.34-3 3s1.34 3 3 3 3-1.34 3-3-1.34-3-3-3z"/></svg>
-        <span id="mobileBtnText">Inline View</span>
-      </button>
+  </section>
 
-      <!-- Large Screen Fullscreen Modal -->
-      <button onclick="openGlassModal()" class="btn-glass-secondary">
-        <svg viewBox="0 0 24 24"><path d="M7 14H5v5h5v-2H7v-3zm-2-4h2V7h3V5H5v5zm12 7h-3v2h5v-5h-2v3zM14 5v2h3v3h2V5h-5z"/></svg>
-        Expand Fullscreen
-      </button>
+  <!-- KEY STATISTICS (PRESERVED - STATIONARY) -->
+  <section class="stats-section">
+    <div class="stats-grid">
+      <div class="stat-item">
+        <div class="stat-number-box"><span class="counter" data-target="350">0</span>+</div>
+        <div class="stat-label">Building Approvals</div>
+      </div>
+      <div class="stat-item">
+        <div class="stat-number-box"><span class="counter" data-target="35">0</span>+</div>
+        <div class="stat-label">Completed Projects</div>
+      </div>
+      <div class="stat-item">
+        <div class="stat-number-box"><span class="counter" data-target="7">0</span>+ Years</div>
+        <div class="stat-label">Professional Experience</div>
+      </div>
+      <div class="stat-item">
+        <div class="stat-number-box"><span class="counter" data-target="35000" data-format="comma">0</span>+</div>
+        <div class="stat-label">sq.ft. Documentation</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- WHY MAKKARI SECTION (PARALLAX TILES, NO FLOATING FONTS) -->
+  <section class="why-section">
+    <div class="section-header">
+      <span class="header-tag">The Makkari Difference</span>
+      <h2 class="section-title">Why Makkari</h2>
+    </div>
+    <div class="why-grid">
+      <!-- Why 01 -->
+      <article class="why-card" data-parallax-speed="0.04">
+        <div class="why-number">01</div>
+        <h3>Engineering-Led Approach</h3>
+        <p>Every structure is designed and built on rigorous engineering standards and compliance verification.</p>
+      </article>
+
+      <!-- Why 02 -->
+      <article class="why-card" data-parallax-speed="-0.035">
+        <div class="why-number">02</div>
+        <h3>Transparent Project Execution</h3>
+        <p>Clear timelines, honest material specifications, and regular project milestones keep you fully informed.</p>
+      </article>
+
+      <!-- Why 03 -->
+      <article class="why-card" data-parallax-speed="0.045">
+        <div class="why-number">03</div>
+        <h3>Technical Documentation</h3>
+        <p>Thorough 3D modeling, accurate site documentation, and structural drawings for site compliance.</p>
+      </article>
+
+      <!-- Why 04 -->
+      <article class="why-card" data-parallax-speed="-0.03">
+        <div class="why-number">04</div>
+        <h3>Quality &amp; Compliance</h3>
+        <p>Strict adherence to regional building codes, government approvals, and material benchmarks.</p>
+      </article>
+
+      <!-- Why 05 -->
+      <article class="why-card" data-parallax-speed="0.04">
+        <div class="why-number">05</div>
+        <h3>End-to-End Support</h3>
+        <p>Comprehensive management from initial site evaluation down to turn-key construction and delivery.</p>
+      </article>
+    </div>
+  </section>
+
+  <!-- FEATURED PROJECTS (PRESERVED - STATIONARY) -->
+  <section class="portfolio-section">
+    <div class="section-header">
+      <span class="header-tag">Our Work</span>
+      <h2 class="section-title">Featured Projects</h2>
+    </div>
+    <div class="portfolio-grid">
+      <article class="portfolio-card">
+        <div class="portfolio-image-wrapper">
+          <span class="portfolio-badge">Residential</span>
+          <img src="https://lh3.googleusercontent.com/d/1K7uZdhhP_TjATdOi07OajLjN7ZMO9iW5" alt="Modern Residence Kottur Kozhikode" loading="lazy">
+        </div>
+        <div class="portfolio-body">
+          <div class="portfolio-header">
+            <h3>Modern Residence</h3>
+            <p class="portfolio-location">Kottur, Kozhikode</p>
+          </div>
+          <div class="portfolio-footer">Design • Engineering • Construction</div>
+        </div>
+      </article>
+      <article class="portfolio-card">
+        <div class="portfolio-image-wrapper">
+          <span class="portfolio-badge">Commercial</span>
+          <img src="https://lh3.googleusercontent.com/d/1Ipx99yiQYOeGwIrEJHfgG7KzQAdStuKG" alt="Minu Commercial Centre Naduvannur" loading="lazy">
+        </div>
+        <div class="portfolio-body">
+          <div class="portfolio-header">
+            <h3>Minu Commercial Centre</h3>
+            <p class="portfolio-location">Naduvannur, Kerala</p>
+          </div>
+          <div class="portfolio-footer">Structural Verification • Construction</div>
+        </div>
+      </article>
+      <article class="portfolio-card">
+        <div class="portfolio-image-wrapper">
+          <span class="portfolio-badge">Institutional</span>
+          <img src="https://lh3.googleusercontent.com/d/1EexB87E78JO2GcsjiWh-NseXShcsQt5s" alt="Markaz Academy of Women Cheruvannur" loading="lazy">
+        </div>
+        <div class="portfolio-body">
+          <div class="portfolio-header">
+            <h3>Markaz Academy of Women</h3>
+            <p class="portfolio-location">Cheruvannur, Kerala</p>
+          </div>
+          <div class="portfolio-footer">Planning • Approvals • Execution</div>
+        </div>
+      </article>
+    </div>
+  </section>
+
+  <!-- CLIENT LOGOS (PRESERVED - STATIONARY) -->
+  <section class="clients-section">
+    <div class="section-header">
+      <span class="header-tag">Partnerships</span>
+      <h2 class="section-title">Trusted by Leading Organizations</h2>
+    </div>
+    <div class="logo-grid">
+      <div class="logo-card">
+        <img src="https://markaz.in/assets/images/markaz-logo.png" alt="Markaz Logo" loading="lazy">
+      </div>
+      <div class="logo-card">
+        <img src="https://tse4.mm.bing.net/th/id/OIP.W_jpzqT7HsER_mcx3WllHgHaB4?r=0&pid=Api&P=0&h=180" alt="Malabar Medical College Logo" loading="lazy">
+      </div>
+      <div class="logo-card">
+        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRpYjVUdkL2Pwf-SSH8LBekVlAJLhxKDKEFgZ5da14Tmmbd5vIbzq01bPh3&s=10" alt="EFF Logo" loading="lazy">
+      </div>
+      <div class="logo-card">
+        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ9ITEA9FiqiJ9mKymd0zod_D9zzLdCH1fturqKqnaKf_YjTtai9Sym9uFD&s=10" alt="LSGD Logo" loading="lazy">
+      </div>
+      <div class="logo-card">
+        <div>
+          <div class="logo-text-title">KOLAKKAD MIXED LPS</div>
+          <div class="logo-text-sub">Muchukunnu</div>
+        </div>
+      </div>
+      <div class="logo-card">
+        <div>
+          <div class="logo-text-title">Athul Agri Warehouse</div>
+          <div class="logo-text-sub">Kongannur, Kozhikode</div>
+        </div>
+      </div>
+      <div class="logo-card">
+        <img src="https://raw.githubusercontent.com/makkarigroup/makkari-constructions-website-/9ee0b020408897c1602eb1358c0dc8a80fcca320/MARKAZ%20SCHOOL%20POOKOD.JPG" alt="Markaz School Logo" loading="lazy">
+      </div>
+    </div>
+  </section>
+
+  <!-- GLASSMORPHIC PORTFOLIO PDF HUB (PRESERVED) -->
+  <div class="portfolio-glass-tile">
+    <div class="glass-tile-card">
+      <div class="glass-tile-content">
+        <span class="glass-tile-tag"><span class="pulse-dot"></span>Company Profile</span>
+        <h2 class="glass-tile-title">Official Company Portfolio</h2>
+        <p class="glass-tile-desc">View or download our engineering credentials, project showcases, and compliance records.</p>
+      </div>
+      <div class="glass-tile-actions">
+        <!-- Direct Engine Viewer Link -->
+        <a href="https://mozilla.github.io/pdf.js/web/viewer.html?file=https://raw.githubusercontent.com/makkarigroup/makkari-constructions-website-/1a47f40f168740470db4d0073f40f8820b2ddde9/MAKKARI%20CONSTRUCTIONS%20PORTFOLIO%20copy.pdf" target="_blank" rel="noopener noreferrer" class="btn-glass-primary">
+          <svg viewBox="0 0 24 24"><path d="M19 9h-4V3H9v6H5l7 7 7-7zM5 18v2h14v-2H5z"/></svg>
+          Download PDF
+        </a>
+        <!-- Inline Preview -->
+        <button onclick="toggleMobilePdf()" class="btn-glass-secondary">
+          <svg viewBox="0 0 24 24"><path d="M12 4.5C7 4.5 2.73 7.61 1 12c1.73 4.39 6 7.5 11 7.5s9.27-3.11 11-7.5c-1.73-4.39-6-7.5-11-7.5zM12 17c-2.76 0-5-2.24-5-5s2.24-5 5-5 5 2.24 5 5-2.24 5-5 5zm0-8c-1.66 0-3 1.34-3 3s1.34 3 3 3 3-1.34 3-3-1.34-3-3-3z"/></svg>
+          <span id="mobileBtnText">Inline View</span>
+        </button>
+        <!-- Large Screen Fullscreen Modal -->
+        <button onclick="openGlassModal()" class="btn-glass-secondary">
+          <svg viewBox="0 0 24 24"><path d="M7 14H5v5h5v-2H7v-3zm-2-4h2V7h3V5H5v5zm12 7h-3v2h5v-5h-2v3zM14 5v2h3v3h2V5h-5z"/></svg>
+          Expand Fullscreen
+        </button>
+      </div>
+    </div>
+    <!-- Inline Large Viewport Container -->
+    <div class="pdf-viewer-container" id="mobilePdfWrapper">
+      <iframe id="mobilePdfFrame"></iframe>
     </div>
   </div>
 
-  <!-- Inline Large Viewport Container -->
-  <div class="pdf-viewer-container" id="mobilePdfWrapper">
-    <iframe id="mobilePdfFrame"></iframe>
-  </div>
-</div>
+</main>
 
 <!-- Glass Lightbox Overlay for Desktop Screens -->
 <div class="glass-modal-overlay" id="glassModal">
@@ -1331,82 +1379,256 @@
   </div>
 </div>
 
+<!-- RIGHT FLOATING CONTACT BUTTONS (Mobile View - Preserved) -->
+<div class="floating-contact-container">
+  <!-- WhatsApp -->
+  <a href="https://wa.me/918281228549" target="_blank" rel="noopener noreferrer" aria-label="Contact on WhatsApp" style="width: 48px; height: 48px; background-color: #25D366; border-radius: 8px; display: flex; align-items: center; justify-content: center; box-shadow: 0 4px 12px rgba(0,0,0,0.25);">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="#ffffff" style="width: 24px; height: 24px;">
+      <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.521.151-.172.2-.296.3-.495.099-.198.05-.372-.025-.521-.075-.148-.669-1.611-.916-2.206-.242-.579-.487-.501-.669-.51l-.57-.01c-.198 0-.52.074-.792.372s-1.04 1.016-1.04 2.479 1.065 2.876 1.213 3.074c.149.198 2.096 3.2 5.077 4.487.709.306 1.263.489 1.694.626.712.226 1.36.194 1.872.118.572-.085 1.787-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.99c-.002 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/>
+    </svg>
+  </a>
+  <!-- Call -->
+  <a href="tel:+918281228549" aria-label="Call Us" style="width: 48px; height: 48px; background-color: #152f4e; border-radius: 8px; display: flex; align-items: center; justify-content: center; box-shadow: 0 4px 12px rgba(0,0,0,0.25);">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="#ffffff" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" style="width: 22px; height: 22px;">
+      <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path>
+    </svg>
+  </a>
+</div>
+
+<!-- FOOTER COMPONENT (PRESERVED) -->
+<footer class="site-footer">
+  <div class="footer-container">
+    <!-- Branding & Logo Column -->
+    <div class="footer-brand">
+      <a href="https://www.makkariconstructions.com/">
+        <img class="footer-logo" src="https://lh3.googleusercontent.com/d/17two9sD2_HX7rojcUk6QjUEVTKM-0sgm" alt="Makkari Constructions and Developers Logo">
+      </a>
+      <p class="brand-description">
+        Building quality spaces and creating value through innovative design and high-standard construction solutions.
+      </p>
+    </div>
+    <!-- Quick Links Column -->
+    <div class="footer-links">
+      <h3 class="footer-heading">Quick Links</h3>
+      <ul>
+        <li><a href="https://www.makkariconstructions.com/about.html">About Us</a></li>
+        <li><a href="https://www.makkariconstructions.com/services.html">Services</a></li>
+        <li><a href="https://www.makkariconstructions.com/projects.html">Projects</a></li>
+        <li><a href="https://www.makkariconstructions.com/contact.html">Contact Us</a></li>
+      </ul>
+    </div>
+    <!-- Contact Information Column -->
+    <div class="footer-contact">
+      <h3 class="footer-heading">Contact Us</h3>
+      <ul class="contact-info">
+        <li>
+          <span class="icon">&#128205;</span>
+          <span>Makkari Constructions and Developers,<br>Minu City Centre<br>Naduvannur, Kozhikode<br>Kerala, India</span>
+        </li>
+        <li>
+          <span class="icon">&#128222;</span>
+          <span>Phone: <a href="tel:+918281228549">+91 82812 28549</a></span>
+        </li>
+        <li>
+          <span class="icon">&#9993;</span>
+          <span>Email: <a href="mailto:info.makkarigroup@gmail.com">info.makkarigroup@gmail.com</a></span>
+        </li>
+      </ul>
+    </div>
+  </div>
+  <!-- Copyright Bar -->
+  <div class="footer-bottom">
+    <p>&copy; 2026 Makkari Constructions and Developers.</p><p> All rights reserved. | Developed In-House.</p>
+  </div>
+</footer>
+
+<!-- JAVASCRIPTS -->
 <script>
-  const pdfJsViewerUrl = "https://mozilla.github.io/pdf.js/web/viewer.html?file=https://raw.githubusercontent.com/makkarigroup/makkari-constructions-website-/1a47f40f168740470db4d0073f40f8820b2ddde9/MAKKARI%20CONSTRUCTIONS%20PORTFOLIO%20copy.pdf";
+// PDF Viewer Functions
+const pdfJsViewerUrl = "https://mozilla.github.io/pdf.js/web/viewer.html?file=https://raw.githubusercontent.com/makkarigroup/makkari-constructions-website-/1a47f40f168740470db4d0073f40f8820b2ddde9/MAKKARI%20CONSTRUCTIONS%20PORTFOLIO%20copy.pdf";
 
-  function toggleMobilePdf() {
-    const wrapper = document.getElementById('mobilePdfWrapper');
-    const frame = document.getElementById('mobilePdfFrame');
-    const btnText = document.getElementById('mobileBtnText');
+function toggleMobilePdf() {
+  const wrapper = document.getElementById('mobilePdfWrapper');
+  const frame = document.getElementById('mobilePdfFrame');
+  const btnText = document.getElementById('mobileBtnText');
+  if (wrapper.style.display === 'block') {
+    wrapper.style.display = 'none';
+    btnText.textContent = 'Inline View';
+  } else {
+    if (!frame.src) frame.src = pdfJsViewerUrl;
+    wrapper.style.display = 'block';
+    btnText.textContent = 'Close View';
+  }
+}
 
-    if (wrapper.style.display === 'block') {
-      wrapper.style.display = 'none';
-      btnText.textContent = 'Inline View';
+function openGlassModal() {
+  const modal = document.getElementById('glassModal');
+  const modalFrame = document.getElementById('glassModalFrame');
+  if (!modalFrame.src) modalFrame.src = pdfJsViewerUrl;
+  modal.style.display = 'flex';
+}
+
+function closeGlassModal() {
+  document.getElementById('glassModal').style.display = 'none';
+}
+
+document.addEventListener('keydown', function(e) {
+  if (e.key === 'Escape') closeGlassModal();
+});
+
+// Document Core Logic & Parallax
+document.addEventListener("DOMContentLoaded", function () {
+  // 1. Header Scroll Effect
+  const header = document.getElementById('makkari-auto-header');
+  const mobileToggle = document.getElementById('mobile-toggle');
+  const navMenu = document.getElementById('nav-menu');
+
+  const handleScroll = () => {
+    if (window.scrollY > 20) {
+      header.classList.add('scrolled');
     } else {
-      if (!frame.src) frame.src = pdfJsViewerUrl;
-      wrapper.style.display = 'block';
-      btnText.textContent = 'Close View';
+      header.classList.remove('scrolled');
     }
-  }
+  };
+  window.addEventListener('scroll', handleScroll, { passive: true });
+  handleScroll();
 
-  function openGlassModal() {
-    const modal = document.getElementById('glassModal');
-    const modalFrame = document.getElementById('glassModalFrame');
-    if (!modalFrame.src) modalFrame.src = pdfJsViewerUrl;
-    modal.style.display = 'flex';
-  }
-
-  function closeGlassModal() {
-    document.getElementById('glassModal').style.display = 'none';
-  }
-
-  /* Escape Key Close Event */
-  document.addEventListener('keydown', function(e) {
-    if (e.key === 'Escape') closeGlassModal();
+  // 2. Active Page Link State
+  const currentPath = window.location.pathname.toLowerCase();
+  const navLinks = document.querySelectorAll('.nav-link');
+  navLinks.forEach(link => {
+    const hrefValue = link.getAttribute('href').toLowerCase();
+    const isHome = (hrefValue.endsWith('index.html') && (currentPath === '/' || currentPath.endsWith('index.html')));
+    const isExactMatch = currentPath.length > 1 && currentPath.includes(hrefValue.split('/').pop().replace('.html', ''));
+    if (isHome || (!hrefValue.endsWith('index.html') && isExactMatch)) {
+      link.classList.add('active-page');
+      link.setAttribute('aria-current', 'page');
+    }
   });
+
+  // 3. Mobile Menu Toggle
+  if (mobileToggle && navMenu) {
+    const toggleMenu = (forceClose = false) => {
+      const isClosing = forceClose || navMenu.classList.contains('active');
+      if (isClosing) {
+        navMenu.classList.remove('active');
+        mobileToggle.classList.remove('active');
+        mobileToggle.setAttribute('aria-expanded', 'false');
+      } else {
+        navMenu.classList.add('active');
+        mobileToggle.classList.add('active');
+        mobileToggle.setAttribute('aria-expanded', 'true');
+      }
+    };
+    mobileToggle.addEventListener('click', (e) => {
+      e.stopPropagation();
+      toggleMenu();
+    });
+    document.addEventListener('click', (e) => {
+      if (!header.contains(e.target)) {
+        toggleMenu(true);
+      }
+    });
+  }
+
+  // 4. Counter Animation
+  const counters = document.querySelectorAll('.counter');
+  const duration = 2000;
+  const animateCounter = (counter) => {
+    const target = +counter.getAttribute('data-target');
+    const isComma = counter.getAttribute('data-format') === 'comma';
+    const startTime = performance.now();
+    const updateNumber = (currentTime) => {
+      const elapsedTime = currentTime - startTime;
+      const progress = Math.min(elapsedTime / duration, 1);
+      const easeOutProgress = 1 - Math.pow(1 - progress, 3);
+      const currentVal = Math.floor(easeOutProgress * target);
+      counter.innerText = isComma ? currentVal.toLocaleString('en-US') : currentVal;
+      if (progress < 1) {
+        requestAnimationFrame(updateNumber);
+      } else {
+        counter.innerText = isComma ? target.toLocaleString('en-US') : target;
+      }
+    };
+    requestAnimationFrame(updateNumber);
+  };
+
+  if ('IntersectionObserver' in window) {
+    const observer = new IntersectionObserver((entries, observerInstance) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          animateCounter(entry.target);
+          observerInstance.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.3 });
+    counters.forEach(counter => observer.observe(counter));
+  } else {
+    counters.forEach(counter => animateCounter(counter));
+  }
+
+  // 5. PARALLAX EFFECT ONLY FOR 'OUR SERVICES' & 'WHY MAKKARI' TILES
+  const isReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  if (!isReducedMotion) {
+    // Select strictly the service-cards and why-cards
+    const targetCards = Array.from(document.querySelectorAll('.services-grid .service-card, .why-grid .why-card')).map(card => ({
+      el: card,
+      speed: parseFloat(card.getAttribute('data-parallax-speed')) || 0,
+      currentY: 0,
+      targetY: 0
+    }));
+
+    let isRunning = false;
+
+    const updateTileTargets = () => {
+      const scrollY = window.pageYOffset || document.documentElement.scrollTop;
+      const vh = window.innerHeight;
+      const centerScroll = scrollY + vh * 0.5;
+
+      targetCards.forEach(item => {
+        const rect = item.el.getBoundingClientRect();
+        const elementAbsoluteTop = rect.top + scrollY;
+        // Shift the entire solid tile gently
+        item.targetY = (centerScroll - elementAbsoluteTop) * item.speed;
+      });
+    };
+
+    const renderParallax = () => {
+      let active = false;
+
+      targetCards.forEach(item => {
+        // Linear interpolation (lerp = 0.08) for butter-smooth damping
+        item.currentY += (item.targetY - item.currentY) * 0.08;
+        if (Math.abs(item.targetY - item.currentY) > 0.05) {
+          active = true;
+        }
+        item.el.style.transform = `translate3d(0, ${item.currentY.toFixed(2)}px, 0)`;
+      });
+
+      if (active) {
+        requestAnimationFrame(renderParallax);
+      } else {
+        isRunning = false;
+      }
+    };
+
+    const onScroll = () => {
+      updateTileTargets();
+      if (!isRunning) {
+        isRunning = true;
+        requestAnimationFrame(renderParallax);
+      }
+    };
+
+    window.addEventListener('scroll', onScroll, { passive: true });
+    window.addEventListener('resize', onScroll, { passive: true });
+    updateTileTargets();
+    renderParallax();
+  }
+});
 </script>
 
-  <!-- Counter Animation Script -->
-  <script>
-    document.addEventListener("DOMContentLoaded", () => {
-      const counters = document.querySelectorAll('.counter');
-      const duration = 2000;
-
-      const animateCounter = (counter) => {
-        const target = +counter.getAttribute('data-target');
-        const isComma = counter.getAttribute('data-format') === 'comma';
-        const startTime = performance.now();
-
-        const updateNumber = (currentTime) => {
-          const elapsedTime = currentTime - startTime;
-          const progress = Math.min(elapsedTime / duration, 1);
-          const easeOutProgress = 1 - Math.pow(1 - progress, 3);
-          const currentVal = Math.floor(easeOutProgress * target);
-
-          counter.innerText = isComma ? currentVal.toLocaleString('en-US') : currentVal;
-
-          if (progress < 1) {
-            requestAnimationFrame(updateNumber);
-          } else {
-            counter.innerText = isComma ? target.toLocaleString('en-US') : target;
-          }
-        };
-
-        requestAnimationFrame(updateNumber);
-      };
-
-      const observer = new IntersectionObserver((entries, observerInstance) => {
-        entries.forEach(entry => {
-          if (entry.isIntersecting) {
-            animateCounter(entry.target);
-            observerInstance.unobserve(entry.target);
-          }
-        });
-      }, { threshold: 0.3 });
-
-      counters.forEach(counter => observer.observe(counter));
-    });
-  </script>
+<!-- Structured Data (JSON-LD) -->
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
@@ -1437,279 +1659,5 @@
   ]
 }
 </script>
-<!-- Right Floating Contact Buttons -->
-<div class="floating-contact-container" style="position: fixed; top: 80%; right: 12px; transform: translateY(-50%); flex-direction: column; gap: 10px; z-index: 9999;">
-  <!-- WhatsApp -->
-  <a href="https://wa.me/918281228549" target="_blank" rel="noopener noreferrer" style="width: 48px; height: 48px; background-color: #25D366; border-radius: 8px; display: flex; align-items: center; justify-content: center; box-shadow: 0 4px 12px rgba(0,0,0,0.25);">
-    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="#ffffff" style="width: 24px; height: 24px;">
-      <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.521.151-.172.2-.296.3-.495.099-.198.05-.372-.025-.521-.075-.148-.669-1.611-.916-2.206-.242-.579-.487-.501-.669-.51l-.57-.01c-.198 0-.52.074-.792.372s-1.04 1.016-1.04 2.479 1.065 2.876 1.213 3.074c.149.198 2.096 3.2 5.077 4.487.709.306 1.263.489 1.694.626.712.226 1.36.194 1.872.118.572-.085 1.787-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.99c-.002 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/>
-    </svg>
-  </a>
-  <!-- Call -->
-  <a href="tel:+918281228549" style="width: 48px; height: 48px; background-color: #152f4e; border-radius: 8px; display: flex; align-items: center; justify-content: center; box-shadow: 0 4px 12px rgba(0,0,0,0.25);">
-    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="#ffffff" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" style="width: 22px; height: 22px;">
-      <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path>
-    </svg>
-  </a>
-</div>
-
-<style>
-  /* Hidden by default on large screens/desktops */
-  .floating-contact-container {
-    display: none !important;
-  }
-
-  /* Display only on mobile and small screens (768px wide or smaller) */
-  @media screen and (max-width: 768px) {
-    .floating-contact-container {
-      display: flex !important;
-    }
-  }
-</style>
-
-
- <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Footer Component - Makkari Constructions</title>
-    <!-- Google Fonts: Archivo -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Archivo:ital,wght@0,400..700;1,400..700&display=swap" rel="stylesheet">
-    
-    <style>
-        :root {
-            --brand-primary: #152f4e;   /* Deep Navy */
-            --brand-accent: #e52330;    /* Vibrant Red */
-            --brand-light: #f9f9f9;     /* Light Gray Background */
-            --brand-white: #ffffff;     /* Pure White */
-            --font-heading: 'Archivo', sans-serif;
-            --font-body: 'Archivo', sans-serif;
-        }
-        /* Container wrapping the footer area */
-footer, 
-.site-footer {
-  width: min(100%, 1400px);     /* Creates left & right gap/blank space */
-  margin: 40px auto 0 auto;     /* Auto-centers the card box */
-  padding: 40px;                 /* Inner spacing for content */
-  background-color: #152F4E;    /* Matching brand dark navy background */
-  border-radius: 0px;           /* Gives it a clean box appearance */
-  box-sizing: border-box;
-  position: relative;
-}
-
-/* Dark bottom space element */
-footer::after, 
-.site-footer::after {
-  content: '';
-  display: block;
-  position: auto;
-  left: -50vw;
-  right: -50vw;
-  bottom: -70px;
-   background-color: 
-  z-index: -1;
-}
-/* Mobile viewport adjustments */
-@media (max-width: 768px) {
-  footer, 
-  .site-footer {
-    width: 100%;
-    padding: 24px 20px;
-      padding-bottom: 30px !important;
-  }
-}
-        * {
-            box-sizing: border-box;
-            margin: 0;
-            padding: 0;
-        }
-
-        body {
-            font-family: var(--font-body);
-            background-color: var(--brand-light);
-        }
-
-        .site-footer {
-            background-color: var(--brand-primary);
-            color: var(--brand-white);
-            padding: 60px 20px 20px;
-            font-size: 15px;
-            line-height: 1.6;
-        }
-
-        .footer-container {
-            max-width: 1200px;
-            margin: 0 auto;
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 40px;
-        }
-
-        /* Company Info Section */
-        .footer-brand {
-            display: flex;
-            flex-direction: column;
-            gap: 15px;
-        }
-
-        .footer-logo {
-            max-width: 220px;
-            height: auto;
-            display: block;
-        }
-
-        .brand-description {
-            color: rgba(255, 255, 255, 0.85);
-            font-size: 14px;
-        }
-
-        /* Titles */
-        .footer-heading {
-            font-family: var(--font-heading);
-            font-size: 18px;
-            font-weight: 700;
-            margin-bottom: 20px;
-            position: relative;
-            padding-bottom: 8px;
-            color: var(--brand-white);
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
-        }
-
-        .footer-heading::after {
-            content: '';
-            position: absolute;
-            left: 0;
-            bottom: 0;
-            width: 40px;
-            height: 3px;
-            background-color: var(--brand-accent);
-            border-radius: 2px;
-        }
-
-        /* Quick Links */
-        .footer-links ul {
-            list-style: none;
-        }
-
-        .footer-links li {
-            margin-bottom: 12px;
-        }
-
-        .footer-links a {
-            color: rgba(255, 255, 255, 0.85);
-            text-decoration: none;
-            transition: all 0.3s ease;
-            display: inline-block;
-        }
-
-        .footer-links a:hover {
-            color: var(--brand-accent);
-            transform: translateX(5px);
-        }
-
-        /* Contact Details */
-        .contact-info {
-            list-style: none;
-        }
-
-        .contact-info li {
-            margin-bottom: 15px;
-            color: rgba(255, 255, 255, 0.85);
-            display: flex;
-            align-items: flex-start;
-            gap: 10px;
-        }
-
-        .contact-info a {
-            color: rgba(255, 255, 255, 0.85);
-            text-decoration: none;
-            transition: color 0.3s ease;
-        }
-
-        .contact-info a:hover {
-            color: var(--brand-accent);
-        }
-
-        .icon {
-            color: var(--brand-accent);
-            font-weight: bold;
-            flex-shrink: 0;
-        }
-
-        /* Bottom Bar */
-        .footer-bottom {
-            max-width: 1200px;
-            margin: 40px auto 0;
-            padding-top: 20px;
-            border-top: 1px solid rgba(255, 255, 255, 0.1);
-            text-align: center;
-            font-size: 13px;
-            color: rgba(255, 255, 255, 0.6);
-        }
-
-        /* Responsive Design */
-        @media (max-width: 768px) {
-            .site-footer {
-                padding: 40px 20px 20px;
-            }
-            .footer-container {
-                gap: 30px;
-            }
-        }
-    </style>
-</head>
-<body>
-
-    <footer class="site-footer">
-        <div class="footer-container">
-            
-            <!-- Branding & Logo Column -->
-            <div class="footer-brand">
-                <!-- Updated Google Drive Direct Image Link -->
-                <a href="https://www.makkariconstructions.com/">
-                    <img class="footer-logo" src="https://lh3.googleusercontent.com/d/17two9sD2_HX7rojcUk6QjUEVTKM-0sgm" alt="Makkari Constructions and Developers Logo">
-                </a>
-                <p class="brand-description">
-                    Building quality spaces and creating value through innovative design and high-standard construction solutions.
-                </p>
-            </div>
-
-            <!-- Quick Links Column -->
-            <div class="footer-links">
-                <h3 class="footer-heading">Quick Links</h3>
-                <ul>
-                    <li><a href="https://www.makkariconstructions.com/about.html">About Us</a></li>
-                    <li><a href="https://www.makkariconstructions.com/services">Services</a></li>
-                    <li><a href="https://www.makkariconstructions.com/projects">Projects</a></li>
-                    <li><a href="https://www.makkariconstructions.com/contact">Contact Us</a></li>
-                </ul>
-            </div>
-
-            <!-- Contact Information Column -->
-            <div class="footer-contact">
-                <h3 class="footer-heading">Contact Us</h3>
-                <ul class="contact-info">
-                    <li>
-                        <span class="icon">&#128205;</span>
-                        <span>Makkari Constructions and Developers,<br>Minu City Centre <br>Naduvannur, Kozhikode <br>Kerala, India</span>
-                    </li>
-                    <li>
-                        <span class="icon">&#128222;</span>
-                        <span>Phone: <a href="tel:+918281228549">+91 82812 28549</a></span>
-                    </li>
-                    <li>
-                        <span class="icon">&#9993;</span>
-                        <span>Email: <a href="/cdn-cgi/l/email-protection#d5bcbbb3bafbb8b4bebeb4a7bcb2a7baa0a595b2b8b4bcb9fbb6bab8" data-cfasync="false"><span class="__cf_email__" data-cfemail="70191e161f5e1d111b1b11021917021f050030171d11191c5e131f1d">[email&#160;protected]</span></a></span>
-                    </li>
-                </ul>
-            </div>
-
-        </div>
-
-        <!-- Copyright Bar -->
-        <div class="footer-bottom">
-            <p>&copy; 2026 Makkari Constructions and Developers.</p><p>All rights reserved. | Developed In-House.</p>
-        </div>
-    </footer>
-<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script>
+</body>
+</html>
