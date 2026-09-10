@@ -1289,14 +1289,11 @@ padding: 60px 30px 20px;
 font-size: 15px;
 line-height: 1.6;
 }
-/* Mobile Screen Override */
+  /* Mobile Screen Override */
 @media (max-width: 768px) {
   .site-footer {
-    /* Increases bottom padding from 20px to 90px (30px + 60px extra space) */
-    padding: 60px 30px 90px;
-    
-    /* Optional: Prevents mobile browser navigation bars from covering bottom content */
-    padding-bottom: max(90px, calc(30px + env(safe-area-inset-bottom)));
+    /* Reduced padding to remove the large gap while leaving room for safe areas */
+    padding: 40px 20px calc(20px + env(safe-area-inset-bottom));
   }
 }
 .footer-container {
