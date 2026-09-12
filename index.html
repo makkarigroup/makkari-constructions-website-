@@ -2334,20 +2334,18 @@ projectsWrapper.scrollLeft = scrollLeft - walk;
 });
 }
 
-/* 5. Fade Out Schedule Consultation Button on Footer Intersection */
-const footer = document.querySelector('.site-footer');
+/* Hide Schedule Consultation Button after Scrolling Past First Screen */
 const consultationBtn = document.getElementById('openModalBtn');
-if (footer && consultationBtn) {
-const footerObserver = new IntersectionObserver((entries) => {
-entries.forEach(entry => {
-if (entry.isIntersecting) {
-consultationBtn.classList.add('hide-on-footer');
-} else {
-consultationBtn.classList.remove('hide-on-footer');
-}
-});
-}, { root: null, rootMargin: '0px 0px 40px 0px', threshold: 0.01 });
-footerObserver.observe(footer);
+
+if (consultationBtn) {
+  window.addEventListener('scroll', () => {
+    // Triggers when scrolled past 80% of the viewport height (first screen)
+    if (window.scrollY > window.innerHeight * 0.8) {
+      consultationBtn.classList.add('hide-on-footer');
+    } else {
+      consultationBtn.classList.remove('hide-on-footer');
+    }
+  });
 }
 });
 </script>
