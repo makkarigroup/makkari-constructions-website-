@@ -382,6 +382,29 @@
       -webkit-overflow-scrolling: touch !important;
       touch-action: pan-y !important;
     }
+    .pinterest-clip-container {
+  width: 100%;
+  min-height: 900px; /* Lock min-height so content doesn't collapse during scroll */
+  display: flex;
+  justify-content: center;
+  padding: 10px 0 30px 0;
+
+  /* Mobile GPU Compositing fix to prevent flashing/disappearing during scroll */
+  -webkit-transform: translateZ(0);
+  transform: translateZ(0);
+  -webkit-backface-visibility: hidden;
+  backface-visibility: hidden;
+  will-change: transform;
+}
+
+/* Ensure the injected iframe also holds fixed composite layer */
+.pinterest-clip-container iframe,
+.pinterest-clip-container span {
+  -webkit-transform: translateZ(0);
+  transform: translateZ(0);
+  -webkit-backface-visibility: hidden;
+  backface-visibility: hidden;
+}
 
     /* Chrome, Safari, Opera, Edge (WebKit / Blink) */
     .pinterest-clip-container::-webkit-scrollbar,
@@ -893,4 +916,62 @@ footer::after,
             <p>&copy; 2026 Makkari Constructions and Developers.</p><p>All rights reserved. | Developed In-House.</p>
         </div>
     </footer>
-<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script>
+<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><!-- Pinterest Core Script -->
+<script async defer src="https://assets.pinterest.com/js/pinit.js"></script>
+
+<script>
+  // Mobile Width Lock Variables
+  let lastDeviceWidth = window.innerWidth;
+  let isPinterestLoaded = false;
+
+  function autoScalePinterestBoard() {
+    const container = document.getElementById('pinterestContainer');
+    if (!container) return;
+
+    const screenWidth = window.innerWidth;
+    const boardWidth = Math.min(screenWidth - 32, 1200);
+    const scaleWidth = screenWidth < 600 ? 140 : 180;
+
+    // Prevent rebuilding DOM if board is already rendered
+    if (isPinterestLoaded && screenWidth === lastDeviceWidth) {
+      return;
+    }
+
+    lastDeviceWidth = screenWidth;
+    isPinterestLoaded = true;
+
+    container.innerHTML = `
+      <a
+        data-pin-do="embedUser"
+        data-pin-board-width="${boardWidth}"
+        data-pin-scale-height="900"
+        data-pin-scale-width="${scaleWidth}"
+        data-pin-terse="true"
+        href="https://www.pinterest.com/makkarivisualstudio/">
+      </a>
+    `;
+
+    if (window.PinUtils) {
+      window.PinUtils.build();
+    }
+  }
+
+  // Load once on initial DOM load
+  document.addEventListener("DOMContentLoaded", function () {
+    autoScalePinterestBoard();
+  });
+
+  // Strict resize watcher: IGNORES height changes (mobile address bar scroll toggles)
+  let resizeTimer;
+  window.addEventListener('resize', function () {
+    const currentWidth = window.innerWidth;
+    
+    // Only execute rebuild if actual horizontal width altered (e.g. screen rotation)
+    if (currentWidth !== lastDeviceWidth) {
+      clearTimeout(resizeTimer);
+      resizeTimer = setTimeout(function () {
+        autoScalePinterestBoard();
+      }, 400);
+    }
+  });
+</script>
