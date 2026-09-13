@@ -1,4 +1,4 @@
-,
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -1627,6 +1627,180 @@ Established Experience
 </div>
 </div>
 </section>
+<!-- =========================================================
+     ABOUT / INTRO SECTION ("WHO WE ARE") - REDUCED TOP GAP
+========================================================= -->
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Archivo:wght@500;600;700;800&display=swap');
+
+/* Section Container - Full Width Breakout, tighter top gap */
+.about-scroll-section {
+  position: relative;
+  z-index: 10;
+  width: 100vw;
+  margin-left: calc(-50vw + 50%);
+  margin-right: calc(-50vw + 50%);
+  background-color: nil
+  color: #152F4E;
+  padding: 150px 5%; /* Reduced top/bottom padding */
+  font-family: 'Archivo', sans-serif;
+  border: none !important;
+  box-shadow: none !important;
+  box-sizing: border-box;
+}
+
+.about-container {
+  max-width: 1100px;
+  width: 100%;
+  margin: 0 auto;
+}
+
+/* Card Container */
+.about-card {
+  background: ;
+  border: 1px solid #e2e8f0;
+  border-radius: 20px;
+  padding: clamp(24px, 4vw, 44px);
+  box-shadow: 0 12px 35px rgba(21, 47, 78, 0.05);
+}
+
+/* Brand Section Badge */
+.about-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 11px;
+  font-weight: 800;
+  color: #E52330;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  margin-bottom: 16px;
+}
+
+.about-badge::before {
+  content: '';
+  display: inline-block;
+  width: 18px;
+  height: 1.5px;
+  background-color: #E52330;
+}
+
+/* Main Content Text - Smaller, refined scale */
+p.word-highlight-text {
+  font-family: 'Archivo', sans-serif;
+  font-size: clamp(0.95rem, 1.2vw, 1.15rem);
+  line-height: 1.6;
+  font-weight: 500;
+  margin-bottom: 1rem;
+  letter-spacing: -0.1px;
+}
+
+p.word-highlight-text:last-of-type {
+  margin-bottom: 1.5rem;
+}
+
+/* Word Scroll Highlight States */
+.word {
+  display: inline-block;
+  color: #cbd5e1;
+  transition: color 0.35s ease, transform 0.35s ease;
+  margin-right: 0.25em;
+  will-change: color, transform;
+}
+
+/* Active Highlighted Word: Brand Navy */
+.word.active {
+  color: #ffffff;
+  transform: translateY(-1px);
+}
+
+/* CTA Button */
+.about-cta-wrapper {
+  margin-top: 10px;
+}
+
+.about-cta-btn {
+  display: inline-block;
+  background-color: #E52330;
+  color: #ffffff;
+  font-family: 'Archivo', sans-serif;
+  font-size: 12.5px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  padding: 12px 28px;
+  border-radius: 50px;
+  text-decoration: none;
+  box-shadow: 0 6px 20px rgba(229, 35, 48, 0.25);
+  transition: all 0.3s ease;
+}
+
+.about-cta-btn:hover {
+  background-color: #c41c27;
+  transform: translateY(-2px);
+  box-shadow: 0 10px 25px rgba(229, 35, 48, 0.4);
+}
+</style>
+
+<section class="about-scroll-section" id="about">
+  <div class="about-container">
+    <div class="about-card">
+      <span class="about-badge">Who We Are</span>
+      
+      <p class="word-highlight-text">
+        At Makkari Constructions, we turn vision into enduring structure through thoughtful design and high-caliber craftsmanship.
+      </p>
+
+      <p class="word-highlight-text">
+        As a full-service construction firm, we handle projects across residential, commercial, and industrial developments engineered for quality, durability, and contemporary style.
+      </p>
+
+      <p class="word-highlight-text">
+        From initial architectural planning to final handover, our team combines technical precision to deliver every build on time, within budget, and to the highest standards of safety.
+      </p>
+
+      <p class="word-highlight-text">
+        Ready to build? Contact our team today to discuss your vision and schedule an initial consultation.
+      </p>
+
+      <div class="about-cta-wrapper">
+        <a href="tel:+918281228549" class="about-cta-btn">Discuss Your Project</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<script>
+document.addEventListener('DOMContentLoaded', () => {
+  const paragraphs = document.querySelectorAll('.word-highlight-text');
+
+  paragraphs.forEach(paragraph => {
+    const words = paragraph.innerText.trim().split(/\s+/);
+    paragraph.innerHTML = words
+      .map(word => `<span class="word">${word}</span>`)
+      .join(' ');
+  });
+
+  const allWords = document.querySelectorAll('.word-highlight-text .word');
+
+  function highlightWordsOnScroll() {
+    const viewportHeight = window.innerHeight;
+    const triggerPoint = viewportHeight * 0.55;
+
+    allWords.forEach(word => {
+      const wordTop = word.getBoundingClientRect().top;
+      if (wordTop < triggerPoint) {
+        word.classList.add('active');
+      } else {
+        word.classList.remove('active');
+      }
+    });
+  }
+
+  window.addEventListener('scroll', highlightWordsOnScroll, { passive: true });
+  highlightWordsOnScroll();
+});
+</script>
 <!-- ==========================================
 2. WHY CHOOSE US SECTION (STICKS WHEN BOTTOM ENTERS VIEW - EXTENDED RUNWAY)
 ========================================== -->
