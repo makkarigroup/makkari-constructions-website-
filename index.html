@@ -1900,6 +1900,327 @@ We deliver a full spectrum of engineering and construction services with a focus
 <span class="arch-drag-note">Swipe or Drag to Explore</span>
 </div>
 </section>
+<style>
+/* =========================================================
+1. GLOBAL RESET & BRAND DESIGN SYSTEM TOKENS
+========================================================= */
+:root {
+  --brand-navy: #152F4E;
+  --brand-red: #E52330;
+  --brand-red-hover: #c41c27;
+  --glass-bg: rgba(255, 255, 255, 0.9);
+  --glass-bg-scrolled: rgba(255, 255, 255, 0.98);
+  --glass-border: rgba(21, 47, 78, 0.1);
+  --glass-hover: rgba(21, 47, 78, 0.05);
+  --text-color: #152F4E;
+  --header-height: clamp(50px, 6vh, 65px);
+  --shadow-glass: 0 6px 24px 0 rgba(21, 47, 78, 0.08);
+  --transition-speed: 0.3s;
+  --ease-spring: cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  
+  /* Set Archivo across all headings & body */
+  --font-heading: 'Archivo', sans-serif;
+  --font-body: 'Archivo', sans-serif;
+}
+
+*, *::before, *::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+html, body {
+  width: 100%;
+  max-width: 100vw;
+  min-height: 100%;
+  font-family: var(--font-body);
+  color: var(--brand-navy);
+  overflow-x: clip;
+  background-color: #ffffff;
+  -webkit-text-size-adjust: 100%;
+}
+
+/* =========================================================
+2. FEATURED PROJECTS CAROUSEL (CSS MARQUEE)
+========================================================= */
+.carousel-section {
+  position: relative;
+  z-index: 10;
+  padding: clamp(40px, 6vw, 70px) 0;
+  background: #ffffff;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.carousel-header {
+  text-align: center;
+  margin-bottom: clamp(20px, 4vw, 30px);
+  padding: 0 1rem;
+}
+
+/* Small Red Subheading */
+.carousel-main-title {
+  font-family: var(--font-heading);
+  font-size: clamp(0.75rem, 1.2vw, 0.9rem);
+  font-weight: 700;
+  color: var(--brand-red);
+  text-transform: uppercase;
+  letter-spacing: 1.5px;
+  margin-bottom: 0.25rem;
+}
+
+/* Main Navy Title */
+.carousel-title {
+  font-family: var(--font-heading);
+  font-size: clamp(1.4rem, 3vw, 2.2rem);
+  font-weight: 800;
+  color: var(--brand-navy);
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+.carousel {
+  --items: 6;
+  --carousel-duration: 35s;
+  --carousel-width: min(96vw, 1200px);
+  --carousel-item-width: 250px;
+  --carousel-item-height: 390px;
+  --carousel-item-gap: 1.25rem;
+  --clr-cta: var(--brand-red);
+
+  position: relative;
+  width: var(--carousel-width);
+  height: var(--carousel-item-height);
+  overflow: hidden;
+  margin: 0 auto;
+}
+
+.carousel[mask] {
+  mask-image: linear-gradient(
+    to right,
+    transparent,
+    black 6% 94%,
+    transparent
+  );
+  -webkit-mask-image: linear-gradient(
+    to right,
+    transparent,
+    black 6% 94%,
+    transparent
+  );
+}
+
+.carousel:hover > article {
+  animation-play-state: paused;
+}
+
+.carousel > article {
+  position: absolute;
+  top: 0;
+  left: calc(100% + var(--carousel-item-gap));
+  width: var(--carousel-item-width);
+  height: var(--carousel-item-height);
+  display: grid;
+  grid-template-rows: 150px auto 1fr;
+  gap: 0.35rem;
+  border: 1px solid var(--glass-border);
+  padding-bottom: 0.9rem;
+  border-radius: 10px;
+  background: #ffffff;
+  box-shadow: 0 6px 18px rgba(21, 47, 78, 0.05);
+  color: var(--brand-navy);
+  transition: border-color var(--transition-speed) ease, box-shadow var(--transition-speed) ease;
+
+  will-change: transform;
+  animation-name: marquee;
+  animation-duration: var(--carousel-duration);
+  animation-timing-function: linear;
+  animation-iteration-count: infinite;
+  animation-delay: calc(
+    var(--carousel-duration) / var(--items) * 1 * var(--i) * -1
+  );
+}
+
+.carousel > article:hover {
+  border-color: rgba(21, 47, 78, 0.2);
+  box-shadow: 0 10px 22px rgba(21, 47, 78, 0.1);
+}
+
+.carousel > article:nth-child(1) { --i: 0; }
+.carousel > article:nth-child(2) { --i: 1; }
+.carousel > article:nth-child(3) { --i: 2; }
+.carousel > article:nth-child(4) { --i: 3; }
+.carousel > article:nth-child(5) { --i: 4; }
+.carousel > article:nth-child(6) { --i: 5; }
+
+.carousel img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 9px 9px 0 0;
+}
+
+.carousel > article > *:not(img) {
+  padding: 0 0.9rem;
+}
+
+.carousel > article h2 {
+  font-family: var(--font-heading);
+  font-size: 0.95rem;
+  font-weight: 700;
+  padding-top: 0.35rem;
+  margin: 0;
+  color: var(--brand-navy);
+  line-height: 1.25;
+}
+
+.carousel > article > div {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: 0.75rem;
+}
+
+.carousel > article p {
+  margin: 0;
+  font-family: var(--font-body);
+  font-size: 0.78rem;
+  line-height: 1.45;
+  color: rgba(21, 47, 78, 0.85);
+  display: -webkit-box;
+  -webkit-line-clamp: 4;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.carousel > article a {
+  font-family: var(--font-body);
+  text-decoration: none;
+  font-weight: 600;
+  font-size: 0.72rem;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  border: 1px solid var(--brand-red);
+  color: #ffffff;
+  background-color: var(--brand-red);
+  border-radius: 5px;
+  padding: 0.35rem 0.75rem;
+  align-self: flex-start;
+  transition: all var(--transition-speed) ease;
+}
+
+.carousel > article a:hover,
+.carousel > article a:focus-visible {
+  background-color: var(--brand-navy);
+  border-color: var(--brand-navy);
+  color: #ffffff;
+  outline: none;
+}
+
+/* Mobile Responsiveness */
+@media (max-width: 480px) {
+  .carousel {
+    --carousel-item-width: 220px;
+    --carousel-item-height: 360px;
+    --carousel-item-gap: 1rem;
+  }
+  
+  .carousel > article {
+    grid-template-rows: 130px auto 1fr;
+  }
+  
+  .carousel > article h2 {
+    font-size: 0.88rem;
+  }
+  
+  .carousel > article p {
+    font-size: 0.74rem;
+    -webkit-line-clamp: 3;
+  }
+}
+
+@keyframes marquee {
+  100% {
+    transform: translateX(
+      calc((var(--items) * (var(--carousel-item-width) + var(--carousel-item-gap))) * -1)
+    );
+  }
+}
+</style>
+</head>
+<body>
+<main>
+  <!-- Featured Projects Carousel Section -->
+  <section class="carousel-section">
+    <div class="carousel-header">
+      <h2 class="carousel-main-title">Featured Works</h2>
+      <h1 class="carousel-title">Project Chronicles</h1>
+    </div>
+    
+    <div class="carousel" mask>
+      <article>
+        <img src="https://drive.google.com/thumbnail?id=1gG4FnmHLcObUlLJS5TbKAHSLLwOXcqBW&sz=w1000" alt="Poonoor Residence">
+        <h2>The Poonoor Residence</h2>
+        <div>
+          <p>Designed around the simple joy of tropical living, this home in Poonoor brings together the warmth of classic Kerala architecture with bright, open modern spaces.</p>
+          <a href="https://www.makkariconstructions.com/residential.html">Read more</a>
+        </div>
+      </article>
+
+      <article>
+        <img src="https://drive.google.com/thumbnail?id=16XeIXb8fu-uBTPUsVzkcGHGn3gOtbwp_&sz=w1000" alt="Naduvannur Residence">
+        <h2>The Naduvannur Residence</h2>
+        <div>
+          <p>Designed around family traditions and wide open horizons, this home in Naduvannur overlooks lush green rice fields with sunlit rooms and sprawling verandahs.</p>
+          <a href="https://www.makkariconstructions.com/residential.html">Read more</a>
+        </div>
+      </article>
+
+      <article>
+        <img src="https://drive.google.com/thumbnail?id=19tyyrwvtVvDwcibthtLrEby94FmIF2Fo&sz=w1000" alt="Turnkey Residence at Nochad">
+        <h2>Turnkey Residence at Nochad</h2>
+        <div>
+          <p>From initial excavation and masonry to final architectural finishing, our turnkey projects offer a complete, stress-free residential construction journey.</p>
+          <a href="https://www.makkariconstructions.com/residential.html">Read more</a>
+        </div>
+      </article>
+
+      <article>
+        <img src="https://drive.google.com/thumbnail?id=19IlTzV1lu8_it89Rgb_ehlFSNTMQL-Nu&sz=w1000" alt="The Panangad Residence">
+        <h2>The Panangad Residence</h2>
+        <div>
+          <p>A striking blend of bold modern lines and warm timber accents, this home in Panangad is engineered for light-filled tropical living and quiet comfort.</p>
+          <a href="https://www.makkariconstructions.com/residential.html">Read more</a>
+        </div>
+      </article>
+
+      <article>
+        <img src="https://drive.google.com/thumbnail?id=1ZCL-OCujTuFdvSCbrL_mCopCKTtxLmfB&sz=w1000" alt="The Poonath Residence">
+        <h2>The Poonath Residence</h2>
+        <div>
+          <p>Set deep within Poonath’s forest-like canopy, this residence is a refined blend of regal Arabic geometry and tropical serenity surrounded by nature.</p>
+          <a href="https://www.makkariconstructions.com/residential.html">Read more</a>
+        </div>
+      </article>
+
+      <article>
+        <img src="https://drive.google.com/thumbnail?id=16zae5dfNBbMxoV-9E650sHFmL43l1EOS&sz=w1000" alt="Commercial Complex at Payyoli">
+        <h2>Commercial Complex at Payyoli</h2>
+        <div>
+          <p>A modern commercial development in Payyoli engineered to maximize retail and office space across three levels with deep basement infrastructure.</p>
+          <a href="https://www.makkariconstructions.com/commercial.html">Read more</a>
+        </div>
+      </article>
+    </div>
+  </section>
+</main>
+</body>
+</html>
 <!-- ==========================================
 5. CONSULTATION TRIGGER & MODAL
 ========================================== -->
