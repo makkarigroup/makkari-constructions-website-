@@ -494,66 +494,6 @@
       }
     }
   </style>
-  <style>
-  /* 1. Hardware acceleration for smooth scrolling without render glitches */
-  .pinterest-clip-container {
-    width: 100%;
-    display: flex;
-    justify-content: center;
-    padding: 10px 0 30px 0;
-    -webkit-transform: translateZ(0);
-    transform: translateZ(0);
-    will-change: transform;
-  }
-
-  /* 2. Prevent backdrop-filter GPU flickering on mobile */
-  .site-header {
-    -webkit-backdrop-filter: blur(10px);
-    backdrop-filter: blur(10px);
-    transform: translateZ(0);
-  }
-</style>
-
-<script>
-  let lastWidth = window.innerWidth;
-
-  function autoScalePinterestBoard() {
-    const container = document.getElementById('pinterestContainer');
-    if (!container) return;
-
-    const screenWidth = window.innerWidth;
-    const boardWidth = Math.min(screenWidth - 32, 1200);
-    const scaleWidth = screenWidth < 600 ? 140 : 180;
-
-    // Direct DOM insertion without clearing innerHTML repeatedly if rendered
-    container.innerHTML = `
-      <a
-        data-pin-do="embedUser"
-        data-pin-board-width="${boardWidth}"
-        data-pin-scale-height="900"
-        data-pin-scale-width="${scaleWidth}"
-        data-pin-terse="true"
-        href="https://www.pinterest.com/makkarivisualstudio/">
-      </a>
-    `;
-
-    if (window.PinUtils) {
-      window.PinUtils.build();
-    }
-  }
-
-  window.addEventListener('DOMContentLoaded', autoScalePinterestBoard);
-
-  // Re-build ONLY when the actual screen width changes (prevents mobile scroll height resize triggers)
-  let resizeDebounce;
-  window.addEventListener('resize', function () {
-    if (window.innerWidth === lastWidth) return; // Ignore height-only scroll resizes
-    lastWidth = window.innerWidth;
-
-    clearTimeout(resizeDebounce);
-    resizeDebounce = setTimeout(autoScalePinterestBoard, 400);
-  });
-</script>
 </head>
 <body>
 
