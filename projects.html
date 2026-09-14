@@ -1153,19 +1153,28 @@ footer::after,
     }
   });
 </script>
-  <!-- Floating Contact Controls -->
+ <!-- Floating Contact Controls -->
 <style>@media (min-width: 768px) {
   .floating-contact-container {
     display: none !important;
+{
+
+/* Floating Contact Button (Preserved) */
 .floating-contact-container {
-position: fixed;
-top: 80%;
-right: 10px;
-transform: translateY(-50%);
-display: none !important;
-flex-direction: column;
-gap: 10px;
-z-index: 9999;
+  display: none !important;
+  position: fixed;
+  top: 80%;
+  right: 12px;
+  transform: translateY(-50%);
+  flex-direction: column;
+  gap: 10px;
+  z-index: 9999;
+}
+
+@media screen and (max-width: 768px) {
+  .floating-contact-container {
+    display: flex !important;
+  }
 }
 .floating-contact-btn {
 width: 48px;
@@ -1186,6 +1195,7 @@ background-color: #25D366;
 .floating-contact-btn.phone {
 background-color: #152f4e;
 }</style>
+  
   
 <!-- RIGHT FLOATING CONTACT BUTTONS (Mobile View - Preserved) -->
 <div class="floating-contact-container">
