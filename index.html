@@ -1640,13 +1640,19 @@ Established Experience
   width: 100vw;
   margin-left: calc(-50vw + 50%);
   margin-right: calc(-50vw + 50%);
-  background-color: nil
+  background-color: nil;
   color: #152F4E;
   padding: 150px 5%; /* Reduced top/bottom padding */
   font-family: 'Archivo', sans-serif;
   border: none !important;
   box-shadow: none !important;
   box-sizing: border-box;
+
+  /* Section Level Scroll Fade & Scale Out */
+  opacity: 1;
+  transform: translateY(0) scale(1);
+  transition: opacity 0.15s ease-out, transform 0.15s ease-out;
+  will-change: opacity, transform;
 }
 
 .about-container {
@@ -1658,7 +1664,7 @@ Established Experience
 /* Card Container */
 .about-card {
   background: ;
-  border: 1px solid #
+  border: 1px solid #;
   border-radius: 20px;
   padding: clamp(24px, 4vw, 44px);
   box-shadow: 0 12px 35px rgba(21, 47, 78, 0.05);
@@ -1671,7 +1677,7 @@ Established Experience
   gap: 8px;
   font-size: 11px;
   font-weight: 800;
-  color: #E52330;
+  color: #ffffff;
   text-transform: uppercase;
   letter-spacing: 2px;
   margin-bottom: 16px;
@@ -1699,18 +1705,20 @@ p.word-highlight-text:last-of-type {
   margin-bottom: 1.5rem;
 }
 
-/* Word Scroll Highlight States */
+/* Word Scroll Highlight & Dimming States */
 .word {
   display: inline-block;
-  color: #cbd5e1;
-  transition: color 0.35s ease, transform 0.35s ease;
+  color: #454c53;
+  opacity: 0.35;
+  transition: color 0.3s ease, opacity 0.3s ease, transform 0.3s ease;
   margin-right: 0.25em;
-  will-change: color, transform;
+  will-change: color, opacity, transform;
 }
 
-/* Active Highlighted Word: Brand Navy */
+/* Active Highlighted Word */
 .word.active {
   color: #ffffff;
+  opacity: 1;
   transform: translateY(-1px);
 }
 
@@ -1772,8 +1780,10 @@ p.word-highlight-text:last-of-type {
 
 <script>
 document.addEventListener('DOMContentLoaded', () => {
+  const section = document.getElementById('about');
   const paragraphs = document.querySelectorAll('.word-highlight-text');
 
+  // Wrap every individual word in a <span> tag
   paragraphs.forEach(paragraph => {
     const words = paragraph.innerText.trim().split(/\s+/);
     paragraph.innerHTML = words
@@ -1783,22 +1793,34 @@ document.addEventListener('DOMContentLoaded', () => {
 
   const allWords = document.querySelectorAll('.word-highlight-text .word');
 
-  function highlightWordsOnScroll() {
+  function handleCombinedScrollEffects() {
     const viewportHeight = window.innerHeight;
-    const triggerPoint = viewportHeight * 0.55;
+    const rect = section.getBoundingClientRect();
 
+    // 1. Word-by-word highlight trigger
+    const wordTriggerPoint = viewportHeight * 0.6;
     allWords.forEach(word => {
       const wordTop = word.getBoundingClientRect().top;
-      if (wordTop < triggerPoint) {
+      if (wordTop < wordTriggerPoint) {
         word.classList.add('active');
       } else {
         word.classList.remove('active');
       }
     });
+
+    // 2. Section-level fade out when scrolling up past the viewport top
+    if (rect.top < 0) {
+      const fadeProgress = Math.min(Math.abs(rect.top) / (rect.height * 0.6), 1);
+      section.style.opacity = (1 - fadeProgress).toFixed(2);
+      section.style.transform = `translateY(${rect.top * 0.12}px) scale(${(1 - fadeProgress * 0.04).toFixed(3)})`;
+    } else {
+      section.style.opacity = 1;
+      section.style.transform = 'translateY(0) scale(1)';
+    }
   }
 
-  window.addEventListener('scroll', highlightWordsOnScroll, { passive: true });
-  highlightWordsOnScroll();
+  window.addEventListener('scroll', handleCombinedScrollEffects, { passive: true });
+  handleCombinedScrollEffects();
 });
 </script>
 <!-- ==========================================
